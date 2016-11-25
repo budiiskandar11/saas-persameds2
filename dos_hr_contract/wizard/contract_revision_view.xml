@@ -1,0 +1,53 @@
+<openerp>
+	<data>
+		<record id="view_wizard_contract_revision" model="ir.ui.view">
+            <field name="name">view.wizard.contract.revision</field>
+            <field name="model">contract.revision</field>
+            <field name="arch" type="xml">
+                <form string="Search Payment lines">
+                	<header>
+                		<button string="Confirm" name="confirm_renewal_contract" class="oe_highlight" type="object"/> or 
+						<button string="Cancel" class="oe_link" special="cancel"/>                		
+                	</header>
+                	<sheet>
+	                	<label string="Renewal Contract" style="color:#819FF7;font-size:20pt;"/>
+	                    <group>
+	                    	<group>
+		                		<field name='type' required="1"/>
+	                    		<field name='name' attrs="{'invisible': [('type', 'not in', ['kenaikan','demosi','pengangkatan','promosi'])], 
+	                    				'required' : [('type', 'in', ['kenaikan','demosi','pengangkatan','promosi'])]}"/>
+								 		
+								<label for="date_start" string="Duration" attrs="{'invisible': [('type', 'not in', ['kenaikan','demosi','pengangkatan','promosi'])]}"/>
+		                        <div attrs="{'invisible': [('type', 'not in', ['kenaikan','demosi','pengangkatan','promosi'])]}">
+		                            <field name="date_start" class="oe_inline" 
+		                            		attrs="{'invisible': [('type', 'not in', ['kenaikan','demosi','pengangkatan','promosi'])],
+		                            				'required': [('type', 'in', ['kenaikan','demosi','pengangkatan','promosi'])]}"/> - 
+		                            <field name="date_end" class="oe_inline" attrs="{'invisible': [('type', 'not in', ['kenaikan','demosi','pengangkatan','promosi'])]}"/>
+		                        </div>
+		                    </group>  
+		                    <group>
+		                    	<field name='struct_id' attrs="{'invisible': [('type', 'not in', ['kenaikan','demosi','pengangkatan','promosi'])],
+		                            				'required': [('type', 'in', ['kenaikan','demosi','pengangkatan','promosi'])]}"/>  
+								<field name='wage' attrs="{'invisible': [('type', 'not in', ['kenaikan','demosi','pengangkatan','promosi'])],
+		                            				'required': [('type', 'in', ['kenaikan','demosi','pengangkatan','promosi'])]}"/>
+							</group>								
+						</group>
+					</sheet>                		
+                </form>
+            </field>
+        </record>
+        
+        
+        <record id="action_wizard_contract_revision" model="ir.actions.act_window">
+            <field name="name">Populate Payment</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">contract.revision</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_wizard_contract_revision"/>
+            <field name="target">new</field>
+        </record>
+        
+        
+	</data>
+</openerp>

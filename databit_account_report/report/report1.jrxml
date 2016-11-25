@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d970b7c8-2777-411b-9ac8-2efa49381f8d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[select * from res_partner]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="company_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Company]]></fieldDescription>
+	</field>
+	<field name="comment" class="java.lang.String"/>
+	<field name="ean13" class="java.lang.String">
+		<fieldDescription><![CDATA[EAN13 Barcode]]></fieldDescription>
+	</field>
+	<field name="create_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[Created on]]></fieldDescription>
+	</field>
+	<field name="color" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Color Index]]></fieldDescription>
+	</field>
+	<field name="image_small" class="java.lang.Object">
+		<fieldDescription><![CDATA[Small-sized photo]]></fieldDescription>
+	</field>
+	<field name="image" class="java.lang.Object">
+		<fieldDescription><![CDATA[Image]]></fieldDescription>
+	</field>
+	<field name="date" class="java.sql.Date">
+		<fieldDescription><![CDATA[Expiration Date]]></fieldDescription>
+	</field>
+	<field name="street" class="java.lang.String">
+		<fieldDescription><![CDATA[Street]]></fieldDescription>
+	</field>
+	<field name="city" class="java.lang.String">
+		<fieldDescription><![CDATA[City]]></fieldDescription>
+	</field>
+	<field name="display_name" class="java.lang.String">
+		<fieldDescription><![CDATA[Name]]></fieldDescription>
+	</field>
+	<field name="zip" class="java.lang.String">
+		<fieldDescription><![CDATA[Zip]]></fieldDescription>
+	</field>
+	<field name="title" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Title]]></fieldDescription>
+	</field>
+	<field name="function" class="java.lang.String">
+		<fieldDescription><![CDATA[Method]]></fieldDescription>
+	</field>
+	<field name="country_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Country]]></fieldDescription>
+	</field>
+	<field name="parent_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Parent]]></fieldDescription>
+	</field>
+	<field name="supplier" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[Supplier]]></fieldDescription>
+	</field>
+	<field name="ref" class="java.lang.String">
+		<fieldDescription><![CDATA[Ref.]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[Email]]></fieldDescription>
+	</field>
+	<field name="is_company" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[Is a Company]]></fieldDescription>
+	</field>
+	<field name="website" class="java.lang.String"/>
+	<field name="customer" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[Customer]]></fieldDescription>
+	</field>
+	<field name="fax" class="java.lang.String">
+		<fieldDescription><![CDATA[Fax]]></fieldDescription>
+	</field>
+	<field name="street2" class="java.lang.String">
+		<fieldDescription><![CDATA[Street2]]></fieldDescription>
+	</field>
+	<field name="employee" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[Employee]]></fieldDescription>
+	</field>
+	<field name="credit_limit" class="java.lang.Double">
+		<fieldDescription><![CDATA[Credit Limit]]></fieldDescription>
+	</field>
+	<field name="write_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[Last Updated on]]></fieldDescription>
+	</field>
+	<field name="active" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[Active]]></fieldDescription>
+	</field>
+	<field name="tz" class="java.lang.String">
+		<fieldDescription><![CDATA[Timezone]]></fieldDescription>
+	</field>
+	<field name="write_uid" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Last Updated by]]></fieldDescription>
+	</field>
+	<field name="lang" class="java.lang.String">
+		<fieldDescription><![CDATA[Language]]></fieldDescription>
+	</field>
+	<field name="create_uid" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Created by]]></fieldDescription>
+	</field>
+	<field name="image_medium" class="java.lang.Object">
+		<fieldDescription><![CDATA[Medium-sized photo]]></fieldDescription>
+	</field>
+	<field name="phone" class="java.lang.String">
+		<fieldDescription><![CDATA[Phone]]></fieldDescription>
+	</field>
+	<field name="mobile" class="java.lang.String">
+		<fieldDescription><![CDATA[Mobile]]></fieldDescription>
+	</field>
+	<field name="type" class="java.lang.String">
+		<fieldDescription><![CDATA[Internal Type]]></fieldDescription>
+	</field>
+	<field name="use_parent_address" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[Use Company Address]]></fieldDescription>
+	</field>
+	<field name="user_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Project Manager]]></fieldDescription>
+	</field>
+	<field name="birthdate" class="java.lang.String">
+		<fieldDescription><![CDATA[Birthdate]]></fieldDescription>
+	</field>
+	<field name="vat" class="java.lang.String">
+		<fieldDescription><![CDATA[TIN]]></fieldDescription>
+	</field>
+	<field name="state_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[State]]></fieldDescription>
+	</field>
+	<field name="commercial_partner_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Commercial Entity]]></fieldDescription>
+	</field>
+	<field name="notify_email" class="java.lang.String">
+		<fieldDescription><![CDATA[Receive Inbox Notifications by Email]]></fieldDescription>
+	</field>
+	<field name="message_last_post" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[Last Message Date]]></fieldDescription>
+	</field>
+	<field name="opt_out" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[Opt-Out]]></fieldDescription>
+	</field>
+	<field name="signup_type" class="java.lang.String">
+		<fieldDescription><![CDATA[Signup Token Type]]></fieldDescription>
+	</field>
+	<field name="signup_expiration" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[Signup Expiration]]></fieldDescription>
+	</field>
+	<field name="signup_token" class="java.lang.String">
+		<fieldDescription><![CDATA[Signup Token]]></fieldDescription>
+	</field>
+	<field name="last_reconciliation_date" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[Latest Full Reconciliation Date]]></fieldDescription>
+	</field>
+	<field name="vat_subjected" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[VAT Legal Statement]]></fieldDescription>
+	</field>
+	<field name="debit_limit" class="java.lang.Double">
+		<fieldDescription><![CDATA[Payable Limit]]></fieldDescription>
+	</field>
+	<field name="pkp" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[PKP]]></fieldDescription>
+	</field>
+	<field name="code" class="java.lang.String">
+		<fieldDescription><![CDATA[Code]]></fieldDescription>
+	</field>
+	<field name="akta_pendirian_id" class="java.lang.String">
+		<fieldDescription><![CDATA[No Akta Pendirian]]></fieldDescription>
+	</field>
+	<field name="kode_status" class="java.lang.String">
+		<fieldDescription><![CDATA[kode status]]></fieldDescription>
+	</field>
+	<field name="hobby" class="java.lang.String">
+		<fieldDescription><![CDATA[Hobby]]></fieldDescription>
+	</field>
+	<field name="street_npwp" class="java.lang.String">
+		<fieldDescription><![CDATA[Street]]></fieldDescription>
+	</field>
+	<field name="tdp_file" class="java.lang.Object">
+		<fieldDescription><![CDATA[TDP Attachment]]></fieldDescription>
+	</field>
+	<field name="group_id" class="java.lang.Integer"/>
+	<field name="state_id_npwp" class="java.lang.Integer">
+		<fieldDescription><![CDATA[State]]></fieldDescription>
+	</field>
+	<field name="country_id_contact2" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Country]]></fieldDescription>
+	</field>
+	<field name="user_id_2" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Salesperson 2]]></fieldDescription>
+	</field>
+	<field name="fav_book" class="java.lang.String">
+		<fieldDescription><![CDATA[Favorite Books]]></fieldDescription>
+	</field>
+	<field name="street_contact2" class="java.lang.String">
+		<fieldDescription><![CDATA[Street]]></fieldDescription>
+	</field>
+	<field name="city_npwp" class="java.lang.String">
+		<fieldDescription><![CDATA[City]]></fieldDescription>
+	</field>
+	<field name="zip_npwp" class="java.lang.String">
+		<fieldDescription><![CDATA[ZIP]]></fieldDescription>
+	</field>
+	<field name="other_file" class="java.lang.Object">
+		<fieldDescription><![CDATA[Other Attachment]]></fieldDescription>
+	</field>
+	<field name="investor_country" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Country of Investor]]></fieldDescription>
+	</field>
+	<field name="siup_id" class="java.lang.String">
+		<fieldDescription><![CDATA[No SIUP]]></fieldDescription>
+	</field>
+	<field name="country_id_contact1" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Country]]></fieldDescription>
+	</field>
+	<field name="contact_name2" class="java.lang.String">
+		<fieldDescription><![CDATA[Name]]></fieldDescription>
+	</field>
+	<field name="contact_name1" class="java.lang.String">
+		<fieldDescription><![CDATA[Name]]></fieldDescription>
+	</field>
+	<field name="street_contact1" class="java.lang.String">
+		<fieldDescription><![CDATA[Street]]></fieldDescription>
+	</field>
+	<field name="fav_food" class="java.lang.String">
+		<fieldDescription><![CDATA[Favorite Foods]]></fieldDescription>
+	</field>
+	<field name="business_sector" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Business Sector]]></fieldDescription>
+	</field>
+	<field name="city_contact1" class="java.lang.String">
+		<fieldDescription><![CDATA[City]]></fieldDescription>
+	</field>
+	<field name="zip_contact1" class="java.lang.String">
+		<fieldDescription><![CDATA[ZIP]]></fieldDescription>
+	</field>
+	<field name="zip_contact2" class="java.lang.String">
+		<fieldDescription><![CDATA[ZIP]]></fieldDescription>
+	</field>
+	<field name="city_contact2" class="java.lang.String">
+		<fieldDescription><![CDATA[City]]></fieldDescription>
+	</field>
+	<field name="siup_file" class="java.lang.Object">
+		<fieldDescription><![CDATA[SIUP Attachment]]></fieldDescription>
+	</field>
+	<field name="state_id_contact1" class="java.lang.Integer">
+		<fieldDescription><![CDATA[State]]></fieldDescription>
+	</field>
+	<field name="state_id_contact2" class="java.lang.Integer">
+		<fieldDescription><![CDATA[State]]></fieldDescription>
+	</field>
+	<field name="npwp" class="java.lang.String">
+		<fieldDescription><![CDATA[NPWP]]></fieldDescription>
+	</field>
+	<field name="akta_file" class="java.lang.Object">
+		<fieldDescription><![CDATA[AKTA Attachment]]></fieldDescription>
+	</field>
+	<field name="street2_npwp" class="java.lang.String">
+		<fieldDescription><![CDATA[Street2]]></fieldDescription>
+	</field>
+	<field name="birthday" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[Date of Birth]]></fieldDescription>
+	</field>
+	<field name="tdp_id" class="java.lang.String">
+		<fieldDescription><![CDATA[No TDP]]></fieldDescription>
+	</field>
+	<field name="wife" class="java.lang.String">
+		<fieldDescription><![CDATA[Wife]]></fieldDescription>
+	</field>
+	<field name="street2_contact1" class="java.lang.String">
+		<fieldDescription><![CDATA[Street2]]></fieldDescription>
+	</field>
+	<field name="street2_contact2" class="java.lang.String">
+		<fieldDescription><![CDATA[Street2]]></fieldDescription>
+	</field>
+	<field name="user_id_3" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Salesperson 3]]></fieldDescription>
+	</field>
+	<field name="section_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[Sales Team]]></fieldDescription>
+	</field>
+	<field name="is_employee" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[Employee]]></fieldDescription>
+	</field>
+	<field name="kawasan" class="java.lang.String">
+		<fieldDescription><![CDATA[Kawasan]]></fieldDescription>
+	</field>
+	<field name="kode_transaksi" class="java.lang.String">
+		<fieldDescription><![CDATA[kode transaksi]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="-20" y="0" width="595" height="64" uuid="ff6d920d-15f4-4751-b6ba-d72c80ce4ec3"/>
+				<imageExpression><![CDATA["wood.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="5" width="263" height="33" uuid="ac775a7e-2940-4323-baa1-c58f7c7b820f"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Wood Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="63" y="39" width="200" height="22" forecolor="#FFFFFF" uuid="9c746980-8e85-41bc-b06d-6d68ebf9b348"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Wood SubTitle]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="fd2a3376-83f0-4fc4-8ac8-350fc12884d2"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement x="162" y="15" width="100" height="20" uuid="7eacc3a4-4108-41e6-b792-073be223969f"/>
+				<text><![CDATA[Credit Limit]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="43" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="3aaa420d-fad4-458b-b8c8-8aff42e4e036"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="63" height="15" uuid="27c18cf9-6945-407f-a0ab-dfd32d1795a9"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="76" y="1" width="86" height="15" uuid="3655b00e-def4-456c-9eff-21f9b689ebaa"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="162" y="0" width="100" height="17" uuid="0640b698-f4f4-428a-812a-8c64b2376cfb"/>
+				<textFieldExpression><![CDATA[$F{credit_limit}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="b662aa31-3ac5-4823-8bad-71fad04c10f2"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="5e6c1e4c-2ad9-4c3a-be78-e19f8a6f9e67"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="d62d9508-9bfc-47d5-8c34-29b15f479cd4"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="ac74e1e0-6ce4-4d53-8844-a5dfaf849d0c"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	<record model="ir.ui.view" id="view_hr_absence_form">
+			<field name="name">view_hr_absence_form</field>
+			<field name="model">hr.absence</field>
+			<field name="arch" type="xml">
+				<form string="HR Absence" version="7.0">
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="employee_id"/>
+							<field name="date"/>
+							<field name="reason"/>					
+						</group>
+					</sheet>	
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="view_hr_absence_tree">
+			<field name="name">view_hr_absence_tree</field>
+			<field name="model">hr.absence</field>
+			<field name="arch" type="xml">
+				<tree string="HR Absence" version="7.0">
+					<field name="name"/>
+					<field name="employee_id"/>
+					<field name="date"/>
+					<field name="reason"/>
+				</tree>
+			</field>
+		</record>
+		
+		<record id="action_hr_absence" model="ir.actions.act_window">
+			<field name="name">HR Absence</field>
+			<field name="res_model">hr.absence</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<!--<field name="search_view_id" ref="view_attendance_filter"/>-->
+		</record>
+		<menuitem id="menu_hr_absence" action="action_hr_absence" 
+				parent="hr_attendance.menu_hr_attendance" name="HR Absence"/>
+
+	</data>		
+</openerp>
+		

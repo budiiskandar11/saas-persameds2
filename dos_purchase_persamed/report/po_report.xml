@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		
+        <report auto="False" id="report_purchase_order" 
+		        model="purchase.order" 
+		        name="report.purchase.order"
+		        file="dos_purchase_epn/report/report_purchase_order.mako" 
+		        string="Purchase Order EPN" 
+         		webkit_header="po_header_footer"
+		        usage="default" 
+		       	report_type="webkit"/>	
+		       		
+		 
+	    <report auto="False" id="report_purchase_request" 
+		        model="purchase.requisition" 
+		        name="report.purchase.request"
+		        file="dos_purchase_epn/report/report_pr.mako" 
+		        string="Print PR" 
+         		webkit_header="pr_header_footer"
+		        usage="default" 
+		       	report_type="webkit"/>	
+		       		
+	</data>
+</openerp>

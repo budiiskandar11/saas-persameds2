@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+
+		<!--		===========================================installment===============================-->
+		<record id="view_installment_loan" model="ir.ui.view">
+			<field name="name">view.loan.installment</field>
+			<field name="model">loan.installment</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Loan Installment">
+					<field name="Payment_date"/>
+                    <field name="sequence" invisible="1"/>
+                    <field name="payment_value" readonly="1"/>
+                    <field name="amount"/>
+                    <field name="loan_value" readonly="1"/>
+                    <field name="state_id"/>
+					
+				</tree>		
+			</field>	
+		</record>
+		
+		<record id="installment_loan_former" model="ir.ui.view">
+			<field name="name">loan installment form</field>
+			<field name="model">loan.installment</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Loan Installment">
+					<group>
+				    <separator string="Loan Installment"/>
+				    <group colspan="4" col="4">
+				    	<field name="Payment_date"/>
+                    	<field name="sequence" invisible="1"/>
+                    	<field name="payment_value" readonly="1"/>
+                    	<field name="amount"/>
+                    	<field name="loan_value" readonly="1"/>
+                    	<field name="state_id"/>
+						<button name="paid" states="unpaid" string="Paid" type="object" icon="gtk-close"/>
+					</group>
+					</group>
+				</form>		
+			</field>	
+		</record>
+		
+		<record id="loan_intallment" model="ir.actions.act_window">
+			<field name="name">loan.intallment.form</field>
+			<field name="res_model">loan.installment</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="installment_loan_former"/>
+			<field name="target">new</field>	
+		</record>
+
+<!-- ===========================================================================-->
+
+<!--	========================== loan management ================================-->
+		<record id="view_loan_management" model="ir.ui.view">
+			<field name="name">view.loan.management</field>
+			<field name="model">loan.management</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Loan View">
+					<field name="employee_id" string="Employee Name" />
+					<field name="loansum" string="Loan Sum" />
+					<field name="loandate" string="Date" />
+					<field name="paymentmethode" string="Intallment Methode" />
+					<field name="installment" string="Intallment" />
+					<field name="installment_amount" />
+					<field name="total_paid" string="Payment Sum" />
+					<field name="residu" string="Residual" />
+					<field name="company_id" widget="selection" on_change="onchange_company_id(company_id)"/>			
+				</tree>		
+			</field>	
+		</record>
+
+		<record id="loan_management_former" model="ir.ui.view">
+			<field name="name">loan.management.form</field>
+			<field name="model">loan.management</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Loan Register">
+					<header>
+                       	<button name="button_verifikasi" states="draft" string="Confirm Loan" icon="terp-camera_test" />
+               			<button name="button_setuju" states="verify" string="Aprove This Loan" icon="gtk-convert"/>
+           				<button name="button_cairkan" states="agree" string="Execute This Loan" icon="gtk-convert"/>
+                       	<button name="button_batalkan" states="verify" string="Cancel This Loan" icon="gtk-no"/>
+                       	<button name="set_to_draft" states="open" string="Receive Payment" type="object" icon="gtk-convert"/>
+                       	<button name="set_to_close" states="open" string="Set to Close" type="object" icon="gtk-close"/>
+                   		 <field name="state" widget="statusbar"/>
+					</header>
+					<sheet>
+						<div class="oe_title">
+							<h1> Employee Loan Form</h1>
+						</div>
+					<group colspan="4" col="8">
+                        <group colspan="6" col="6">
+                        	<field name="employee_id" on_change="onchange_name_id(employee_id)"/>
+                        	<field name="name" string ="name"/>
+                        </group>
+                    </group>
+                      <notebook>
+						<page string="Loan Data">
+							 <separator colspan="5" string="Loan Detail"/>
+							   <group colspan="4" col="4">
+							     <field name="loansum" />
+							      <field name="state" readonly="True"/>
+							     <field name="loandate" string="Date" />
+							    
+							     <field name="paymentmethode" string="Payment Methode" />
+							     <field name="installment" />
+							     <field name="installment_amount" />
+							     <field name="total_paid" string="Payment Sum" />
+								 <field name="residu" string="Residual" />
+								 <field name="currency_id"/>
+                 				 <field name="company_id" widget="selection" on_change="onchange_company_id(company_id)"/>	
+
+							   </group>	
+							
+						<group string="Loan Installment">
+							<button type="object" name="compute_installment" string="Compute Intallment" icon="terp-stock_format-scientific" colspan="2" />
+							<field name="installment_ids" colspan="4" nolabel="1">
+								 <tree string="Installment Lines">
+								 	<field name="Payment_date"/>
+                          			<field name="sequence" invisible="1"/>
+                          			<field name="payment_value" readonly="1"/>
+                          			<field name="amount"/>
+                          			<field name="loan_value" readonly="1"/>
+									<field name="state_id"/>
+                          			<field name="parent_state" invisible="1"/>
+									<button name="paid" string="Paid" type="object" attrs="{'invisible':[('state_id','=','paid')]}" icon="gtk-execute"/>		
+								 </tree>						
+							</field>
+							
+
+						</group>
+						</page>
+						<page string="History of Payment">
+                    		
+               		
+                 		</page>
+					  </notebook>
+					 </sheet>	
+				</form>
+			</field>	
+		</record>
+		
+
+<!--==================================================================-->
+		<record id="loan_register" model="ir.actions.act_window">
+			<field name="name">loan.register.form</field>
+			<field name="res_model">loan.management</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="view_loan_management"/>
+		</record>
+		
+		<menuitem id="menu_loan_management" action="loan_register" parent="hr_payroll.menu_hr_root_payroll" name="Employee Loan" sequence="4" />
+
+<act_window id="act_entries_open" name="Entries" res_model="account.move.line" src_model="loan.management" context="{'search_default_asset_id': [active_id], 'default_asset_id': active_id}"/>
+
+<!--  ==================================== inherit from hr.employee =====================================================================-->
+	
+		<record id="loan_payment_page" model="ir.ui.view">
+			<field name="name">View Loan Payment</field>
+			<field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr.view_employee_form"/>
+			<field name="arch" type="xml">
+				<page string="Personal Information" position="after">
+					<page string="Loan">
+						<field name="loan_ids" nolabel="1" />
+					</page>
+				</page>
+			</field>			
+		</record>
+	</data>
+</openerp>

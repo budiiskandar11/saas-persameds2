@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+  <template id="assets_backend_bs" inherit_id="website.assets_backend" name="Website Balance Sheet Report">
+    <xpath expr="." position="inside">
+      <script type="text/javascript" src="/website_account/static/src/js/website_balancesheet.js"></script>
+      <script type="text/javascript" src="/website_account/static/lib/jSignature/jSignature.min.js"></script>
+      <link rel='stylesheet' href='/website_account/static/src/css/website_profitloss.css'/>
+    </xpath>
+  </template>  
+
+  <template  id="so_balancesheet" name="Balance Sheet Details">&lt;!DOCTYPE html&gt;
+      <html>
+      <head>      
+      <title>Balance Sheet - Odoo</title>
+      <link rel="shortcut icon" href="/website_account/static/src/img/favicon.ico" type="image/x-icon"/>
+        <t t-call-assets="web.assets_common" t-css="false"/>
+        <t t-call-assets="web.assets_backend" t-css="false" />
+        <link rel="stylesheet" href="/web/static/lib/bootstrap/css/bootstrap.css" />
+         <link rel='stylesheet' href='/website_account/static/src/css/website_profitloss.css'/>
+         <link rel="stylesheet" href="/website_account/static/src/css/pickdate_jquery-ui.css"/>
+	<script src="/website_account/static/src/js/pickdate_jquery-ui.js"></script>
+	<link rel="stylesheet" href="/website_account/static/src/css/style.css"/>
+	
+	
+    <link href="/website_account/static/src/css/daterange/jquery.comiseo.daterangepicker.css" rel="stylesheet"/>
+    <script src="/website_account/static/src/js/daterange/moment.min.js"></script>
+    <script src="/website_account/static/src/js/daterange/jquery.comiseo.daterangepicker.js"></script>
+        
+        <script type="text/javascript" id="loading-script-bs" t-raw="init">
+            $(function() {
+                var s = new openerp.init();
+                var wc = new s.web.WebClient();
+
+                wc.show_application = function() {
+                    wc.action_manager.do_action("website_account.balancesheet", {});
+                };
+
+                wc.do_push_state = function(state){};
+                wc.setElement($(document.body));
+                wc.start();
+            });
+        </script>
+      </head>  
+<body>
+        <div class='openerp openerp_webclient_container'>
+            <table class='oe_webclient'>
+                <tr>
+                    <td class='oe_application' />
+                </tr>
+            </table>
+        </div>
+    </body>      
+        </html>
+  </template>
+  
+<template id="user_navbar_bs" inherit_id="website_account.so_balancesheet" groups="base.group_user">
+<xpath expr="//div['id=divtitlebs']" position="before">
+<div id="dvLoading" name="dvLoading"></div>
+<t t-if="website and menu_data">
+    <nav id="oe_main_menu_navbar" class="navbar1 navbar-inverse" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#oe_applications">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>    
+        </div>
+
+        <ul id="oe_applications" class="nav navbar-nav navbar-left navbar-collapse collapse">
+            <li class="dropdown active">
+                <a href="#" class="dropdown-toggle hidden-xs" data-toggle="dropdown"><i class="fa fa-th-large"></i> Website<b class="caret"/></a>
+                <ul class="dropdown-menu">
+                    <li t-foreach="menu_data['children']" t-as="menu">
+                        <t t-call="web.menu_link"/>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul id="oe_applications" class="nav navbar-nav navbar-left navbar-collapse collapse">
+            <li class="dropdown active">
+                <a href="#" class="dropdown-toggle hidden-xs" data-toggle="dropdown"><i class="fa fa-th-large"></i> Reports<b class="caret"/></a>
+                <ul class="dropdown-menu">
+                    <li>
+                       <a t-att-href="'/trailbalance/web/'" t-att-class="'oe_menu_toggler oe_menu_leaf'">
+        		<span class="oe_menu_text">
+            		  Trail Balance
+        		</span>
+    			</a>
+                    </li>
+                    <li>
+                       <a t-att-href="'/balancesheet/web/'" t-att-class="'oe_menu_toggler oe_menu_leaf'">
+        		<span class="oe_menu_text">
+            		  Balance Sheet
+        		</span>
+    			</a>
+                    </li>
+                    <li>
+                       <a t-att-href="'/profitloss/web/'" t-att-class="'oe_menu_toggler oe_menu_leaf'">
+        		<span class="oe_menu_text">
+            		  Profit and Loss
+        		</span>
+    			</a>
+                    </li>
+                    <li>
+                       <a t-att-href="'/cashflow_statement/web/'" t-att-class="'oe_menu_toggler oe_menu_leaf'">
+        		<span class="oe_menu_text">
+            		  Statement of Cash Flows
+        		</span>
+    			</a>
+                    </li>
+                    <li class="show_budget_actual">
+                       <a t-att-href="'/budget_actual/web/'" t-att-class="'oe_menu_toggler oe_menu_leaf'">
+        		<span class="oe_menu_text">
+            		  Budget vs Actual
+        		</span>
+    			</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+	<div class="navbar-header navbar-form navbar-right">
+            <button type="button" class="btn btn-danger js_pick_quit pull-right">Quit</button>
+        </div>
+        <div class="navbar-header navbar-form navbar-right">
+            
+        </div>
+    </nav>
+</t>
+
+</xpath>
+</template>
+
+</data>
+</openerp>

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<template id="payslip_template_document">
+			<t t-name="dos_hr_payroll_abacus.payslip_template_document">
+				<t t-call="report.external_layout">
+					<t t-foreach="docs" t-as="o">
+						<div class="page">
+							<h4>
+								<center>
+									<strong>SLIP GAJI</strong>
+								</center>
+							</h4>
+							<h6>
+								<center>
+									<strong>
+										<span t-field="o.company_id.name"/>
+									</strong>
+								</center>
+							</h6>
+							<br/>
+							<br/>
+							<table class="table table-condensed" style="font-size:12px;width:100%;">
+								<tr>
+									<td>
+									</td>
+								</tr>
+							</table>
+							<table class="table-condensed" style="font-size:12px;width:100%;">
+								<tr class="table table-condensed">
+									<td style="width:25%" class ="a">No. Pegawai</td>
+									<td style="width:25%">
+									</td>
+									<td style="width:15%">
+									</td>
+									<td style="width:35%">
+										:
+										<span t-field="o.employee_id.nik"/>
+									</td>
+								</tr>
+								<tr>
+									<td>Nama</td>
+									<td>
+									</td>
+									<td>
+									</td>
+									<td>
+										:
+										<span t-field="o.employee_id.name"/>
+									</td>
+								</tr>
+								<tr>
+									<td>Jabatan</td>
+									<td>
+									</td>
+									<td>
+									</td>
+									<td>
+										:
+										<span t-field="o.employee_id.job_id.name"/>
+									</td>
+								</tr>
+								<tr>
+									<td>Departemen</td>
+									<td>
+									</td>
+									<td>
+									</td>
+									<td>
+										:
+										<span t-field="o.employee_id.department_id.name"/>
+									</td>
+								</tr>
+								<tr>
+									<td>Hari Kerja</td>
+									<td>
+									</td>
+									<td>
+									</td>
+									<td>
+										:
+										<span t-field="o.allowance_days"/>
+									</td>
+								</tr>
+								<tr>
+									<td>Periode Gaji</td>
+									<td>
+									</td>
+									<td>
+									</td>
+									<td>
+										:
+										<span t-field="o.date_to" t-field-options='{"format": "MMMM y"}'/>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4">
+									</td>
+								</tr>
+								<tr>
+									<td colspan="4">
+									</td>
+								</tr>
+								<tr>
+									<td>Mata Uang</td>
+									<td>
+									</td>
+									<td>
+									</td>
+									<td>: Rupiah</td>
+								</tr>
+								<tr>
+									<td colspan="4">
+									</td>
+								</tr>
+								<tr t-foreach="o.line_ids" t-as="line">
+									<td>
+									</td>
+									<td>
+										<span t-field="line.name"/>
+									</td>
+									<td>
+									</td>
+									<td align="right">
+										<span t-field="line.total"/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+									</td>
+									<td>
+									</td>
+									<td>Pendapatan Bersih</td>
+									<td align="right">
+									</td>
+								</tr>
+								
+							</table>
+							<table class="table table-condensed" style="font-size:12px;width:100%;">
+								<tr>
+									<td>
+									</td>
+								</tr>
+							</table>
+							<table class="table-condensed" style="font-size:12px;width:100%;">
+								<tr>
+									<td>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<p align="center">
+											<strong>
+												<u>DENY FAJAR ARIANTO</u>
+											</strong>
+										</p>
+										<p align="center">SENIOR MANAGER BUSINESS SUPPORT</p>
+									</td>
+									<td class ="text-right">
+										<p align="right">
+											Jakarta,
+											<span t-field="o.date_to" t-field-options='{"format": "d MMMM y"}'/>
+										</p>
+										<br/>
+										<p align="right">Diterima Oleh :</p>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<br/>
+										<p align="right">
+											<strong>
+												<u><span t-field="o.employee_id.name"/></u>
+											</strong>
+										</p>
+									</td>
+								</tr>
+							</table>
+							
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+		<template id="report_payslip_doc">
+			<t t-call="report.html_container">
+				<t t-foreach="doc_ids" t-as="doc_id">
+					<t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'dos_hr_payroll_abacus.payslip_template_document')"/>
+				</t>
+			</t>
+		</template>
+		
+		
+	</data>
+</openerp>

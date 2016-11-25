@@ -1,0 +1,24 @@
+1    [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - No method matching arguments: java.util.HashMap, java.lang.String, java.lang.String, java.util.HashMap, java.util.HashMap
+org.apache.xmlrpc.XmlRpcException: No method matching arguments: java.util.HashMap, java.lang.String, java.lang.String, java.util.HashMap, java.util.HashMap
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:110)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+1    [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - No method matching arguments: java.util.HashMap, java.lang.String, java.lang.String, java.util.HashMap, java.util.HashMap
+org.apache.xmlrpc.XmlRpcException: No method matching arguments: java.util.HashMap, java.lang.String, java.lang.String, java.util.HashMap, java.util.HashMap
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:110)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)
+1    [XML-RPC-0] ERROR org.apache.xmlrpc.server.XmlRpcErrorLogger - No method matching arguments: java.util.HashMap, java.lang.String, java.lang.String, java.util.HashMap, java.util.HashMap
+org.apache.xmlrpc.XmlRpcException: No method matching arguments: java.util.HashMap, java.lang.String, java.lang.String, java.util.HashMap, java.util.HashMap
+	at org.apache.xmlrpc.server.ReflectiveXmlRpcHandler.execute(ReflectiveXmlRpcHandler.java:110)
+	at org.apache.xmlrpc.server.XmlRpcServerWorker.execute(XmlRpcServerWorker.java:46)
+	at org.apache.xmlrpc.server.XmlRpcServer.execute(XmlRpcServer.java:86)
+	at org.apache.xmlrpc.server.XmlRpcStreamServer.execute(XmlRpcStreamServer.java:200)
+	at org.apache.xmlrpc.webserver.Connection.run(Connection.java:208)
+	at org.apache.xmlrpc.util.ThreadPool$Poolable$1.run(ThreadPool.java:68)

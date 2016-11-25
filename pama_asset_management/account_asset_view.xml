@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+             
+        <record id="view_account_asset_asset_form_inherit" model="ir.ui.view">
+            <field name="name">account.asset.asset.form.inherit</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_asset_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='validate']" position="replace">
+                 	<button name="first_validate" states="draft" string="Confirm " type="object" class="oe_highlight"/>
+                    <button name="validate" states="fa_validate" string="Confirm Asset" type="object" class="oe_highlight"/>
+                </xpath>
+                
+                <field name="parent_id" position="attributes">
+                	<attribute name="on_change">onchange_parent_asset(parent_id)</attribute>
+                </field>
+                
+                <xpath expr="//field[@name='parent_id']" position="before">
+                    <field name="asset_reg_id"/>                   
+                	<field name="asset_group_id" attrs="{'readonly': [('asset_reg_id','!=', False)]}"/>
+                    <field name="asset_class_id" attrs="{'readonly': [('asset_reg_id','!=', False)]}"/>
+                    <field name="serial_number"/>
+					<field name="brand"/>                    
+                </xpath>	
+				<field name="parent_id" position="after">
+					<button name="depreciation_sync" string="(synchronize)" attrs="{'invisible': ['|',('state','!=','open'),('parent_id','=', False)]}" class="oe_link" 
+					confirm="Are you sure Sync this preciation with Main Asset?" type="object"/>
+				</field>
+                
+				<xpath expr="//field[@name='parent_id']" position="after">
+					<field name="is_masterlist"/>
+					<field name="is_leasing"/>
+					<field name="leasing_no" attrs="{'invisible': [('is_leasing','=', False)]}"/>
+					
+				</xpath>
+				<xpath expr="//field[@name='name']" position="replace">
+					<field name="image" widget='image' class="oe_left oe_avatar" options='{"preview_image":
+						"image_medium", "size": [90, 90]}'/>
+					<div class=" oe_left">
+						<field name="asset_number"/>
+						<label for="name" class="oe_edit_only"/>
+						<field name="name" class="oe_inline"/>
+					</div>
+				</xpath>
+				<xpath expr="//field[@name='purchase_date']" position="replace">
+					<field name="purchase_date1"/>
+					<field name="purchase_date" string="Used Date" />
+				</xpath>
+                <xpath expr="//field[@name='currency_id']" position="after">
+                	<field name="user_id" string="Created by"/>
+                	<field name="employee_id"/>
+                	<field name="department_id"/>
+                	
+                	<field name="asset_location_id" />
+                	<field name="asset_desc"/>
+                </xpath>
+                
+                <!--
+                <field name="value_residual" position="after">
+                	<field name="purchase_value_usd"/>	
+                	<field name="value_residual_usd"/>
+                </field>
+                -->
+                <xpath expr="//form/sheet/notebook/page[@string='Depreciation Board']/field/tree/field[@name='remaining_value']" position="after">
+                	<field name="amount_usd"/>
+                </xpath>
+                	
+                <xpath expr="//notebook/page[@string='Depreciation Board']" position="after">
+                    <page string="Tax Depreciation Board">
+                    	<group>
+	                    	<group>
+	                    		<field name="tax_asset_category" on_change="onchange_tax_category(tax_asset_category)"/>
+	                    		<field name="tax_asset_group"/>
+	                    		<newline/>
+	                    		<field name="tax_value_residual"  widget="monetary" options="{'currency_field': 'currency_id'}"/>
+	                    		</group>
+		                	<group>
+		                		<field name="tax_dep_method" required="1"/>
+		                		<field name="tax_method_progress_factor" required="1" attrs="{'invisible':[('tax_dep_method','=','linear')], 'required':[('tax_dep_method','=','degressive')]}"/>
+		                	
+		                		<field name="tax_method_number" />
+	                    		<field name="tax_method_period" />	
+		                	</group>	
+	                    </group>
+	                    <button type="object" name="compute_tax_depreciation_board" string="Compute" icon="terp-stock_format-scientific" colspan="2" attrs="{'invisible':[('state','=','close')]}"/>
+						<field name="tax_depreciation_line_ids" mode="tree">
+							<tree string="Depreciation Lines" >
+								<field name="depreciation_date"/>
+								<field name="sequence" invisible="1"/>
+								<field name="depreciated_value" readonly="1"/>
+								<field name="amount"/>
+								<field name="remaining_value" readonly="1"/>
+								<field name="parent_state" invisible="1"/>
+								<field name="move_check" />
+							</tree>
+							<form string="Tax Depreciation Lines">
+								<group>
+									<group>
+										<field name="parent_state" invisible="1"/>
+										<field name="name"/>
+										<field name="amount"/>
+										<field name="parent_state" invisible="1"/>
+									</group>
+									<group>
+										<field name="sequence"/>
+										<field name="depreciation_date"/>
+										<field name="depreciated_value"/>
+										<field name="remaining_value"/>
+									</group>
+								</group>
+							</form>
+						</field>
+                   </page>
+                </xpath>
+				<xpath expr="//notebook/page[@string='Notes']" position="after">
+					<page string="Extra Fields">
+						<group col="3">
+							<group>
+								<field name="field1"/>
+								<field name="field2"/>
+								<field name="field3"/>
+							</group>
+							<group>
+								<field name="field4"/>
+								<field name="field5"/>
+								<field name="field6"/>
+							</group>
+							<group>
+								<field name="field7"/>
+								<field name="field8"/>
+								<field name="field9"/>
+							</group>
+						</group>
+					</page>
+				</xpath>
+               </field>
+        </record>
+        
+        <record id="view_account_asset_asset_tree_inherit" model="ir.ui.view">
+            <field name="name">account.asset.asset.tree.inherit</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_asset_tree"/>
+            <field name="arch" type="xml"> 
+        		<xpath expr="//field[@name='name']" position="before">
+                	<field name="asset_number" />
+                </xpath>
+            </field>
+        </record>
+        
+         <record id="view_account_asset_tax_category_form" model="ir.ui.view">
+            <field name="name">account.asset.tax.category.form</field>
+            <field name="model">account.asset.tax.category</field>
+            <field name="arch" type="xml"> 
+        		<form string="Asset Tax Categories">
+        			<sheet>
+        				<group string="Asset Tax Categories">
+        			<group>
+        				<field name="sequence" />
+        				<field name="name" />
+        				<field name="grup" />
+        			</group>
+        			<group>	
+        				<field name="tax_dep_method_cat" />
+        				<field name="tax_method_progress_factor_cat" />
+        				<field name="tax_method_number_cat" />
+        				<field name="tax_method_period_cat" />
+        				
+        			</group>
+        			</group>
+        			</sheet>
+        		</form>
+            </field>
+        </record>
+        
+        <record id="view_account_asset_tax_category_tree" model="ir.ui.view">
+            <field name="name">account.asset.tax.category.tree</field>
+            <field name="model">account.asset.tax.category</field>
+            <field name="arch" type="xml"> 
+        		<tree string="Asset Tax Categories">
+        				<field name="sequence" />
+        				<field name="name" />
+        				<field name="grup" />
+        				<field name="tax_dep_method_cat" />
+        				<field name="tax_method_progress_factor_cat" />
+        				<field name="tax_method_number_cat" />
+        				<field name="tax_method_period_cat" />
+        				
+        		</tree>
+            </field>
+        </record>
+        
+        <record id="open_asset_tax_category" model="ir.actions.act_window">
+            <field name="name">Asset Tax Category</field>
+            <field name="res_model">account.asset.tax.category</field>
+            <field name="view_type">form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a Asset Tax Category
+              </p>
+            </field>
+        </record>
+        
+       <menuitem action="open_asset_tax_category" id="menu_open_asset_tax_category" parent="account_asset.menu_finance_config_assets" sequence="5"/>
+    	
+        
+    </data>
+ </openerp>

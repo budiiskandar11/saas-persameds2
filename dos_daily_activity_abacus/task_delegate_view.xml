@@ -1,0 +1,185 @@
+<openerp>
+	<data>
+		<record id="task_delegate_tree_view" model="ir.ui.view">
+	        <field name="name">task.delegate.tree.view</field>
+	        <field name="model">task.delegate</field>
+	        <field name="arch" type="xml">
+	            <tree string="Task Delegation">
+	            	<field name='name'/>
+					<field name='delegate_date'/>	            	
+					<field name='employee_id'/>
+					<field name='department_id'/>
+	            </tree>
+	        </field>
+	    </record>
+		<record id="task_delegate_form_view" model="ir.ui.view">
+			<field name="name">task.delegate.form.view</field>
+			<field name="model">task.delegate</field>
+			<field name="arch" type="xml">
+				<form string="Task Delegation">
+					<header>
+						<button name="assign_task" string="Assign Task" type="object" class="oe_highlight"
+							states="draft" confirm="After you assign task system will sent email notification to user delegated"/> 
+						<button name="set_to_draft" string="Set to Draft" type="object" class="oe_highlight"
+							states="cancel"/>
+						<button name="cancel_task" string="Cancel Task" type="object" class="oe_highlight"
+							states="draft,confirm"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft, confirm, done"/>
+					</header>
+					<sheet string="Task Delegation">
+						<div class="oe_title">
+							<h1>
+								<field name='name' nolabel="1" placeholder="Description Task" attrs="{'readonly': [('state','!=','draft')], 'required' : [('state','=','draft')]}"/>
+							</h1>
+						</div>
+						
+						<group>
+							<field name='created_by' 
+							 	on_change="onchange_created_by(created_by)" 
+								invisible="1" attrs="{'readonly': [('state','!=','draft')], 'required' : [('state','=','draft')]}"/>
+							<field name='department_created_by' invisible="1"/>
+							<field name='delegate_date' attrs="{'readonly': [('state','!=','draft')], 'required' : [('state','=','draft')]}"/>
+							<field name='employee_id' domain = "[('department_id','child_of',department_created_by)]"							
+								widget="selection" attrs="{'readonly': [('state','!=','draft')], 'required' : [('state','=','draft')]}"/>
+							<field name='department_id'/>
+						</group>
+						<field name = 'task_list' attrs="{'readonly': [('state','!=','draft')]}">
+							<tree>
+								<field name='name' required="1"/>
+								<field name='deadline' required="1"/>
+								<field name='note'/>
+								<field name='state' readonly="1"/>
+							</tree>
+							<form>
+								<group>
+									<field name='name' required="1"/>
+									<field name='deadline' required="1"/>
+									<field name='note'/>
+									<field name='state' readonly="1" invisible="1"/>
+								</group>
+								
+								<field name="daily_lines" readonly="1">
+									<tree>
+										<field name="date"/>
+										<field name="time_start" widget="float_time" required="1"/>
+										<field name="time_end" widget="float_time" required="1"/>
+										<field name="task_list_id" domain="[('task_delegate_id.employee_id','=',parent.employee_id)]"/>
+										<field name="category_id"/>
+										<field name="name"/>
+										<field name="result"/>
+										<field name="follow_up"/>
+										<field name="note"/>
+										<field name='state' invisible="0"/>
+									</tree>
+									<form>
+										<group col="4">
+											<field name="date_start"/>
+											<field name="name"/>
+										</group>
+										<group col="4">
+											<field name="date_end"/>
+										</group>
+									</form>
+								</field>
+								
+							</form>
+						</field>
+						<field name='note' placeholder="Notes"/>
+					</sheet>
+				</form>
+			</field>
+		</record>
+	    
+	    <record id="view_task_delegate_action" model="ir.actions.act_window">
+            <field name="name">Task Delegate</field>
+            <field name="res_model">task.delegate</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="view_id" ref="task_delegate_tree_view"/>
+            <field name="domain">[]</field>
+            <!--<field name="search_view_id" ref="daily_activity_search_view"/>-->
+        </record>
+        
+        
+        <record id="task_delegate_line_tree_view" model="ir.ui.view">
+	        <field name="name">task.delegate.line.tree.view</field>
+	        <field name="model">task.list</field>
+	        <field name="arch" type="xml">
+	            <tree string="Task Delegated List">
+	            	<field name='employee_id'/>
+	            	<field name='name' required="1"/>
+					<field name='deadline' required="1"/>
+					<field name='note'/>
+					<field name='state' readonly="1"/>
+	            </tree>
+	        </field>
+	    </record>
+	    
+	    <record id="task_delegate_line_form_view" model="ir.ui.view">
+	        <field name="name">task.delegate.line.form.view</field>
+	        <field name="model">task.list</field>
+	        <field name="arch" type="xml">
+	            <form string="Task Delegated List">
+	               
+	               	<header>
+	               		<field name='state' widget="statusbar" readonly="1"/>
+	               	</header>
+	               	<sheet>
+	               		<h2>
+	               			<label string="Task List"/>
+	               		</h2>
+	            	<group>	
+	            		<group>
+	            		<field name='name' required="1"/>
+	            		<field name='deadline' required="1"/>
+						<field name="category_id"/>
+						<field name="task_delegate_id"/>
+						</group>
+						<group>
+	            		<field name='employee_id'/>
+	            		<field name='note'/>
+						</group>
+						
+						
+					</group>
+				   </sheet>
+	            </form>
+	        </field>
+	    </record>
+	    
+	    
+	    
+	    
+	    <record id="view_task_delegated_list_filter" model="ir.ui.view">
+            <field name="name">Task Delegated List Filter</field>
+            <field name="model">task.list</field>
+            <field name="arch" type="xml">
+                <search string="Task Delegated List Filter">
+                    
+                    <group expand="0" string="Group By">
+                        <filter string="Employee" icon="terp-personal" domain="[]" context="{'group_by':'employee_id'}"/>
+						<filter string="Deadline" icon="terp-personal" domain="[]" context="{'group_by':'deadline'}"/>
+						<filter string="Status" icon="terp-personal" domain="[]" context="{'group_by':'state'}"/>                       
+                    </group>
+                </search>
+             </field>
+         </record>
+        
+        <record id="view_task_delegate_line_action" model="ir.actions.act_window">
+            <field name="name">Task Delegated List</field>
+            <field name="res_model">task.list</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph</field>
+            <field name="view_id" ref="task_delegate_line_tree_view"/>
+            <field name="domain">[]</field>
+            <field name="search_view_id" ref="view_task_delegated_list_filter"/>
+        </record>
+		
+		<menuitem name="Task Delegation" id="submenu_task_delegate" action="view_task_delegate_action"
+		        parent="submenu_daily_report" sequence="1" />
+	    
+		<menuitem name="Task Delegated List" id="submenu_task_delegate_line" action="view_task_delegate_line_action"
+		        parent="submenu_daily_report" sequence="2" />
+		        	
+	</data>
+</openerp>

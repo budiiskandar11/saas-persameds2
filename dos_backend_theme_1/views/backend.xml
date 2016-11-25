@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+<data>
+
+<!-- Setting theme favicon -->
+<template id="layout" inherit_id="web.layout"
+          name="Setting favicon" priority="20">
+    <xpath expr="//link[@rel='shortcut icon']" position="replace">
+        <link rel="shortcut icon"
+              href="/dos_backend_theme_1/static/src/img/favicon.ico"
+              type="image/x-icon"/>
+    </xpath>
+</template>
+
+<!-- Add theme CSS and Javascript -->
+<template id="assets_backend" inherit_id="web.assets_backend"
+          name="Custom CSS and JS" priority="20">
+    <xpath expr="." position="inside">
+        <link rel="stylesheet" href="/dos_backend_theme_1/static/src/css/backend.css"/>
+        <link rel="stylesheet" href="/dos_backend_theme_1/static/src/css/menu_dropdown.css"/>
+        <link rel="stylesheet" href="/dos_backend_theme_1/static/src/css/kanban.css"/>
+        <script type="text/javascript" src="/dos_backend_theme_1/static/src/js/backend.js"></script>
+    </xpath>
+</template>
+
+<!-- Remove login footer and change logo -->
+<!-- Priority 10 to be applied before website.login_layout if installed -->
+
+<template id="login_layout" inherit_id="web.login_layout" name="Remove login footer and change logo" priority="10">
+    <xpath expr="//div[@class='oe_single_form_footer']" position="replace">
+        <div></div>
+    </xpath>
+    <xpath expr="//div[@class='oe_single_form_logo']" position="replace">
+        <div class="oe_single_form_logo">
+            <img src="/dos_backend_theme_1/static/src/img/logo.png" alt="Antiun Ingeniería S.L." title="Antiun Ingeniería S.L." />
+        </div>
+    </xpath>
+</template>
+<template id="menu_secondary" inherit_id="web.menu_secondary" name="Force logo in backend" priority="20">
+    <xpath expr="//a/img" position="replace">
+    </xpath>
+     <xpath expr="//div/div/div" position="replace">
+     	<div class="oe_secondary_menus_container">
+            <t t-foreach="menu_data['children']" t-as="menu">
+        		<div style="display: block" class="oe_secondary_menu nav nav-pills nav-stacked" t-att-data-menu-parent="menu['id']">
+					<t t-call="web.menu_secondary_submenu"/>
+        		</div>
+            </t>
+        </div>
+    </xpath>
+    <xpath expr="//div[@class='oe_footer']" position="replace">	
+    </xpath>
+</template>
+
+
+<template id="menu_secondary_submenu" inherit_id="web.menu_secondary_submenu">
+	<xpath expr="//ul" position="replace">
+		<ul t-if="menu['children']" class="submenu">
+            <li t-foreach="menu['children']" t-as="menu">
+            	<t t-set="debug_param" t-value="'?&amp;debug=' if debug else ''"/>
+                <a t-att-href="'/web%s#menu_id=%s&amp;action=%s' % (debug_param, menu['id'], menu['action'] and menu['action'].split(',')[1] or '')"  
+                	t-att-class="'oe_menu_toggler' if menu.get('children') else 'oe_menu_leaf'" 
+			        t-att-data-menu="menu['id']"   
+			        t-att-data-action-model="menu['action'] and menu['action'].split(',')[0] or ''"  
+			        t-att-data-action-id="menu['action'] and menu['action'].split(',')[1] or ''">
+			        <span class="oe_menu_text">
+			            <t t-esc="menu['name']"/>
+			        </span>
+			    </a>        	
+			    <t t-call="web.menu_secondary_submenu"/>
+            </li>
+        </ul>
+    </xpath>
+</template>
+
+
+<template id="menu_link" inherit_id="web.menu_link">
+	<xpath expr="//a" position="replace">	    
+        <a t-att-href="'/web%s#menu_id=%s&amp;action=%s' % (debug_param, menu['id'], menu['action'] and menu['action'].split(',')[1] or '')"
+            t-att-class="'oe_menu_toggler' if menu.get('children') else 'oe_menu_leaf'" 
+            t-att-data-menu="menu['id']"  
+            t-att-data-action-model="menu['action'] and menu['action'].split(',')[0] or ''"
+            t-att-data-action-id="menu['action'] and menu['action'].split(',')[1] or ''">
+            <span class="oe_menu_text">
+                <t t-esc="menu['name']"/>
+            </span>
+        </a>
+    </xpath>
+</template>
+
+<template id="menu" inherit_id="web.menu">
+	<xpath expr="//ul[@class='nav navbar-nav navbar-left oe_application_menu_placeholder']" position="replace">	    
+		<ul class="nav navbar-nav navbar-left oe_application_menu_placeholder">
+            <li t-foreach="menu_data['children']" t-as="menu">
+                <t t-call="web.menu_link"/>
+            </li>
+            <li id="menu_more_container" class="dropdown" style="display: none;">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
+                <ul id="menu_more" class="dropdown-menu"></ul>
+            </li>
+        </ul>
+    </xpath>
+    <xpath expr="//ul[2]" position="replace">	    
+    </xpath>
+</template>
+
+<template id="dos_backend_theme_1.ApplicationTiles_content">
+    <ul class="menu-nav menu-left" style="display: inline;">
+        <li t-foreach="menu_data['children']" t-as="menu">
+        	<a href="#"><i class="fa fa-th-large"></i>       
+                <span><t t-esc="menu['name']"/></span>
+            </a>
+            <t t-call="web.menu_secondary_submenu"/>
+        </li>
+    </ul>
+    <ul class="menu-nav menu-right oe_user_menu_placeholder" style="display: none;"/>
+	<ul class="menu-nav menu-right oe_systray" style="display: none;"/>
+</template>
+
+
+<template id="webclient_bootstrap" inherit_id="web.webclient_bootstrap" name="Force leftbar" priority="20">
+	<xpath expr="//nav[@class='navbar navbar-inverse']" position="replace">    	
+    	<nav id="oe_main_menu_navbar" role="navigation" groups="base.group_user,base.group_portal">
+        	<div class="menu_header" groups="base.group_user,base.group_portal">
+                <t t-call="dos_backend_theme_1.ApplicationTiles_content"/>
+            </div>
+        </nav>
+    </xpath>
+    <xpath expr="//div[@class='openerp openerp_webclient_container']" position="replace">    	
+    	<div class="openerp openerp_webclient_container">
+		    <table class="oe_webclient">
+		    	<!--
+		    	<tr>
+		    		<td>
+		    			<nav>
+				    		<div class="menu_header" groups="base.group_user,base.group_portal">
+				                <t t-call="dos_backend_theme_1.ApplicationTiles_content"/>
+				            </div>
+			            </nav>
+		    		</td>
+		    	</tr>
+		    	-->
+		        <tr>
+		            <td class="oe_application"/>
+		        </tr>
+		    </table>
+        </div>    	
+    </xpath>
+</template>
+
+</data>
+</openerp>

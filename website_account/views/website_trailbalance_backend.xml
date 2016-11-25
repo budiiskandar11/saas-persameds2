@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="action_trailbalance_menu" model="ir.actions.client">
+            <field name="name">Trail Balance</field>
+            <field name="tag">trailbalance</field>
+            <field name="target">self</field>
+        </record>
+        
+        <record id="action_trailbalance_rpt" model="ir.actions.act_url">
+            <field name="name">Trail Balance</field>
+            <field name="url">/trailbalance/web/</field>
+            <field name="target">self</field>
+        </record>
+
+        <report 
+            id="action_report_trailbalance_print"
+            model="website_account.trailbalance.report"
+            string="Trail Balance Report"
+            report_type="qweb-pdf"
+            name="website_account.report_trailbalance_print"
+            file="website_account.report_trailbalance_print"
+            menu="False"
+        />
+        <menuitem icon="STOCK_PRINT" name="Trail Balance" action="action_trailbalance_rpt" id="account.menu_general_Balance_report" parent="account.final_accounting_reports"/>
+    </data>
+</openerp>

@@ -1,0 +1,38 @@
+{
+    "name"          : "Accounting Indonesia",
+    "version"       : "1.0",
+    "depends"       : ["base","account","report_webkit","account_voucher","dos_amount2text_idr","dos_rate_pajak"],
+    "author"        : "Databit Solusi Indonesia",
+    "description"   : """This module is aim to add some new fields to:
+                        - account.invoice
+                        - change invoice print our""",
+    "website"       : "https://www.databit.co.id/",
+    "category"      : "UKM PACKAGE,SME PACKAGE,ENTERPRICE PACKAGE",
+    "init_xml"      : [],
+    "demo_xml"      : [],
+    'test'          : [],
+    "data"    : [
+                       "security/account_security.xml",
+                       #"sequence/payment_request_sequence.xml",
+                       #"sequence/purchase_request_sequence.xml",
+                       "data/account_journal.xml",
+                       "account_menuitem.xml",
+                       "journal_view.xml",
+                       "report/invoice_header_footer.xml",
+                       "report/report_invoice.xml",
+                       "faktur_pajak_view.xml", 
+                       "wizard_generate.xml",
+                       #"report/report_faktur_pajak.xml",
+                       #"purchase_request_view.xml",
+                       "account_invoice_view.xml",
+                       #"account_voucher_view.xml",
+                       #"company_inherit_view.xml",
+                       "account_report.xml",
+                       "views/report_pr_qweb.xml",
+                       #"res_config.xml",
+                       #'res_users_view.xml',
+                       
+                       ],
+    "active"        : False,
+    "installable"   : True,
+}

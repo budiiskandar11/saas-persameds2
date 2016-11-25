@@ -1,0 +1,15 @@
+<openerp>
+	<data>
+		<record id="view_company_form" model="ir.ui.view">
+			<field name="name">res.company.form</field>
+			<field name="model">res.company</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="base.view_company_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="/form/sheet/notebook/page[@string='Configuration']/group/group/field[@name='currency_id']" position="after">
+					<field name="rounding_account_id"/>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</openerp>

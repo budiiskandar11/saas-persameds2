@@ -1,0 +1,185 @@
+<openerp>
+<data>
+	
+	<!--
+        Asset
+     -->
+
+    <record model="ir.ui.view" id="view_asset_asset_register_form">
+        <field name="name">asset.register.form</field>
+        <field name="model">asset.register</field>
+        <field name="arch" type="xml">
+            <form string="Asset" create="false">
+                <header>
+                    <button name="asset_create" attrs="{'invisible': ['|',('state','!=','draft'),('type','=', 'extra')]}" string="Confirm Asset" type="object" class="oe_highlight"/>
+					<button name="asset_extra_create" attrs="{'invisible': ['|',('state','!=','draft'),('type','!=', 'extra')]}" string="Confirm Asset Extra" type="object" class="oe_highlight"/>                    
+                    <button name="dummy" states="open" string="Set to Draft" type="object" />                   
+                    <field name="state" widget="statusbar" statusbar_visible="draft,registered"/>
+                </header>
+                <sheet>
+                	<div class="oe_right oe_button_box" name="buttons">
+                		<button name="%(action_view_asset_split)d" id="asset_split" class="oe_inline oe_stat_button" 
+                        		attrs="{'invisible': ['|',('state','!=','draft'),('type','=', 'extra')]}" 
+                        		string="Split Asset" type="action" icon="fa-tachometer"/>
+                    </div>
+					<field name="image" widget='image' class="oe_left oe_avatar" options='{"preview_image":
+						"image_medium", "size": [90, 90]}'/>
+					<div class="oe_title oe_left">
+						<label for="asset_number" class="oe_edit_only"/>
+						<h2>
+							<field name="asset_number"/>
+						</h2>
+						<label for="name" class="oe_edit_only"/>
+						<h1>
+							<field name="name" class="oe_inline" readonly="0"/>
+						</h1>
+						<field name="asset_desc"/>
+					</div>
+                    <group>
+						<group string="General Info">
+							<field name="asset_category" readonly="0"/>
+							<field name="asset_group_id" readonly="0"/>
+							<field name="asset_class_id"/>
+							<field name="serial_number"/>
+							<field name="brand"/>
+							<field name="cip_account_id"/>		
+							<field name="asset_distrik_id"/>					
+							<field name="asset_location_id"/>	
+							<field name="type" readonly="1" required="0"/>
+						</group>
+						<group string="PIC Assets">
+							<field name="employee_id" on_change="onchange_employee_id(employee_id)" readonly="1"/>
+							<field name="distrik_id" readonly="1"/>
+							<field name="department_id" readonly="1"/>
+							<field name="user_id" insivible="1"/>
+						</group>
+					
+                        <group string="Purchase Info">	
+                        	<field name="origin"/>                  	
+                        	<field name="partner_id"/>
+                            <field name="purchase_date1" string="Purchase Date"/>
+                        	<field name="purchase_date" string="Use Date"/>
+							
+						          	
+                        	<field name="purchase_value" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="currency_id"/>
+							<field name="purchase_value_usd" widget="monetary" options="{'currency_field': 'currency_usd_id'}"/>    
+							<field name="currency_usd_id"/>
+							<field name="budget_asset_item_id"/>  
+							</group>
+						<group> 
+							<field name="stock_move_id" invisible="1"/> 
+							<div>
+							<label for="stock_move_line"/>
+							<field name="stock_move_line" nolabel="1">
+								<tree>
+									<field name="picking_id"/>
+									<field name="price_unit"/>	
+									<field name="state" invisible="1"/>								
+								</tree>
+							</field> 
+							</div>	   						
+						</group>
+					</group>	
+                    <notebook>
+                    	<page string="Notes">
+                    		<field name="note" placeholder="Add an Internal Notes..."/>
+                    	</page>
+                    	<page string="Extra Fields">
+                    		<group col="3">
+                    			<group>
+                    				<field name="field1"/>
+									<field name="field2"/>		
+									<field name="field3"/>
+                    			</group>
+                    			<group>
+                    				<field name="field4"/>
+									<field name="field5"/>		
+									<field name="field6"/>
+                    			</group>
+                    			<group>
+                    				<field name="field7"/>
+									<field name="field8"/>		
+									<field name="field9"/>
+                    			</group>
+                    		</group>
+                    		                    		
+                    	</page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    
+     <record id="view_asset_register_tree" model="ir.ui.view">
+			<field name="name">asset.register.tree</field>
+			<field name="model">asset.register</field>
+			<field name="priority">2</field>
+			<field name="arch" type="xml">
+				<tree string="Asset register" colors="blue:(state == 'draft');grey:(state == 'registered')" create="false">
+					<field name="asset_number"/>
+					<field name="name" string="Asset Name"/>
+					<field name="asset_group_id"/>
+					<field name="asset_category"/>
+					<field name="employee_id"/>
+				    <field name="distrik_id"/> 
+					<field name="department_id"/>
+					<field name="origin"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+    
+    <record id="view_asset_register_search" model="ir.ui.view">
+         <field name="name">asset.asset.search</field>
+        <field name="model">asset.register</field>
+        <field name="arch" type="xml">
+            <search string="Account Asset">
+                <field name="name" string="Asset"/>
+                <field name="purchase_date"/>
+                <filter icon="terp-check" string="Draft" domain="[('state','in', ('draft'))]" help="Assets in draft and open states"/>
+                <filter icon="terp-dialog-close" string="Registered" domain="[('state','=', 'register')]" help="Assets in closed state"/>
+               <group expand="0" string="Group By">
+                        <filter string="Category" icon="terp-personal" domain="[]" context="{'group_by':'asset_category'}"/>
+                        <filter string="Group" icon="terp-personal" domain="[]" context="{'group_by':'asset_group_id'}"/>
+                        <filter string="Department" icon="terp-personal+" domain="[]" context="{'group_by':'department_id'}"/>
+                        <filter string="Distrik" icon="terp-gtk-select-all" domain="[]" context="{'group_by':'distrik_id'}"/>
+                        
+                </group>
+                
+            </search>
+        </field>
+    </record>
+    
+    
+    
+    
+    <!-- Asset E -->
+		
+	
+		 <record model="ir.actions.act_window" id="action_asset_register">
+        <field name="name">Assets Register</field>
+        <field name="res_model">asset.register</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('employee_id.user_id.id', '=', uid)]</field>
+        <field name="search_view_id" ref="view_asset_register_search"/>
+         <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a Asset register Comptable.
+              </p><p>
+                Odoo helps you easily track all activities related to
+                an employee: discussions, history of business opportunities,
+                documents, etc.
+              </p>
+            </field>
+    </record>
+
+    <menuitem  parent="account_asset.menu_finance_assets" id="action_asset_register_form1"
+        sequence="100"
+        action="action_asset_register"/>
+	
+	
+</data>
+</openerp>

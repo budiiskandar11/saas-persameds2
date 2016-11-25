@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <template id="assets_backend" name="mytheme assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/ad_web_epn/static/src/css/mytheme.css"/>
+                <script type="text/javascript" src="/ad_web_epn/static/src/js/mytheme.js"></script>
+            </xpath>
+        </template>
+        <template id="ad_web_epn.login_layout" inherit_id="web.login_layout" name="My Theme Login">
+            <xpath expr="//div[@class='oe_single_form_footer']" position="replace">
+                <div class="oe_single_form_footer">Here you can write your login footer</div>
+            </xpath>
+            <xpath expr="//div[@class='oe_single_form_logo']" position="replace">
+                <div class="oe_single_form_logo">
+                    <img src="/ad_web_epn/static/src/img/logo.png"
+                         alt="My Theme Logo"
+                         title="My Theme Logo" />
+                </div>
+            </xpath>
+        </template>
+    </data>
+</openerp>

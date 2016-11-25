@@ -1,0 +1,80 @@
+<openerp>
+	<data>
+
+		<record id="view_hr_resign_tree" model="ir.ui.view">
+            <field name="name">view.hr.resign.tree</field>
+            <field name="model">hr.resign</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Resignation" version="7.0">
+                    <field name="employee_id"/>
+                    <field name="contract_id"/>
+                    <field name="date"/>
+                    <field name="user_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hr_resign_form" model="ir.ui.view">
+            <field name="name">view.hr.resign.form</field>
+            <field name="model">hr.resign</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Resignation" version="7.0">
+                    <header>
+                        <button name="action_wait_approval" class="oe_highlight" states='draft' string="Confirm" type="object"/>
+                        <button name="action_wait_approval" class="oe_highlight" states='confirm' string="Approve" type="object"/>
+                        <button name="action_wait_approval" class="oe_highlight" states='approve' string="Verified" type="object"/>
+                            
+                        <field name="state" widget="statusbar" nolabel="1"/>
+                    </header>
+                    <sheet>
+                        <h1><field name="name" required="1" class="oe_inline" placeholder="Resign Doc Number"/></h1>
+                    	<group string="Resignation">
+	                    	<group>
+	                    		<field name="user_id"/>
+	                    		<field name="employee_id" required="1"/>
+                                <field name="department_id"/>
+                                <field name="job_id"/>
+			                    <field name="contract_id" required="1" domain="[('employee_id', '=', employee_id)]"/>
+	                    	</group>
+	                    	<group>
+			                    <field name="date" required="1"/>
+			                    <field name="attach"/>
+	                    	</group>
+		                    <field name="reason" colspan="4" placeholder="Reasons" nolabel="1" required="1"/>
+                    	</group>
+                        <notebook attrs="{'invisible':[('state','!=','approve')]}">
+                            <page string="List To Check">
+                                <group col="2">
+                                    <field name="asset_return"/>
+                                    <field name="bpjs_nonactive"/>
+                                    <field name="new_contract_id" readonly="1"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+		<record id="action_hr_resign" model="ir.actions.act_window">
+            <field name="name">Resignation</field>
+            <field name="res_model">hr.resign</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <!-- <field name="domain">[('types','=','director')]</field> -->
+            <!-- <field name="context">{'default_types':'director','types': 'director'}</field> -->
+            <field name="view_id" ref="view_hr_resign_tree"/>
+            <!-- <field name="search_view_id" ref="hr.view_employee_filter"/> -->
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create Resignation
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_hr_resign" id="menu_hr_resign" sequence="2" parent="dos_hr_contract.menu_admin_legal"/>
+
+	</data>
+</openerp>

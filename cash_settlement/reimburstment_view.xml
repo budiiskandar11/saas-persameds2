@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+    	
+    	<!-- view form reiburstment -->
+    	
+		<record model="ir.ui.view" id="reiburstment_form_view">
+			<field name="name">reiburstment.form</field>
+            <field name="model">reimburstment</field>
+            <field name="arch" type="xml">
+            	<form string="Reimbursment">
+            		<header>
+            			<button name="propose" type="object" states="draft,cancel" string="Propose" class="oe_highlight"/>
+            			<button name="approve" type="object" states="confirm" string="Approve" class="oe_highlight"/>
+            			<button name="create_payment" type="object" states="approve" string="Pay" class="oe_highlight"/>
+            			<button name="cancel" type="object" states="confirm" string="Cancel" icon="gtk-go-forward"/>
+            			
+            			<field name="state" widget="statusbar"/>
+            		</header>
+            		<sheet string="Reimbursment">
+            			<div>
+            			<h1>
+            			<label string="Reimburstment No"/>
+            			<field name="name" class="oe_inline" readonly="1"/>
+            			</h1>
+						    </div>        			
+            			<group>
+            				<group>
+            					<field name="date_create"/>
+            				</group>
+            				<group>	
+            					<field name="create_uid"/>
+            				</group>
+            				<group>
+            					<field name="employee_id" on_change="onchange_employee_id(employee_id)"/>
+            					<field name="department_id"/>
+            				</group>
+            				<group>
+            					<field name="date_start"/>
+            					<field name="date_end"/>
+            				</group>
+            				
+            			</group>
+            			<group colspan="2">
+            				<field name="memo"/>
+            			</group>
+            			<notebook>
+            				<page string="Details">
+            					<group>
+            						<field name="line_ids" nolabel="1" >
+            							<tree string="Details" editable="bottom">
+            								<field name="date" required="1"/>
+            								<field name="tipe_id" required="1"/>
+            								<field name="name"/>
+            								<field name="qty"/>
+            								<field name="unit_price"/>
+            								<field name="subtotal"/>
+            							</tree>
+            						</field>
+            					</group>
+            					<group class="oe_subtotal_footer oe_right" name="sale_total">
+			                        <div class="oe_subtotal_footer_separator oe_inline">
+                                		<label for="amount_total" />
+                            		</div>    
+            						<field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+			                        </group>
+            					<newline/>
+            					<group string="Payments">
+            						<group>
+            							<field name="date_payment" attrs="{'required':[('state', '=', 'approve')]}"/>
+            							<field name="journal_id" domain="[('type','in', ('bank','cash'))]" string="Payment Method" attrs="{'required':[('state', '=', 'approve')]}"/>
+            							
+            						</group>
+            						<group>
+            							<field name="move_id" readonly="1"/>
+            							<field name="period_id" readonly="1"/>
+            							<field name="currency_id" readonly="0"/>
+            						</group>
+            					</group>
+            				</page>
+            			</notebook>
+            			
+            		</sheet>
+            		<div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            	</form>
+            </field>
+		</record>
+		
+		<record model="ir.ui.view" id="reiburstment_tree_view">
+			<field name="name">reiburstment.tree</field>
+            <field name="model">reimburstment</field>
+            <field name="arch" type="xml">
+            	<tree string="Reimburstment">
+            		<field name="name"/>
+            		<field name="employee_id"/>
+            		<field name="memo"/>
+            		<field name="department_id"/>
+           			<field name="date_start"/>
+  					<field name="date_end"/>
+  					<field name="amount_total"/>
+            		<field name="state"/>
+            	</tree>
+            </field>
+		</record>
+		
+		<record id="view_reimburst_search" model="ir.ui.view">
+            <field name="name">view.search.reimburstmentr</field>
+            <field name="model">reimburstment</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Search Reimburstment">
+                    <group col='8' colspan='4'>
+                        <filter icon="terp-document-new" string="Draft" domain="[('state','=','draft')]" help="Draft"/>
+                        <filter icon="terp-camera_test" string="Waiting Payment" domain="[('state','=','approve')]" help="Posted Vouchers"/>
+                        <filter icon="terp-camera_test" string="paid" domain="[('state','=','posted')]" help="Posted Vouchers"/>
+                        <separator orientation="vertical"/>
+                       
+                        <separator orientation="vertical"/>
+                        <field name="date_start"/>
+                        <field name="name"/>
+                        <field name="move_id"/>
+                        <field name="employee_id" string="Employee"/>
+                    </group>
+                   
+                   <newline/>
+                    <group expand="0" string="Group By..." colspan="4" col="10">
+                        <filter string="Employee" icon="terp-personal" domain="[]" context="{'group_by':'employee_id'}"/>
+                        <filter string="Department" icon="terp-personal" domain="[]" context="{'group_by':'department_id'}"/>
+                        <filter string="Month" icon="terp-personal" domain="[]" context="{'group_by':'date_payment'}"/>
+                        
+                    </group>
+                </search>
+            </field>
+        </record>
+		
+		<record model='ir.actions.act_window' id='reimburstment_action'>
+            <field name="name">Reimbursment</field>
+            <field name="res_model">reimburstment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new Reimburstment
+              </p>
+            </field>
+        </record>
+        
+        <menuitem action="reimburstment_action" parent="menu_view_cash_advance" id="installation_action_menu"/>
+		
+        <!-- View untuk reimburstment Type -->
+        
+		<record model="ir.ui.view" id="reimburstment_expense_type_form">
+			<field name="name">reimburstment.expense.type</field>
+            <field name="model">reimburstment.expense.type</field>
+            <field name="arch" type="xml">
+            	<form string="Reimburstment Type">
+            		<header>
+            		</header>
+            		<sheet string="Reimburstment Type">
+            			<group>
+            				<group>
+            					<field name="code"/>
+            					<field name="name"/>
+            				</group>
+            				<group>
+            					<field name="account_id"/>
+            				</group>
+            			</group>
+            		</sheet>
+            	</form>
+            </field>
+		</record>
+		
+		<record model="ir.ui.view" id="reimburstment_expense_type_tree">
+			<field name="name">reimburstment.expense.type</field>
+            <field name="model">reimburstment.expense.type</field>
+            <field name="arch" type="xml">
+            	<tree string="Expense Type">
+            		<field name="code"/>
+           			<field name="name"/> 				
+            		<field name="account_id"/>
+            				
+            	</tree>
+            </field>
+		</record>
+		
+		<record id="action_reimburstment_type" model="ir.actions.act_window">
+            <field name="name">Reimbursment Expense Type</field>
+            <field name="res_model">reimburstment.expense.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new model.
+              </p>
+            </field>
+            
+        </record>
+		
+			
+		<menuitem action="action_reimburstment_type" 
+		parent="menu_advance_settlement_config" 
+		id="reimburstment_type" 
+		sequence="101"	/>  		
+    		    	
+    </data>
+    </openerp>

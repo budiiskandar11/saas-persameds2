@@ -1,0 +1,191 @@
+<openerp>
+	<data>
+		<record id="view_duty_tree" model="ir.ui.view">
+            <field name="name">view.duty.tree</field>
+            <field name="model">duty.trip</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Duty Trip">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="depart_id"/>
+                    <field name="type"/>
+                    <field name="category_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_duty_form" model="ir.ui.view">
+            <field name="name">view.duty.form</field>
+            <field name="model">duty.trip</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Duty Trip">
+                	<header>
+                		
+                		<button name="confirm" states="draft" type="object" string="Confirm" class="oe_highlight" icon="terp-camera_test" />
+               			<button name="approve" states="confirm" type="object" string="Approve" class="oe_highlight" icon="terp-camera_test"/>
+           				<button name="paid" states="wait_pay" type="object" string="Paid" class="oe_highlight" icon="terp-camera_test"/>
+                       	<button name="settle" states="paid" type="object" string="Settle" class="oe_highlight" icon="terp-camera_test"/>
+                       	<button name="done" states="settle" type="object" string="Done" class="oe_highlight" icon="terp-camera_test"/>
+                       	<button name="propose_payment" states="approve" type="object" string="Payment Propose" class="oe_highlight" icon="terp-camera_test"/>
+                       	<button name="set_to_draft" states="confirm" string="Reject" type="object"  icon="gtk-close"/>
+                       	<button name="cancel" states="draft,approve" string="Cancel" type="object" icon="gtk-close"/>
+                		
+                   		 <field name="state" widget="statusbar"/>
+                	</header>
+                	<sheet>
+                		<div class="oe_title">
+                        <h2>
+                		<label string="SPPD No "/>
+                        
+                            <field name="name" class="oe_inline" readonly="1"/>
+                        </h2>
+                    </div>
+                    	
+                		<group >
+                			<group attrs="{'readonly': [('state', '!=', 'draft')]}">
+			                    <field name="user_id" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+			                    <field name="date_create" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+			                    <field name="type" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+		                	</group>
+		                </group>
+		                <group >
+		                	<group string="Duty Trip General Info">
+			                    <field name="employee_id" string="Employee" on_change="onchange_employee_id(employee_id)" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+			                     <field name="depart_id"/>
+			                      <field name="job_id"/>
+			                      <field name="category_id" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+			                      <field name="description" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+			                </group>
+			                	
+			                <group string="Trip Schedule">
+			                	
+			                    <field name="date_start" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+			                    <field name="date_end"  required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+			                    <field name="total_days"/>
+			                    <field name="departure" required="0" attrs="{'invisible':[('type', '=', 'domestik')], 'readonly':[('state', '!=', 'draft')]}" />
+			                    <field name="destination" required="0" attrs="{'invisible': [('type', '=', 'domestik')],'readonly': [('state', '!=', 'draft')]}"/>
+			                    <field name="departure_local" required="0" attrs="{'invisible': [('type', '!=', 'domestik')],'readonly': [('state', '!=', 'draft')]}" />
+			                    <field name="destination_local"  attrs="{'invisible': [('type', '!=', 'domestik')],'readonly': [('state', '!=', 'draft')]}" required="0"/>
+			                    	 <field name="route" required="1" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+			              	</group>
+			              	
+                		</group>
+                		
+                		<label for="flight_ids" string="Flight List"/>
+                		<field name="flight_ids" colspan="4"  attrs="{'readonly': [('state', 'not in', ('approve','draft'))], 'required':[('state','=','approve')]}" >
+                			<tree editable="bottom">
+                				<field name="flight_dep"/>
+                				<field name="flight_arr"/>
+                				<field name="flight_num"/>
+                				<field name="flight_date"/>
+                				<field name="flight_time" string="Time" widget="float_time"/>
+                				<field name="arrival_date"/>
+                				<field name="arrival_time" string="Time" widget="float_time"/>
+                			</tree>
+                		</field>
+                		<label for="hotel_ids" string="Hotel List"/>
+                		<field name="hotel_ids" colspan="4" attrs="{'readonly': [('state', 'not in', ('approve','draft'))]}">
+                			<tree editable="bottom">
+                				<field name="hotel_name"/>
+                				<field name="check_in_date"/>
+                				<field name="check_out_date"/>
+                				<field name="note"/>
+                			</tree>
+                		</field>
+                	<notebook>
+                	<page string="Travel Allowance">
+                		
+                		<field name="duty_list" colspan="4" attrs="{'readonly': [('state', 'not in', ('approve','draft'))], 'required':[('state','=','approve')]}">
+                			<tree string="Travel Allowance" editable="bottom">
+                				<field name="name" widht="120px"/>
+                				<field name="qty"/>
+                				<field name="currency_id" string="Cur" widht="10px"/>
+                				<field name="amount"/>
+                				<field name="tot_amount"/>
+                			</tree>
+                		</field>
+                	</page>	
+                	</notebook>
+                	
+                	<group>
+                		<field name="tot_amount_idr" readonly="1"/>
+                		<field name="tot_amount_usd" readonly="1"/>
+                	</group>
+                	<group string="Payments">
+                		<field name="voucher_no" attrs="{'readonly': [('state', '!=', 'wait_pay')], 'required':[('state','=','wait_pay')]}"/>
+                		<field name="voucher_date" attrs="{'readonly': [('state', '!=', 'wait_pay')], 'required':[('state','=','wait_pay')]}"/>
+                	</group>
+                	</sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_duty_form" model="ir.actions.act_window">
+            <field name="name">Duty Trip</field>
+            <field name="res_model">duty.trip</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_duty_tree"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a Duty Trip.
+                </p>
+            </field>
+        </record>        
+
+		
+		
+		<record id="view_duty_category_tree" model="ir.ui.view">
+            <field name="name">view.duty.category.tree</field>
+            <field name="model">duty.category</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Duty Trip Category">
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+			
+        <record id="view_duty_category_form" model="ir.ui.view">
+            <field name="name">view.duty.category.tree</field>
+            <field name="model">duty.category</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Duty Trip Category">
+                	<sheet>
+                		<group>
+	                    <field name="code" required="1"/>
+	                    <field name="name" required="1"/>
+	                    </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+			
+		
+         <record id="action_view_duty_category_form" model="ir.actions.act_window">
+            <field name="name">Duty Trip Category</field>
+            <field name="res_model">duty.category</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_duty_category_form"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a Duty Trip Category.
+                </p>
+            </field>
+        </record>        
+        
+        <menuitem id="menu_duty" parent="hr.menu_hr_root" name="Travel Duty"/>
+		<menuitem action="action_view_duty_form" id="menu_hr_duty_tree" parent="menu_duty"/>
+
+		<menuitem id="menu_duty_category" parent="hr.menu_hr_root" name="Duty Trip Category"/>
+		<menuitem action="action_view_duty_category_form" id="menu_hr_duty_tree_category" parent="menu_duty"/>
+        
+        
+	</data>
+</openerp>

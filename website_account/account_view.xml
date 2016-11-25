@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+        <record id="view_account_form_cashflow_inh" model="ir.ui.view">
+            <field name="name">account.account.form.cashflow.inh</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+                <field name="user_type" position="after">
+                    <field name="cashflow_act" attrs="{'invisible':[('type','=','view')]}"/>
+                </field>
+            </field>
+        </record>
+    
+        <record id="view_account_list_cashflow_inh" model="ir.ui.view">
+            <field name="name">account.account.list.cashflow.inh</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_list"/>
+            <field name="arch" type="xml">
+                <field name="company_currency_id" position="before">
+                    <field name="cashflow_act"/>
+                </field>
+            </field>
+        </record>
+    
+        <record id="view_account_search_cashflow_inh" model="ir.ui.view">
+            <field name="name">account.account.search.cashflow.inh</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_search"/>
+            <field name="arch" type="xml">
+                <filter string="Internal Type" position="after">
+                    <filter string="Cashflow Activity" icon="terp-stock_symbol-selection" domain="" context="{'group_by':'cashflow_act'}"/>
+                </filter>
+            </field>
+        </record>
+    
+    </data>
+</openerp>

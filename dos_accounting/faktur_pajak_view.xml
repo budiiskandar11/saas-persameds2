@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_nomor_faktur_pajak_tree" model="ir.ui.view">
+            <field name="name">nomor.faktur.pajak.tree</field>
+            <field name="model">nomor.faktur.pajak</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Nomor Faktur">
+                	<field name="type" invisible="1"/>
+                    <field name="name"/>
+					<field name="date_used"/>
+                    <field name="invoice_id"/>
+                    <field name="partner_id"/>
+                    <field name="dpp"/>
+					<field name="tax_amount"/>                    
+                    <field name="status"/>                    
+                </tree>
+            </field>
+        </record>
+        <record id="view_anomor_faktur_pajak_form" model="ir.ui.view">
+            <field name="name">nomor.faktur.pajak.form</field>
+            <field name="model">nomor.faktur.pajak</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Nomor Faktur">
+                	<header>
+                		 <field name="status" widget="statusbar" statusbar_visible="0,1" statusbar_colors='{"confirmed":"1"}' readonly="1"/>
+                	</header>
+                	<sheet>	
+                		<div class="oe_title"> 
+                			<h1>
+                        		<label string="Faktur Pajak No "/>
+                            	<field name="name" class="oe_inline"/>
+                        	</h1>
+                   		</div>
+	                   	<group string="Faktur Details">
+		                    <group>
+		                       <field name="date_used"/>
+		                       <field name="invoice_id"/>
+	                    	   <field name="partner_id"  context="{'show_address': 1}" options='{"always_reload": True}'/>
+		                       <field name="company_id"/>
+		                    </group>
+		                    <group>
+		                       <field name="type"/>
+		                       <field name="dpp"/>
+							   <field name="tax_amount"/>
+							   <field name="currency_id"/>
+		                    </group>
+	                    </group>	
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="action_account_nomor_faktur_pajak" model="ir.actions.act_window">
+            <field name="name">Faktur Pajak Masukan</field>
+            <field name="res_model">nomor.faktur.pajak</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type', '=', 'in')]</field>
+            <field name="context">{'type':'in'}</field>
+        </record>
+         <record id="action_account_nomor_faktur_pajak_keluaran" model="ir.actions.act_window">
+            <field name="name">Faktur Pajak Keluaran</field>
+            <field name="res_model">nomor.faktur.pajak</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('type', '=', 'out')]</field>
+            <field name="context">{'type':'out'}</field>
+        </record>
+        <menuitem id="faktur_pajak_menu" name="Faktur Pajak" parent="account.menu_finance" sequence="5"/>
+        <menuitem id="ad_menu_nomor_faktur_pajak_keluar" parent="faktur_pajak_menu" action="action_account_nomor_faktur_pajak_keluaran"/>
+        <menuitem id="ad_menu_nomor_faktur_pajak_masuk" parent="faktur_pajak_menu" action="action_account_nomor_faktur_pajak"/>
+    </data>
+</openerp>

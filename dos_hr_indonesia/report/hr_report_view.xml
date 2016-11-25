@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="view_hr_report_graph" model="ir.ui.view">
+         <field name="name">hr.report.graph</field>
+         <field name="model">hr.report</field>
+         <field name="arch" type="xml">
+             <graph string="Employee Analysis" type="pivot">
+                 <field name="department_id" type="row"/>
+                 <field name="job_id" type="col"/>
+             </graph>
+         </field>
+    </record>
+
+    <!-- Custom reports (aka filters) -->
+    
+    <record id="filter_report_job" model="ir.filters">
+        <field name="name">By Job</field>
+        <field name="model_id">hr.report</field>
+        <!-- <field name="user_id" eval="False"/> -->
+        <field name="context">{'group_by': ['date_create:month', 'job_id'], 'col_group_by': ['date_create:month']}</field>
+    </record>
+    <record id="filter_report_departmnet" model="ir.filters">
+        <field name="name">By Department</field>
+        <field name="model_id">hr.report</field>
+        <!-- <field name="user_id" eval="False"/> -->
+        <field name="context">{'group_by': ['date_create:month', 'department_id'], 'col_group_by': ['date_create:month']}</field>
+    </record>
+
+    <record id="view_hr_report_search" model="ir.ui.view">
+        <field name="name">hr.report.search</field>
+        <field name="model">hr.report</field>
+        <field name="arch" type="xml">
+            <search string="Employee Analysis">
+                <field name="job_id"/>
+                <field name="department_id"/>
+                <!-- <field name="user_id"/> -->
+                <filter string="This Year" name="year" domain="[('date_create','&lt;=', time.strftime('%%Y-12-31')),('date_create','&gt;=',time.strftime('%%Y-01-01'))]"/>
+                <separator/>
+                <filter string="Unassigned" domain="[('user_id', '=', False)]"/>
+                <filter string="My" domain="[('user_id', '=', uid)]"/>
+                <separator/>
+                
+               
+                <group expand="1" string="Group By">
+                   
+                   <filter string="Jobs" name="job" context="{'group_by':'job_id'}"/>
+                   <filter string="Department" name="department" context="{'group_by':'department_id'}"/>
+                  
+                  
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_hr_report_all" model="ir.actions.act_window">
+        <field name="name">Employee Analysis</field>
+        <field name="res_model">hr.report</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">graph</field>
+        <field name="context">{'group_by_no_leaf':1,'group_by':[]}</field>
+        <field name="search_view_id" ref="view_hr_report_search"/>
+    </record>
+    <menuitem action="action_hr_report_all" id="menu_hr_report_all" parent="hr.menu_hr_reporting" sequence="0"/>
+
+</data>
+</openerp>

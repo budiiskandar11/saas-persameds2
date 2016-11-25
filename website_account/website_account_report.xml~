@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <report 
+            id="action_website_account_report_cashflow_statement"
+            model="account.account"
+            string="Statement of Cash Flows"
+            report_type="qweb-pdf"
+            name="website_account.report_cashflow_statement"
+            file="website_account.report_cashflow_statement"
+        />
+    </data>
+</openerp>

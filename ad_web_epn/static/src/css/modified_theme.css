@@ -1,0 +1,42 @@
+@media print {
+  body {
+    height: auto !important;
+  }
+}
+
+body.oe_single_form .oe_single_form_logo {
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+body.oe_single_form .oe_single_form_footer {
+  position: absolute;
+  bottom: -30px;
+  right: 0px;
+  width: 100%;
+  text-align: center;
+}
+body.oe_single_form .oe_single_form_container {
+  padding: 10px;
+  position: absolute;	
+  left: 50%;
+  top: 50%;
+  width: 400px;
+  margin-top: -250px;
+  margin-left: -200px;
+}
+
+body.oe_single_form {
+  background-image: url('../img/medical2.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat:no-repeat;
+}
+
+body.oe_single_form .oe_single_form_footer {
+	font-size: 12px;
+	color: #ffffff;
+	text-shadow: 2px 2px 4px #000000;
+}

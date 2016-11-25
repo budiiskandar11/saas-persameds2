@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="view_ptkp_trees" model="ir.ui.view">
+            <field name="name">hr.ptkp.tree</field>
+            <field name="model">hr.ptkp</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="PTKP" version="7.0">
+                    <field name="name"/>
+                    <field name="describe" style="width:35%%;"/>
+                    <field name="amount" style="width:35%%;"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_ptkp_forms" model="ir.ui.view">
+            <field name="name">hr.ptkp.form</field>
+            <field name="model">hr.ptkp</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="PTKP" version="7.0" nolabel="0">
+                	<sheet>
+                		<group>
+                			<field name="name" style="width:35%%;"/>
+		                    <field name="describe" style="width:35%%;"/>
+		                    <field name="amount" style="width:35%%;"/>
+                		</group>
+                	</sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_ptkp_forms" model="ir.actions.act_window">
+            <field name="name">PTKP</field>
+            <field name="res_model">hr.ptkp</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_ptkp_trees"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a PTKP Rules.
+                </p>
+            </field>
+        </record>
+		<menuitem action="action_view_ptkp_forms" id="menu_hr_ptkp_tree" parent="hr.menu_hr_configuration" sequence="15"/>
+
+        <!-- ============ -->
+
+        <!-- ======PTKP FIELD======== -->
+        
+        <record id="view_ptkp_form" model="ir.ui.view">
+            <field name="name">hr.contract.form</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page/group[1]" position="after">
+                    <group>
+                        <group string="TAXES">
+                            <field name="ptkp_id" style="width:15%%;" on_change="onchange_ptkp_amount(ptkp_id)"/>
+                            <field name="amount_ptkp" readonly="1"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+
+	</data>
+</openerp>

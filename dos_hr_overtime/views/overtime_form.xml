@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="overtime_document">
+    <t t-call="report.html_container">
+        <t t-call="report.internal_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <h2><center><strong>Form Perintah Lembur</strong></center></h2>
+                    <h3><center><strong>PT.ABACUS DISTRIBUTION SYSTEMS INDONESIA</strong></center></h3>
+                    <br/>
+                    
+                    <table class="table table-bordered" style="margin:0px auto; width:80%;">
+                        <tr>
+                            <td align="center">Nama</td>
+                            <td align="center">Tanggal</td>
+                            <td align="center">Estimasi Durasi</td>
+                            <td align="center">Pekerjaan</td>
+                        </tr>
+                        <tr>
+                            <td>Nama</td>
+                            <td>Tanggal</td>
+                            <td>Estimasi Durasi</td>
+                            <td>Pekerjaan</td>
+                        </tr>  
+                    </table>
+                    <br/>
+                    <table class="table table-bordered" style="margin:0px auto; width:50%;float:right;">
+                        <tr>
+                            <td align="center">Jakarta</td>
+                            <td>17-Jun-14</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="50px"/>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">Aripin</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center">Procurement Spn</td>
+                        </tr>  
+                    </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+<template id="report_overtime_document">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'dos_hr_overtime.overtime_document')"/>
+        </t>
+    </t>
+</template>
+
+
+</data>
+</openerp>

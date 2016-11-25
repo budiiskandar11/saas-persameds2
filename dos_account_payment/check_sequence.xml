@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!-- check -->
+        <record id="seq_type_check" model="ir.sequence.type">
+            <field name="name">check</field>
+            <field name="code">check</field>
+        </record>
+
+        <record id="seq_check" model="ir.sequence">
+            <field name="name">check</field>
+            <field name="code">check</field>
+            <field name="prefix">CHK</field>
+            <field name="suffix">/%(month)s/%(year)s</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <!-- giro -->
+		<record id="seq_type_giro" model="ir.sequence.type">
+            <field name="name">giro</field>
+            <field name="code">giro</field>
+        </record>
+
+        <record id="seq_giro" model="ir.sequence">
+            <field name="name">giro</field>
+            <field name="code">giro</field>
+            <field name="prefix">GIR</field>
+            <field name="suffix">/%(month)s/%(year)s</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</openerp>

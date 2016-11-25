@@ -1,0 +1,147 @@
+<openerp>
+<data>
+	
+	<!--
+        Asset
+     -->
+
+    <record model="ir.ui.view" id="view_asset_asset_extra_form">
+        <field name="name">asset.extra.form</field>
+        <field name="model">asset.extra</field>
+        <field name="arch" type="xml">
+            <form string="Asset">
+                <header>
+                    <button name="validate" states="draft" string="Confirm Asset" type="object" class="oe_highlight"/>
+                    <button name="set_to_close" states="open" string="Set to Close" type="object" class="oe_highlight"/>
+                    <button name="set_to_draft" states="open" string="Set to Draft" type="object" />
+                    <button name="appr_to_close" states="approve" string="Approval to Close" type="object" />
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,close,approve"/>
+                </header>
+                <sheet>
+                    <field name="image" widget='image' class="oe_left oe_avatar" options='{"preview_image": "image_medium", "size": [90, 90]}'/>
+                	<div class="oe_title oe_left">
+                        <label for="asset_number" class="oe_edit_only"/>
+                        <h2>
+                        	<field name="asset_number"/>
+                        </h2>
+                         <label for="name" class="oe_edit_only"/>
+                        <h1>
+                        	<field name="name" class="oe_inline"/>
+                        </h1>
+                        
+                        	<field name="asset_desc"/>
+                    </div>
+                    <group>
+                        <group string="General Info">
+                            <field name="group_id"/>
+                    		<field name="asset_class_id"/>
+                           
+                            <field name="user_id"/>
+                            
+                        </group>
+                        <group string="Purchase Info">
+                        	<field name="origin"/>
+                            <field name="purchase_date1" string="Purchase Date"/>
+                        	<field name="purchase_date" string="Use Date"/>
+                        	<field name="purchase_value" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="currency_id" />
+                            <field name="company_id" widget="selection" groups="base.group_multi_company" on_change="onchange_company_id(company_id)"/>
+                        </group>
+                         <group string="PIC Assets">
+                             <field name="employee_id" on_change="onchange_employee_id(employee_id)"/> 
+                              <field name="distrik_id"/> 
+                               <field name="department_id"/> 		
+                        </group>
+                        
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Notes">
+                            <field name="note" placeholder="Add an internal note here for example : Asset spesification"/>
+                             
+                            <field name="close_reason" placeholder="tuliskan alasan kenapa di close" attrs="{'invisible': [('state', 'in', ['draft','open'])]}"/>
+                       		
+                          </page>
+                         <page string="Log Asset Checking">
+                         	<group>
+                         	<field name="date_last_check"/>
+	                        </group>
+	                        <group colspan="4">                         	
+                         	 <field name="log_asset_ids" nolabel="1">
+                         	 	<tree string="Log Checking" editable="bottom">
+                         	 		<field name="date"/>
+                         	 		<field name="employee_id"/>
+                         	 		<field name="condition"/>
+                         	 		<field name="note"/>
+                         	 	</tree>
+                         	 </field>
+                         	 </group> 
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    
+     <record id="view_asset_extra_tree" model="ir.ui.view">
+			<field name="name">asset.extra.tree</field>
+			<field name="model">asset.extra</field>
+			<field name="priority">2</field>
+			<field name="arch" type="xml">
+				<tree string="Asset Extra">
+					<field name="asset_number"/>
+					<field name="name" string="Asset Name"/>
+					<field name="group_id"/>
+					<field name="employee_id"/>
+				     <field name="distrik_id"/> 
+					<field name="department_id"/>
+					<field name="state"/>
+					<field name="date_last_check"/>
+				</tree>
+			</field>
+		</record>
+    
+    <record id="view_asset_extra_search" model="ir.ui.view">
+         <field name="name">asset.asset.search</field>
+        <field name="model">asset.extra</field>
+        <field name="arch" type="xml">
+            <search string="Account Asset">
+                <field name="name" string="Asset"/>
+                <field name="purchase_date"/>
+                <filter icon="terp-check" string="Current" domain="[('state','in', ('draft','open'))]" help="Assets in draft and open states"/>
+                <filter icon="terp-dialog-close" string="Closed" domain="[('state','=', 'close')]" help="Assets in closed state"/>
+               
+                
+            </search>
+        </field>
+    </record>
+    
+    
+    
+    
+    <!-- Asset E -->
+		
+	
+		 <record model="ir.actions.act_window" id="action_asset_extra">
+        <field name="name">Assets Extra Comptable</field>
+        <field name="res_model">asset.extra</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+         <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a Asset Extra Comptable.
+              </p><p>
+                Odoo helps you easily track all activities related to
+                an employee: discussions, history of business opportunities,
+                documents, etc.
+              </p>
+            </field>
+    </record>
+
+    <menuitem  parent="account_asset.menu_finance_assets" id="action_asset_extra_form1"
+        sequence="100"
+        action="action_asset_extra"/>
+	
+	
+</data>
+</openerp>

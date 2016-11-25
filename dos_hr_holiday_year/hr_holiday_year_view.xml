@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="view_holiday_year_tree">
+            <field name="name">Holiday Tree</field>            
+            <field name="model">hr.holiday.year</field>            
+            <field name="type">tree</field>							
+            <field name="arch" type="xml">
+            	<tree string="Holiday Establishment">
+            		<field name="name" />
+            		<field name="date" />
+            		<field name="note" />
+            		<field name="year" />
+            		<field name="month" />
+            	</tree>
+            </field>
+   		</record>
+   		
+   		<record model="ir.ui.view" id="view_holiday_year_form">
+            <field name="name">Holiday Form</field>            
+            <field name="model">hr.holiday.year</field>            
+            <field name="type">form</field>							
+            <field name="arch" type="xml">
+            	<form string="Holiday Establishment">
+            		<group col="8" colspan="4">
+	            		<field name="name" />
+	            		<field name="date" />
+	            		<field name="year" />
+	            		<field name="month" />
+            		</group>
+            		<separator string="Description" colspan="4" /><newline />
+            		<field name="note" colspan="4" nolabel="1" />
+            	</form>
+            </field>
+   		</record>
+   		
+   		<record model="ir.ui.view" id="view_holiday_year_search">
+            <field name="name">Holiday Search</field>            
+            <field name="model">hr.holiday.year</field>            
+            <field name="type">search</field>							
+            <field name="arch" type="xml">
+            	<search string="Holiday Establishment">
+            		<field name="name" />
+            		<field name="date" />
+            		<newline />
+            		<group expand="False" string="Group By..." groups="base.group_extended">
+                        <filter name="year" string="Year" icon="terp-go-year" domain="[]" context="{'group_by':'year'}"/>
+                        <filter name="month" string="Month" icon="terp-go-month" domain="[]" context="{'group_by':'month'}"/>
+                    </group>
+            	</search>
+            </field>
+		</record>
+		
+		<record model="ir.ui.view" id="view_holiday_year_calendar">
+            <field name="name">Holiday Calendar</field>
+            <field name="model">hr.holiday.year</field>
+            <field name="type">calendar</field>
+            <field name="arch" type="xml">
+                <calendar string="Calendar View" date_start="date" date_delay="delay" color="name">
+                    <field name="name" />
+                </calendar>
+            </field>
+        </record>
+		
+		<record id="act_menu_holiday_year" model="ir.actions.act_window">
+		    <field name="name">Holiday Establishment</field>
+		    <field name="res_model">hr.holiday.year</field>
+		    <field name="view_type">form</field>
+		    <field name="view_mode">tree,form,calendar</field>
+		    <field eval="False" name="filter"/>
+		    <field name="view_id" ref="view_holiday_year_calendar"/>
+		    <field name="context">{"search_default_year":1,"search_default_month":1,}</field>
+		    <field name="search_view_id" ref="view_holiday_year_search"/>
+		</record>
+   		
+   		<menuitem 	name='Holiday Establishment'
+					id='menu_holiday_year' 
+				  	parent='hr.menu_open_view_attendance_reason_config'
+				  	action="act_menu_holiday_year"
+				  	/>
+				  	
+	</data>
+</openerp>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Top menu item -->
+		<menuitem name="Finance"
+            id="account.menu_finance" 
+            groups="account.group_account_user,account.group_account_manager,account.group_account_invoice"
+            sequence="50"/>
+        <!-- Top menu item -->
+        <menuitem name="Accounting"
+            id="menu_accounting"  
+            groups="account.group_account_user,account.group_account_manager,account.group_account_invoice"
+            sequence="51"/>
+
+        <menuitem id="account.menu_finance_periodical_processing" name="Periodic Processing" parent="menu_accounting" sequence="13" groups="account.group_account_user,account.group_account_manager"/>
+        <!-- This menu is used in account_code module -->        
+		<menuitem id="account.menu_finance_charts" name="Charts" parent="menu_accounting" groups="account.group_account_user" sequence="6"/>
+        <menuitem id="account.menu_finance_reports" name="Reporting" parent="menu_accounting" sequence="14" groups="account.group_account_user,account.group_account_manager"/>
+        <menuitem id="account.menu_finance_configuration" name="Configuration" parent="menu_accounting" sequence="15" groups="account.group_account_manager"/>        
+		<menuitem id="account.menu_finance_entries" name="Journal Entries" parent="menu_accounting" sequence="5" groups="account.group_account_user,account.group_account_manager"/>
+
+
+    </data>
+</openerp>
+

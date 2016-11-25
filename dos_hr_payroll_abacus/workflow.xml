@@ -1,0 +1,25 @@
+<openerp>
+	<data>
+		<record id="act_verify_1" model="workflow.activity">
+            <field name="wkf_id" ref="hr_payroll.wkf"/>
+            <field name="name">verify1</field>
+            <field name="action">hr_verify_sheet_1()</field>
+            <field name="kind">function</field>
+        </record>
+
+
+        <record id="hr_payroll.t1" model="workflow.transition">
+            <field name="act_from" ref="hr_payroll.act_draft"/>
+            <field name="act_to" ref="act_verify_1"/>
+            <field name="signal">hr_verify_sheet</field>
+        </record>
+        
+        <record id="t6" model="workflow.transition">
+            <field name="act_from" ref="act_verify_1"/>
+            <field name="act_to" ref="hr_payroll.act_verify"/>
+            <field name="signal">hr_verify_sheet_1</field>
+        </record>
+
+        
+	</data>
+</openerp>

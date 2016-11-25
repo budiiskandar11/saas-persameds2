@@ -1,0 +1,5 @@
+
+    $('.oe_secondary_menu_section').click(function() {
+        $(this).next().slideToggle(500);
+    });
+

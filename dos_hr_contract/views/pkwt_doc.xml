@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="pkwt_document">
+    <t t-call="report.html_container">
+        <t t-call="report.internal_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <h2><center><strong>PERJANJIAN KERJA UNTUK WAKTU TERTENTU</strong></center></h2>
+                    <h3><center><strong>Nomor : ADSI / SPKWT -     / X / 2012</strong></center></h3>
+                    <br/>
+                    <t t-set="company" t-value="res_company"/>
+                    <table class="table-condensed" style="margin:0px auto; width:80%;">
+                        <tr>
+                            <td colspan="4">Yang Bertanda Tangan Dibawah ini :</td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">1</td>
+                            <td style="width:10%; text-align:left;">Nama</td>
+                            <td style="width:2%;">:</td>
+                            <td style="width:50%;"><t t-esc="company.employee_id.name"/></td>
+                        </tr>
+                         <tr>
+                            <td style="width:2%;"/>
+                            <td style="width:10%; text-align:left;">Jabatan</td>
+                            <td style="width:2%;">:</td>
+                            <td style="width:50%;"><t t-esc="company.employee_id.job_id.name"/></td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;"/>
+                            <td colspan="3" style="text-align:justify;">
+                                Dalam hal ini bertindak untuk dan atas nama PT. ABACUS DISTRIBUTION SYSTEMS INDONESIA, berkedudukan di Jakarta Jalan Mampang Prapatan Raya No. 93 Jakarta Selatan 12790, yang selanjutnya disebut Pihak Pertama;
+                            </td>
+                        </tr>
+                         <tr>
+                            <td style="width:2%;">2</td>
+                            <td style="width:10%; text-align:left;">Nama</td>
+                            <td style="width:2%;">:</td>
+                            <td style="width:50%;"><span t-field="o.employee_id.name"/></td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;"/>
+                            <td style="width:2%; text-align:left;">Tempat/Tgl Lahir</td>
+                            <td style="width:2%;">:</td>
+                            <td style="width:50%;"><span t-field="o.employee_id.place_of_birth"/>/<span t-field="o.employee_id.birthday"/></td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;"/>
+                            <td style="width:10%; text-align:left;">Jenis Kelamin</td>
+                            <td style="width:2%;">:</td>
+                            <td style="width:50%;"><span t-field="o.employee_id.gender"/></td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;"/>
+                            <td style="width:10%; text-align:left;">Alamat</td>
+                            <td style="width:2%;">:</td>
+                            <td style="width:50%;"><span t-field="o.employee_id.ktp_street"/></td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;"/>
+                            <td colspan="3" style="text-align:justify;">
+                                Dalam hal ini bertindak untuk dan atas nama diri sendiri selaku karyawan, yang selanjutnya disebut Pihak Kedua.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">Menimbang</td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">1</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Bahwa Pihak Pertama membutuhkan tenaga kerja sebagai <span t-field="job_id.name"/> pada  PT. Abacus Distribution Systems Indonesia di ...........
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">2</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Bahwa dengan kualifikasi yang dimiliki Pihak Kedua dipandang memenuhi syarat untuk melaksanakan pekerjaan tersebut.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="text-align:justify;">
+                                Sehubungan dengan hal-hal tersebut diatas, maka kedua belah pihak telah sepakat untuk mengadakan kesepakatan kerja dengan ketentuan sebagai berikut :
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table-condensed" style="margin:0px auto; width:80%;">
+                        <th colspan="4"><center><strong>Pasal 1</strong></center></th>
+
+                        <tr>
+                            <td style="width:2%;">1</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Pihak Pertama mempekerjakan Pihak Kedua sebagai karyawan dengan status Karyawan Kontrak untuk jangka waktu 1 (satu) tahun, terhitung sejak tanggal .............  dan berakhir pada tanggal ...............
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">2</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Apabila diperlukan, kesepakatan ini dapat diperpanjang sesuai dengan ketentuan yang berlaku dan disepakati oleh kedua belah pihak.
+                            </td>
+                        </tr>
+
+                        <th colspan="4"><center><strong>Pasal 2</strong></center></th>
+
+                        <tr>
+                            <td style="width:2%;">1</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Pihak Pertama menempatkan serta menugaskan Pihak Kedua sebagai ........... PT. Abacus Distribution Systems Indonesia di ...............
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">2</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Posisi dan Rincian Kerja Pihak Kedua akan diatur oleh ............. PT. Abacus Distribution Systems Indonesia
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">3</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Hari dan jam kerja Pihak Kedua sesuai dengan ketentuan yang berlaku pada  PT. Abacus Distribution Systems Indonesia.
+                            </td>
+                        </tr>
+
+                        <th colspan="4"><center><strong>Pasal 3</strong></center></th>
+                        <tr>
+                            <td colspan="4">Kewajiban-kewajiban Pihak Kedua selama berlangsungnya hubungan kerja :</td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:2%;">1</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Tunduk dan taat pada peraturan – peraturan dan ketentuan – ketentuan, tata tertib yang berlaku umum maupun yang ditetapkan oleh Pihak Pertama....
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">2</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Melaksanakan tugas yang diberikan oleh Pihak Pertama dengan penuh tanggung jawab, jujur dan ikhlas serta dedikasi yang tinggi.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">3</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Tidak memberikan keterangan yang bersifat rahasia mengenai Pihak Pertama kepada pihak lain.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">4</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Pihak Kedua, selama terikat hubungan kerja dengan Pihak Pertama, dilarang untuk bekerja pada perusahaan lain, terlibat dan/atau melakukan usaha dan/atau aktifitas lain di bidang yang sejenis dengan pekerjaan atau usaha Pihak Pertama tanpa izin dari Pihak Pertama
+                            </td>
+                        </tr>
+                        
+                        <th colspan="4"><center><strong>Pasal 4</strong></center></th>
+                        <tr>
+                            <td colspan="4" style="text-align:justify;">Selama hubungan kerja berlangsung berdasarkan perjanjian ini, Pihak Pertama memberikan penghasilan kepada Pihak Kedua :</td>
+                        </tr>
+
+                        <tr>
+                            <td style="width:2%;">1</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Upah berupa paket sebesar ..........,- (................. rupiah)  per Bulan. 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">2</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Penghasilan tersebut dibayarkan setiap 1 (satu) bulan sekali sesuai dengan ketentuan yang berlaku di perusahaan.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">3</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Pajak Penghasilan (Pph 21) ditanggung oleh Pihak Pertama.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">4</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Sesuai dengan ketentuan Undang – Undang, maka Pihak Kedua wajib diikutsertakan pada Program Jamsostek. Dimana Upah sebagaimana tercantum dalam Pasal 4 angka 1 Perjanjian ini akan dipotong 2% untuk Program Jamsostek.
+                            </td>
+                        </tr>
+
+                        <th colspan="4"><center><strong>Pasal 5</strong></center></th>
+
+                        <tr>
+                            <td style="width:2%;">1</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Pihak Pertama memberikan biaya pengobatan bulanan sebesar .............,-/bulan/ kepada Pihak Kedua.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">2</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Biaya pengobatan diberikan dengan cara reimbursement kwitansi dokter dan apotik yang disertai dengan diagnosa dokter.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">3</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Kepada Pihak Kedua tidak diberikan Hak Cuti.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">4</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Apabila dalam periode 1 bulan ( tanggal 1 sampai dengan tanggal 30 ) Pihak Kedua terlambat datang ke lokasi pekerjaan sebanyak 3 (tiga) kali,  maka Pihak Pertama dapat mengeluarkan Surat Peringatan.
+                            </td>
+                        </tr>
+
+                        <th colspan="4"><center><strong>Pasal 6</strong></center></th>
+
+                        <tr>
+                            <td style="width:2%;">1</td>
+                            <td style="width:2%">a.</td>
+                            <td colspan="2" style="text-align:justify;">
+                                Apabila Pihak Kedua hendak mengakhiri perjanjian ini sebelum waktunya, maka wajib untuk memberitahukan secara tertulis kepada Pihak Pertama sekurang-kurangnya 16 (enam belas) hari Kalender sebelum waktu yang dikehendaki dan oleh karenanya tidak dikenakan ganti rugi apapun.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%"/>
+                            <td style="width:2%">b.</td>
+                            <td colspan="2" style="text-align:justify;">
+                                Apabila Pihak Kedua hendak mengakhiri perjanjian ini sebelum waktunya, dan pemberitahuan tertulis kepada Pihak Pertama dilakukan kurang dari 16 (enambelas) hari kalender, maka Pihak Kedua setuju untuk memberikan ganti rugi sebesar 1 (satu) bulan upah kepada Pihak Pertama.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">2</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Pihak Pertama berhak untuk mengakhiri perjanjian ini sebelum waktunya tanpa pemberitahuan terlebih dahulu kepada pihak kedua dan Pihak Pertama dibebaskan dari kewajiban untuk membayar ganti rugi atau biaya lainnya dalam hal :
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%"/>
+                            <td style="width:2%">a.</td>
+                            <td colspan="2" style="text-align:justify;">
+                                Pihak Kedua dinilai Pihak Pertama mempunyai kinerja yang kurang baik dalam bekerja
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%"/>
+                            <td style="width:2%">b.</td>
+                            <td colspan="2" style="text-align:justify;">
+                                Pihak Kedua melakukan pelanggaran berat 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%"/>
+                            <td style="width:2%">c.</td>
+                            <td colspan="2" style="text-align:justify;">
+                                Pihak kedua melanggar ketentuan yang tercantum dalam Kesepakatan Kerja ini.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%"/>
+                            <td style="width:2%">d.</td>
+                            <td colspan="2" style="text-align:justify;">
+                                Pihak Kedua sudah menerima Surat Peringatan secara tertulis dari atasan langsung terkait dengan huruf a, b dan c Pasal 6 ayat 2 Perjanjian ini.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">3</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Apabila Pihak Kedua diberhentikan karena melanggar ketentuan yang tercantum dalam Kesepakatan Kerja ini maka Pihak Pertama dibebaskan dari kewajiban membayar Penghasilan dari Pihak kedua
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">4</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Pihak Pertama setuju untuk memberikan kompensasi kepada Pihak Kedua sebesar 1 (satu) bulan upah apabila Pihak Pertama mengakhiri Perjanjian sebelum waktunya oleh karena sebab-sebab berikut :
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%"/>
+                            <td style="width:2%">a.</td>
+                            <td colspan="2" style="text-align:justify;">
+                                Pihak Pertama melakukan pengurangan jumlah karyawan
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%"/>
+                            <td style="width:2%">b.</td>
+                            <td colspan="2" style="text-align:justify;">
+                                Pihak Kedua menderita sakit terus menerus selama 14 (empat belas) hari kerja.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">5</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Pihak Pertama berhak mengakhiri perjanjian ini, apabila dalam waktu 3 (tiga) bulan pertama, Pihak Kedua dinilai menunjukkan hasil performa yang tidak memenuhi kebutuhan Pihak Pertama.
+                            </td>
+                        </tr>
+
+                        <th colspan="4"><center><strong>Pasal 7</strong></center></th>
+                        <tr>
+                            <td colspan="4" style="text-align:justify;">Setelah berakhirnya jangka waktu sebagaimana dimaksud pasal 1, maka perjanjian ini berakhir dengan sendirinya tanpa adanya kompensasi apapun.</td>
+                        </tr>
+
+                        <th colspan="4"><center><strong>Pasal 8</strong></center></th>
+
+                        <tr>
+                            <td style="width:2%;">1</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Perselisihan yang timbul sebagai akibat dari pelaksanaan perjanjian ini akan diselesaikan secara musyawarah untuk mencapai mufakat.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">2</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Apabila dengan cara musyawarah tidak tercapai kata sepakat, Kedua Pihak akan menyelesaikan perselisihan menurut hukum yang berlaku.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:2%;">3</td>
+                            <td colspan="3" style="text-align:justify;">
+                                Kedua belah pihak mengenai penyelesaian perselisihan tersebut pada ayat ayat pasal ini memilih tempat kedudukan yang tetap dan tidak berubah di Kantor Pengadilan Negeri Jakarta Selatan.
+                            </td>
+                        </tr>
+                        
+                        <th colspan="4"><center><strong>Pasal 9</strong></center></th>
+                        <tr>
+                            <td colspan="4" style="text-align:justify;">
+                                Hal-hal yang belum diatur dalam perjanjian ini akan diatur kemudian oleh kedua belah pihak.
+ 
+                                Dibuat dan ditanda tangani di Jakarta pada 1 November 2012 dan dalam rangkap 2 (dua) bermaterai cukup yang mempunyai kekuatan hak yang sama dan ditanda tangani oleh kedua belah pihak tanpa adanya tekanan atau paksaan dari pihak lain.
+
+                            </td>
+                        </tr>
+
+                     </table>                    
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+<template id="report_pkwt_doc">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'dos_hr_contract.pkwt_document')"/>
+        </t>
+    </t>
+</template>
+
+
+</data>
+</openerp>

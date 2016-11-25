@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		
+        <report auto="False" id="report_receiving" 
+		        model="stock.picking" 
+		        name="report.receiving"
+		        file="dos_purchase_epn/report/receiving_report.mako" 
+		        string="Print Receiving Report" 
+         		webkit_header=""
+		        usage="default" 
+		       	report_type="webkit"/>	
+	</data>
+</openerp>

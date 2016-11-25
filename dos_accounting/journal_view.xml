@@ -1,0 +1,14 @@
+<openerp>
+	<data>
+		<record id="view_account_journal_distrik_form" model="ir.ui.view">
+            <field name="name">account.journal.distrik.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="arch" type="xml">
+            	<field name="currency" position="after">
+					<field name="stock_mit_account"/>            		
+            	</field>
+            </field>
+    	</record>
+	</data>
+</openerp>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		
+		<report id="sale.report_sale_order" string="Quotation / Order" model="sale.order"
+			report_type="qweb-pdf" file="sale.report_saleorder" name="sale.report_saleorder" 
+			menu="False" />
+		
+		<report id="dos_new_quotation_report" model="sale.order" name="dos_new_quotation_report" 
+			file="dos_sale/report/print_persameds.mako" string="Quotation / Order" webkit_header="persamed_header_footer"  
+			report_type="webkit"/> 
+				
+		<report id="dos_order_confirmation" model="sale.order" name="dos_confirmation_order" 
+			file="dos_sale/report/order_confirmation_persameds.mako" string="Confirmation Order" webkit_header=""  
+			report_type="webkit"/> 
+		
+	</data>
+</openerp>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		<report 
+		   id="dos_report_bapuk" model="bank.reconciliation" name="dos.cash.bapuk" 
+			file="dos_bank_reconciliation/report/dos_print_bapuk.mako" string="Print BAPUK" 
+			report_type="webkit"/>
+			
+		
+	</data>
+</openerp>

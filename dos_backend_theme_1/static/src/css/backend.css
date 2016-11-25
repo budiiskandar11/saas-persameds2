@@ -1,0 +1,289 @@
+/*
+# -*- encoding: utf-8 -*-
+# Python source code encoding : https://www.python.org/dev/peps/pep-0263/
+##############################################################################
+#
+#    OpenERP, Odoo Source Management Solution
+#    Copyright (c) 2015 Databit Solusi Indonesia (http://www.databit.co.id)
+#    Ade Anshori <adeanshori@databit.co.id>
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+*/
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+.openerp {
+  font-family: "FontAwesome";
+  font-size: 12px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #fff;
+}
+
+.ui-widget {
+  font-family: "FontAwesome";
+  font-size: 12px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #fff;
+}
+
+
+.openerp .oe_form_sheet_width {
+    max-width: 100%;
+}
+
+.openerp .oe_leftbar {
+    background-color: #cccfff;
+    border-right: 1px solid #1D559D;
+}
+
+
+.openerp .oe_form header,
+.openerp .oe_view_manager_current > .oe_view_manager_header {
+    background: transparent;
+}
+
+.openerp .oe_button.oe_link span,
+.openerp .oe_application a,
+.openerp .ui-widget-content a,
+.openerp .oe_view_manager table.oe_view_manager_header h2 a,
+.openerp .oe_secondary_menu_section {
+    color: #1D559D;
+}
+.oe_dropdown_header {
+    margin: 30px auto;
+    width: 90%;
+}
+
+.openerp .oe_searchview {
+  cursor: text;
+  position: relative;
+  float: right;
+  padding: 3px 0;
+  line-height: 18px;
+  min-width: 600px;
+  border-bottom: 1px solid #ababab;
+  background: white;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  -moz-box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
+  -webkit-box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset;
+}
+
+
+.openerp .nav-pills > li.active > a,
+
+.openerp a.list-group-item.active > a {
+    background-color: #1D559D;
+}
+
+.openerp .nav-pills > li.active a:hover,
+.openerp .nav-pills > li.active a:focus,
+.openerp a.list-group-item.active a:hover,
+.openerp a.list-group-item.active a:focus {
+    background-color: #446b9d;
+}
+.navbar-inverse {
+    background-color: #A3478A;
+    border-color: #1D559D;
+}
+
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+    border-color: #1D559D;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #FFFFFF;
+}
+
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus,
+.navbar-inverse .navbar-nav > .active > a,
+.navbar-inverse .navbar-nav > .active > a:hover,
+.navbar-inverse .navbar-nav > .active > a:focus {
+    color: #FFFFFF;
+    background-color: #5F144A;
+width: 100%;
+height: 100%;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+    color: #d4dae1;
+}
+/* button create kanban*/
+/*.openerp button.oe_highlight {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    background-color: #337ab7;
+    border: 0px;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.openerp button.oe_highlight:hover {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    background-color: #2d6da3;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+*/
+/*print and more*/
+.openerp .oe_dropdown_toggle {
+    border: 1px thin;
+    font-weight: 400;
+    text-align: left;
+    vertical-align: left;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    background-color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.42857143;
+}
+
+.openerp .oe_dropdown_toggle:hover {
+    border: 1px thin;
+    font-weight: 400;
+    text-align: left;
+    vertical-align: left;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    background-color: #2d6da3;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.42857143;
+}
+.openerp .oe_dropdown_menu {
+    border: 0px;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: left;
+    vertical-align: left;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    background-color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}/*select view (kanban,list,form)*/
+.openerp .oe_view_manager .oe_pager_group {
+    border: 0px;
+}
+/*tree*/
+/*.openerp .oe_list_content div.o_checkbox {
+}
+*/
+/* button create edit tree */
+.openerp button.oe_button {
+    border: 0px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    background-color: #337ab7;
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.42857143;
+    border-radius: 0px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.openerp button.oe_button:hover {
+    border: 0px;
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    background-color: #2d6da3;
+    color: white;
+    white-space: nowrap;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.42857143;
+    border-radius: 0px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}

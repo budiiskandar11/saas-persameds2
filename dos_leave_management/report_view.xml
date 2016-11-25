@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<report 
+		 id="report_holidays_leave_doc" 
+		 string="BIT FORM" 
+		 model="hr.holidays.propose" 
+		 report_type="qweb-pdf" 
+		 file="dos_leave_management.holidays_leave_document" 
+		 name="dos_leave_management.holidays_leave_document"/>
+	</data>
+</openerp>

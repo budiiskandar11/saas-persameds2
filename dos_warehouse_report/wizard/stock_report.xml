@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		
+		<menuitem name="Reporting" id="stock_report" parent="stock.menu_stock_root"/>
+		
+		
+		<record model="ir.ui.view" id="view_stock_move_wizard">
+			<field name="name">Print Stock Move</field>
+			<field name="model">stock.report</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form col="4" string="Print Stock Move Report">
+					<group>
+						<group>
+							<!-- <field name="type" required="0" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/> -->
+							<field name="move_type" required="1" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+							<!-- <field name="location" required="0" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/> -->
+						</group>
+						<group>
+							<field name="start_date" required="1"/>
+							<field name="end_date" required="1"/>
+						</group>
+					</group>
+					
+					<footer>
+						<button name="print_stock_list" string="Print" type="object" icon="gtk-print" class="oe_highlight"/>
+						or
+						<button special="cancel" string="_Cancel" icon="gtk-cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.actions.act_window" id="action_print_stock_move">
+			<field name="name">Stock Move Report</field>
+			<field name="res_model">stock.report</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+		
+		<menuitem id="stock_report_menu" name="Stock Move Report" parent="stock_report" action="action_print_stock_move" />
+		
+	
+   </data>
+</openerp>

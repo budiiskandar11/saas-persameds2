@@ -1,0 +1,14 @@
+<openerp>
+	<data>
+		<record id="view_employee_bpjs_form" model="ir.ui.view">
+            <field name="name">view.employee.bpjs.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="dos_hr_indonesia.view_nik_form" />
+            <field name="arch" type="xml">
+            	<field name='otherid' position='before'>
+            		<field name='insurance_id'/>
+            	</field>
+            </field>
+    	</record>
+	</data>
+</openerp>

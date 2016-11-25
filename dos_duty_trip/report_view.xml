@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<report 
+		 id="report_pa" 
+		 string="Payment Authorization" 
+		 model="duty.trip" 
+		 report_type="qweb-pdf" 
+		 file="dos_duty_trip.pa_template_document" 
+		 name="dos_duty_trip.pa_template_document"/>
+	</data>
+
+	<data>
+		<report 
+		 id="report_sppd" 
+		 string="SPPD" 
+		 model="duty.trip" 
+		 report_type="qweb-pdf" 
+		 file="dos_duty_trip.sppd_template_document" 
+		 name="dos_duty_trip.sppd_template_document"/>
+	</data>
+</openerp>

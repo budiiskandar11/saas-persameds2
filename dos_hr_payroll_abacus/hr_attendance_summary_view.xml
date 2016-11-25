@@ -1,0 +1,210 @@
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="attendance_summary_tree">
+            <field name="name">attendance.summary.tree</field>            
+            <field name="model">hr.attendance.summary</field>            
+            <field name="type">tree</field>							
+            <field name="arch" type="xml">
+            	<tree string="Attendance Summary">
+            		<field name="name" />
+            		<field name="employee_id" />
+            		<field name="start_date" />
+            		<field name="end_date" />
+            	</tree>
+            </field>
+		</record>
+		
+		<record model="ir.ui.view" id="attendance_summary_form">
+            <field name="name">attendance.summary.form</field>            
+            <field name="model">hr.attendance.summary</field>            
+            <field name="type">form</field>							
+            <field name="arch" type="xml">
+            	<form string="Attendance Summary Form">
+            		<group>
+	            		<field name="name"/>
+	            		<field name="employee_id" on_change="onchange_date(start_date,end_date,employee_id)"/>
+	            		<field name="start_date" on_change="onchange_date(start_date,end_date,employee_id)"/>
+	            		<field name="end_date" on_change="onchange_date(start_date,end_date,employee_id)"/>
+					</group>	            		
+            		<notebook colspan="4">
+            			<page string="Attendance Summary Lines">
+            				<field name="summary_lines" colspan="4" nolabel="1" view_mode="tree,form">
+		            			<tree string="Summary Lines">
+		            				<field name="name" />
+				            		<field name="worktime" />
+				            		<field name="late_time" />
+				            		<field name="overtime" />
+				            		<field name="extra_day"/>
+				            		<field name="sign_in"/>
+				            		<field name="sign_out"/>
+		            			</tree>	
+								<form string="Summary Lines">
+									<group colspan="4" col="4">
+			            				<field name="name"/>
+					            		<field name="worktime" />
+					            		<field name="late_time" />
+					            		<field name="overtime" />
+					            		<field name="extra_day" />
+					            		<field name="sign_in"/>
+				            			<field name="sign_out"/>
+				            		</group>
+				            		<field name="attendance_ids" colspan="4" nolabel="1"/>
+		            			</form>	
+		            		</field>           			
+            			</page>
+            			
+            			<page string="Absence Summary Lines">
+            				<field name="absence_reason_ids" colspan="4" nolabel="1">
+		            			<tree string="Absence Lines">
+		            				<field name="name" />
+				            		<field name="date" />
+				            		<field name="reason" />
+		            			</tree>	
+								<form string="Absence Lines">
+									<field name="name" />
+				            		<field name="date" />
+				            		<field name="reason" />
+		            			</form>	
+		            		</field>
+            			</page>
+            				
+            			<page string="Absence Summary Lines" invisible="1">
+            				<field name="absence_ids" colspan="4" nolabel="1">
+		            			<tree string="Absence Lines">
+		            				<field name="name" />
+				            		<field name="type" />
+				            		<field name="leave_id" />
+				            		<field name="description" />
+		            			</tree>	
+								<form string="Absence Lines">
+									<group colspan="4" col="4">
+			            				<field name="name"/>
+					            		<field name="type"/>
+					            		<field name="leave_id"/>
+					            		<newline/>
+					            		<group colspan="4" col="2" string="Description">
+						            		<field name="description" nolabel="1"/>
+					            		</group>
+				            		</group>
+		            			</form>	
+		            		</field>           			
+            			</page>
+            			<page string="On Duty Summary">
+            				<field name="spt_lines" colspan="4" nolabel="1">
+		            			<tree string="On Duty Lines">
+		            				<field name="name" />
+				            		<field name="spt_id" />
+				            		<field name="description" />
+		            			</tree>	
+								<form string="On Duty Lines">
+									<group colspan="4" col="4">
+			            				<field name="name"/>
+					            		<field name="spt_id"/>
+					            		<newline/>
+					            		<group colspan="4" col="2" string="Description">
+						            		<field name="description" nolabel="1"/>
+					            		</group>
+				            		</group>
+		            			</form>	
+		            		</field>           			
+            			</page>        
+						<page string="Halfday Leaves">
+							<field name="half_day_leaves" nolabel="1" colspan="4">
+								<tree colors="red:state == 'refuse';blue:state == ' draft';black:state in ('confirm','validate','validate1')" string="Leave Requests">
+				                    <field name="holiday_type"/>
+				                    <field name="employee_id"/>
+				                    <field name="department_id" invisible="not context.get('set_visible',False)"/>
+				                    <field name="holiday_status_id" required="False"/>
+				                    <field name="name"/>
+				                    <field name="number_of_days_temp" invisible="1" sum="Total Days"/>
+				                    <field name="number_of_days" string="Number of Days"/>
+				                    <field name="date_from"/>
+				                    <field name="date_to"/>
+				                    <field name="manager_id" invisible="1"/>
+				                    <field name="user_id" invisible="1"/>
+				                    <!--field name="type"/-->
+				                    <field name="state"/>
+				                    <button string="Approve" name="validate" states="confirm" type="workflow" icon="gtk-apply" groups="base.group_hr_user,base.group_hr_manager"/>
+				                    <button string="Approved" name="second_validate" states="validate1" type="workflow" icon="gtk-apply" groups="base.group_hr_user,base.group_hr_manager"/>
+				                </tree>
+								<form string="Leave Request(s)">
+									<group col="8" colspan="4">
+					                    <field name="name" attrs="{'readonly':[('state','!=','draft'),('state','!=','confirm')]}"/>
+					                    <field name="holiday_type" on_change="onchange_type(holiday_type)" attrs="{'readonly':[('state','!=','draft')]}" width="130" string="Mode" groups="base.group_hr_manager"/>
+					                    <group attrs="{'invisible':[('holiday_type','=','employee')]}">
+					                        <field name="category_id" attrs="{'required':[('holiday_type','=','category')], 'readonly':[('state','!=','draft')]}"/>
+					                        </group>
+					                        <group attrs="{'invisible':[('holiday_type','=','category')]}">
+					                        <field name="employee_id" attrs="{'required':[('holiday_type','=','employee')]}"/>
+					                        </group>
+					                    </group>
+					                    <notebook colspan="4">
+					                        <page string="General">
+					                            <field name="holiday_status_id" on_change="onchange_sec_id(holiday_status_id)" required="False" context="{'employee_id':employee_id}"/>
+					                            <field name="department_id" attrs="{'readonly':[('holiday_type','=','category')]}"/>
+					                            <field name="date_from" on_change="onchange_date_from(date_to, date_from)" required="1"/>
+					                            <field name="date_to" on_change="onchange_date_from(date_to, date_from)" required="1"/>
+					                            <field name="number_of_days_temp"/>
+					                            <field name="double_validation" invisible="1"/>
+					                            <newline/>
+					                            <field name="manager_id"/>
+					                            <field name="manager_id2" attrs="{'invisible':[('double_validation', '!=', True)]}"/>
+					                            <separator string="Reasons" colspan="4"/>
+					                            <field name="notes" nolabel="1" colspan="4"/>
+					                            <newline/>
+					                            <field name="state" widget="statusbar" statusbar_visible="draft,confirm,validate" statusbar_colors='{"confirm":"blue","validate1":"blue","refuse":"red"}' colspan="2"/>
+					                            <group colspan="2" col="6">
+					                                <button string="Refuse" name="refuse" states="confirm,validate1" type="workflow" icon="gtk-no" groups="base.group_hr_user,base.group_hr_manager"/>
+					                                <button string="Confirm" name="confirm" states="draft" type="workflow" icon="gtk-yes"/>
+					                                <button string="Approve" name="validate" states="confirm" type="workflow" icon="gtk-apply" groups="base.group_hr_user"/>
+					                                <button string="Approved" name="second_validate" states="validate1" type="workflow" icon="gtk-apply" groups="base.group_hr_user"/>
+					                                <button string="Set to Draft" name="set_to_draft" states="refuse,validate" type="object" icon="gtk-convert" groups="base.group_hr_user"/>
+					                            </group>
+					                        </page>
+					                    </notebook>							
+								</form>						
+							</field>				
+						</page>  		
+            		</notebook>
+            		<group colspan="2" col="4" string="Working Days Summary">
+	            		<field name="workdays"/>
+	            		<field name="normalwork"/>
+	            		<field name="late"/>
+	            		<field name="overtime"/>
+	            		<field name="extraday"/>
+	            		<field name="ondutyday" invisible="1"/>
+						<field name="ondutytrip"/>	            		
+	            		<field name="overtime_holiday"/>
+            		</group>
+            		<group colspan="2" col="2" string="Leaves &amp; Absence Summary">
+	            		<field name="absentday"/>
+	            		<field name="leaveday"/>
+						<field name="allowance_day"/>	            		
+            		</group>
+            	</form>
+            </field>
+		</record>
+		
+		<record id="attendance_summary_search" model="ir.ui.view">
+            <field name="name">attendance.summary.search</field>
+            <field name="model">hr.attendance.summary</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Attendance Summary Form">
+                    <field name="name" />
+            		<field name="employee_id" />
+            		<field name="start_date" />
+            		<field name="end_date" />
+                </search>
+            </field>
+        </record>
+        
+		<record id="action_attendance_summary" model="ir.actions.act_window">
+			<field name="name">Attendance Summary</field>
+			<field name="res_model">hr.attendance.summary</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		<menuitem id="menu_attendance_summary" action="action_attendance_summary" parent="hr_attendance.menu_hr_attendance"/>	
+	</data>
+</openerp>

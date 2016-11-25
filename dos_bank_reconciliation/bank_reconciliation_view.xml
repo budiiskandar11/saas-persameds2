@@ -1,0 +1,206 @@
+<openerp>
+	<data>
+		<record id="view_bank_reconciliation_tree" model="ir.ui.view">
+			<field name="name">bank.reconciliation.tree</field>
+			<field name="model">bank.reconciliation</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Bank Reconciliation List">
+					<field name="name" />
+					<field name="start_date"/>
+					<field name="end_date"/>
+					<field name="journal_id"/>
+					<field name="beginning_balance"/>					
+					<field name="ending_balance"/>
+					<field name="state"/>					
+				</tree>
+			</field>
+		</record>
+		
+		<record id="view_bank_reconciliation_form" model="ir.ui.view">
+			<field name="name">bank.reconciliation.form</field>
+			<field name="model">bank.reconciliation</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Bank Reconciliation Form" version="7.0">
+					<header>
+						<button name='refresh_record' string='Refresh' type='object' attrs="{'invisible':[('state','!=','draft')]}"/>
+						<button name='close' string='Close' type='object' attrs="{'invisible':[('state','!=','draft')]}" class="oe_highlight"/>
+						<button name='open' string='Open' type='object' attrs="{'invisible':[('state','!=','close')]}"/>						
+						<field name="state" widget="statusbar"/>
+					</header>
+					<sheet>
+						<group colspan="2">
+							`<h2><field name="name" placeholder="Description" attrs="{'readonly':[('state','!=','draft')]}"/></h2>
+						</group>
+						<group>
+							<group>
+								<field name="fiscalyear_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="start_date" on_change="onchange_reconcile(start_date, end_date, account_id, company_id, fiscalyear_id)" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="end_date" on_change="onchange_reconcile(start_date, end_date, account_id, company_id, fiscalyear_id)" attrs="{'readonly':[('state','!=','draft')]}"/>			
+							</group>
+							<group>
+								<field name="journal_id" on_change="onchange_journal(journal_id)" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="currency_id" attrs="{'readonly':[('state','!=','draft')]}"/>								
+								<field name="account_id" on_change="onchange_reconcile(start_date, end_date, account_id, company_id, fiscalyear_id)" invisible="1"/>
+								<field name="company_id" on_change="onchange_reconcile(start_date, end_date, account_id, company_id, fiscalyear_id)" attrs="{'readonly':[('state','!=','draft')]}"/>		
+							</group>
+						</group>
+							 
+						<notebook>
+							<page string="Bank Transactios">
+							<label for='account_label' string='Deposits, Credits, and Interest'/>
+								<field name="reconciliation_debit_line" nolabel="1" context="{'default_type':'dr'}" attrs="{'readonly':[('state','!=','draft')]}">
+									<tree editable="bottom" string="Deposits, Credits, and Interest" colors="blue:bank_recon_id==True">
+										<field name="cleared"/>
+										<field name="date" attrs="{'required':[('status','=',False)], 'readonly':[('status','=',True)]}"/>
+										<field name="name" attrs="{'required':[('status','=',False)], 'readonly':[('status','=',True)]}"/>
+										<field name="reference" attrs="{'readonly':[('status','=',True)]}"/>
+										<field name="partner_id" attrs="{'required':[('status','=',False)], 'readonly':[('status','=',True)]}"/>
+										<field name="account_id" attrs="{'required':[('status','=',False)], 'readonly':[('status','=',True)]}"/>										
+										<field name="amount" attrs="{'required':[('status','=',False)], 'readonly':[('status','=',True)]}"/>
+										<field name="currency_id" readonly="1" invisible="1"/>
+										<field name="research_required" invisible="1"/>		
+<!--										<field name="cheque_id" readonly="1"/>	-->
+										<field name="move_line_id" readonly="1"/>
+										<field name="status" invisible="1"/>
+										<field name="type" invisible="1"/>	
+										<field name="bank_recon_id" invisible="1"/>										
+										<button name='posted_action' string='Confirm' type='object' icon="gtk-apply" attrs="{'invisible':[('status','=',True)]}"/>								
+									</tree>
+									<form string="Deposits, Credits, and Interest" version="7.0">
+										<field name="cleared"/>
+										<field name="date"/>
+										<field name="name"/>
+										<field name="reference"/>
+										<field name="partner_id"/>
+										<field name="amount"/>
+										<field name="currency_id"/>
+										<field name="research_required"/>			
+										<field name="move_line_id"/>
+									</form>
+								</field>
+								<label for='account_label2' string="Checks, Withdrawals, Debits, and Service Charges"/>
+								<field name="reconciliation_credit_line" nolabel="1" context="{'default_type':'cr'}" attrs="{'readonly':[('state','!=','draft')]}">
+									
+									<tree editable="bottom" string="Checks, Withdrawals, Debits, and Service Charges" colors="blue:bank_recon_id==True">
+										<field name="cleared"/>
+										<field name="date" attrs="{'required':[('status','=',False)], 'readonly':[('status','=',True)]}"/>
+										<field name="name" attrs="{'required':[('status','=',False)], 'readonly':[('status','=',True)]}"/>
+										<field name="reference" attrs="{'readonly':[('status','=',True)]}"/>
+										<field name="partner_id" attrs="{'required':[('status','=',False)], 'readonly':[('status','=',True)]}"/>
+										<field name="account_id" attrs="{'required':[('status','=',False)], 'readonly':[('status','=',True)]}"/>										
+										<field name="amount" attrs="{'required':[('status','=',False)], 'readonly':[('status','=',True)]}"/>
+<!--										<field name="cheque_id"/-->
+										<field name="currency_id" readonly="1" invisible="1"/>
+										<field name="research_required" invisible="1"/>
+										<field name="move_line_id" readonly="1"/>
+										<field name="status" invisible="1"/>
+										<field name="type" invisible="1"/>				
+										<field name="bank_recon_id" invisible="1"/>							
+										<button name='posted_action' string='Confirm' type='object' icon="gtk-apply" attrs="{'invisible':[('status','=',True)]}"/>								
+									</tree>
+									<form string="Checks, Withdrawals, Debits, and Service Charges" colors="blue:bank_recon_id==True">
+										<field name="cleared"/>
+										<field name="date"/>
+										<field name="name"/>
+										<field name="reference"/>
+										<field name="partner_id"/>
+										<field name="amount"/>
+										<field name="currency_id"/>
+										<field name="research_required"/>			
+										<field name="move_line_id"/>
+									</form>
+								</field>
+							</page>
+							<page string="Bank Transactions Mutation">
+								<field name="mutation_reconciliation">
+									<tree string="Mutation Reconciliation" colors="blue:bank_recon_id==True">
+										<field name="date"/>
+										<field name="name"/>
+										<field name="reference"/>
+										<field name="partner_id"/>									
+										<field name="debit"/>
+										<field name="credit"/>										
+										<field name="balance" bgcolor="green" fgcolor="yellow"/>
+										<field name="currency_id" invisible="1"/>
+<!--										<field name="cheque_id"/-->
+										<field name="move_line_id"/>										
+										<field name="type" invisible="1"/>
+										<field name="bank_recon_id" invisible="1"/>										
+									</tree>
+								</field>
+							</page>
+						</notebook>
+						
+						
+						<group colspan="2" col="6">
+							<group colspan="2" col="4">
+								<!--<separator string="Beginning Balance"/>
+								<newline />
+								<div>
+				                	<h2>
+										<field name="beginning_balance" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+									</h2>
+								</div>-->
+							</group>
+							<group colspan="2" col="4">
+								<separator string="###"/>
+								<newline />
+								<!--<h2>
+									<field name="ending_balance" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+								</h2-->
+								<group>
+									<field name="increase_line_item" string="Credit Items#"/>
+									<field name="decrease_line_item" string="Debit Items#"/>
+								</group>							
+							</group>
+							
+							<group colspan="2" col="4">
+								<separator string="Summary" colspan="2"/>
+								<newline />								
+								<group class="oe_subtotal_footer oe_left">
+									<field name="beginning_balance" widget="monetary"/>
+									<field name="increase_total" string="Credit Total#" widget="monetary"/>
+									<field name="decrease_total" string="Debit Total#" widget="monetary"/>
+									<field name="ending_balance" widget="monetary"/>						
+								</group>
+								
+							</group>
+							
+						</group>
+						
+					</sheet>						
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_bank_reconciliation_search" model="ir.ui.view">
+            <field name="name">bank.reconciliation.search</field>
+            <field name="model">bank.reconciliation</field>
+            <field name="arch" type="xml">
+                <search string="Bank Reconciliation">
+                    <group string="Group By..." expand="0">
+                        <filter string="Bank/ Cash" context="{'group_by': 'journal_id'}" name="group_reconciliation_journal_id_id"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+				
+		<record id="action_bank_reconciliation" model="ir.actions.act_window">
+			<field name="name">Bank Statement Reconciliation</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">bank.reconciliation</field>
+			<field name="context">{}</field>
+			<field name="domain">[]
+			</field>
+			<field name="view_mode">tree,form</field>
+			<!--<field name="domain">[('type','=','in')]</field>-->
+			<!--<field name="context">{'default_type':'in', 'type':'in'}</field-->
+			<field name="context">{'search_default_group_reconciliation_journal_id_id': 1}</field>
+		</record>
+		
+		<menuitem action="action_bank_reconciliation" id="menu_bank_reconciliation" 
+			parent="account.menu_finance_bank_and_cash" sequence="1" />
+	</data>
+</openerp>

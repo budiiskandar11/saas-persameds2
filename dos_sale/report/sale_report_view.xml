@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+   
+
+    <record id="view_order_product_search_inherit" model="ir.ui.view">
+        <field name="name">sale.report.search.inherit</field>
+        <field name="model">sale.report</field>
+        <field name="inherit_id" ref="sale.view_order_product_search"/>
+        <field name="arch" type="xml">
+            	<xpath expr="/search/filter[2]" position="after">
+            		 <filter string="Quotation Sales" help="My Sales" domain="[('state','=','quot')]"/>
+            	</xpath>
+            	<xpath expr="/search/filter[@name='Sales']" position="replace">
+            		<filter name="Sales" string="Sales" domain="[('state','not in',('quot_approval','quot','sent','draft', 'cancel'))]"/>
+            	</xpath>
+        </field>
+    </record>
+
+    
+</data>
+</openerp>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="view_overtime_submission_tree">
+            <field name="name">view.overtime.submission.tree</field>
+            <field name="model">hr.overtime</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+            	<tree string="Overtime Submission" colors="red:state=='proposed';blue:state=='draft'">
+            		<field name="date" />
+            	    <field name="name" />
+            		<field name="department" />
+            		<field name="state" />
+            	</tree>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_overtime_submission_form">
+            <field name="name">view.overtime.submission.form</field>            
+            <field name="model">hr.overtime</field>            
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            	<form string="Overtime submission">
+            		<header>
+                        <button name="button_proposed" states="draft" string="Propose" type="object" class="oe_highlight"/>
+                        <button name="button_draft" states="proposed" string="Reviews" type="object" class="oe_highlight"/>
+                        <button name="button_approved" groups="base.group_hr_manager" states="proposed" string="Approve" type="object" class="oe_highlight" />
+                        <button name="button_done" states="approved" string="Done" type="object" class="oe_highlight"/>
+						<field name="state" widget="statusbar"/>	                        
+            		</header>
+            		<sheet>
+	            		<group col="6" colspan="4">
+		            		<separator string="Overtime Submission" colspan="6" /> <newline />
+		            		<field name="name"/>
+		            		<field name="department" widget="selection" />
+		            		<field name="manager" /> <newline />
+		            		<field name="date"/>
+		            		<field name="periode" attrs="{'readonly':[('state','!=','new')]}" />
+	            		</group>
+	            		<notebook colspan="4">
+	            			<page string="Overtime Lines">
+	            				<field name="line_ids" colspan="8" nolabel="1" attrs="{'readonly':[('state','=','done')]}">
+	            					<tree string="Overtime Lines">
+						           		<field name="name"/>
+						           		<field name="time_start"/>
+						           		<field name="time_end"/>
+						           		<field name="duration"/>
+						           		<field name="paid"/>
+	            					</tree>
+	            					<form string="Overtime Lines">
+	            						<group>
+							           		<field name="name"/>
+							           		<field name="time_start"/>
+							           		<field name="time_end"/>
+							           		<field name="duration"/>
+							           		<field name="paid"/>
+										</group>							           		
+						           		<newline />
+						           		<separator string="Notes" colspan="4" />
+						           		<newline />
+						           		<field name="note" nolabel="1" colspan="4"/>
+	            					</form>
+	            				</field>
+	            			</page>
+	            			<page string="Notes">
+			            		<field name="note" colspan="4" nolabel="1" />
+			            	</page>
+	            		</notebook>
+	            	</sheet>
+            	</form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_overtime_submission_search">
+            <field name="name">view.overtime.submission.search</field>            
+            <field name="model">hr.overtime</field>            
+            <field name="type">search</field>							
+            <field name="arch" type="xml">
+            	<search string="Overtime Submission">
+            		<field name="name" />
+            		<field name="department" />
+            		<field name="date"/>
+            		<newline />
+            		<group expand="False" string="Group By..." groups="base.group_extended">
+                        <filter name="department_filter" string="Department" icon="terp-partner" domain="[]" context="{'group_by':'department'}"/>
+                    </group>
+            	</search>
+            </field>
+        </record>
+        
+        <record id="act_menu_overtime_submission_form" model="ir.actions.act_window">
+		    <field name="name">Overtime Submission</field>
+		    <field name="res_model">hr.overtime</field>
+		    <field name="view_type">form</field>
+		    <field name="view_mode">tree,form</field>
+		    <field eval="False" name="filter"/>
+		    <field name="view_id" ref="view_overtime_submission_tree"/>
+		    <field name="search_view_id" ref="view_overtime_submission_search"/>
+		</record>
+        
+		<menuitem 	name='Overtime'
+					id='menu_overtime' 
+				  	parent='hr_attendance.menu_hr_attendance'
+				  	sequence='20' />
+		<menuitem 	name='Overtime'
+					id='menu_overtime_submit' 
+				  	parent='menu_overtime'
+				  	action="act_menu_overtime_submission_form"
+		            sequence='20' />
+		
+		<!-- OVERTIME CONFIG -->
+		
+		<record model="ir.ui.view" id="view_overtime_config_tree">
+            <field name="name">view.overtime.config.tree</field>
+            <field name="model">hr.overtime.hours.config</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+            	<tree string="Overtime Config">
+            		<field name="name"/>
+            	    <field name="job_level"/>
+            		<field name="type"/>
+            		<field name="hours_multiplier"/>
+            	</tree>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_overtime_config_form">
+            <field name="name">view.overtime.config.form</field>            
+            <field name="model">hr.overtime.hours.config</field>            
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            	<form string="Overtime Config">
+            		<sheet>
+            			<group>
+		            		<field name="name"/>
+							<field name="job_level"/>
+		            		<field name="type"/>
+		            		<field name="hours_multiplier"/>
+		            		<newline/>
+		            		<separator string="Wage Computation" colspan="4"/>
+		            		<field name="wage_computation" colspan="4" nolabel="1"/>
+						</group>		            		
+					</sheet>            		
+            	</form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_overtime_config_search">
+            <field name="name">view.overtime.config.search</field>            
+            <field name="model">hr.overtime.hours.config</field>            
+            <field name="type">search</field>							
+            <field name="arch" type="xml">
+            	<search string="Overtime Config">
+            		<field name="name"/>
+            	    <field name="job_level"/>
+            		<field name="type"/>
+            		<field name="hours_multiplier"/>
+            	</search>
+            </field>
+        </record>
+        
+        <record id="act_menu_overtime_config_form" model="ir.actions.act_window">
+		    <field name="name">Overtime Config</field>
+		    <field name="res_model">hr.overtime.hours.config</field>
+		    <field name="view_type">form</field>
+		    <field name="view_mode">tree,form</field>
+		    <field eval="False" name="filter"/>
+		    <field name="view_id" ref="view_overtime_config_tree"/>
+		    <field name="search_view_id" ref="view_overtime_config_search"/>
+		</record>
+        
+		<menuitem name='Overtime Configuration'
+				id='menu_overtime_config' 
+			  	parent='menu_overtime'
+			  	action="act_menu_overtime_config_form"
+	            sequence='21'/>
+		
+	</data>
+</openerp>

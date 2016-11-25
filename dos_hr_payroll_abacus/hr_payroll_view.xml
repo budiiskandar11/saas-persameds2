@@ -1,0 +1,96 @@
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="abacus_view_hr_payslip_form_view">
+			<field name="name">abacus.view.hr.payslip.form.view</field>
+			<field name="model">hr.payslip</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />
+			<field name="arch" type="xml">
+				<xpath expr="/form/sheet/notebook/page[@string='Worked Days &amp; Inputs']/separator[@string='Worked Days']" position="before">
+					<group col="3">							
+						<group>
+							<separator string="Basic Wage"/>
+							<newline/>
+							<field name='basic_wage' readonly="1"/>
+							
+							<separator string="BPJS Ketenagakerjaan"/>
+							<newline/>
+							<field name='bpjs_tk_p' readonly="1"/>
+							<field name='bpjs_tk_k' readonly="1"/>
+							
+							<separator string="Benefit"/>
+							<newline/>		
+							<field name='overtime_adjustment'/>
+							<field name='overtime'/>
+							<field name='bonus'/>
+							<field name='benefit'/>
+							<field name='thr'/>
+							<field name='spp'/>
+							<field name='insentif'/>
+							<field name='gaji13'/>
+							<field name='reward'/>		
+							<field name='abacus_bhakti'/>
+							<field name='bit'/>		
+						</group>
+						<group>
+							<separator string="Take Home Pay"/>
+							<newline/>
+							<field name='thp' readonly="1"/>
+							
+							<separator string="BPJS Kesehatan"/>
+							<newline/>
+							<field name='bpjs_kes_p' readonly="1"/>
+							<field name='bpjs_kes_k' readonly="1"/>
+							<separator string="Correction"/>
+							<newline/>							
+							<field name='correction'/>						
+						</group>
+						<group>
+							<separator string="Total Days"/>
+							<newline/>
+							<field name='allowance_days'/>
+							
+							<separator string="DPLK Karyawan"/>
+							<newline/>
+							<field name='dplk_p' readonly="1"/>
+							<field name='dplk_k' readonly="1"/>
+							<separator string="Potongan"/>
+							<newline/>							
+							<field name='kokara'/>						
+						</group>
+					</group>						
+				</xpath>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="malinda_view_hr_payslip_form_view">
+			<field name="name">malinda.view.hr.payslip.form.view</field>
+			<field name="model">hr.payslip</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="hr_payroll.view_hr_payslip_form" />
+			<field name="arch" type="xml">
+				<button name="hr_verify_sheet" position="attributes">
+					<attribute name="invisible">1</attribute>
+					<!--
+					<button string="Submit to Accounting" icon="terp-camera_test" name="hr_verify_sheet_1" states="verify_account"/>
+					-->
+				</button>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="malinda_view_hr_payslip_batch_form_view">
+			<field name="name">malinda.view.hr.payslip.batch.form.view</field>
+			<field name="model">hr.payslip.run</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="hr_payroll.hr_payslip_run_form" />
+			<field name="arch" type="xml">
+				<field name="date_end" position="after">
+					<field name="partner_id"/>			
+				</field>
+				<button name="close_payslip_run" position="replace">
+					<button string="Submit to Accounting" icon="terp-camera_test" type="object" name="close_payslip_run" states="draft"/>			
+				</button>
+			</field>
+		</record>
+	</data>
+</openerp>

@@ -1,0 +1,265 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* agaplan_terms_and_conditions
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.2\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2011-07-06 11:52+0000\n"
+"PO-Revision-Date: 2011-07-06 11:52+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: agaplan_terms_and_conditions
+#: help:res.company,term_rule_ids:0
+msgid "List of terms for this company."
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: help:ir.actions.report.xml,term_rule_ids:0
+msgid "List of possible terms to be added."
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.rule:0
+msgid "You can use the following keywords in the condition field:"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: model:ir.model,name:agaplan_terms_and_conditions.model_term_term
+#: view:res.partner:0
+msgid "Terms and conditions"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: field:res.partner,print_terms:0
+msgid "Print Terms"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: selection:term.term,mode:0
+msgid "Before report"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.rule:0
+msgid "'date': The current date in '%Y-%m-%d' format."
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: constraint:res.company:0
+msgid "Error! You can not create recursive companies."
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: field:res.partner,date_terms_signed:0
+msgid "Date Terms Signed"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.rule:0
+msgid "Group By..."
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.term:0
+msgid "Insertion Mode"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.rule:0
+msgid "'time': The almighty/omnipresent time module."
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: model:ir.actions.act_window,name:agaplan_terms_and_conditions.action_term
+#: model:ir.ui.menu,name:agaplan_terms_and_conditions.menu_terms_menuitem
+msgid "Terms"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: field:term.term,term_rule_ids:0
+msgid "Rules"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: model:ir.ui.menu,name:agaplan_terms_and_conditions.menu_term_rules_menuitem
+msgid "Term Rules"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.rule:0
+msgid "'context': The context used to launch the report."
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: help:term.term,term_rule_ids:0
+msgid "Rules where this term is used."
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: help:res.partner,date_terms_signed:0
+msgid "Date on witch the sales conditions/terms are signed"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: help:term.term,pdf:0
+msgid "The PDF file to attach to the report"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: model:ir.actions.act_window,name:agaplan_terms_and_conditions.action_term_rule
+#: view:term.rule:0
+msgid "Term rules"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.rule:0
+#: field:term.rule,report_id:0
+msgid "Report"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: help:res.partner,print_terms:0
+msgid "If true the sales conditions/terms will be printed on the documents"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: field:term.rule,condition:0
+msgid "Condition"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: selection:term.term,mode:0
+msgid "Every other page"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.rule:0
+#: field:term.rule,term_id:0
+#: view:term.term:0
+msgid "Term"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: field:term.rule,report_name:0
+msgid "Report Name"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: field:term.term,name:0
+msgid "Name"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: selection:term.term,mode:0
+msgid "After report"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: field:term.term,pdf:0
+msgid "PDF File"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.term:0
+msgid "Search terms"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: model:ir.model,name:agaplan_terms_and_conditions.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.term:0
+msgid "Reports"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: help:term.rule,condition:0
+msgid "condition on when to print the therm"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: model:ir.model,name:agaplan_terms_and_conditions.model_term_rule
+msgid "Rules to define where the linked term is to be used."
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: model:ir.module.module,shortdesc:agaplan_terms_and_conditions.module_meta_information
+msgid "Terms and Conditions"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: field:term.term,mode:0
+msgid "Insertion mode"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.rule:0
+msgid "'data': Any wizard data (also includes 'model' to show the model from which the report was started)"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:res.partner:0
+msgid "Sales & Purchases"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: field:term.rule,sequence:0
+msgid "Sequence"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.rule:0
+msgid "Terms and Conditions rules"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: model:ir.module.module,description:agaplan_terms_and_conditions.module_meta_information
+msgid "Module that gives the possibility to add custom terms and conditions to reports"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.term:0
+msgid "Group by..."
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.rule:0
+msgid "'report': The ir.actions.report.xml object (in browse mode)."
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: field:ir.actions.report.xml,term_rule_ids:0
+#: field:res.company,term_rule_ids:0
+msgid "unknown"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.rule:0
+msgid "'object': This is a browse record (always a single item) of the model you printed the report from."
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: model:ir.model,name:agaplan_terms_and_conditions.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: view:term.rule:0
+#: field:term.rule,company_id:0
+msgid "Company"
+msgstr ""
+
+#. module: agaplan_terms_and_conditions
+#: model:ir.model,name:agaplan_terms_and_conditions.model_ir_actions_report_xml
+msgid "ir.actions.report.xml"
+msgstr ""
+

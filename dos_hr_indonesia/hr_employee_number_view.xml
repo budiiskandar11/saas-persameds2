@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	
+    	
+    	 <!--Employee form view -->
+		<record id="view_nik_form2" model="ir.ui.view">
+			<field name="name">hr.employee.form</field>
+			<field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr.view_employee_form" />
+			<field name="arch" type="xml">
+				<xpath expr="/form/sheet/notebook/page[@string='Public Information']/group/group[2]/field[@name='department_id']" position="attributes">
+					<attribute name="string">Unit</attribute>
+				</xpath>
+				
+				<xpath expr="/form/sheet/notebook/page[@string='Public Information']/group/group[2]/field[@name='department_id']" position="attributes">
+					<attribute name="attrs">{'readonly':[('state_id', 'not in', ('new'))]}</attribute>
+				</xpath>
+				
+				<xpath expr="/form/sheet/notebook/page[@string='Public Information']/group/group[2]/field[@name='job_id']" position="attributes">
+					<attribute name="attrs">{'readonly':[('state_id', 'not in', ('new'))]}</attribute>
+				</xpath>
+				
+				<xpath expr="/form/sheet/div/h1/field[@name='name']" position="attributes">
+					<attribute name="attrs">{'readonly':[('state_id', 'not in', ('new'))]}</attribute>
+				</xpath>
+				
+				<xpath expr="/form/sheet/div[1]/label[@for='category_ids']" position="before">
+					<label for="nik" class="oe_edit_only"/>
+					<field name="nik" attrs="{'readonly':[('state_id', 'not in', ('new'))]}" placeholder="e.g. Nomor Induk Karyawan" />
+				</xpath>
+				
+				<xpath expr="/form/sheet/notebook/page[1]/group/group[2]/field[@name='job_id']" position="after">
+					<field name="grade" attrs="{'readonly':[('state_id', 'not in', ('new'))]}"/>
+					<field name="level" attrs="{'readonly':[('state_id', 'not in', ('new'))]}"/>
+				</xpath>
+				
+				<xpath expr="/form/sheet/notebook/page[1]/group/group[2]/field[@name='department_id']" position="before">
+					<field name="types"/>
+				</xpath>
+				
+				<xpath expr="/form/sheet/notebook/page[1]/group/group[2]" position="after">
+					<group string="Work Period">
+                        <field name="date_in"/>
+						<field name="pengangkatan_date"/>
+						<field name="date_out"/>
+						<field name="year_work"/>
+					</group>
+				</xpath>
+				
+				<xpath expr="/form/sheet" position="before">
+					<header>
+						<field name="state_id" widget="statusbar" nolabel="1"/>
+						<button attrs="{'invisible':[('state_id', 'in', ('new'))]}" string="Modify"
+                    		type="object" name="modify" icon="gtk-edit" groups="base.group_hr_manager"/>
+					</header>
+				</xpath>
+				
+			</field>
+		</record>	
+    	
+    	
+    	<!-- HR Komisaris -->
+    	
+    	
+
+        <record id="open_view_komisaris_list" model="ir.actions.act_window">
+            <field name="name">Employees</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form,tree</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="hr.view_employee_filter"/>
+        </record>
+
+        <record id="open_view_direktur_list_my" model="ir.actions.act_window">
+            <field name="name">Director</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('types','=','director')]</field>
+            <field name="context">{'default_types':'director','types': 'director'}</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="hr.view_employee_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new director.
+              </p><p>
+                With just a quick glance on the Odoo employee screen, you
+                can easily find all the information you need for each person;
+                contact data, job position, availability, etc.
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="open_view_direktur_list_my" id="menu_open_view_direktur_list_my" sequence="3" parent="hr.menu_hr_main"/>
+
+
+        <record id="open_view_komisaris_list_my" model="ir.actions.act_window">
+            <field name="name">Commisioner</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('types','=','commisioner')]</field>
+            <field name="context">{'default_types':'commisioner','types': 'commisioner'}</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="hr.view_employee_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new commisioner.
+              </p><p>
+                With just a quick glance on the Odoo employee screen, you
+                can easily find all the information you need for each person;
+                contact data, job position, availability, etc.
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="open_view_komisaris_list_my" id="menu_open_view_komisaris_list_my" sequence="4" parent="hr.menu_hr_main"/>
+    	
+       <record id="action_hr_my_personal_info" model="ir.actions.act_window">
+            <field name="name">My Personal Information</field>
+            <field name="res_model">hr.employee</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('user_id.id', '=', uid)]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="hr.view_employee_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new commisioner.
+              </p><p>
+                With just a quick glance on the Odoo employee screen, you
+                can easily find all the information you need for each person;
+                contact data, job position, availability, etc.
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_hr_my_personal_info" id="menu_action_hr_my_personal_info" sequence="2" parent="hr.menu_hr_main"/>	 
+    	
+</data>
+</openerp>

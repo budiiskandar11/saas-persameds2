@@ -1,0 +1,12 @@
+<openerp>
+	<data>
+		<record id="action_balance_sheet_xls" model="ir.actions.report.xml">
+			<field name="name">Balance Sheet Print</field>
+			<field name="model">accounting.report</field>
+			<field name="type">ir.actions.report.xml</field>
+			<field name="report_name">balance.sheet.xls</field>
+			<field name="report_type">xls</field>
+			<field name="auto" eval="False"/>
+		</record>
+	</data>
+</openerp>

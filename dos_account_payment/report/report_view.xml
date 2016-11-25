@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		
+		<!--
+		<report id="report_voucher_print" 
+			string="Voucher" model="account.voucher" 
+			name="voucher.print" file="dos_account_payment/report/print_cheque.mako" 
+			auto="False" header="True" menu="True"/> 
+			
+		<report id="report_webkit_cheque" string="Cheque" model="account.voucher" name="webkit.cheque" file="dos_account_payment/report/print_cheque.mako" report_type="webkit" auto="False" header="False" menu="True" webkit_header="ir_header_webkit_print_form_cheque"/>
+		<report id="report_qweb_cheque" string="QWEB Cheque" model="account.voucher" report_type="qweb-pdf" file="dos_account_payment.qweb_cheque" name="dos_account_payment.qweb_cheque" />
+		-->
+		
+		<report id="report_webkit_cheque" string="Print PV" 
+		model="account.voucher" name="webkit.cheque" 
+		file="dos_account_payment/report/print_cheque.mako" 
+		report_type="webkit" auto="False" header="False" 
+		usage="default"/>
+		<report id="report_webkit_kuitansi" string="Print Kuitansi" 
+		model="account.voucher" name="webkit.kuitansi" 
+		file="dos_account_payment/report/kuitansi.mako" 
+		report_type="webkit" auto="False" header="False" 
+		usage="default"/>
+
+				</data>
+</openerp>

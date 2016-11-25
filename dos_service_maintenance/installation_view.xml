@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+    	<!-- menus -->
+    	<menuitem name="Installation and Service" id="menu_root" sequence="110"/>
+    	<menuitem name="Installation" id="installation_menu" parent="menu_root"/>
+    	<menuitem name="Configuration" id="installation_config_menu" parent="menu_root"/>
+
+    	<!-- menu Configuration -->	
+    	
+    	 <record model='ir.ui.view' id='installation_cost_type_tree'>
+            <field name="name">installation.cost.type.tree</field>
+            <field name="model">installation.cost.type</field>
+            <field name="arch" type="xml">
+                <tree string="Cost Type">
+                    <field name="code" />
+                    <field name="name" />
+                    <field name="account_id" />
+                </tree>
+            </field>
+        </record>
+        
+         <record model='ir.ui.view' id='installation_cost_type_form'>
+            <field name="name">installation.cost.type.form</field>
+            <field name="model">installation.cost.type</field>
+            <field name="arch" type="xml">
+                <form string="Cost Type">
+                	<sheet>
+                		<h1> 
+                			<label string="Cost Type"/>
+						</h1>
+                		<group>
+                			<group>
+		                    <field name="code" />
+		                    <field name="name" />
+		                    </group>
+		                    <group>
+		                    <field name="account_id" required="1" domain="[('user_type.name','=', ('Expense'))]"/>
+                    	</group>
+                    	</group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model='ir.actions.act_window' id='action_installation_cost'>
+            <field name="name">Installation Cost</field>
+            <field name="res_model">installation.cost.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new model.
+              </p>
+            </field>
+        </record>
+    	
+        <menuitem action="action_installation_cost" parent="installation_config_menu" id="installation_cost_action_menu"/>
+    	
+      <!-- Menu Installation -->  	
+        
+      	<record model='ir.ui.view' id='installation_form'>
+            <field name="name">installation.form</field>
+            <field name="model">installation</field>
+            <field name="arch" type="xml">
+                <form string="Installation Form">
+                	<header>
+                		<button name="action_confirm" states="draft" type="object" string="Confirm" class="oe_highlight"/>
+                		<!-- <button name="progress" states="confirm" type="object" string="Mark as Do" class="oe_highlight"/> -->
+                		<button name="done" states="confirm" type="object" string="Done" class="oe_highlight"/>
+                		<button name="set_draft" states="cancel" type="object" string="Set to Draft" class="oe_highlight"/>
+                		<button name="cancel" states="draft,confirm" type="object" string="Cancel"/> 
+                		<button name="print_bast" states='done' type="object" string="Print BAST"/>
+                		<button name="print_war" states='done' type="object" string="Print Warranty"/>
+                		<field name="state" widget="statusbar"/>	
+                	</header>
+                	<sheet string="Installation" >
+                		<h1> 
+                			<label string="Installation Form No"/>
+                			<field name="name" readonly="1" class="oe_inline"/>
+						</h1>
+						<group>
+							<field name="date_create" />
+		                    <field name="user_id" />
+		                </group>
+                		<group>
+                			<group string="Product">
+                    			<field name="sale_ref" string="Sales No"/>
+                    			<field name="move_ref" string="DO No"/>
+                    			<field name="product_id" required="1" on_change="onchange_product(product_id)"/>
+                    			<field name="brand_id" required="1"/>
+                    			<field name="default_code" required="1"/>
+                    			<field name="man_country"/>
+                    			<field name="lot_number" domain="[('product_id','=',product_id)]"/>
+                    		</group>
+                    		<group string="Customer">
+                    			<field name="customer_id" required="1" domain="[('customer','=',True)]" context="{'search_default_customer':1, 'show_address': 1}" options='{"always_reload": True}'/>
+                    			<field name="phone1"/>
+                    			<field name="email1"/>
+                    			<field name="contact1"/>
+                    			
+                    		</group>
+		                    <group string ="Installation Date">
+		                    	<field name="date_install" string="Plan Installation Date" required="1"/>
+		                    	<field name="date_finish" string="Finish Date" attrs="{'required':[('state','=','confirm')]}" on_change="onchange_date(date_finish)"/>
+		                    	<field name="responsible_id" required="1" />
+                    		</group>
+                    		<group string="Installation Loc">
+                    			<p colspan="2">Diisi jika Lokasi install berbeda dengan data pelanggan</p>
+                    			<field name="partner_id" domain="[('customer','=',True)]" context="{'search_default_customer':1, 'show_address': 1}" options='{"always_reload": True}'/>
+                    			<field name="phone2"/>
+                    			<field name="email2"/>
+                    			<field name="contact2"/>
+                    			
+                    		</group>
+                    		<group string="Warranty Info">
+                    			<field name="warranty_no"/>
+                    			<field name="valid_date"/>
+                    			
+                    		</group>
+                    	</group>
+                    	
+                    		<!-- <group string="Working Summary">
+                    			<group colspan="2">
+                    				<field name="task_ids" nolabel="1">
+                    					<tree string="Work Summary" editable="bottom">
+                    						<field name="name" string="Task"/>
+                    						<field name="description"/>
+                    						<field name="result"/>
+                    						<field name="next_action"/>						
+					                    </tree>
+					                    				
+                    				</field>
+                    			</group>
+                    		</group>
+                    		<group string="Cost">
+                    			<group colspan="2">
+                    				<field name="cost_ids" nolabel="1">
+                    					<tree string="Cost">
+                    						<field name="type" widget="selection"/>
+                    						<field name="description"/>
+                    						<field name="employee_id"/>
+                    						<field name="amount"/>						
+					                    </tree>
+					                    <form string="Cost">
+					                    	<group string="Cost">
+					                    		<group>
+	                    						<field name="type" widget="selection"/>
+	                    						<field name="description"/>
+	                    						<field name="employee_id"/>
+	                    						<field name="amount"/>
+	                    						</group>
+                    						</group>					
+					                    </form>					
+                    				</field>
+                    			</group>
+                    		</group> -->
+                    	<group>
+                    		<field name="notes"/>
+                    	</group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model='ir.ui.view' id='installation_tree'>
+            <field name="name">installation.tree</field>
+            <field name="model">installation</field>
+            <field name="arch" type="xml">
+                <tree string="Installation" colors="blue:state in ('draft')">
+                	<field name="date_install" />
+                	<field name="name"/>
+                    <field name="product_id"/>
+                    <field name="lot_number"/>
+                    <field name="customer_id"/>
+                    <field name="move_ref" string="DO No"/>
+                    <field name="responsible_id" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+        
+        
+        
+        <record id="view_installation_search" model="ir.ui.view">
+            <field name="name">installation.select</field>
+            <field name="model">installation</field>
+            <field name="arch" type="xml">
+                <search string="Search Installation">
+                    <field name="name" string="Installation Name"/>
+                    <field name="lot_number"/>
+                    <field name="unit_id"/>
+                    <field name="customer_id"/>
+                    
+                    <separator/>
+                    <filter string="Done" name="Current" domain="[('state', '=','done')]"/>
+                    <filter string="Draft" name="Draft" domain="[('state', '=','draft')]"/>
+                    <field name="responsible_id" string="Technician"/>
+                    
+                    <group expand="0" string="Group By">
+                        <filter string="Technician" name="Technician" context="{'group_by':'responsible_id'}"/>
+                        <filter string="Customer" name="Partner" context="{'group_by':'customer_id'}"/>
+                        <filter string="Month" context="{'group_by':'date_install:month'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        
+         <record id="view_installation_calendar" model="ir.ui.view">
+            <field name="name">installation.calendar</field>
+            <field name="model">installation</field>
+            <field eval="2" name="priority"/>
+            <field name="arch" type="xml">
+                <calendar color="user_id" date_start="date_install" string="Installation">
+                    <field name="name"/>
+                    <field name="customer_id"/>
+                </calendar>
+            </field>
+        </record>
+        
+        <record model='ir.actions.act_window' id='action_installation'>
+            <field name="name">Installation Form</field>
+            <field name="res_model">installation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar</field>
+            <field name="search_view_id" ref="view_installation_search"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new Installation
+              </p>
+            </field>
+        </record>
+    	
+    	<!-- Warranty -->
+    	
+    	<record model='ir.ui.view' id='warranty_tree'>
+            <field name="name">warranty.tree</field>
+            <field name="model">installation</field>
+            <field name="arch" type="xml">
+                <tree string="Warranty" colors="red:valid_date &lt; current_date;">
+                	<field name="date_finish" string="Warranty Start" />
+                	<field name="valid_date" string="Warranty End" />
+                	<field name="warranty_no" />
+                    <field name="product_id"/>
+                    <field name="lot_number"/>
+                    <field name="customer_id"/>
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+    	<record model='ir.actions.act_window' id='action_warranty'>
+            <field name="name">Warranty</field>
+            <field name="res_model">installation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="warranty_tree"/>
+            <field name="search_view_id" ref="view_installation_search"/>
+            <field name="context">{}</field>
+            <field name="domain">[('state','=','done')]</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new Installation
+              </p>
+            </field>
+        </record>
+    	
+    	
+        <menuitem action="action_installation" parent="installation_menu" id="installation_action_menu"/>
+    	<menuitem action="action_warranty" parent="installation_menu" id="war_action_menu"/>
+      	
+      	
+        	
+      		    	    	
+    </data>
+</openerp>

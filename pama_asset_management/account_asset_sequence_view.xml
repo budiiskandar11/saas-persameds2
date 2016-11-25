@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!-- Sequences for account.asset -->
+        <record id="seq_type_account_asset" model="ir.sequence.type">
+            <field name="name">Account Asset </field>
+            <field name="code">account.asset.asset</field>
+        </record>
+
+        <record id="seq_sale_order" model="ir.sequence">
+            <field name="name">Account Asset</field>
+            <field name="code">account.asset.asset</field>
+            <field name="prefix"></field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+         <record id="seq_type_asset_extra" model="ir.sequence.type">
+            <field name="name">Asset Extra Comptable</field>
+            <field name="code">asset.extra</field>
+        </record>
+
+        <record id="seq_asset_extra" model="ir.sequence">
+            <field name="name">Asset Extra Comptablet</field>
+            <field name="code">asset.extra</field>
+            <field name="prefix">LVA</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+
+    </data>
+</openerp>

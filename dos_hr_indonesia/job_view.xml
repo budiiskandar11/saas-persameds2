@@ -1,0 +1,28 @@
+<openerp>
+	<data>
+		<record id="view_job_tree" model="ir.ui.view">
+            <field name="name">view.job.tree</field>
+            <field name="model">hr.job</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Job">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+		
+		<record id="action_view_job_form" model="ir.actions.act_window">
+            <field name="name">Job</field>
+            <field name="res_model">hr.job</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_job_tree"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a Duty Trip.
+                </p>
+            </field>
+        </record>
+		<menuitem id="menu_job" parent="hr.menu_hr_root" name="Job"/>
+		<menuitem action="action_view_job_form" id="menu_hr_job_tree" parent="menu_job"/>
+	</data>
+</openerp>

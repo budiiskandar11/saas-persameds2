@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_sale_advance_payment_inv_inherit" model="ir.ui.view">
+            <field name="name">Invoice Order</field>
+            <field name="model">sale.advance.payment.inv</field>
+           <field name="inherit_id" ref="sale.view_sale_advance_payment_inv"/>
+            <field name="arch" type="xml">
+            	<xpath expr="/form/group/field[@name='qtty']" position="after">
+            		<field name="description" attrs="{'invisible': [('advance_payment_method', 'not in', ('fixed','percentage'))]}"/>
+            	</xpath>
+                
+            </field>
+        </record>
+
+        
+    </data>
+</openerp>

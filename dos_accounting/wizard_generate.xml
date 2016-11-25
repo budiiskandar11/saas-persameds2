@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="generate_faktur_pajak_form_view" model="ir.ui.view">
+            <field name="name">Generate Faktur</field>
+            <field name="model">generate.faktur.pajak</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Generate Faktur Pajak">
+                	<group>
+                		<field name="type"/> 
+					</group>              
+                	<group>
+	                	<div class="oe_tags">
+	                		<field name="nomor_faktur_awal" style="width: 18%%" readonly="1"/>
+	                        <field name="nomor_perusahaan" placeholder="000" style="width: 4%%"/>
+	                        <field name="strip" style="width: 1%%" readonly="1"/>
+	                        <field name="tahun" placeholder="15" style="width: 3%%"/>
+	                        <field name="dot" style="width: 1%%" readonly="1"/>
+	                        <field name="nomor_awal" placeholder="00000001" style="width: 9%%"/>
+	                    </div>
+					</group>             
+                	<group>	
+	                	<div class="oe_tags">
+	                		<field name="nomor_faktur_akhir" readonly="1" style="width: 18%%"/>
+	                        <field name="nomor_perusahaan" placeholder="000" style="width: 4%%"/>
+	                        <field name="strip2" style="width: 1%%" readonly="1"/>
+	                        <field name="tahun" placeholder="15" style="width: 3%%"/>
+	                        <field name="dot2" style="width: 1%%" readonly="1"/>
+	                        <field name="nomor_akhir" placeholder="00000010" style="width: 9%%"/>
+	                    </div>
+					</group>       
+                    <footer>
+	                    <button name="generate_faktur" string="Create" type="object" class="oe_highlight"/>
+	                    or
+	                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_faktur" model="ir.actions.act_window">
+            <field name="name">Generate Faktur Pajak</field>
+            <field name="res_model">generate.faktur.pajak</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem id="menu_generate_faktur_pajak" name="Generate Faktur" parent="faktur_pajak_menu"
+            action="action_faktur"/>
+        
+    </data>
+</openerp>

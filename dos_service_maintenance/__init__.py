@@ -1,0 +1,3 @@
+import report
+import stock_picking_inherit
+import installation

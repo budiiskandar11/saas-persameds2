@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		
+		<!-- <record id="stock_move_inherit_install_form" model="ir.ui.view">
+            <field name="name">stock.move.form</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//group/group[1]/field[@name='product_id']" position="before">
+                    <field colspan="2" name="to_install" />
+                </xpath>
+            </field>
+        </record> -->
+        
+      <!--   <record id="stock_move_inherit_install_tree" model="ir.ui.view">
+            <field name="name">stock.move.form</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+            <field name="arch" type="xml">
+                    <field name="product_id" position="before" >
+                    <field name="to_install"/>
+                    </field>
+               
+            </field>
+        </record> -->
+        
+      
+        
+        <record id="view_picking_form_dos_stock_3" model="ir.ui.view">
+            <field name="name">stock.picking.form.dos_stock3</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="/form/sheet/group/group[2]/field[@name='origin']" position="after">
+            		<field name="is_install"/>
+            		<field name="install_created" invisible="1"/>
+            	</xpath>
+            	<xpath expr="/form/header/field[@name='state']" position="before">
+            		<button name="create_installation" class="oe_highlight" string="Create Inst Form" groups="base.group_user" type="object" attrs="{'invisible': ['|','|',('is_install', '=', False),('state', '!=', 'done'),('install_created', '=', True)]}"/>
+            	</xpath>
+            	<xpath expr="/form/sheet/notebook/page[2]/field[@name='pack_operation_ids']" position="replace">
+            		<field name="pack_operation_ids" context="{'default_picking_id': active_id, 'default_location_id': location_id, 'default_location_dest_id': location_dest_id}">
+                                <tree editable="bottom">
+                                    <field name="package_id" groups="stock.group_tracking_lot"/>
+                                    <field name="to_install"/>
+                                    <field name="product_id" on_change="product_id_change(product_id, product_uom_id, product_qty)" attrs="{'readonly': [('processed', 'in', ('true','false'))]}"/>
+                                    <field name="product_uom_id" groups="product.group_uom"/>
+                                    <field name="lot_id" domain="[('product_id','=?', product_id)]" context="{'product_id': product_id}" groups="stock.group_production_lot"/>
+                                    <field name="picking_id" invisible="1"/>
+                                    <field name="processed" invisible="1"/>
+                                    <field name="owner_id" groups="stock.group_tracking_owner"/>
+                                    <field name="product_qty" attrs="{'required': [('product_id', '!=', False)], 'readonly': [('processed', 'in', ('true','false'))]}"/>
+                                    <field name="location_id" domain="[('id', 'child_of', parent.location_id)]"/>
+                                    <field name="location_dest_id" domain="[('id', 'child_of', parent.location_dest_id)]"/>
+                                    <field name="result_package_id" groups="stock.group_tracking_lot" context="{'location_id': location_dest_id}"/>
+                                    
+                                </tree>
+                            </field>
+            	</xpath>
+            </field>
+        </record>
+		
+		
+	</data>
+</openerp>

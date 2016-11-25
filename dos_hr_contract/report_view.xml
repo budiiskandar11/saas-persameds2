@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<report 
+		 id="report_pkwt" 
+		 string="PKWT" 
+		 model="hr.contract" 
+		 report_type="qweb-pdf" 
+		 file="dos_hr_contract.pkwt_document" 
+		 name="dos_hr_contract.pkwt_document"/>
+
+		 <report 
+		 id="report_exit_interview" 
+		 string="Exit Interview" 
+		 model="hr.contract" 
+		 report_type="qweb-pdf" 
+		 file="dos_hr_contract.exit_document" 
+		 name="dos_hr_contract.exit_document"/>
+	</data>
+</openerp>

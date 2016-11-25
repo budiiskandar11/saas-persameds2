@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!-- Sequences For Asset Disposal -->
+        <record id="seq_type_account_asset_disposal" model="ir.sequence.type">
+            <field name="name">Account Asset Disposal</field>
+            <field name="code">account.asset.disposal</field>
+        </record>
+
+        <record id="seq_account_asset_disposal" model="ir.sequence">
+            <field name="name">Account Asset Disposal</field>
+            <field name="code">account.asset.disposal</field>
+            <field name="prefix">DSP</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,60 @@
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="hr_abacus_bhakti_tree">
+            <field name="name">hr.abacus.bhakti.tree</field>            
+            <field name="model">hr.abacus.bhakti</field>            
+            <field name="type">tree</field>							
+            <field name="arch" type="xml">
+            	<tree string="Abacus Bhakti List">
+            		<field name="create_date" />
+            		<field name="effective_period" />          
+            		<field name="employee_id" />  		
+            		<field name="name" />
+            		<field name="percentage" />
+            	</tree>
+            </field>
+		</record>
+		
+		<record model="ir.ui.view" id="hr_abacus_bhakti_form">
+            <field name="name">hr.abacus.bhakti.form</field>            
+            <field name="model">hr.abacus.bhakti</field>            
+            <field name="type">form</field>							
+            <field name="arch" type="xml">
+            	<form string="Abacus Bhakti Form">
+            		<header>
+            			<button string="Confirm" name="confirm" type='object' states="draft" class="oe_highlight"/>
+                    	<button string="Cancel" name="cancel" type='object' states="draft,confirm" />
+						<button string="Set to Draft" name="set_to_draft" type='object' states="cancel" />                    	
+            			<field name='state' widget='statusbar'/>
+            		</header>
+            		<sheet>
+	            		<h2>
+	            			<field name="name" placeholder="SK Number" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+						</h2>
+						<group>
+							<group>
+			            		<field name="create_date" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+				            	<field name="percentage" style="width: 80%%" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>							
+			            	</group>
+			            	<group>
+			            		<field name="effective_period" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>         
+			            		<field name="employee_id" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+							</group>			            		
+						</group>
+					</sheet>            		
+            	</form>
+            </field>
+		</record>
+		
+		
+		<record id="action_hr_abacus_bhakti" model="ir.actions.act_window">
+			<field name="name">Abacus Bhakti</field>
+			<field name="res_model">hr.abacus.bhakti</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<menuitem id="menu_hr_abacus_bhakti" action="action_hr_abacus_bhakti" parent="hr_payroll.menu_hr_root_payroll"/>
+		
+	</data>
+</openerp>

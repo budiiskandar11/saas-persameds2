@@ -1,0 +1,189 @@
+<openerp>
+	<data>
+		<record id="view_order_form_dos_sale" model="ir.ui.view">
+            <field name="name">sale.order.form.dos_sale</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="/form/sheet/h1/label[@string='Quotation ']" position="attributes">
+            		<attribute name="attrs">{'invisible': [('state','not in',('quot','sent'))]}</attribute>
+            	</xpath>
+            	<xpath expr="/form/sheet/h1/label[@string='Sales Order ']" position="attributes">
+            		<attribute name="attrs">{'invisible': [('state','in',('draft','quot','sent'))]}</attribute>
+            	</xpath>
+            	<xpath expr="/form/sheet/h1/label[@string='Quotation ']" position="after">
+            		<label string="Draft " attrs="{'invisible': [('state','not in',('draft'))]}"/>
+            	</xpath>            	
+            	<xpath expr="/form/header/field[@name='state']" position="attributes">
+            		<attribute name="statusbar_visible">draft,quot,progress,done</attribute>
+            	</xpath>
+            	<xpath expr="/form/header/button[7]" position="attributes">
+            		<attribute name="states">quot</attribute>
+            		<attribute name="string">Confirm Quotation</attribute>
+            	</xpath>
+            	
+            		<xpath expr="/form/header/button[12]" position="attributes">
+            		<attribute name="string">Cancel Draft</attribute>
+            	</xpath>
+            	<xpath expr="/form/header/button[4]" position="attributes">
+            		<attribute name="states">quot,sent,progress,manual</attribute>
+            	</xpath>
+            	<xpath expr="/form/header/button[5]" position="attributes">
+            		<attribute name="states">draft</attribute>
+            	</xpath>
+            	<xpath expr="/form/header/button[7]" position="after">
+            		 <button name="action_confirm_quot" states="draft" string="Confirm Draft" type="object" groups="base.group_user"/>
+            		 <button name="action_approve_quot" states="quot_approval" string="To Approve" type="object" groups="base.group_sale_manager"/>
+            		 <button name="quo_revision" states="quot" string="Revise" type="object" class="oe_highlight"/>
+                     <button name="cancel" states="quot,quot_approval,sent" string="Cancel Quotation" groups="base.group_user"/>
+            	</xpath>
+            	
+            	<xpath expr="/form/sheet/group/group[2]/field[@name='date_order']" position="after">
+            		<field name="date_valid"/>
+            		<field name="conf_date"/>
+            		<field name="paket"/>
+            	</xpath>
+            	<xpath expr="/form/sheet/notebook/page[@string='Order Lines']/group" position="replace">
+                    <group>
+                        <group class="oe_left">
+                            <field name="add_disc_type" groups="sale.group_discount_per_so_line" invisible="1"/>
+                            <field name="amount_add_disc" groups="sale.group_discount_per_so_line" invisible="1"/>
+                        </group>
+                        <group class="oe_subtotal_footer oe_right" name="sale_total">
+                        	<field name="gross_total" groups="sale.group_discount_per_so_line" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    		<field name="discount_total" groups="sale.group_discount_per_so_line" widget='monetary' style="border-bottom: 1px solid #cacaca;font-weight: normal;font-size: 13px;" options="{'currency_field': 'currency_id'}"/>
+                            <field name="amount_untaxed" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="amount_tax" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <div class="oe_subtotal_footer_separator oe_inline">
+                                <label for="amount_total" />
+                                <button name="button_dummy"
+                                    states="draft,sent" string="(update)" type="object" class="oe_edit_only oe_link"/>
+                            </div>
+                            <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                    </group>
+            	</xpath>
+            	<xpath expr="/form/sheet/notebook/page[@string='Order Lines']/field[@name='note']" position="replace">
+            		<group>
+            			<group> 
+                     	<field name="ketentuan" widget="html"/>
+                    </group> 
+                    </group>
+                </xpath>
+                <xpath expr="/form/sheet/notebook/page[@string='Order Lines']/field[1]/tree/field[@name='product_id']" position="before">
+            		<field name="num"/>
+            		<field name="main_unit"/>
+            	</xpath>
+            	 <xpath expr="/form/sheet/notebook/page[@string='Order Lines']/field[1]/form/group/group[1]/div/field[@name='discount']" position="after">
+            		<field name="disc_amount" groups="sale.group_discount_per_so_line"/>
+            		<field name="num"/>
+            	</xpath>
+            	 <xpath expr="/form/sheet/notebook/page[@string='Order Lines']/field[1]/tree/field[@name='discount']" position="after">
+            		<field name="disc_amount" groups="sale.group_discount_per_so_line"/>
+            	</xpath>
+            	
+            	<xpath expr="/form/sheet/group/group[1]/field[@name='partner_id']" position="after">
+            		<field name="contact"/>
+            		<field name="contact2"/>
+            		<field name="quo_ref"/>
+            		<field name="reason" attrs="{'invisible': [('quo_ref', '=', False)], 'required':[('quo_ref','&gt;', 0)]}"/>
+            	</xpath>
+            	
+                </field>
+                    
+               
+        </record>
+        
+       
+        
+        <record id="view_order_tree_dos_sale" model="ir.ui.view">
+            <field name="name">sale.order.tree.dos_sale</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+            	<xpath expr="/tree/field[@name='amount_total']" position="before">
+            		<field name="amount_untaxed" sum="Total Untaxed"/>
+            	</xpath>
+            </field>
+        </record>
+        
+        <record id="sale.action_quotations" model="ir.actions.act_window">
+            <field name="name">Quotations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="sale.view_quotation_tree"/>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field name="context">{'search_default_my_sale_orders_filter': 1}</field>
+            <field name="domain">[('state','in',('quot','sent','quot_approval'))]</field>
+            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a quotation, the first step of a new sale.
+              </p><p>
+                OpenERP will help you handle efficiently the complete sale flow:
+                from the quotation to the sales order, the
+                delivery, the invoicing and the payment collection.
+              </p><p>
+                The social feature helps you organize discussions on each sales
+                order, and allow your customers to keep track of the evolution
+                of the sales order.
+              </p>
+            </field>
+        </record>
+        
+        <record id="sale.action_orders" model="ir.actions.act_window">
+            <field name="name">Sales Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+            <field name="context">{
+                    'search_default_my_sale_orders_filter': 1
+                }
+            </field>
+            <field name="domain">[('state', 'not in', ('draft','quot_approval' ,'quot', 'sent', 'cancel'))]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a quotation that can be converted into a sales
+                    order.
+                </p><p>
+                    OpenERP will help you efficiently handle the complete sales flow:
+                    quotation, sales order, delivery, invoicing and payment.
+                </p>
+            </field>
+        </record>
+        
+        <record id="action_draft" model="ir.actions.act_window">
+            <field name="name">Draft Quotation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="sale.view_quotation_tree"/>
+            <field name="view_mode">tree,form,calendar,graph</field>
+            <field name="context">{'search_default_my_sale_orders_filter': 1}</field>
+            <field name="domain">[('state','in',('draft','cancel'))]</field>
+            <field name="search_view_id" ref="sale.view_sales_order_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a quotation, the first step of a new sale.
+              </p><p>
+                OpenERP will help you handle efficiently the complete sale flow:
+                from the quotation to the sales order, the
+                delivery, the invoicing and the payment collection.
+              </p><p>
+                The social feature helps you organize discussions on each sales
+                order, and allow your customers to keep track of the evolution
+                of the sales order.
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_sale_drafts" 
+                action="action_draft" parent="base.menu_sales"
+                sequence="4"/>
+		
+	</data>
+</openerp>
+

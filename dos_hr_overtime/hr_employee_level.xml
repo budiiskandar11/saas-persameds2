@@ -1,0 +1,71 @@
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="view_employee_lvl_tree">
+            <field name="name">view.employee.lvl.tree</field>
+            <field name="model">hr.employee.level</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+            	<tree string="Employee Level">
+            		<field name="name" />
+            	    <field name="parent_id" />
+            		<field name="description" />
+            	</tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_employee_lvl_form">
+            <field name="name">view.employee.lvl.form</field>
+            <field name="model">hr.employee.level</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            	<form string="Employee Level">
+            		<sheet>
+            			<group>
+		            		<field name="name" />
+		            	    <field name="parent_id" />
+		            	    <newline/>
+		 					<separator colspan="4" string="Description"/>
+		            		<field name="description" colspan="4"/>
+						</group>		            		
+					</sheet>	            		
+            	</form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_employee_lvl_search">
+            <field name="name">view.employee.lvl.search</field>
+            <field name="model">hr.employee.level</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+            	<search string="Employee Level">
+            		<field name="name" />
+            	    <field name="parent_id" />
+            		<field name="description"/>
+            	</search>
+            </field>
+        </record>
+        <record id="act_menu_employee_lvl_form" model="ir.actions.act_window">
+		    <field name="name">Employee Level</field>
+		    <field name="res_model">hr.employee.level</field>
+		    <field name="view_type">form</field>
+		    <field name="view_mode">tree,form</field>
+		    <field eval="False" name="filter"/>
+		    <field name="view_id" ref="view_employee_lvl_tree"/>
+		    <field name="search_view_id" ref="view_employee_lvl_search"/>
+		</record>
+		<menuitem name='Employee Level' id='menu_act_menu_employee_lvl_form' 
+				parent='dos_hr_overtime.menu_overtime' 
+				action="act_menu_employee_lvl_form" sequence='20'/>
+		
+		<record model="ir.ui.view" id="employee_level_form_view">
+			<field name="name">employee.level.form.view</field>
+			<field name="model">hr.employee</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="hr.view_employee_form" />
+			<field name="priority">32</field>
+			<field name="arch" type="xml">
+				<field name="name" position="after">
+					<field name="level_id"/>		
+				</field>
+			</field>
+		</record>
+	</data>
+</openerp>

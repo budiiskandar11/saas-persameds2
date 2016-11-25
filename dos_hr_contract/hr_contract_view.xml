@@ -1,0 +1,141 @@
+<openerp>
+	<data>
+		
+		<record id="hr_contract_view_tree_custom" model="ir.ui.view">
+            <field name="name">hr.contract.view.tree.custom</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_tree"/>
+            <field name="arch" type="xml">
+                <field name ="wage" position="after">
+                	<field name ="state"/>
+            	</field>
+			</field>
+        </record>
+		
+		<record id="hr_contract_view_form_custom" model="ir.ui.view">
+            <field name="name">hr.contract.view.form.custom</field>
+            <field name="model">hr.contract</field>
+	        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+	        <field name="type">form</field>
+	        <field name="arch" type="xml">
+	        	<xpath expr="/form/sheet" position="before">
+	        		<header>
+	        			<button name="action_wait_approval" class="oe_highlight" states='draft' string="Confirm" type="object"/>
+	        			<button name="modify" class="oe_highlight" states='confirm,approve' string="Modify" type="object"/>
+            			<button name="action_wait_approval" class="oe_highlight" states='confirm' string="Approve" type="object"/>
+            			<field name="state" widget="statusbar" nolabel="1"/>
+	        		</header>
+	        	</xpath>
+
+
+	        	<xpath expr="/form/sheet/div[1]" position="before">
+	        		<div class="oe_right oe_button_box">
+	        			<button name="%(dos_hr_contract.action_wizard_contract_revision)d" 
+	        					class="oe_inline oe_stat_button oe_right" 
+	        					Help="Create New Contract Document"
+            					type="action" icon="fa-pencil-square-o" widget="statinfo">
+	        					<div>Renewal<br/>Contract</div>
+	        			</button>
+	        			
+	        		</div>	
+	        	</xpath>
+	        	
+	        	<xpath expr="/form/sheet/notebook/page[@string='Work Permit']" position="after">
+                    <page string='Previous Contract' attrs="{'invisible':[('prev_contract','=',False)]}">
+                        <group string="Previous Contract">
+                            <field name='renewal_type' readonly="1"/>
+                            <field name='prev_contract' readonly="1"/>
+                        </group>
+                    </page>
+                </xpath>
+	        	
+	        	<xpath expr="/form/sheet/group/group[2]/field[@name='type_id']" position="after">
+	        		<field name="employee_status" required="1"/>	        		
+	        	</xpath>
+	        	<field name="name" position="attributes">
+	        		<attribute name="attrs">{'readonly':[('state','!=','draft')]}</attribute>
+	        	</field>
+	        	<field name="employee_id" position="attributes">
+	        		<attribute name="attrs">{'readonly':[('state','!=','draft')]}</attribute>
+	        	</field>
+	        	<field name="job_id" position="attributes">
+	        		<attribute name="attrs">{'readonly':[('state','=','approve')]}</attribute>
+	        	</field>
+	        	<field name="type_id" position="attributes">
+	        		<attribute name="attrs">{'readonly':[('state','=','approve')]}</attribute>
+	        	</field>
+	        	<field name="employee_status" position="attributes">
+	        		<attribute name="attrs">{'readonly':[('state','=','approve')]}</attribute>
+	        	</field>
+	        	<field name="trial_date_start" position="attributes">
+	        		<attribute name="attrs">{'readonly':[('state','=','approve')]}</attribute>
+	        	</field>
+	        	<field name="trial_date_end" position="attributes">
+	        		<attribute name="attrs">{'readonly':[('state','=','approve')]}</attribute>
+	        	</field>
+	        	<field name="date_start" position="attributes">
+	        		<attribute name="attrs">{'readonly':[('state','=','approve')]}</attribute>
+	        	</field>
+	        	<field name="date_end" position="attributes">
+	        		<attribute name="attrs">{'readonly':[('state','=','approve')]}</attribute>
+	        	</field>
+	        	<field name="working_hours" position="attributes">
+	        		<attribute name="attrs">{'readonly':[('state','=','approve')]}</attribute>
+	        	</field>
+	        	<field name="wage" position="attributes">
+	        		<attribute name="attrs">{'readonly':[('state','!=','draft')]}</attribute>
+	        	</field>
+	        	<field name="advantages" position="attributes">
+	        		<attribute name="attrs">{'readonly':[('state','=','approve')]}</attribute>
+	        	</field>
+	        	<!-- <xpath expr="//field[@name='struct_id']" position="attributes">
+					<attribute name="attrs">{'readonly':[('state','!=','draft')]}</attribute>
+				</xpath> -->
+	        </field>
+	    </record>
+
+	    <record id="hr_contract_view_form_custom_inherit" model="ir.ui.view">
+            <field name="name">hr.contract.view.form.custom.inherit</field>
+            <field name="model">hr.contract</field>
+	        <field name="inherit_id" ref="hr_payroll.hr_contract_form_inherit"/>
+	        <field name="type">form</field>
+	        <field name="arch" type="xml">
+	        	<field name="struct_id" position="attributes">
+	        		<attribute name="attrs">{'readonly':[('state','!=','draft')]}</attribute>
+	        	</field>
+	        </field>
+	    </record>
+
+
+	    <!-- WORKFLOW -->
+
+	    <record id="wkf_contract" model="workflow">
+            <field name="name">hr.contract.basic</field>
+            <field name="osv">hr.contract</field>
+            <field name="on_create">True</field>
+        </record>
+
+	    <record id="act_approval" model="workflow.activity">
+	    	<field name="wkf_id" ref="wkf_contract"/>
+            <field name="name">approval</field>
+            <field name="kind">function</field>
+            <field name="action">action_wait_approval()</field>
+        </record>
+
+        <!-- INHERIT MENU -->
+
+        <record id="action_hr_contract_custom" model="ir.actions.act_window">
+            <field name="name">Contracts</field>
+            <field name="res_model">hr.contract</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{'search_default_current':1}</field>
+            <field name="search_view_id" ref="hr_contract.hr_contract_view_search"/>
+        </record>
+
+ 
+		<menuitem id="menu_admin_legal" parent="hr.menu_hr_root" name="Admin Legal" sequence="1"/>
+        <menuitem action="action_hr_contract_custom" id="hr_menu_contract" parent="menu_admin_legal" name="Contracts" sequence="1" groups="base.group_hr_manager"/>
+	</data>
+</openerp>

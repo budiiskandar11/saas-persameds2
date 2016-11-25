@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report string="Financial report"
+                model="account.financial.report"
+                auto="True"
+                name="jasper_account_report"
+                rml="/databit_account_report/report/account_report.jrxml"
+                id="action_report_financial_xls"
+                menu="False"
+                 />
+                 
+    </data>
+</openerp>

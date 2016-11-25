@@ -1,0 +1,83 @@
+<openerp>
+	<data>
+		
+		<record id="view_purchase_form_inherit_persamed" model="ir.ui.view">
+			<field name="name">Purchase Order Form</field>
+			<field name="model">purchase.order</field>
+			<field name="inherit_id" ref="purchase.purchase_order_form" />
+			<field name="arch" type="xml">
+				<xpath expr="/form/sheet/notebook/page[2]/group/field[@name='incoterm_id']" position="replace">
+					
+				</xpath>
+				<xpath expr="/form/sheet/notebook/page[3]/group/group[2]/field[@name='payment_term_id']" position="replace">
+					
+				</xpath>
+				
+				<xpath expr="/form/sheet/notebook/page[1]/group" position="replace">
+					<group class="oe_subtotal_footer oe_right">
+						       <field name="gross_total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+						       <field name="disc_total" widget='monetary' style="border-bottom: 1px solid #cacaca;font-weight: normal;font-size: 13px;" options="{'currency_field': 'currency_id'}"/>
+                               <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <field name="amount_tax" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <div><field name="add_reason" placeholder="..add cost"/></div>
+								<field nolabel="1" name="add_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <div class="oe_subtotal_footer_separator oe_inline">
+                                    <label for="amount_total"/>
+                                    <button name="button_dummy"
+                                        states="draft" string="(update)" type="object" class="oe_edit_only oe_link"/>
+                                </div>
+                                <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </group>
+					
+				</xpath>
+				
+				<field name="picking_type_id" position="after">
+					<field name="inco"/>
+					<field name="incoterm_id" attrs="{'invisible':[('inco','!=',True)]}"/>
+					<field name="shipping_int"/>				
+				</field>
+				
+				<field name="currency_id" position="after">
+					<field name="payment_term_id"/>
+									
+				</field>
+				<xpath expr="/form/sheet/notebook/page[1]/field[@name='notes']" position="replace">
+					<field name="notes" widget="html"/>
+				</xpath>
+				<xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                  <field name="diskon" string="disc (%)"/>
+                 </xpath>
+                 <xpath expr="/form/sheet/group/group[2]/field[@name='date_order']" position="after">
+					<field name="minimum_planned_date"/>
+				</xpath>
+				 <xpath expr="/form/sheet/notebook/page[3]/group/group[1]/field[@name='minimum_planned_date']" position="replace">
+					
+				</xpath>
+				
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="purchase_discount_order_line_form_databit">
+        <field name="name">discount.order.line.form</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_form"/>
+        <field name="arch" type="xml">
+            <field name="price_unit" position="after">
+                <field name="diskon"/>
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="purchase_discount_order_line_tree_databit">
+        <field name="name">discount.order.line.tree</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_tree"/>
+        <field name="arch" type="xml">
+            <field name="price_unit" position="after">
+                <field name="diskon"/>
+            </field>
+        </field>
+    </record>
+    
+		
+	</data>
+</openerp>

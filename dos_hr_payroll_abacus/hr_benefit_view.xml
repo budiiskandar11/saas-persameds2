@@ -1,0 +1,63 @@
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="hr_benefit_tree">
+            <field name="name">hr.benefit.tree</field>            
+            <field name="model">hr.benefit</field>            
+            <field name="type">tree</field>							
+            <field name="arch" type="xml">
+            	<tree string="Benefit List">
+            		<field name="type"/>
+            		<field name="create_date" />
+            		<field name="effective_period" />          
+            		<field name="employee_id" />  		
+            		<field name="name" />
+            		<field name="percentage" />
+            	</tree>
+            </field>
+		</record>
+		
+		<record model="ir.ui.view" id="hr_hr_benefit_form">
+            <field name="name">hr.benefit.form</field>            
+            <field name="model">hr.benefit</field>            
+            <field name="type">form</field>							
+            <field name="arch" type="xml">
+            	<form string="Benefit Form">
+            		<header>
+            			<button string="Confirm" name="confirm" type='object' states="draft" class="oe_highlight"/>
+                    	<button string="Cancel" name="cancel" type='object' states="draft,confirm" />
+						<button string="Set to Draft" name="set_to_draft" type='object' states="cancel" />                    	
+            			<field name='state' widget='statusbar'/>
+            		</header>
+            		<sheet>
+	            		<h2>
+	            			<field name="name" placeholder="Description" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+						</h2>
+						<group>
+							<group>
+								<field name="type" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+			            		<field name="create_date" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+								<field name="percentage" required="1" attrs="{'invisible':[('type','in',('reward','uniform'))],'readonly':[('state','!=','draft')]}"/>
+								<field name="amount" required="1" attrs="{'invisible':[('type','not in',('reward','uniform'))],'readonly':[('state','!=','draft')]}"/>
+			            	</group>
+			            	<group>
+			            		<field name="effective_period" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>         
+			            		<field name="employee_id" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+							</group>			            		
+						</group>
+					</sheet>            		
+            	</form>
+            </field>
+		</record>
+		
+		
+		<record id="action_hr_benefit" model="ir.actions.act_window">
+			<field name="name">Payroll Benefit</field>
+			<field name="res_model">hr.benefit</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<menuitem id="menu_hr_benefit" action="action_hr_benefit" parent="hr_payroll.menu_hr_root_payroll"/>
+		
+	</data>
+</openerp>

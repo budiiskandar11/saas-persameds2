@@ -1,0 +1,1703 @@
+	<openerp>
+		<data>
+			
+			<record id='chart_0' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='user_type' ref='account.data_account_type_view'/>
+				<field name='name'>Chart of Account Indonesia</field>
+				<field name='code'>0</field>
+			</record>
+			<record id='chart_BAL' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_0'/>
+				<field name='user_type' ref='account.data_account_type_view'/>
+				<field name='name'>Balance Sheet</field>
+				<field name='code'>BS</field>
+			</record>
+			<record id='chart_100-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_BAL'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Assets</field>
+				<field name='code'>100-0000</field>
+			</record>
+			<record id='chart_101-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_100-0000'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Current Assets</field>
+				<field name='code'>101-0000</field>
+			</record>
+			<record id='chart_101-0100' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_101-0000'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Cash or Bank</field>
+				<field name='code'>101-0100</field>
+			</record>
+			<record id='chart_101-0110' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_101-0100'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Cash</field>
+				<field name='code'>101-0110</field>
+			</record>
+			<record id='chart_101-0111' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0110'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Petty Cash</field>
+				<field name='code'>101-0111</field>
+			</record>
+			<record id='chart_101-0120' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_101-0100'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Bank</field>
+				<field name='code'>101-0120</field>
+			</record>
+			<record id='chart_101-0121' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0120'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Bank (Local)</field>
+				<field name='code'>101-0121</field>
+			</record>
+			<record id='chart_101-0122' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0120'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Bank (Holding)</field>
+				<field name='code'>101-0122</field>
+			</record>
+			<record id='chart_101-0123' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0120'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Bank (Operation)</field>
+				<field name='code'>101-0123</field>
+			</record>
+			<record id='chart_101-0200' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_101-0000'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Receivable</field>
+				<field name='code'>101-0200</field>
+			</record>
+			<record id='chart_101-0210' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_101-0200'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Operating Receivables</field>
+				<field name='code'>101-0210</field>
+			</record>
+			<record id='chart_101-0211' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0210'/>
+				<field name='user_type' ref='account.data_account_type_receivable'/>
+				<field name='name'>Credit Card Receivables</field>
+				<field name='code'>101-0211</field>
+			</record>
+			<record id='chart_101-0212' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0210'/>
+				<field name='user_type' ref='account.data_account_type_receivable'/>
+				<field name='name'>Notes Receivables</field>
+				<field name='code'>101-0212</field>
+			</record>
+			<record id='chart_101-0213' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0210'/>
+				<field name='user_type' ref='account.data_account_type_receivable'/>
+				<field name='name'>Account Receivable</field>
+				<field name='code'>101-0213</field>
+			</record>
+			<record id='chart_101-0214' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0210'/>
+				<field name='user_type' ref='account.data_account_type_receivable'/>
+				<field name='name'>Allowance for Doubtful Accounts</field>
+				<field name='code'>101-0214</field>
+			</record>
+			<record id='chart_101-0220' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_101-0200'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Non Operating Receivables</field>
+				<field name='code'>101-0220</field>
+			</record>
+			<record id='chart_101-0221' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0220'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Employee's Receivables</field>
+				<field name='code'>101-0221</field>
+			</record>
+			<record id='chart_101-0222' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0220'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Director's Receivables</field>
+				<field name='code'>101-0222</field>
+			</record>
+			<record id='chart_101-0223' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0220'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Excess Payment Receivables</field>
+				<field name='code'>101-0223</field>
+			</record>
+			<record id='chart_101-0224' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0220'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Other Non Operating Receivables</field>
+				<field name='code'>101-0224</field>
+			</record>
+			<record id='chart_101-0300' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_101-0000'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Inventory</field>
+				<field name='code'>101-0300</field>
+			</record>
+			<record id='chart_101-0301' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0300'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Merchandise Inventory</field>
+				<field name='code'>101-0301</field>
+			</record>
+			<record id='chart_101-0302' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0300'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Merchandise in Vendor</field>
+				<field name='code'>101-0302</field>
+			</record>
+			<record id='chart_101-0303' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0300'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Merchandise on Route</field>
+				<field name='code'>101-0303</field>
+			</record>
+			<record id='chart_101-0304' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0300'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Merchandise in Stock</field>
+				<field name='code'>101-0304</field>
+			</record>
+			<record id='chart_101-0305' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0300'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Merchandise in Market</field>
+				<field name='code'>101-0305</field>
+			</record>
+			<record id='chart_101-0400' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_101-0000'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Prepaid Expenses</field>
+				<field name='code'>101-0400</field>
+			</record>
+			<record id='chart_101-0401' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0400'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Prepaid Cost</field>
+				<field name='code'>101-0401</field>
+			</record>
+			<record id='chart_101-0402' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0400'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Prepaid Rent</field>
+				<field name='code'>101-0402</field>
+			</record>
+			<record id='chart_101-0403' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0400'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Prepaid Insurance</field>
+				<field name='code'>101-0403</field>
+			</record>
+			<record id='chart_101-0500' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_101-0000'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Prepaid Tax</field>
+				<field name='code'>101-0500</field>
+			</record>
+			<record id='chart_101-0501' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0500'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Prepaid PPN In</field>
+				<field name='code'>101-0501</field>
+			</record>
+			<record id='chart_101-0502' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0500'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Prepaid PPh 21</field>
+				<field name='code'>101-0502</field>
+			</record>
+			<record id='chart_101-0503' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0500'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Prepaid PPh 22</field>
+				<field name='code'>101-0503</field>
+			</record>
+			<record id='chart_101-0504' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0500'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Prepaid PPh 23</field>
+				<field name='code'>101-0504</field>
+			</record>
+			<record id='chart_101-0505' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0500'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Prepaid PPh 25</field>
+				<field name='code'>101-0505</field>
+			</record>
+			<record id='chart_101-0506' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0500'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Prepaid PPh 29</field>
+				<field name='code'>101-0506</field>
+			</record>
+			<record id='chart_101-0507' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0500'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Prepaid PPh Pasal 4 (2) Sewa Tanah/Bangunan</field>
+				<field name='code'>101-0507</field>
+			</record>
+			<record id='chart_101-0508' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_101-0500'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Other Prepaid Taxes</field>
+				<field name='code'>101-0508</field>
+			</record>
+			<record id='chart_102-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_100-0000'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Non Current Assets</field>
+				<field name='code'>102-0000</field>
+			</record>
+			<record id='chart_102-0100' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_102-0000'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Investments</field>
+				<field name='code'>102-0100</field>
+			</record>
+			<record id='chart_102-0101' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_102-0100'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Deposit Investments</field>
+				<field name='code'>102-0101</field>
+			</record>
+			<record id='chart_102-0102' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_102-0100'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Share Investments</field>
+				<field name='code'>102-0102</field>
+			</record>
+			<record id='chart_102-0103' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_102-0100'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Obligation Investments</field>
+				<field name='code'>102-0103</field>
+			</record>
+			<record id='chart_102-0104' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_102-0100'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Other Investments</field>
+				<field name='code'>102-0104</field>
+			</record>
+			<record id='chart_102-0200' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_102-0000'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Fixed Assets</field>
+				<field name='code'>102-0200</field>
+			</record>
+			<record id='chart_102-0210' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_102-0200'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Tangible Fix Assets</field>
+				<field name='code'>102-0210</field>
+			</record>
+			<record id='chart_102-0211' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_102-0210'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Office Equipment</field>
+				<field name='code'>102-0211</field>
+			</record>
+			<record id='chart_102-0212' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_102-0210'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Furniture</field>
+				<field name='code'>102-0212</field>
+			</record>
+			<record id='chart_102-0213' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_102-0210'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Land</field>
+				<field name='code'>102-0213</field>
+			</record>
+			<record id='chart_102-0214' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_102-0210'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Machinery</field>
+				<field name='code'>102-0214</field>
+			</record>
+			<record id='chart_102-0215' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_102-0210'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Fixture</field>
+				<field name='code'>102-0215</field>
+			</record>
+			<record id='chart_102-0216' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_102-0210'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Tangible Fixed Asset Depreciation Accumulation</field>
+				<field name='code'>102-0216</field>
+			</record>
+			<record id='chart_102-0220' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_102-0200'/>
+				<field name='user_type' ref='account.account_type_asset_view1'/>
+				<field name='name'>Intangible Fixed Asset</field>
+				<field name='code'>102-0220</field>
+			</record>
+			<record id='chart_102-0221' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_102-0220'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Trade Mark</field>
+				<field name='code'>102-0221</field>
+			</record>
+			<record id='chart_102-0222' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_102-0220'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Goodwill</field>
+				<field name='code'>102-0222</field>
+			</record>
+			<record id='chart_102-0223' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_102-0220'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Company License Cost</field>
+				<field name='code'>102-0223</field>
+			</record>
+			<record id='chart_102-0224' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_102-0220'/>
+				<field name='user_type' ref='account.data_account_type_asset'/>
+				<field name='name'>Other Intangible Fixed Assets</field>
+				<field name='code'>102-0224</field>
+			</record>
+			<record id='chart_200-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_BAL'/>
+				<field name='user_type' ref='account.account_type_liability_view1'/>
+				<field name='name'>Liabilities</field>
+				<field name='code'>200-0000</field>
+			</record>
+			<record id='chart_201-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_200-0000'/>
+				<field name='user_type' ref='account.account_type_liability_view1'/>
+				<field name='name'>Current Liabilities</field>
+				<field name='code'>201-0000</field>
+			</record>
+			<record id='chart_201-0100' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_201-0000'/>
+				<field name='user_type' ref='account.account_type_liability_view1'/>
+				<field name='name'>Operational Liabilities</field>
+				<field name='code'>201-0100</field>
+			</record>
+			<record id='chart_201-0101' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0100'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Account Payables</field>
+				<field name='code'>201-0101</field>
+			</record>
+			<record id='chart_201-0102' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0100'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Credit Card Payables</field>
+				<field name='code'>201-0102</field>
+			</record>
+			<record id='chart_201-0103' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0100'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Notes Payables</field>
+				<field name='code'>201-0103</field>
+			</record>
+			<record id='chart_201-0104' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0100'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Consignment Payables</field>
+				<field name='code'>201-0104</field>
+			</record>
+			<record id='chart_201-0105' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0100'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Current Bank Payables</field>
+				<field name='code'>201-0105</field>
+			</record>
+			<record id='chart_201-0106' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0100'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Account Payables</field>
+				<field name='code'>201-0106</field>
+			</record>
+			<record id='chart_201-0107' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0100'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Cash Advance Employee</field>
+				<field name='code'>201-0107</field>
+			</record>
+			<record id='chart_201-0108' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0100'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Cash Advance Other</field>
+				<field name='code'>201-0108</field>
+			</record>
+			<record id='chart_201-0109' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0100'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Interest Payable</field>
+				<field name='code'>201-0109</field>
+			</record>
+			<record id='chart_201-0110' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0100'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Insurance Payable</field>
+				<field name='code'>201-0110</field>
+			</record>
+			<record id='chart_201-0111' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0100'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Salary Payable</field>
+				<field name='code'>201-0111</field>
+			</record>
+			<record id='chart_201-0112' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0100'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Associate Fee Payable</field>
+				<field name='code'>201-0112</field>
+			</record>
+			<record id='chart_201-0113' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0100'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Consultant Fee Payable</field>
+				<field name='code'>201-0113</field>
+			</record>
+			<record id='chart_201-0114' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0100'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Other Payable</field>
+				<field name='code'>201-0114</field>
+			</record>
+			<record id='chart_201-0200' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_201-0000'/>
+				<field name='user_type' ref='account.account_type_liability_view1'/>
+				<field name='name'>Non Operational Liabilities</field>
+				<field name='code'>201-0200</field>
+			</record>
+			<record id='chart_201-0201' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0200'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Excess Payment Liabilities</field>
+				<field name='code'>201-0201</field>
+			</record>
+			<record id='chart_201-0202' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0200'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Other Payables</field>
+				<field name='code'>201-0202</field>
+			</record>
+			<record id='chart_201-0300' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_201-0000'/>
+				<field name='user_type' ref='account.account_type_liability_view1'/>
+				<field name='name'>Tax Payables</field>
+				<field name='code'>201-0300</field>
+			</record>
+			<record id='chart_201-0301' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0300'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Tax Received</field>
+				<field name='code'>201-0301</field>
+			</record>
+			<record id='chart_201-0302' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0300'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>PPh 21 Payables</field>
+				<field name='code'>201-0302</field>
+			</record>
+			<record id='chart_201-0303' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0300'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>PPh 23 Payables</field>
+				<field name='code'>201-0303</field>
+			</record>
+			<record id='chart_201-0304' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0300'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>PPh 4 (2) Payables</field>
+				<field name='code'>201-0304</field>
+			</record>
+			<record id='chart_201-0305' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0300'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>PPh 25 Payables</field>
+				<field name='code'>201-0305</field>
+			</record>
+			<record id='chart_201-0306' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0300'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>PPh 29 Payables</field>
+				<field name='code'>201-0306</field>
+			</record>
+			<record id='chart_201-0307' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0300'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Taxes Payable – PPN Out</field>
+				<field name='code'>201-0307</field>
+			</record>
+			<record id='chart_201-0308' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0300'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Import Cost Payables</field>
+				<field name='code'>201-0308</field>
+			</record>
+			<record id='chart_201-0309' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0300'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Reserve and Profit/Loss Account</field>
+				<field name='code'>201-0309</field>
+			</record>
+			<record id='chart_201-0400' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_201-0000'/>
+				<field name='user_type' ref='account.account_type_liability_view1'/>
+				<field name='name'>Short Term Loan</field>
+				<field name='code'>201-0400</field>
+			</record>
+			<record id='chart_201-0401' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0400'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Short Term Loan Bank</field>
+				<field name='code'>201-0401</field>
+			</record>
+			<record id='chart_201-0402' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_201-0400'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Short Term Loan Other</field>
+				<field name='code'>201-0402</field>
+			</record>
+			<record id='chart_202-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_200-0000'/>
+				<field name='user_type' ref='account.account_type_liability_view1'/>
+				<field name='name'>Non Current Liabilities</field>
+				<field name='code'>202-0000</field>
+			</record>
+			<record id='chart_202-0001' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_202-0000'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Non Current Bank Payables</field>
+				<field name='code'>202-0001</field>
+			</record>
+			<record id='chart_202-0002' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_202-0000'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Other Non Current Bank Payables</field>
+				<field name='code'>202-0002</field>
+			</record>
+			<record id='chart_202-0003' model='account.account.template'>
+				<field name='reconcile' eval='1'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_202-0000'/>
+				<field name='user_type' ref='account.data_account_type_payable'/>
+				<field name='name'>Dividen Payables</field>
+				<field name='code'>202-0003</field>
+			</record>
+			<record id='chart_300-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_BAL'/>
+				<field name='user_type' ref='account.account_type_liability_view1'/>
+				<field name='name'>Equity</field>
+				<field name='code'>300-0000</field>
+			</record>
+			<record id='chart_301-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_300-0000'/>
+				<field name='user_type' ref='account.account_type_liability_view1'/>
+				<field name='name'>Contributed Capital</field>
+				<field name='code'>301-0000</field>
+			</record>
+			<record id='chart_301-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_301-0000'/>
+				<field name='user_type' ref='account.data_account_type_liability'/>
+				<field name='name'>Shareholder Capital</field>
+				<field name='code'>301-0001</field>
+			</record>
+			<record id='chart_301-0002' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_301-0000'/>
+				<field name='user_type' ref='account.data_account_type_liability'/>
+				<field name='name'>Common Stocks</field>
+				<field name='code'>301-0002</field>
+			</record>
+			<record id='chart_301-0003' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_301-0000'/>
+				<field name='user_type' ref='account.data_account_type_liability'/>
+				<field name='name'>Preference Stocks</field>
+				<field name='code'>301-0003</field>
+			</record>
+			<record id='chart_301-0004' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_301-0000'/>
+				<field name='user_type' ref='account.data_account_type_liability'/>
+				<field name='name'>Non Partipacing Preference Stocks</field>
+				<field name='code'>301-0004</field>
+			</record>
+			<record id='chart_301-0005' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_301-0000'/>
+				<field name='user_type' ref='account.data_account_type_liability'/>
+				<field name='name'>Cumulative Preference Stocks</field>
+				<field name='code'>301-0005</field>
+			</record>
+			<record id='chart_301-0006' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_301-0000'/>
+				<field name='user_type' ref='account.data_account_type_liability'/>
+				<field name='name'>Additional paid In Capital</field>
+				<field name='code'>301-0006</field>
+			</record>
+			<record id='chart_301-0007' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_301-0000'/>
+				<field name='user_type' ref='account.data_account_type_liability'/>
+				<field name='name'>Donational Capital</field>
+				<field name='code'>301-0007</field>
+			</record>
+			<record id='chart_302-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_300-0000'/>
+				<field name='user_type' ref='account.data_account_type_liability'/>
+				<field name='name'>Common Stock</field>
+				<field name='code'>302-0001</field>
+			</record>
+			<record id='chart_303-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_300-0000'/>
+				<field name='user_type' ref='account.data_account_type_liability'/>
+				<field name='name'>Treasury Stock</field>
+				<field name='code'>303-0001</field>
+			</record>
+			<record id='chart_304-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_300-0000'/>
+				<field name='user_type' ref='account.data_account_type_liability'/>
+				<field name='name'>Retained Earnings</field>
+				<field name='code'>304-0001</field>
+			</record>
+			<record id='chart_305-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_300-0000'/>
+				<field name='user_type' ref='account.data_account_type_liability'/>
+				<field name='name'>Current Year Earnings</field>
+				<field name='code'>305-0001</field>
+			</record>
+			<record id='chart_306-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_300-0000'/>
+				<field name='user_type' ref='account.data_account_type_liability'/>
+				<field name='name'>Trial Balance</field>
+				<field name='code'>306-0001</field>
+			</record>
+			<record id='chart_307-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_300-0000'/>
+				<field name='user_type' ref='account.data_account_type_liability'/>
+				<field name='name'>Other Equity Adjustment</field>
+				<field name='code'>307-0001</field>
+			</record>
+			<record id='chart_PL' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_0'/>
+				<field name='user_type' ref='account.data_account_type_view'/>
+				<field name='name'>Profit and Loss</field>
+				<field name='code'>PL</field>
+			</record>
+			<record id='chart_400-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_PL'/>
+				<field name='user_type' ref='account.account_type_income_view1'/>
+				<field name='name'>Incomes</field>
+				<field name='code'>400-0000</field>
+			</record>
+			<record id='chart_401-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_400-0000'/>
+				<field name='user_type' ref='account.account_type_income_view1'/>
+				<field name='name'>Incomes from Merchandise</field>
+				<field name='code'>401-0000</field>
+			</record>
+			<record id='chart_401-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_401-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Merchandise Sales</field>
+				<field name='code'>401-0001</field>
+			</record>
+			<record id='chart_401-0002' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_401-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Merchandise Discounts</field>
+				<field name='code'>401-0002</field>
+			</record>
+			<record id='chart_401-0003' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_401-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Merchandise Trade Discounts</field>
+				<field name='code'>401-0003</field>
+			</record>
+			<record id='chart_401-0004' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_401-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Merchandise Cash Discounts</field>
+				<field name='code'>401-0004</field>
+			</record>
+			<record id='chart_401-0005' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_401-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Merchandise Sales Return and Allowances</field>
+				<field name='code'>401-0005</field>
+			</record>
+			<record id='chart_402-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_400-0000'/>
+				<field name='user_type' ref='account.account_type_income_view1' />
+				<field name='name'>Incomes from Services</field>
+				<field name='code'>402-0000</field>
+			</record>
+			<record id='chart_402-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_402-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Training Fees</field>
+				<field name='code'>402-0001</field>
+			</record>
+			<record id='chart_402-0002' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_402-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Consultation Fees</field>
+				<field name='code'>402-0002</field>
+			</record>
+			<record id='chart_402-0003' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_402-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Implementation Fees</field>
+				<field name='code'>402-0003</field>
+			</record>
+			<record id='chart_500-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_PL'/>
+				<field name='user_type' ref='account.account_type_income_view1'/>
+				<field name='name'>CoGS</field>
+				<field name='code'>500-0000</field>
+			</record>
+			<record id='chart_500-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_500-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Merchandise Cost</field>
+				<field name='code'>500-0001</field>
+			</record>
+			<record id='chart_500-0002' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_500-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Shipping Cost</field>
+				<field name='code'>500-0002</field>
+			</record>
+			<record id='chart_500-0003' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_500-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Purchase Return</field>
+				<field name='code'>500-0003</field>
+			</record>
+			<record id='chart_500-0004' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_500-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Other CoGS</field>
+				<field name='code'>500-0004</field>
+			</record>
+			<record id='chart_500-0005' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_500-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>CTP Yearly Fee</field>
+				<field name='code'>500-0005</field>
+			</record>
+			<record id='chart_500-0006' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_500-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Partnership Fee</field>
+				<field name='code'>500-0006</field>
+			</record>
+			<record id='chart_600-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_PL'/>
+				<field name='user_type' ref='account.account_type_expense_view1'/>
+				<field name='name'>Expenses</field>
+				<field name='code'>600-0000</field>
+			</record>
+			<record id='chart_601-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_600-0000'/>
+				<field name='user_type' ref='account.account_type_expense_view1'/>
+				<field name='name'>Operational Expenses</field>
+				<field name='code'>601-0000</field>
+			</record>
+			<record id='chart_601-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Salary Expenses</field>
+				<field name='code'>601-0001</field>
+			</record>
+			<record id='chart_601-0002' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Telephone  And  Internet</field>
+				<field name='code'>601-0002</field>
+			</record>
+			<record id='chart_601-0003' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Water  And  Lighting</field>
+				<field name='code'>601-0003</field>
+			</record>
+			<record id='chart_601-0004' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Pantry</field>
+				<field name='code'>601-0004</field>
+			</record>
+			<record id='chart_601-0005' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Office Supplies</field>
+				<field name='code'>601-0005</field>
+			</record>
+			<record id='chart_601-0006' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Food  And  Beverage Expenses</field>
+				<field name='code'>601-0006</field>
+			</record>
+			<record id='chart_601-0007' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Amenities</field>
+				<field name='code'>601-0007</field>
+			</record>
+			<record id='chart_601-0008' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Utilities Expenses</field>
+				<field name='code'>601-0008</field>
+			</record>
+			<record id='chart_601-0009' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Transportation Expenses</field>
+				<field name='code'>601-0009</field>
+			</record>
+			<record id='chart_601-0010' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Advertizing and Promotion Expenses</field>
+				<field name='code'>601-0010</field>
+			</record>
+			<record id='chart_601-0011' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Rent Expenses</field>
+				<field name='code'>601-0011</field>
+			</record>
+			<record id='chart_601-0012' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Building Service Charge / IPL</field>
+				<field name='code'>601-0012</field>
+			</record>
+			<record id='chart_601-0013' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Insurance Expenses</field>
+				<field name='code'>601-0013</field>
+			</record>
+			<record id='chart_601-0014' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Service  Expenses</field>
+				<field name='code'>601-0014</field>
+			</record>
+			<record id='chart_601-0015' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Operational Interest Expenses</field>
+				<field name='code'>601-0015</field>
+			</record>
+			<record id='chart_601-0016' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Loss Expenses</field>
+				<field name='code'>601-0016</field>
+			</record>
+			<record id='chart_601-0017' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Doubtful Receivables Expenses</field>
+				<field name='code'>601-0017</field>
+			</record>
+			<record id='chart_601-0018' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_601-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Other Operational  Expenses</field>
+				<field name='code'>601-0018</field>
+			</record>
+			<record id='chart_602-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_600-0000'/>
+				<field name='user_type' ref='account.account_type_expense_view1'/>
+				<field name='name'>Non Operational Expenses</field>
+				<field name='code'>602-0000</field>
+			</record>
+			<record id='chart_602-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_602-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Depreciation Expenses</field>
+				<field name='code'>602-0001</field>
+			</record>
+			<record id='chart_602-0002' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_602-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Amortization Expenses</field>
+				<field name='code'>602-0002</field>
+			</record>
+			<record id='chart_602-0003' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_602-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Other Non Operational  Expenses</field>
+				<field name='code'>602-0003</field>
+			</record>
+			<record id='chart_602-0004' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_602-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Medical Expenses</field>
+				<field name='code'>602-0004</field>
+			</record>
+			<record id='chart_700-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_PL'/>
+				<field name='user_type' ref='account.account_type_income_view1'/>
+				<field name='name'>Other Incomes</field>
+				<field name='code'>700-0000</field>
+			</record>
+			<record id='chart_700-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_700-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Interest Incomes</field>
+				<field name='code'>700-0001</field>
+			</record>
+			<record id='chart_700-0002' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_700-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Profit Sharing Incomes</field>
+				<field name='code'>700-0002</field>
+			</record>
+			<record id='chart_700-0003' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_700-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Investment Incomes</field>
+				<field name='code'>700-0003</field>
+			</record>
+			<record id='chart_700-0004' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_700-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Foreign Exchange Income Loss</field>
+				<field name='code'>700-0004</field>
+			</record>
+			<record id='chart_800-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_PL'/>
+				<field name='user_type' ref='account.account_type_expense_view1'/>
+				<field name='name'>Other Expenses</field>
+				<field name='code'>800-0000</field>
+			</record>
+			<record id='chart_800-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_800-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Investment Expenses</field>
+				<field name='code'>800-0001</field>
+			</record>
+			<record id='chart_800-0002' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_800-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Other Expense</field>
+				<field name='code'>800-0002</field>
+			</record>
+			<record id='chart_800-0003' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_800-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Write-off Expenses</field>
+				<field name='code'>800-0003</field>
+			</record>
+			<record id='chart_900-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_PL'/>
+				<field name='user_type' ref='account.account_type_expense_view1'/>
+				<field name='name'>Extraordinary Incomes and Expenses</field>
+				<field name='code'>900-0000</field>
+			</record>
+			<record id='chart_901-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_900-0000'/>
+				<field name='user_type' ref='account.account_type_income_view1'/>
+				<field name='name'>Extraordinary Incomes</field>
+				<field name='code'>901-0000</field>
+			</record>
+			<record id='chart_901-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_901-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Insurance Claim Incomes</field>
+				<field name='code'>901-0001</field>
+			</record>
+			<record id='chart_901-0002' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_901-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Income from Sale of Fixed Asset</field>
+				<field name='code'>901-0002</field>
+			</record>
+			<record id='chart_901-0003' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_901-0000'/>
+				<field name='user_type' ref='account.data_account_type_income'/>
+				<field name='name'>Other Extraordinary Incomes</field>
+				<field name='code'>901-0003</field>
+			</record>
+			<record id='chart_902-0000' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>view</field>
+				<field name='parent_id' ref='chart_900-0000'/>
+				<field name='user_type' ref='account.account_type_expense_view1'/>
+				<field name='name'>Extraordinary Expenses</field>
+				<field name='code'>902-0000</field>
+			</record>
+			<record id='chart_902-0001' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_902-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Accident Loss</field>
+				<field name='code'>902-0001</field>
+			</record>
+			<record id='chart_902-0002' model='account.account.template'>
+				<field name='reconcile' eval='0'/>
+				<field name='type'>other</field>
+				<field name='parent_id' ref='chart_902-0000'/>
+				<field name='user_type' ref='account.data_account_type_expense'/>
+				<field name='name'>Other Extraordinary Expenses</field>
+				<field name='code'>902-0002</field>
+			</record>
+			
+			<!-- CHART OF TAXES -->
+			
+			<record id="tc_root_id" model="account.tax.code.template">
+				<field name="name">Indonesia Chart of Taxes</field>
+				<field name="parent_id" eval="False"/>
+			</record>
+			
+			<!-- CHART OF ACCOUNT -->
+			<record id="chart_template_indonesia" model="account.chart.template">
+				<field name="name">Indonesia - Chart of Accounts</field>
+				<field name="account_root_id" ref="chart_0"/>
+				<field name="tax_code_root_id" ref="tc_root_id"/>
+				<field name="bank_account_view_id" ref="chart_101-0121"/>
+				<field name="property_account_receivable" ref="chart_101-0213"/>
+				<field name="property_account_payable" ref="chart_201-0101"/>
+				<field name="property_account_expense_categ"/>
+				<field name="property_account_income_categ"/>
+				<field name="complete_tax_set" eval="False"/>
+				<field name="currency_id" ref="base.IDR"/>
+			</record>
+			
+			
+			
+			<!-- TAXABLE AMOUNTS -->
+			
+			<record id="tc_base_id" model="account.tax.code.template">
+				<field name="name">Nilai Pajak</field>
+				<field name="parent_id" ref="tc_root_id"/>
+			</record>
+			
+			<!-- PPN BASE -->
+			
+			<record id="tc_base_vat_id" model="account.tax.code.template">
+				<field name="name">PPN</field>
+				<field name="parent_id" eval="tc_base_id"/>
+			</record>
+			
+			<record id="tc_base_input_id" model="account.tax.code.template">
+				<field name="name">PPN In</field>
+				<field name="code">PPN_10%_In_Base</field>
+				<field name="parent_id" ref="tc_base_vat_id"/>
+			</record>
+			
+			<record id="tc_base_output_id" model="account.tax.code.template">
+				<field name="name">PPN Out</field>
+				<field name="code">PPN_10%_Out_Base</field>
+				<field name="parent_id" ref="tc_base_vat_id"/>
+			</record>
+			
+			<record id="tc_base_output_inc_id" model="account.tax.code.template">
+				<field name="name">PPN Out (Price Include)</field>
+				<field name="code">PPN_10%_Out_Inc_Base</field>
+				<field name="parent_id" ref="tc_base_vat_id"/>
+			</record>
+			
+			<!-- PPh BASE -->
+			
+			<record id="tc_base_wht_id" model="account.tax.code.template">
+				<field name="name">PPh</field>
+				<field name="parent_id" eval="tc_base_id"/>
+			</record>
+			
+			<record id="tc_base_wht_co_id" model="account.tax.code.template">
+				<field name="name">PPh Badan</field>
+				<field name="code">PPh_Bad</field>
+				<field name="parent_id" ref="tc_base_wht_id"/>
+			</record>
+			
+			<record id="tc_base_wht_pers_id" model="account.tax.code.template">
+				<field name="name">PPh Pribadi</field>
+				<field name="code">PPh_Pri</field>
+				<field name="parent_id" ref="tc_base_wht_id"/>
+			</record>
+			
+			<record id="tc_base_wht_pph_21" model="account.tax.code.template">
+				<field name="name">PPh 21</field>
+				<field name="code">PPh_21</field>
+				<field name="parent_id" ref="tc_base_wht_pers_id"/>
+			</record>
+			
+			<record id="tc_base_wht_pph_25_bad" model="account.tax.code.template">
+				<field name="name">PPh 25 Badan</field>
+				<field name="code">PPh_25_Bad</field>
+				<field name="parent_id" ref="tc_base_wht_co_id"/>
+			</record>
+			
+			<record id="tc_base_wht_pph_25_pri" model="account.tax.code.template">
+				<field name="name">PPh 25 Pribadi</field>
+				<field name="code">PPh_25_Pri</field>
+				<field name="parent_id" ref="tc_base_wht_pers_id"/>
+			</record>
+			
+			
+			<record id="tc_base_wht_pph_23_bad" model="account.tax.code.template">
+				<field name="name">PPh 23 Badan</field>
+				<field name="code">PPh_23_Bad</field>
+				<field name="parent_id" ref="tc_base_wht_co_id"/>
+			</record>
+			
+			<record id="tc_base_wht_pph_29_bad" model="account.tax.code.template">
+				<field name="name">PPh 29 Badan</field>
+				<field name="code">PPh_29_Bad</field>
+				<field name="parent_id" ref="tc_base_wht_co_id"/>
+			</record>
+			
+			<record id="tc_base_wht_pph_29_pri" model="account.tax.code.template">
+				<field name="name">PPh 29 Pribadi</field>
+				<field name="code">PPh_29_Pri</field>
+				<field name="parent_id" ref="tc_base_wht_pers_id"/>
+			</record>
+			
+			<record id="tc_base_wht_pph_22_bad_ind" model="account.tax.code.template">
+				<field name="name">PPh 22 Badan Industri</field>
+				<field name="code">PPh_22_Bad_Ind</field>
+				<field name="parent_id" ref="tc_base_wht_co_id"/>
+			</record>
+			
+			<record id="tc_base_wht_pph_22_bad_imp" model="account.tax.code.template">
+				<field name="name">PPh 22 Badan Import</field>
+				<field name="code">PPh_22_Bad_Imp</field>
+				<field name="parent_id" ref="tc_base_wht_co_id"/>
+			</record>
+			
+			<record id="tc_base_wht_pph_4_2_bad" model="account.tax.code.template">
+				<field name="name">PPh Pasal 4 Ayat 2</field>
+				<field name="code">PPh_4_2</field>
+				<field name="parent_id" ref="tc_base_wht_co_id"/>
+			</record>
+			
+			<!-- TAXES TO BE PAID -->
+			
+			<!-- PPN -->
+			
+			<record id="tc_tax_id" model="account.tax.code.template">
+				<field name="name">Hutang Pajak</field>
+				<field name="parent_id" ref="tc_root_id"/>
+			</record>
+			
+			<record id="tc_tax_vat_id" model="account.tax.code.template">
+				<field name="name">PPN</field>
+				<field name="parent_id" eval="tc_tax_id"/>
+			</record>
+			
+			
+			<record id="tc_tax_vat_input_id" model="account.tax.code.template">
+				<field name="name">PPN In</field>
+				<field name="code">PPN_10%_In</field>
+				<field name="parent_id" ref="tc_tax_vat_id"/>
+				<field name="sign" eval="-1"/>
+			</record>
+			
+			<record id="tc_tax_vat_output_id" model="account.tax.code.template">
+				<field name="name">PPN Out</field>
+				<field name="code">PPN_10%_Out</field>
+				<field name="parent_id" ref="tc_tax_vat_id"/>
+			</record>
+			
+			<record id="tc_tax_vat_output_inc_id" model="account.tax.code.template">
+				<field name="name">PPN Out (Price Include)</field>
+				<field name="code">PPN_10%_Out_Inc</field>
+				<field name="parent_id" ref="tc_tax_vat_id"/>
+			</record>
+			
+			<!-- PPh -->
+			
+			<record id="tc_tax_wht_id" model="account.tax.code.template">
+				<field name="name">PPh Ditahan</field>
+				<field name="parent_id" eval="tc_tax_id"/>
+			</record>
+			
+			
+			<record id="tc_tax_wht_co_id" model="account.tax.code.template">
+				<field name="name">PPh Badan</field>
+				<field name="code">PPh_Bad</field>
+				<field name="parent_id" ref="tc_tax_wht_id"/>
+			</record>
+			
+			<record id="tc_tax_wht_pers_id" model="account.tax.code.template">
+				<field name="name">PPh Pribadi</field>
+				<field name="code">PPh_Pri</field>
+				<field name="parent_id" ref="tc_tax_wht_id"/>
+			</record>
+			
+			<record id="tc_tax_wht_pph_21" model="account.tax.code.template">
+				<field name="name">PPh 21</field>
+				<field name="code">PPh_21</field>
+				<field name="parent_id" ref="tc_tax_wht_pers_id"/>
+			</record>
+			
+			<record id="tc_tax_wht_pph_25_bad" model="account.tax.code.template">
+				<field name="name">PPh 25 Badan</field>
+				<field name="code">PPh_25_Bad</field>
+				<field name="parent_id" ref="tc_tax_wht_co_id"/>
+			</record>
+			
+			<record id="tc_tax_wht_pph_25_pri" model="account.tax.code.template">
+				<field name="name">PPh 25 Pribadi</field>
+				<field name="code">PPh_25_Pri</field>
+				<field name="parent_id" ref="tc_tax_wht_pers_id"/>
+			</record>
+			
+			<record id="tc_tax_wht_pph_23_bad" model="account.tax.code.template">
+				<field name="name">PPh 23 Badan</field>
+				<field name="code">PPh_23_Bad</field>
+				<field name="parent_id" ref="tc_tax_wht_co_id"/>
+			</record>
+			
+			<record id="tc_tax_wht_pph_29_bad" model="account.tax.code.template">
+				<field name="name">PPh 29 Badan</field>
+				<field name="code">PPh_29_Bad</field>
+				<field name="parent_id" ref="tc_tax_wht_co_id"/>
+			</record>
+			
+			<record id="tc_tax_wht_pph_29_pri" model="account.tax.code.template">
+				<field name="name">PPh 29 Pribadi</field>
+				<field name="code">PPh_29_Pri</field>
+				<field name="parent_id" ref="tc_tax_wht_pers_id"/>
+			</record>
+			
+			<record id="tc_tax_wht_pph_22_bad_ind" model="account.tax.code.template">
+				<field name="name">PPh 22 Badan Industri</field>
+				<field name="code">PPh_22_Bad_Ind</field>
+				<field name="parent_id" ref="tc_tax_wht_co_id"/>
+			</record>
+			
+			<record id="tc_tax_wht_pph_22_bad_imp" model="account.tax.code.template">
+				<field name="name">PPh 22 Badan Import</field>
+				<field name="code">PPh_22_Bad_Imp</field>
+				<field name="parent_id" ref="tc_tax_wht_co_id"/>
+			</record>
+			
+			<record id="tc_tax_wht_pph_4_2_bad" model="account.tax.code.template">
+				<field name="name">PPh Pasal 4 Ayat 2</field>
+				<field name="code">PPh_4_2</field>
+				<field name="parent_id" ref="tc_tax_wht_co_id"/>
+			</record>
+			
+			
+			
+			<!-- TAXES -->
+			
+			<record id="tax_input_vat_id" model="account.tax.template">
+				<field name="chart_template_id" ref="chart_template_indonesia"/>
+				<field name="name">PPN In</field>
+				<field name="type">percent</field>
+				<field name="amount" eval="0.10"/>
+				<field name="account_collected_id" ref="chart_101-0501"/>
+				<field name="account_paid_id" ref="chart_101-0501"/>
+				<field name="base_code_id" ref="tc_base_input_id"/>
+				<field name="tax_code_id" ref="tc_tax_vat_input_id"/>
+				<field name="type_tax_use">purchase</field>
+			</record>
+			
+			<record id="tax_output_vat_id" model="account.tax.template">
+				<field name="chart_template_id" ref="chart_template_indonesia"/>
+				<field name="name">PPN Out</field>
+				<field name="type">percent</field>
+				<field name="amount" eval="0.10"/>
+				<field name="account_collected_id" ref="chart_201-0307"/>
+				<field name="account_paid_id" ref="chart_201-0307"/>
+				<field name="base_code_id" ref="tc_base_output_id"/>
+				<field name="tax_code_id" ref="tc_tax_vat_output_id"/>
+				<field name="type_tax_use">sale</field>
+			</record>
+			
+			<record id="tax_output_inc_vat_id" model="account.tax.template">
+				<field name="chart_template_id" ref="chart_template_indonesia"/>
+				<field name="name">PPN Out (Price Include)</field>
+				<field name="type">percent</field>
+				<field name="price_include">True</field>
+				<field name="amount" eval="0.10"/>
+				<field name="account_collected_id" ref="chart_201-0307"/>
+				<field name="account_paid_id" ref="chart_201-0307"/>
+				<field name="base_code_id" ref="tc_base_output_inc_id"/>
+				<field name="tax_code_id" ref="tc_tax_vat_output_inc_id"/>
+				<field name="type_tax_use">sale</field>
+			</record>
+			
+			<record id="tax_wht_co_23_id" model="account.tax.template">
+				<field name="chart_template_id" ref="chart_template_indonesia"/>
+				<field name="name">PPh 23 Badan</field>
+				<field name="type">percent</field>
+				<field name="amount" eval="0.02"/>
+				<field name="account_collected_id" ref="chart_201-0303"/>
+				<field name="account_paid_id" ref="chart_201-0303"/>
+				<field name="base_code_id" ref="tc_base_wht_pph_23_bad"/>
+				<field name="tax_code_id" ref="tc_tax_wht_pph_23_bad"/>
+				<field name="type_tax_use">purchase</field>
+			</record>
+			
+			<record id="tax_wht_co_22_id" model="account.tax.template">
+				<field name="chart_template_id" ref="chart_template_indonesia"/>
+				<field name="name">PPh 22 Badan Import</field>
+				<field name="type">percent</field>
+				<field name="amount" eval="0.075"/>
+				<field name="account_collected_id" ref="chart_101-0502"/>
+				<field name="account_paid_id" ref="chart_101-0502"/>
+				<field name="base_code_id" ref="tc_base_wht_pph_22_bad_imp"/>
+				<field name="tax_code_id" ref="tc_tax_wht_pph_22_bad_imp"/>
+				<field name="type_tax_use">purchase</field>
+			</record>
+			
+			<record id="tax_wht_co_4_2_id" model="account.tax.template">
+				<field name="chart_template_id" ref="chart_template_indonesia"/>
+				<field name="name">PPh Pasal 4 (2) Sewa Tanah/Bangunan</field>
+				<field name="type">percent</field>
+				<field name="amount" eval="0.075"/>
+				<field name="account_collected_id" ref="chart_201-0304"/>
+				<field name="account_paid_id" ref="chart_201-0304"/>
+				<field name="base_code_id" ref="tc_base_wht_pph_4_2_bad"/>
+				<field name="tax_code_id" ref="tc_tax_wht_pph_4_2_bad"/>
+				<field name="type_tax_use">purchase</field>
+			</record>
+			
+		</data>
+	</openerp>

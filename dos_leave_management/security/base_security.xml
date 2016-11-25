@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+
+        <record model="res.groups" id="group_my_leave">
+            <field name="name">My Holiday</field>
+        </record>
+        
+        <record model="res.groups" id="group_leave_proposed">
+            <field name="name">Holiday Proposed</field>
+        </record>
+        
+        <record model="res.groups" id="group_leave_hr_validate">
+            <field name="name">Holiday HR Validate</field>
+        </record>
+
+    </data>
+</openerp>
+

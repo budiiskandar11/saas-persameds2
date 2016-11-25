@@ -1,0 +1,191 @@
+<openerp>
+	<data>
+		
+	
+        <record id="stock_landscape_header" model="ir.header_webkit">
+            <field name="footer_html"><![CDATA[
+		<html>
+		    <head>
+		        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+		        <script>
+		            function subst() {
+		            var vars={};
+		            var x=document.location.search.substring(1).split('&');
+		            for(var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
+		            var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
+		            for(var i in x) {
+		            var y = document.getElementsByClassName(x[i]);
+		            for(var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
+		                }
+		            }
+		        </script>
+		    </head>
+		    
+		    <body style="border:0; margin: 0;" onload="subst()">
+		       
+		    </body>
+		</html>]]></field>
+		            <field name="orientation">Landscape</field>
+		            <field name="format">A4</field>
+		            <field name="html"><![CDATA[
+		<html>
+		    <head>
+		        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+		        <script>
+		            function subst() {
+		            var vars={};
+		            var x=document.location.search.substring(1).split('&');
+		            for(var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
+		            var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
+		            for(var i in x) {
+		            var y = document.getElementsByClassName(x[i]);
+		            for(var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
+		                }
+		            }
+		        </script>
+		        <style type="text/css">
+		            ${css}
+		        </style>
+		    </head>
+		    <body style="border:0; margin: 0;" onload="subst()">
+		        </body>
+		</html>]]>
+		            </field>
+		            <field eval="0.0" name="margin_top"/>
+		            <field name="css"><![CDATA[
+		
+		body, table, td, span, div {
+		    font-family: Helvetica, Arial;
+		}
+		
+		.act_as_table {
+		    display: table;
+		}
+		.act_as_row  {
+		    display: table-row;
+		}
+		.act_as_cell {
+		    display: table-cell;
+		}
+		.act_as_thead {
+		    display: table-header-group;
+		}
+		.act_as_tbody {
+		    display: table-row-group;
+		}
+		.act_as_tfoot {
+		    display: table-footer-group;
+		}
+		.act_as_caption {
+		    display: table-caption;
+		}
+		act_as_colgroup {
+		    display: table-column-group;
+		}
+		
+		.list_table, .data_table {
+		    width: 1080px;
+		    table-layout: fixed
+		}
+		
+		.bg, .act_as_row.labels {
+		    background-color:#F0F0F0;
+		}
+		
+		.list_table, .data_table, .list_table .act_as_row {
+		    border-left:0px;
+		    border-right:0px;
+		    text-align:left;
+		    font-size:9px;
+		    padding-right:3px;
+		    padding-left:3px;
+		    padding-top:2px;
+		    padding-bottom:2px;
+		    border-collapse:collapse;
+		}
+		
+		.list_table .act_as_row.labels, .list_table .act_as_row.initial_balance, .list_table .act_as_row.lines {
+		    border-color:gray;
+		    border-bottom:1px solid lightGrey;
+		}
+		
+		.data_table .act_as_cell {
+		    border: 1px solid lightGrey;
+		    text-align: center;
+		}
+		
+		.data_table .act_as_cell, .list_table .act_as_cell {
+		    word-wrap: break-word;
+		}
+		
+		.data_table .act_as_row.labels {
+		    font-weight: bold;
+		}
+		
+		.initial_balance .act_as_cell {
+		    font-style:italic;
+		}
+		
+		.account_title {
+		    font-size:10px;
+		    font-weight:bold;
+		    page-break-after: avoid;
+		}
+		
+		.act_as_cell.amount {
+		    word-wrap:normal;
+		    text-align:right;
+		}
+		
+		.list_table .act_as_cell{
+		    padding-left: 5px;
+		/*    border-right:1px solid lightGrey;  uncomment to active column lines */
+		}
+		.list_table .act_as_cell.first_column {
+		    padding-left: 0px;
+		/*    border-left:1px solid lightGrey; uncomment to active column lines */
+		}
+		
+		.sep_left {
+		    border-left: 1px solid lightGrey;
+		}
+		
+		.overflow_ellipsis {
+		    text-overflow: ellipsis;
+		    overflow: hidden;
+		    white-space: nowrap;
+		}
+		
+		.open_invoice_previous_line {
+		    font-style: italic;
+		}
+		
+		.clearance_line {
+		    font-style: italic;
+		}
+		
+		]]>
+            </field>
+            <field name="name">Stock Landscape Header</field>
+            <field eval="10.0" name="margin_top"/>
+            <field eval="10.0" name="margin_bottom"/>
+        </record>
+        
+        <record id="stock_report_pdf" model="ir.actions.report.xml">
+			<field name="name">Stock Move List</field>
+			<field name="model">stock.report</field>
+			<field name="type">ir.actions.report.xml</field>
+			<field name="report_name">stock.report.pdf</field>
+			<field name="report_type">webkit</field>
+			<field name="webkit_header" ref="stock_landscape_header"/>
+			<field name="paperformat_id" ref="paperformat_euro_landscape" />
+			<field name="report_rml">dos_warehouse_report/report/stock_report.mako</field>
+            <field name="report_file">dos_warehouse_report/report/stock_report.mako</field>
+			<field name="auto" eval="False"/>
+		</record>
+        
+       </data>
+ </openerp> 
+        
+        
+       

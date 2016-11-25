@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_sale_propose_approval_disc" model="ir.ui.view">
+            <field name="name">Propose Approval to Manager</field>
+            <field name="model">sale.propose.approval</field>
+            <field name="arch" type="xml">
+                <form string="Propose Approval to Manager">
+                	<group string="Propose Approval">
+                    <p class="oe_grey">
+                       Anda mempunyai <field name="qtty" class="oe_inline"/> , transaksi yang membutuhkan approval karena limit discount hanya<field name="limit_disc" class="oe_inline"/>%
+                    </p>
+                    <footer>
+                        <button name="propose_approve" string="Propose Approval" type="object" groups="base.group_user,base.group_sale_salesman_all_leads,base.group_sale_salesman" class="oe_highlight"/>
+                        <button name="bypass_approve" string="Confirm Draft" type="object" groups="base.group_sale_manager" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_sale_propose_approval_disc" model="ir.actions.act_window">
+            <field name="name">Propose Approval to Manager</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.propose.approval</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+             <field name="view_id" ref="view_sale_propose_approval_disc"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</openerp>

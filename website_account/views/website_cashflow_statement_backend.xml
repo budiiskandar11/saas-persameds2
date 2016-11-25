@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="action_cashflow_statement_menu" model="ir.actions.client">
+            <field name="name">Statement of Cash Flows</field>
+            <field name="tag">cashflow_statement</field>
+            <field name="target">self</field>
+        </record>
+        
+        <record id="action_report_cashflow_statement" model="ir.actions.act_url">
+            <field name="name">Statement of Cash Flows</field>
+            <field name="url">/cashflow_statement/web/</field>
+            <field name="target">self</field>
+        </record>
+        
+        <menuitem icon="STOCK_PRINT" name="Statement of Cash Flows" action="action_report_cashflow_statement" id="menu_cashflow_statement_report" parent="account.final_accounting_reports"/>
+    </data>
+</openerp>

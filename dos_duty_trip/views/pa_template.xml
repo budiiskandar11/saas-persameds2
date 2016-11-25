@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="pa_template_document">
+    <t t-call="report.html_container">
+        <!-- <t t-call="report.internal_layout"> -->
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    
+                     <table class="table-condensed" style="font-size:12px;">
+                        <t t-set="company" t-value="res_company"/>
+                        <tr>
+                            <td colspan="3" align="right">
+                                <img t-att-src="'data:image/png;base64,%s' % company.logo" style="max-height: 45px;"/>
+                            </td>
+                            <td colspan="3">
+                                <h4><strong>PAYMENT AUTHORIZATION</strong></h4>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:170px;" class="a">SPPD NO</td>
+                            <td style="width:20px;">:</td>
+                            <td style="width:200px;"><span t-field="o.name"/></td>
+                            <td style="width:140px;" class="a">Ref No</td>
+                            <td style="width:20px;">:</td>
+                            <td><span/></td>
+                        </tr>
+                        <tr>
+                            <td style="width:170px;" class="a">Name / No Peg</td>
+                            <td style="width:20px;">:</td>
+                            <td style="width:200px;"><span t-field="o.employee_id.name"/></td>
+                            <td style="width:140px;" class="a">SAP No</td>
+                            <td style="width:20px;">:</td>
+                            <td><span/></td>
+                        </tr>
+                        <tr>
+                            <td style="width:170px;" class="a">Unit Cost Center</td>
+                            <td style="width:20px;">:</td>
+                            <td style="width:200px;"><span t-field="o.depart_id.name"/></td>
+                            <td style="width:170px;" class="a">Date</td>
+                            <td style="width:20px;">:</td>
+                            <td style="width:200px;"><span t-field="o.date_create" t-field-options='{"format": "d MMMM y"}'/></td>
+                        </tr>
+                        <tr>
+                            <td style="width:140px;" class="a">Route</td>
+                            <td style="width:20px;">:</td>
+                            <td style="width:150px;" colspan="4"><span t-field="o.route"/></td>
+                        </tr>
+                        <tr>
+                            <td style="width:140px;" class="a">Duration</td>
+                            <td style="width:20px;">:</td>
+                            <td style="width:150px;" colspan="4"><span t-field="o.date_start" t-field-options='{"format": "d MMMM y"}'/> - <span t-field="o.date_end" t-field-options='{"format": "d MMMM y"}'/></td>
+                        </tr>
+                    </table>
+
+                    <br/>
+                    <h6><strong>Computation</strong></h6>
+                    <h6><strong>Kick Off Computation</strong></h6>
+
+                    <br/>
+                    <br/>
+                    <h6><strong>Travel Allowance description in IDR/USD:</strong></h6>
+                    
+                    <table class="table table-bordered" style="margin:0px auto;font-size:12px;">
+                    <!-- <t t-foreach="o.duty_list" t-as="list"> -->
+                        
+                        <tr t-foreach="o.duty_list" t-as="l">
+                            <td><span t-field="l.name"/></td>
+                            <td align="right"><span t-field="l.qty"/></td>
+                            <td align="center">x</td>
+                            <td align="right"><span t-field="l.amount"/></td>
+                            <td align="center">=</td>
+                            <td align="right"><span t-field="l.tot_amount" t-field-options='{"widget": "num2words"}'/></td>
+                        </tr>
+                    <!-- </t> -->
+                        <tr>
+                            <td align="left" colspan="5">Total (IDR)</td>
+                            <td align="right"><t t-esc="sum(l.tot_amount for l in o.duty_list)"/></td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <table class="table-condensed" style="font-size:12px;">
+                        <tr>
+                            <td style="width:250px;">Request By :</td>
+                            <td style="width:250px;">Verified By :</td>
+                            <td style="width:250px;">Approval By :</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" height="50px"/>
+                        </tr>
+                        <tr>
+                            <td style="width:300px;"><u><span t-field="o.employee_id.name"/></u></td>
+                            <td style="width:300px;"><u>Hisar Parulian P.</u></td>
+                            <td style="width:300px;"><u>Denny Fajar A.</u></td>
+                        </tr>
+                        <tr>
+                            <td style="width:300px;" valign="top">Branch Manager Area II</td>
+                            <td style="width:300px;" valign="top">Mgr Accounting</td>
+                            <td style="width:300px;" valign="top">SM. Finance  Bussines Report</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"/>
+                        </tr>
+                        <tr>
+                            <td colspan="3">*) Apabila ada kelebihan realisasi harga tiket dibanding estimasi harap dikembalikan Finance.</td>
+                        </tr>
+                    </table>
+                    <table class="table-condensed" style="font-size:12px;">
+                        <tr>
+                            <td colspan="4" style="background-color:grey;" align="center">CASH RECEIPT</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">From Finance Received By :</td>
+                            <td colspan="2">Received By :</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" height="50px"/>
+                        </tr>
+                        <tr>
+                            <td/>
+                            <td>Rp. <span t-field="o.tot_amount_idr"/></td>
+                            <td/>
+                            <td>Rp. <span t-field="o.tot_amount_idr"/></td>
+                        </tr>
+                        <tr>
+                            <td style="width:250px;">(Yessi Veranita)</td>
+                            <td style="width:250px;">USD. <span t-field="o.tot_amount_usd"/></td>
+                            <td style="width:250px;">: <span t-field="o.employee_id.name"/></td>
+                            <td style="width:250px;">USD. <span t-field="o.tot_amount_usd"/></td>
+                        </tr>
+                    </table>
+                    <table class="table-condensed" style="font-size:12px;width:100%;page-break-before:always;">
+                        <tr>
+                            <td colspan="2" style="background-color:grey;" align="center">DOCUMENT RECEIPT</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">For Accounting received by:</td>
+                        </tr>
+                        <tr>
+                            <td style="width:200px;"/>
+                            <td>
+                                <table class="table table-bordered" style="margin:0px auto;font-size:12px;width:50%;">
+                                    <tr>
+                                        <td>1.</td>
+                                        <td>Ticket</td>
+                                        <td align="center">x</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2.</td>
+                                        <td>Boarding Pass to Destination</td>
+                                        <td align="center">x</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3.</td>
+                                        <td>Boarding Pass from Destination</td>
+                                        <td align="center">x</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4.</td>
+                                        <td>Airpot Tax</td>
+                                        <td align="center">x</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5.</td>
+                                        <td>Fiscal</td>
+                                        <td align="center">x</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6.</td>
+                                        <td>Others = </td>
+                                        <td align="center">x</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <tr>
+                                <td>( Lely Djunaedi/Finance )</td>
+                                <td align="center">* Tanda "X" = Ada</td>
+                            </tr>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        <!-- </t> -->
+    </t>
+</template>
+<template id="report_pa_doc">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'dos_duty_trip.pa_template_document')"/>
+        </t>
+    </t>
+</template>
+
+
+</data>
+</openerp>

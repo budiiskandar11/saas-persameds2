@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="action_balancesheet_menu" model="ir.actions.client">
+            <field name="name">Balance Sheet</field>
+            <field name="tag">balancesheet</field>
+            <field name="target">self</field>
+        </record>
+        
+        <record id="action_balancesheet_rpt" model="ir.actions.act_url">
+            <field name="name">Balance Sheet</field>
+            <field name="url">/balancesheet/web/</field>
+            <field name="target">self</field>
+        </record>
+
+        <report 
+            id="action_report_balancesheet_print"
+            model="website_account.balancesheet.report"
+            string="Balance Sheet Report"
+            report_type="qweb-pdf"
+            name="website_account.report_balancesheet_print"
+            file="website_account.report_balancesheet_print"
+            menu="False"
+        />
+        <menuitem icon="STOCK_PRINT" name="Balance Sheet" action="action_balancesheet_rpt" id="account.menu_account_report_bs" parent="account.final_accounting_reports"/>
+    </data>
+</openerp>

@@ -1,0 +1,143 @@
+<openerp>
+	<data>
+		
+<!--        <record id="invoice_tree_dos_acc" model="ir.ui.view">-->
+<!--            <field name="name">account.invoice.tree.dos.acc</field>-->
+<!--            <field name="model">account.invoice</field>-->
+<!--            <field name="inherit_id" ref="account.invoice_tree"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--            	<field name="name" position="after">-->
+<!--            		<field name="paid_date"/>-->
+<!--            	</field>-->
+<!--            </field>-->
+<!--       	</record>-->
+		
+		<record id="view_invoice_form_dos_accounting" model="ir.ui.view">
+            <field name="name">account.invoice.form.dos_accounting</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="/form/sheet/group/group[2]/div/field[@name='currency_id']" position="attributes">
+            		<attribute name="domain">[('visible','=',True)]</attribute>
+            	</xpath>
+            	<field name="discount" position="attributes">
+            		<attribute name="groups">dos_accounting.group_discount_per_inv_and_line,sale.group_discount_per_so_line</attribute>
+            	</field>
+            	<xpath expr="/form/sheet/notebook/page[@string='Invoice Lines']/group" position="replace">
+            		<group>
+                        <group class="oe_left">
+                            <field name="amount_string"/>
+                            <field name="add_disc_type" groups="dos_accounting.group_discount_per_inv_and_line,sale.group_discount_per_so_line"/>
+                            <field name="amount_add_disc" groups="dos_accounting.group_discount_per_inv_and_line,sale.group_discount_per_so_line"/>
+                        </group>
+                        <group class="oe_subtotal_footer oe_right">
+                        	<field name="gross_total" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    		<field name="discount_total" groups="dos_accounting.group_discount_per_inv_and_line,sale.group_discount_per_so_line" widget='monetary' style="border-bottom: 1px solid #cacaca;font-weight: normal;font-size: 13px;" options="{'currency_field': 'currency_id'}"/>
+                            <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <div>
+                                <label for="amount_tax"/>
+                                <button name="button_reset_taxes" states="draft,proforma2"
+                                    string="(update)" class="oe_link oe_edit_only"
+                                    type="object" help="Recompute taxes and total"/>
+                            </div>
+                            <field name="amount_tax" nolabel="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="amount_total" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="residual" groups="account.group_account_user" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="reconciled" invisible="1"/>
+                        </group>
+                    </group>
+            	</xpath>
+            	<xpath expr="//field[@name='invoice_line']/tree/field[@name='discount']" position="after">
+		            <field name="disc_amount" />
+		            
+		        </xpath>
+				
+				<field name="partner_id" position="after">
+					<field name="npwp_no"/>
+				</field>
+            	<xpath expr="/form/sheet/group/group[2]/field[@name='account_id']" position="after">
+                    <label string="Nomor Faktur"/>
+                    <div>
+                        <field name="kode_transaksi" nolabel="1" style="width: 9.2%%"/>
+                        <field name="nomor_faktur_id" nolabel="1" invisible="False" style="width: 89%%" domain="[('status','=','0'),('type','=','out')]" attrs="{'readonly': [('state','in',('open', 'proforma2', 'paid'))]}"/>
+                    </div>                    
+                </xpath>
+            </field>
+        </record>
+
+        
+         <record id="view_invoice_tree" model="ir.ui.view">
+            <field name="name">account.voucher.all</field>
+            <field name="model">account.voucher</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="/tree/field[1]" position="after">
+                    <field name="invoice_name"/>
+                </xpath>
+            </field>    
+         </record>
+         
+		<record id="view_invoice_form_dos_supplier_accounting" model="ir.ui.view">
+			<field name="name">View Total Discount on Supplier Invoice</field>
+			<field name="model">account.invoice</field>
+			<field name="inherit_id" ref="account.invoice_supplier_form"/>
+			<field name="arch" type="xml">
+            	<xpath expr="/form/sheet/group/group[2]/field[@name='currency_id']" position="attributes">
+            		<attribute name="domain">[('visible','=',True)]</attribute>
+            	</xpath>
+            	<field name="discount" position="attributes">
+            		<attribute name="groups">dos_accounting.group_discount_per_inv_and_line,sale.group_discount_per_so_line</attribute>
+            	</field>
+            	<!--
+            	<button name="invoice_pay_customer" position="after">
+            		<button name="invoice_reverse" type="object" string="Reverse Invoice" states="open" confirm="Are you sure Reserve This is invoice?"/>
+            	</button>
+            	-->
+            	<field name="user_id" position="after">
+            		<field name="reference_invoice_id"/>
+            	</field>
+            	<xpath expr="/form/sheet/notebook/page[@string='Invoice']/group" position="replace">
+            		<group>
+                        <group class="oe_left">
+                            <field name="amount_string"/>
+                            <field name="add_disc_type" groups="dos_accounting.group_discount_per_inv_and_line,sale.group_discount_per_so_line"/>
+                            <field name="amount_add_disc" groups="dos_accounting.group_discount_per_inv_and_line,sale.group_discount_per_so_line"/>
+                        </group>
+                        <group class="oe_subtotal_footer oe_right">
+                        	<field name="gross_total" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+							<field name="discount_total" groups="dos_accounting.group_discount_per_inv_and_line,sale.group_discount_per_so_line" widget='monetary' style="border-bottom: 1px solid #cacaca;font-weight:normal;font-size: 13px;" options="{'currency_field': 'currency_id'}"/>
+							<field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <div>
+                                <label for="amount_tax"/>
+                                <button name="button_reset_taxes" states="draft,proforma2"
+                                    string="(update)" class="oe_link oe_edit_only"
+                                    type="object" help="Recompute taxes and total"/>
+                            </div>
+                            <field name="amount_tax" nolabel="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="amount_total" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+ 
+                            <field name="residual" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="reconciled" invisible="1"/>
+                        </group>
+                    </group> 
+            	</xpath>      				
+				
+				
+				<!-- 
+				<xpath expr="/form/sheet/notebook/page[@string='Invoice']/group/field[@name='amount_tax']" position="after">
+					<div>
+						<label for="amount_downpayment" style="font-weight: normal;font-size: 13px;"/>
+						<field name="payment_request_dp_id" nolabel="1" style="width: 40%%" 
+							 domain="[('partner_id','=',partner_id),('currency_id','=',currency_id),('type','=','prepayment'),('prepayment_status','=',False)]"/>
+					</div>
+					<field name="amount_downpayment" widget='monetary' options="{'currency_field': 'currency_id'}" nolabel="1"/>						
+				</xpath>
+				-->
+			</field>
+		</record>
+       
+
+	</data>
+</openerp>
+

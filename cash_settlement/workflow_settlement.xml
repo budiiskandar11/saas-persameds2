@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="wkf_settlement" model="workflow">
+            <field name="name">cash.settlement</field>
+            <field name="osv">cash.settlement</field>
+            <field name="on_create">True</field>
+        </record>
+        
+         <record id="act_proforma_settlement" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_settlement"/>
+            <field name="flow_start">True</field>
+            <field name="name">proforma</field>
+            <field name="action">write({'state':'draft'})</field>
+            <field name="kind">function</field>
+        </record>
+        
+        <record id="act_approve_lv2_settlement" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_settlement"/>
+            <field name="name">approve_lv2</field>
+            <field name="action">account_expense_check()
+            check_amount()
+            write({'state':'approve_lv2'})</field>
+            <field name="kind">function</field>
+        </record>
+        
+        <record id="act_done_settlement" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_settlement"/>
+            <field name="name">done</field>
+            <field name="action">proforma_voucher2()</field>
+            <field name="kind">function</field>
+        </record>
+        
+        
+        <record id="act_cancel" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_settlement"/>
+            <field name="name">cancel</field>
+            <field name="action">cancel_voucher()</field>
+            <field name="kind">function</field>
+            <field name="flow_stop">True</field>
+        </record>
+        
+        <!--######################Transition#########################-->
+        
+        <record id="t1_settlement" model="workflow.transition">
+            <field name="act_from" ref="act_proforma_settlement"/>
+            <field name="act_to" ref="act_approve_lv2_settlement"/>
+            <field name="signal">approve_lv2</field>
+            <field name="condition">True</field>
+            <field name="group_id" ref=""/>
+        </record>
+        
+        <record id="t2_settlement" model="workflow.transition">
+            <field name="act_from" ref="act_approve_lv2_settlement"/>
+            <field name="act_to" ref="act_done_settlement"/>
+            <field name="signal">proforma_voucher2</field>
+            <field name="condition">True</field>
+            <field name="group_id" ref=""/>
+        </record>
+        
+        
+        <record id="tcancel1_settlement" model="workflow.transition">
+            <field name="act_from" ref="act_proforma_settlement"/>
+            <field name="act_to" ref="act_cancel"/>
+            <field name="signal">cancel_voucher</field>
+            <field name="condition">True</field>
+            <field name="group_id" ref=""/>
+        </record>
+        
+        <record id="tcancel2_settlement" model="workflow.transition">
+            <field name="act_from" ref="act_approve_lv2_settlement"/>
+            <field name="act_to" ref="act_cancel"/>
+            <field name="signal">cancel_voucher</field>
+            <field name="condition">True</field>
+            <field name="group_id" ref=""/>
+        </record>
+        
+        <record id="tcancel3_settlement" model="workflow.transition">
+            <field name="act_from" ref="act_done_settlement"/>
+            <field name="act_to" ref="act_cancel"/>
+            <field name="signal">cancel_voucher</field>
+            <field name="condition">True</field>
+            <field name="group_id" ref=""/>
+        </record>
+        
+	</data>
+</openerp>

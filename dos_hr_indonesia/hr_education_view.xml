@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="employee_education_form_view">
+			<field name="name">hr.employee.education.from</field>
+			<field name="model">hr.employee</field>
+			<field name="inherit_id" ref="hr.view_employee_form" />
+			<field name="arch" type="xml">
+				<page string="Personal Information" position="after">
+					<page string="Education">
+						
+						<group string="Education">
+							<group>
+							<field name="latest_edu"/>
+						    <field name="degree"/>
+						    </group>
+							<field name="education_id" nolabel="1" colspan="4">
+							<tree string="Education List">
+								<field name="edu_from"/>
+								<field name="edu_to"/>
+								<field name="name"/>
+								<field name="subject"/>
+								<field name="degree" />
+								<field name="no_certificate" />
+							</tree>
+							<form string="Education List">
+								<group>
+								<group>
+								<field name="edu_from"/>
+								<field name="edu_to"/>
+								<field name="name" />
+								</group>
+								<group>
+								<field name="type" />
+								<field name="subject" />
+								<field name="degree" attrs="{'invisible':[('type','!=','formal')]}" />
+								<field name="no_certificate" />
+								</group>	
+								<notebook colspan="4">
+									<page string="Certificate">
+										<separator string="Certificate" colspan="4"/>
+										<field name="certificate" nolabel="1" colspan="4"/>
+									</page>
+								</notebook>
+								</group>
+							</form>
+						</field>
+						
+						</group>
+					</page>
+				</page>
+			</field>
+		</record>
+		
+	</data>
+</openerp>

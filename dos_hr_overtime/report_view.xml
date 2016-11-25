@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<report 
+		 id="report_overtime_doc" 
+		 string="Overtime Form" 
+		 model="hr.overtime" 
+		 report_type="qweb-pdf" 
+		 file="dos_hr_overtime.overtime_document" 
+		 name="dos_hr_overtime.overtime_document"/>
+	</data>
+</openerp>

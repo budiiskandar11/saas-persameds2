@@ -1,0 +1,632 @@
+# -*- encoding: utf-8 -*-
+##############################################################################
+#
+#    OpenERP, Open Source Management Solution
+#
+#    Copyright (c) 2013 Noviat nv/sa (www.noviat.com). All rights reserved.
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+##############################################################################
+
+from openerp.osv import orm
+import xlwt
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+from datetime import timedelta,date
+from operator import itemgetter
+import time
+from openerp.addons.website_account.report_xls import report_xls
+from openerp.addons.website_account.utils import rowcol_to_cell
+from openerp.tools.translate import _
+# import logging
+# _logger = logging.getLogger(__name__)
+
+class general_ledger_xls(orm.TransientModel):
+    _name = 'general.ledger.xls'
+
+    def xls_export(self, cr, uid, data, context=None):
+        data['title'] = self.pool.get('res.users').browse(cr, uid, uid).company_id.name + ': General ledger'
+        data['company'] = self.pool.get('res.users').browse(cr, uid, uid).company_id.name
+              
+        ret = {'type': 'ir.actions.report.xml', 'datas': data, 'report_name': 'account.account_report_general_ledger_xls'}
+        
+        return ret
+        
+class account_general_ledger_xls(report_xls):
+    column_sizes = []
+    monthNames = {'01':"January",'02':"February",'03':"March",'04':"April",'05':"May",'06':"June",'07':"July",'08':"August",'09':"September",'10':"October", '11':"November", '12':"December"}
+    shortMonthNames = {'01':"Jan",'02':"Feb",'03':"Mar",'04':"Apr",'05':"May",'06':"Jun",'07':"Jul",'08':"Aug",'09':"Sep",'10':"Oct", '11':"Nov", '12':"Dec"}
+    
+
+    def set_context(self, objects, data, ids, report_type=None):
+        new_ids = ids
+        obj_move = self.pool.get('account.move.line')
+        self.sortby = data['form'].get('sortby', 'sort_date')
+        self.query = obj_move._query_get(self.cr, self.uid, obj='l', context=data['form'].get('used_context',{}))
+        ctx2 = data['form'].get('used_context',{}).copy()
+        self.init_balance = data['form'].get('initial_balance', True)
+        if self.init_balance:
+            ctx2.update({'initial_bal': True})
+        self.init_query = obj_move._query_get(self.cr, self.uid, obj='l', context=ctx2)
+        self.display_account = data['form']['display_account']
+        self.target_move = data['form'].get('target_move', 'all')
+        ctx = self.context.copy()
+        ctx['fiscalyear'] = data['form']['fiscalyear_id']
+        if data['form']['filter'] == 'filter_period':
+            ctx['periods'] = data['form']['periods']
+        elif data['form']['filter'] == 'filter_date':
+            ctx['date_from'] = data['form']['date_from']
+            ctx['date_to'] =  data['form']['date_to']
+        ctx['state'] = data['form']['target_move']
+        if data['form'].has_key('filter_account') and data['form']['filter_account']:
+            if isinstance(data['form']['filter_account'], (list)):
+                ctx['filter_account'] = data['form']['filter_account'][0]
+            else:
+                ctx['filter_account'] = data['form']['filter_account']
+        else:
+            ctx['filter_account'] = data['form']['chart_account_id']
+        self.context.update(ctx)
+        if (data['model'] == 'ir.ui.menu'):
+            new_ids = [data['form']['id']]
+            objects = self.pool.get('account.account').browse(self.cr, self.uid, new_ids)
+        return ctx
+        
+    def __init__(self, name,obj,context=None):
+        if context is None:
+            context = {}
+        super(account_general_ledger_xls, self).__init__(name,obj)
+        self.query = ""
+        self.tot_currency = 0.0
+        self.period_sql = ""
+        self.sold_accounts = {}
+        self.sortby = 'sort_date'        
+        self.context = context
+
+    def get_children_accounts(self, account):
+        res = []
+        account = self.pool.get('account.account').browse(self.cr, self.uid, account)
+        currency_obj = self.pool.get('res.currency')
+        ids_acc = self.pool.get('account.account')._get_children_and_consol(self.cr, self.uid, account.id)
+        currency = account.currency_id and account.currency_id or account.company_id.currency_id
+        for child_account in self.pool.get('account.account').browse(self.cr, self.uid, ids_acc, context=self.context):
+            sql = """
+                SELECT count(id)
+                FROM account_move_line AS l
+                WHERE %s AND l.account_id = %%s
+            """ % (self.query)
+            self.cr.execute(sql, (child_account.id,))
+            num_entry = self.cr.fetchone()[0] or 0
+            sold_account = self._sum_balance_account(child_account)
+            self.sold_accounts[child_account.id] = sold_account
+            if self.display_account == 'movement':
+                if child_account.type != 'view' and num_entry <> 0:
+                    res.append(child_account)
+            elif self.display_account == 'not_zero':
+                if child_account.type != 'view' and num_entry <> 0:
+                    if not currency_obj.is_zero(self.cr, self.uid, currency, sold_account):
+                        res.append(child_account)
+            else:
+                res.append(child_account)
+        if not res:
+            return [account]
+        return res
+        
+
+    def lines(self, account):
+        """ Return all the account_move_line of account with their account code counterparts """
+        move_state = ['draft','posted']
+        if self.target_move == 'posted':
+            move_state = ['posted', '']
+        # First compute all counterpart strings for every move_id where this account appear.
+        # Currently, the counterpart info is used only in landscape mode
+        sql = """
+            SELECT m1.move_id,
+                array_to_string(ARRAY(SELECT DISTINCT a.code
+                                          FROM account_move_line m2
+                                          LEFT JOIN account_account a ON (m2.account_id=a.id)
+                                          WHERE m2.move_id = m1.move_id
+                                          AND m2.account_id<>%%s), ', ') AS counterpart
+                FROM (SELECT move_id
+                        FROM account_move_line l
+                        LEFT JOIN account_move am ON (am.id = l.move_id)
+                        WHERE am.state IN %s and %s AND l.account_id = %%s GROUP BY move_id) m1
+        """% (tuple(move_state), self.query)
+        self.cr.execute(sql, (account.id, account.id))
+        counterpart_res = self.cr.dictfetchall()
+        counterpart_accounts = {}
+        for i in counterpart_res:
+            counterpart_accounts[i['move_id']] = i['counterpart']
+        del counterpart_res
+
+        # Then select all account_move_line of this account
+        if self.sortby == 'sort_journal_partner':
+            sql_sort='j.code, p.name, l.move_id'
+        else:
+            sql_sort='l.date, l.move_id'
+        sql = """
+            SELECT l.id AS lid, l.date AS ldate, j.code AS lcode, l.currency_id,l.amount_currency,l.ref AS lref, l.name AS lname, COALESCE(l.debit,0) AS debit, COALESCE(l.credit,0) AS credit, l.period_id AS lperiod_id, l.partner_id AS lpartner_id,
+            m.name AS move_name, m.id AS mmove_id,per.code as period_code,
+            c.symbol AS currency_code,
+            i.id AS invoice_id, i.type AS invoice_type, i.number AS invoice_number,
+            p.name AS partner_name
+            FROM account_move_line l
+            JOIN account_move m on (l.move_id=m.id)
+            LEFT JOIN res_currency c on (l.currency_id=c.id)
+            LEFT JOIN res_partner p on (l.partner_id=p.id)
+            LEFT JOIN account_invoice i on (m.id =i.move_id)
+            LEFT JOIN account_period per on (per.id=l.period_id)
+            JOIN account_journal j on (l.journal_id=j.id)
+            WHERE %s AND m.state IN %s AND l.account_id = %%s ORDER by %s
+        """ %(self.query, tuple(move_state), sql_sort)
+        self.cr.execute(sql, (account.id,))
+        res_lines = self.cr.dictfetchall()
+        res_init = []
+        if res_lines and self.init_balance:
+            #FIXME: replace the label of lname with a string translatable
+            sql = """
+                SELECT 0 AS lid, '' AS ldate, '' AS lcode, COALESCE(SUM(l.amount_currency),0.0) AS amount_currency, '' AS lref, 'Initial Balance' AS lname, COALESCE(SUM(l.debit),0.0) AS debit, COALESCE(SUM(l.credit),0.0) AS credit, '' AS lperiod_id, '' AS lpartner_id,
+                '' AS move_name, '' AS mmove_id, '' AS period_code,
+                '' AS currency_code,
+                NULL AS currency_id,
+                '' AS invoice_id, '' AS invoice_type, '' AS invoice_number,
+                '' AS partner_name
+                FROM account_move_line l
+                LEFT JOIN account_move m on (l.move_id=m.id)
+                LEFT JOIN res_currency c on (l.currency_id=c.id)
+                LEFT JOIN res_partner p on (l.partner_id=p.id)
+                LEFT JOIN account_invoice i on (m.id =i.move_id)
+                JOIN account_journal j on (l.journal_id=j.id)
+                WHERE %s AND m.state IN %s AND l.account_id = %%s
+            """ %(self.init_query, tuple(move_state))
+            self.cr.execute(sql, (account.id,))
+            res_init = self.cr.dictfetchall()
+        res = res_init + res_lines
+        account_sum = 0.0
+        for l in res:
+            l['move'] = l['move_name'] != '/' and l['move_name'] or ('*'+str(l['mmove_id']))
+            l['partner'] = l['partner_name'] or ''
+            account_sum += l['debit'] - l['credit']
+            l['progress'] = account_sum
+            l['line_corresp'] = l['mmove_id'] == '' and ' ' or counterpart_accounts[l['mmove_id']].replace(', ',',')
+            # Modification of amount Currency
+            if l['credit'] > 0:
+                if l['amount_currency'] != None:
+                    l['amount_currency'] = abs(l['amount_currency']) * -1
+            if l['amount_currency'] != None:
+                self.tot_currency = self.tot_currency + l['amount_currency']
+        return res
+
+    def _sum_debit_account(self, account):
+        if account.type == 'view':
+            return account.debit
+        move_state = ['draft','posted']
+        if self.target_move == 'posted':
+            move_state = ['posted','']
+        self.cr.execute('SELECT sum(debit) \
+                FROM account_move_line l \
+                JOIN account_move am ON (am.id = l.move_id) \
+                WHERE (l.account_id = %s) \
+                AND (am.state IN %s) \
+                AND '+ self.query +' '
+                ,(account.id, tuple(move_state)))
+        sum_debit = self.cr.fetchone()[0] or 0.0
+        if self.init_balance:
+            self.cr.execute('SELECT sum(debit) \
+                    FROM account_move_line l \
+                    JOIN account_move am ON (am.id = l.move_id) \
+                    WHERE (l.account_id = %s) \
+                    AND (am.state IN %s) \
+                    AND '+ self.init_query +' '
+                    ,(account.id, tuple(move_state)))
+            # Add initial balance to the result
+            sum_debit += self.cr.fetchone()[0] or 0.0
+        return sum_debit
+
+    def _sum_credit_account(self, account):
+        if account.type == 'view':
+            return account.credit
+        move_state = ['draft','posted']
+        if self.target_move == 'posted':
+            move_state = ['posted','']
+        self.cr.execute('SELECT sum(credit) \
+                FROM account_move_line l \
+                JOIN account_move am ON (am.id = l.move_id) \
+                WHERE (l.account_id = %s) \
+                AND (am.state IN %s) \
+                AND '+ self.query +' '
+                ,(account.id, tuple(move_state)))
+        sum_credit = self.cr.fetchone()[0] or 0.0
+        if self.init_balance:
+            self.cr.execute('SELECT sum(credit) \
+                    FROM account_move_line l \
+                    JOIN account_move am ON (am.id = l.move_id) \
+                    WHERE (l.account_id = %s) \
+                    AND (am.state IN %s) \
+                    AND '+ self.init_query +' '
+                    ,(account.id, tuple(move_state)))
+            # Add initial balance to the result
+            sum_credit += self.cr.fetchone()[0] or 0.0
+        return sum_credit
+
+    def _sum_balance_account(self, account):
+        if account.type == 'view':
+            return account.balance
+        move_state = ['draft','posted']
+        if self.target_move == 'posted':
+            move_state = ['posted','']
+        self.cr.execute('SELECT (sum(debit) - sum(credit)) as tot_balance \
+                FROM account_move_line l \
+                JOIN account_move am ON (am.id = l.move_id) \
+                WHERE (l.account_id = %s) \
+                AND (am.state IN %s) \
+                AND '+ self.query +' '
+                ,(account.id, tuple(move_state)))
+        sum_balance = self.cr.fetchone()[0] or 0.0
+        if self.init_balance:
+            self.cr.execute('SELECT (sum(debit) - sum(credit)) as tot_balance \
+                    FROM account_move_line l \
+                    JOIN account_move am ON (am.id = l.move_id) \
+                    WHERE (l.account_id = %s) \
+                    AND (am.state IN %s) \
+                    AND '+ self.init_query +' '
+                    ,(account.id, tuple(move_state)))
+            # Add initial balance to the result
+            sum_balance += self.cr.fetchone()[0] or 0.0
+        return sum_balance
+
+    def _get_account(self, data):
+        if data['model'] == 'account.account':
+            return self.pool.get('account.account').browse(self.cr, self.uid, data['form']['id']).company_id.name
+        return super(general_ledger_inh ,self)._get_account(data)
+
+    def _get_sortby(self, data):
+        if self.sortby == 'sort_date':
+            return self._translate('Date')
+        elif self.sortby == 'sort_journal_partner':
+            return self._translate('Journal & Partner')
+        return self._translate('Date')
+
+    def get_account_filter(self, data):
+        if data['form'].has_key('filter_account') and data['form']['filter_account']:
+            return data['form']['filter_account'][1]
+        return ''    
+
+    def _sum_currency_amount_account(self, account):
+        self.cr.execute('SELECT sum(l.amount_currency) AS tot_currency \
+                FROM account_move_line l \
+                WHERE l.account_id = %s AND %s' %(account.id, self.query))
+        sum_currency = self.cr.fetchone()[0] or 0.0
+        if self.init_balance:
+            self.cr.execute('SELECT sum(l.amount_currency) AS tot_currency \
+                            FROM account_move_line l \
+                            WHERE l.account_id = %s AND %s '%(account.id, self.init_query))
+            sum_currency += self.cr.fetchone()[0] or 0.0
+        return sum_currency
+        
+    def generate_xls_report(self, _p, _xs, data, objects, wb):
+        self.set_context(objects, data, [data['form']['chart_account_id']])
+	self.generate_xls_report_stn(_p, _xs, data, objects, wb)
+	    
+    def generate_xls_report_stn(self, _p, _xs, data, objects, wb):
+        formula_dict_debit = {}
+        formula_dict_credit = {}
+        formula_dict = {}
+        formula_dict_prev = {}
+        self.column_sizes = []
+        ws = wb.add_sheet('General Ledger')
+        ws.panes_frozen = True
+        ws.remove_splits = True
+        ws.portrait = 0  # Landscape
+        ws.fit_width_to_pages = 1
+        row_pos = 0
+        data['chart_account_name'] = self.pool.get('account.account').browse(self.cr, self.uid, data['form']['chart_account_id']).name
+        data['fiscal_year'] = self.pool.get('account.fiscalyear').browse(self.cr, self.uid, data['form']['fiscalyear_id']).name
+        journals = self.pool.get('account.journal').read(self.cr, self.uid, data['form']['journal_ids'], ['name','id', 'code'])
+        data['display_account_val'] = False        
+        if data['form']['display_account'] == 'all':
+            data['display_account_val'] = 'All accounts'
+        elif data['form']['display_account'] == 'movement':
+            data['display_account_val'] = 'With movements'
+        elif data['form']['display_account'] == 'not_zero':
+            data['display_account_val'] = 'With balance not equal to zero'
+        
+        data['filter_by_val'] = False  
+        if data['form']['filter'] == 'filter_no':
+            data['filter_by_val'] = 'Not filtered'
+        elif data['form']['filter'] == 'filter_period':
+            data['filter_by_val'] = 'Filtered by period'
+        elif data['form']['filter'] == 'filter_date':
+            data['filter_by_val'] = 'Filtered by date'
+        
+        data['sort_by_val'] = False  
+        if data['form']['sortby'] == 'sort_date':
+            data['sort_by_val'] = 'Date'
+        elif data['form']['sortby'] == 'sort_journal_partner':
+            data['sort_by_val'] = 'Journal & Partner'
+        
+        data['target_move_val'] = False  
+        if data['form']['target_move'] == 'posted':
+            data['target_move_val'] = 'All Posted Entries'
+        elif data['form']['target_move'] == 'all':
+            data['target_move_val'] = 'All Entries'
+        
+        data['filter_acc_val'] = False  
+        if data['form']['target_move'] == 'posted':
+            data['filter_acc_val'] = 'All Posted Entries'
+        
+        data['journals'] = ', '.join([ lt['code'] or '' for lt in journals ])
+        
+        acc_id=False
+        if data['form']['filter_account']:
+            acc_id= data['form']['filter_account']
+        elif data['form']['chart_account_id']:
+            acc_id= data['form']['chart_account_id']
+	records = self.get_children_accounts(acc_id)
+	
+	
+
+	max_level = 11   # Index starts with 0 but levels starts with 1, -3 to avoid 3 empty Rows
+       # set print header/footer
+        ws.header_str = data['title']
+        ws.footer_str = self.xls_footers['standard']
+        # Title
+        cell_style = xlwt.easyxf(_xs['xls_title'])
+        
+        cell_format = _xs['bold'] + _xs['borders_all']
+        cell_style = xlwt.easyxf(cell_format)
+        cell_style_center = xlwt.easyxf(cell_format + _xs['center'])
+        cell_style_right = xlwt.easyxf(cell_format + _xs['right'])
+        c_specs = [
+            ('company', max_level, 0, 'text', data['company'], None, cell_style_center),
+        ]
+        row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+        row_pos = self.xls_write_row(
+            ws, row_pos, row_data, row_style=cell_style)
+        c_specs = [
+            ('title', max_level, 0, 'text', data['title'], None, cell_style_center),
+        ]
+        row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+        row_pos = self.xls_write_row(
+            ws, row_pos, row_data, row_style=cell_style)
+        c_specs = [
+            ('filter_chart_acc', 2, 0, 'text', 'Chart of Accounts:', None),
+            ('filter_space1', 1, 0, 'text', '', None),
+            ('filter_fiscal', 2, 0, 'text', 'Fiscal Year:', None),
+            ('filter_space1', 1, 0, 'text', '', None),
+            ('filter_journal', 2, 0, 'text', 'Journals:', None),
+            ('filter_space1', 1, 0, 'text', '', None),
+            ('filter_disp_acc', 2, 0, 'text', 'Display Account:', None),
+        ]
+        row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+        row_pos = self.xls_write_row(
+            ws, row_pos, row_data, row_style=cell_style)
+        c_specs = [
+            ('filter_chart_acc', 2, 0, 'text', data['chart_account_name'], None),
+            ('filter_space1', 1, 0, 'text', '', None),
+            ('filter_fiscal', 2, 0, 'text', data['fiscal_year'], None),
+            ('filter_space1', 1, 0, 'text', '', None),
+            ('filter_journal', 2, 0, 'text', data['journals'], None),
+            ('filter_space1', 1, 0, 'text', '', None),
+            ('filter_disp_acc', 2, 0, 'text', data['display_account_val'], None),
+        ]            
+        row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+        row_pos = self.xls_write_row(
+            ws, row_pos, row_data, row_style=cell_style)
+
+        # write empty row to define column sizes
+	
+        self.column_sizes.extend([10] * (max_level-6))
+        self.column_sizes.append(13)
+        self.column_sizes.append(30)
+        self.column_sizes.append(10)
+        self.column_sizes.append(10)
+        self.column_sizes.append(10)
+        self.column_sizes.append(10)
+        self.column_sizes.append(10)
+        
+        c_sizes = self.column_sizes
+        c_specs = [('empty%s' % i, 1, c_sizes[i], 'text', None)
+                   for i in range(0, len(c_sizes))]
+        row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+        row_pos = self.xls_write_row(
+            ws, row_pos, row_data, set_column_size=True,set_row_height=False)
+
+        c_specs = [
+            ('filter_by', 2, 0, 'text', 'Filter By:', None),
+            ('filter_space1', 1, 0, 'text', '', None),
+            ('filter_sort_by', 2, 0, 'text', 'Sorted By:', None),
+            ('filter_space1', 1, 0, 'text', '', None),
+            ('filter_target_move', 2, 0, 'text', 'Target Moves:', None),
+            ('filter_space1', 1, 0, 'text', '', None),
+            ('filter_acc_filter', 2, 0, 'text', 'Account Filter:', None),
+        ]
+        row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+        row_pos = self.xls_write_row(
+            ws, row_pos, row_data, row_style=cell_style)
+        c_specs = [
+            ('filter_by', 2, 0, 'text', data['filter_by_val'], None),
+            ('filter_space1', 1, 0, 'text', '', None),
+            ('filter_sort_by', 2, 0, 'text', data['sort_by_val'], None),
+            ('filter_space1', 1, 0, 'text', '', None),
+            ('filter_target_move', 2, 0, 'text', data['target_move_val'], None),
+            ('filter_space1', 1, 0, 'text', '', None),
+            ('filter_acc_filter', 2, 0, 'text', data['filter_acc_val'], None),
+        ]
+        row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+        row_pos = self.xls_write_row(
+            ws, row_pos, row_data, row_style=cell_style)
+            
+        if data['form']['filter'] == 'filter_date':            
+            date_from = (datetime.strptime(data['form']['date_from'], '%Y-%m-%d')).strftime('%m/%d/%Y') 
+            date_to = (datetime.strptime(data['form']['date_to'], '%Y-%m-%d')).strftime('%m/%d/%Y') 
+            c_specs = [
+                ('filter_date_from', 1, 0, 'text', 'Date from : ', None),
+                ('filter_date_from_val', 1, 0, 'text', date_from, None)
+        ]
+            row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+            row_pos = self.xls_write_row(
+                ws, row_pos, row_data, row_style=cell_style)   
+            c_specs = [
+                ('filter_date_to', 1, 0, 'text', 'Date from : ', None),
+                ('filter_date_to_val', 1, 0, 'text', date_to, None)
+        ]
+            row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+            row_pos = self.xls_write_row(
+                ws, row_pos, row_data, row_style=cell_style)
+            
+        if data['form']['filter'] == 'filter_period': 
+            period_from = self.pool.get('account.period').browse(self.cr, self.uid, data['form']['period_from'])
+            period_to = self.pool.get('account.period').browse(self.cr, self.uid, data['form']['period_to'])
+            c_specs = [
+                ('filter_period_from', 1, 0, 'text', 'Start Period : ', None),
+                ('filter_period_from_val', 1, 0, 'text', period_from.name, None)
+        ]
+            row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+            row_pos = self.xls_write_row(
+                ws, row_pos, row_data, row_style=cell_style)
+            c_specs = [
+                ('filter_period_end', 1, 0, 'text', 'End Period : ', None),
+                ('filter_period_end_val', 1, 0, 'text', period_to.name, None)
+        ]
+            row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+            row_pos = self.xls_write_row(
+                ws, row_pos, row_data, row_style=cell_style)
+        
+        row_pos = row_pos + 1
+
+        c_specs = [
+            ('date_val', 1, 0, 'text', 'Date', None),
+            ('jrnl_val', 1, 0, 'text', 'JRNL', None),
+            ('partner_val', 1, 0, 'text', 'Partner', None),
+            ('ref_val', 1, 0, 'text', 'Ref', None),
+            ('move_val', 1, 0, 'text', 'Move', None),
+            ('entry_lbl_val', 1, 0, 'text', 'Entry Label', None),
+            ('counter_part_val', 1, 0, 'text', 'Counterpart', None),
+            ('debit_val', 1, 0, 'text', 'Debit', None, cell_style_right),
+            ('credit_val', 1, 0, 'text', 'Credit', None, cell_style_right),
+            ('progress_val', 1, 0, 'text', 'Progress', None, cell_style_right),
+            ('currency_val', 1, 0, 'text', 'Currency ', None, cell_style_right),
+        ]
+        row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+        row_pos = self.xls_write_row(
+            ws, row_pos, row_data, row_style=cell_style)
+        ws.set_horz_split_pos(row_pos)    
+        
+        
+        # Column Header Row
+        cell_format = _xs['bold'] + _xs['fill_blue'] + \
+            _xs['borders_all'] + _xs['wrap'] + _xs['top']
+        cell_style = xlwt.easyxf(cell_format)
+        cell_style_right = xlwt.easyxf(cell_format + _xs['right'])
+        cell_style_center = xlwt.easyxf(cell_format + _xs['center'])
+
+
+        last_child_consol_ids = []
+
+        # cell styles for account data
+        view_cell_format = _xs['bold'] + _xs['borders_all']
+        view_cell_style = xlwt.easyxf(view_cell_format)
+        view_cell_style_center = xlwt.easyxf(view_cell_format + _xs['center'])
+        view_cell_style_decimal = xlwt.easyxf(
+            view_cell_format + _xs['right'],
+            num_format_str=report_xls.decimal_format)
+        view_cell_style_pct = xlwt.easyxf(
+            view_cell_format + _xs['center'], num_format_str='0')
+        regular_cell_format = _xs['borders_all']
+        regular_cell_style = xlwt.easyxf(regular_cell_format)
+        regular_cell_style_center = xlwt.easyxf(
+            regular_cell_format + _xs['center'])
+        regular_cell_style_decimal = xlwt.easyxf(
+            regular_cell_format + _xs['right'],
+            num_format_str=report_xls.decimal_format)
+        regular_cell_style_pct = xlwt.easyxf(
+            regular_cell_format + _xs['center'], num_format_str='0')	
+	style_percent_bold = xlwt.easyxf(_xs['bold'], num_format_str='0.00%')  
+	style_percent = xlwt.easyxf(num_format_str='0.00%')  
+        
+        for current_account in records:
+            
+            #if current_account['type']=='report' or current_account['level']==0:
+            #    continue
+
+            #if current_account['level'] <= 3 or current_account['name'][:5] == 'Total' or current_account['has_childs']:
+            cell_style = view_cell_style
+            cell_style_center = view_cell_style_center
+            cell_style_decimal = view_cell_style_decimal
+            cell_style_pct = view_cell_style_pct
+            cell_style_percent = style_percent_bold
+            
+            #else:
+            #    cell_style = regular_cell_style
+            #    cell_style_center = regular_cell_style_center
+            #    cell_style_decimal = regular_cell_style_decimal
+            #    cell_style_pct = regular_cell_style_pct
+            #    cell_style_percent = style_percent
+		
+	    
+	    
+	    """ -2 To avoid 2 empty rows"""
+	    
+	    curr = self._sum_currency_amount_account(current_account)
+	        
+            c_specs = [
+                ('date_val', max_level-4, 0, 'text', (current_account['level']*'     ') + current_account['code'] + ' ' +current_account['name'], None, None, None, None, None,True),
+                ('debit_val', 1, 0, 'number', current_account['debit'], None, cell_style_decimal),
+                ('credit_val', 1, 0, 'number', current_account['credit'], None, cell_style_decimal),
+                ('progress_val', 1, 0, 'number', current_account['balance'], None, cell_style_decimal),                
+            ]
+            if curr>0:
+                c_specs+=[('currency_val', 1, 0, 'number', curr, None, cell_style_decimal),]
+            else:
+                c_specs+=[('currency_val', 1, 0, 'text', '', None, None),]
+            row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+            #if row_data[0][2][4][:5]=='Total':
+            #    row_pos = self.xls_write_row(
+            #   ws, row_pos, row_data, row_style=cell_style, set_row_height=True)
+            #else:    
+            row_pos = self.xls_write_row(
+            ws, row_pos, row_data, row_style=cell_style, set_row_height=True)
+            dlines = self.lines(current_account)
+            for line in dlines:
+                acurr = line['amount_currency']
+                c_specs = [
+                    ('date_val', 1, 0, 'text', (line['ldate']!='' and (datetime.strptime(line['ldate'], '%Y-%m-%d')).strftime('%m/%d/%Y') or ''), None, None, None),
+                    ('jrnl_val', 1, 0, 'text', line['lcode'], None, None, None),
+                    ('partner_val', 1, 0, 'text', line['partner_name'], None, None, None),
+                    ('ref_val', 1, 0, 'text', line['lref'], None, None, None),
+                    ('move_val', 1, 0, 'text', line['move'], None, None, None),
+                    ('entry_lbl_val', 1, 0, 'text', line['lname'], None, None, None),
+                    ('counter_part_val', 1, 0, 'text', line['line_corresp'].replace(',',', '), None, None, None),
+                    ('debit_val', 1, 0, 'number', line['debit'], None, cell_style_decimal),
+                    ('credit_val', 1, 0, 'number', line['credit'], None, cell_style_decimal),
+                    ('progress_val', 1, 0, 'number', line['progress'], None, cell_style_decimal),                
+                ]
+                if acurr>0:
+                    c_specs+=[('currency_val', 1, 0, 'number', acurr+''+line['currency_code'], None, cell_style_decimal),]
+                else:
+                    c_specs+=[('currency_val', 1, 0, 'text', '', None, None),]
+                    
+                row_data = self.xls_row_template(c_specs, [x[0] for x in c_specs])
+                row_pos = self.xls_write_row(
+                ws, row_pos, row_data, row_style=cell_style)
+                lines = self.lines(current_account)
+             
+                
+account_general_ledger_xls('report.account.account_report_general_ledger_xls',
+                  'account.account')
+
+
+
+

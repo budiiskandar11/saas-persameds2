@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="holidays_leave_document">
+    <t t-call="report.html_container">
+        <t t-call="report.internal_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <h4><center><strong>SURAT PERMOHONAN BANTUAN ISTIRAHAT TAHUNAN</strong></center></h4>
+                    <br/>
+                    
+                    <table class="table-condensed" style="margin:0px auto; width:80%;">
+                        <tr>
+                            <td colspan="2">Dengan ini, saya yang bertanda tangan dibawah ini</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"/>
+                        </tr>
+                        <tr>
+                            <td style="width:25%">Nama</td>
+                            <td>: <span t-field="o.employee_id.name"/></td>
+                        </tr>
+                        <tr>
+                            <td>No. Pegawai</td>
+                            <td>: <span t-field="o.employee_id.nik"/> </td>
+                        </tr>  
+                        <tr>
+                            <td>Departemen</td>
+                            <td>: <span t-field="o.department_id.name"/></td>
+                        </tr>  
+                        <tr>
+                            <td>Tanggal Mulai Bekerja</td>
+                            <td>: </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"/>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Mengajukan Permohonan Bantuan Istirahat Tahunan sebagai berikut:</td>
+                        </tr>
+                        <tr/>  
+                        <tr>
+                            <td>Cuti yang diambil</td>
+                            <td>: </td>
+                        </tr>  
+                        <tr>
+                            <td>Tanggal Cuti</td>
+                            <td>: </td>
+                        </tr>  
+                        <tr>
+                            <td>Sisa Cuti</td>
+                            <td>: </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"/>
+                        </tr> 
+                        <tr>
+                            <td colspan="2">Selama saya dalam masa Istirahat Tahunan ini maka saya menyerahkan seluruh pekerjaan saya kepada :</td>
+                        </tr>  
+                        <tr>
+                            <td style="width:25%">Nama</td>
+                            <td>: <span t-field="o.delegate_employee_id.name"/></td>
+                        </tr>
+                        <tr>
+                            <td>No. Pegawai</td>
+                            <td>: <span t-field="o.delegate_employee_id.nik"/> </td>
+                        </tr>  
+                        <tr>
+                            <td>Departemen</td>
+                            <td>: <span t-field="o.delegate_department_id.name"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"/>
+                        </tr>
+                        <tr>
+                            <td colspan="2"/>
+                        </tr>
+                        <tr>
+                            <td align="right">Menyetujui,</td>
+                            <td align="right">
+                                <table class="table-condensed" style="margin:0px auto; width:40%;float:right;">
+                                    <tr>
+                                        <td align="center" height="50px">Jakarta, 17 September 2014</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center">Pemohon,</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center" height="100px">Diterima Oleh,</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center"><b>Nama : (HRD)</b></td>
+                        </tr>   
+                        <tr>
+                            <td colspan="2" align="center"><b>Tanggal : </b></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"/>
+                        </tr>   
+                        <tr>
+                            <td colspan="2"><i>* Harap Melampirkan Surat Permohonan Cuti yang telah disetujui</i></td>
+                        </tr>      
+                    </table>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+<template id="report_holidays_leave_document">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'dos_leave_management.holidays_leave_document')"/>
+        </t>
+    </t>
+</template>
+
+
+</data>
+</openerp>

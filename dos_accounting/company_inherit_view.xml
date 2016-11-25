@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		
+		<record id="view_company_form" model="ir.ui.view">
+        	<field name="name">res.company.custom</field>
+			<field name="model">res.company</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="base.view_company_form" />
+			<field name="arch" type="xml">
+					<xpath expr="/form/sheet/notebook/page[1]/group[1]/group[1]/field" position="after">
+							<field name="npwp"/>
+							<field name="kode_transaksi" />
+							<field name="kode_status" />
+					</xpath>			
+					
+			</field>
+		</record>
+		
+		<record id="dos_view_partner_form" model="ir.ui.view">
+        	<field name="name">dos.res.partner.custom</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form" />
+			<field name="arch" type="xml">
+				<xpath expr="/form/sheet/group/group[2]/field[@name='title']" position="after">
+					<field name="kode_transaksi" />
+<!--					<field name="kode_status" />-->
+				</xpath>
+			</field>
+		</record>
+	</data>
+</openerp>

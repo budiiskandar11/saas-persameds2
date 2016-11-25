@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="action_cash_bank_summary_xls" model="ir.actions.report.xml">
+			<field name="name">Cash Bank Summary Print</field>
+			<field name="model">wizz.cash.bank.summary</field>
+			<field name="type">ir.actions.report.xml</field>
+			<field name="report_name">cash.bank.summary.xls</field>
+			<field name="report_type">xls</field>
+			<field name="auto" eval="False"/>
+		</record>
+	</data>
+</openerp>

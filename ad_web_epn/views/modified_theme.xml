@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- <template id="assets_backend" name="ad_web_epn assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/ad_web_epn/static/src/css/modified_theme.css"/>
+            </xpath>
+        </template> -->
+
+        <template id="ad_web_epn.login_layout" inherit_id="web.login_layout" name="Persameds ODOO Login">
+
+            <t t-call="web.layout">
+                <t t-set="head">
+                    <link href="/ad_web_epn/static/src/css/modified_theme.css" rel="stylesheet"/>
+                    <!-- <link href="/web/static/src/css/base.css" rel="stylesheet"/> -->
+                    <link href="/web/static/lib/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+                </t>
+            </t>
+
+            <xpath expr="//t[@t-set='body_classname']" position="replace">
+            	<t t-set="body_classname" t-value="'oe_single_form'"/>
+            </xpath>
+
+            <xpath expr="//div[@class='oe_single_form_footer']" position="replace">
+                <div class="oe_single_form_footer">Develop By DataBit | Powered By Odoo</div>
+            </xpath>
+
+            <!-- <div class="oe_single_form_logo">
+        		<img src="/ad_web_epn/static/src/img/logo2.png" alt="My Theme Logo" title="My Theme Logo" />
+        	</div> -->
+        </template>
+
+        <!-- <template id="ad_web_epn.layout" inherit_id="web.layout" name="Web layout">
+            &lt;!DOCTYPE html&gt;
+            <html style="height: 100%">
+                <head>
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+                    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+                    <title>Odoo EPN System</title>
+                    <link rel="shortcut icon" href="/ad_web_epn/static/src/img/odoo-fav.png" type="image/x-icon"/>
+                    <t t-raw="head or ''"/>
+                </head>
+                <body t-att-class="body_classname">
+                    <t t-raw="0"/>
+                </body>
+            </html>
+        </template> -->
+
+    </data>
+</openerp>

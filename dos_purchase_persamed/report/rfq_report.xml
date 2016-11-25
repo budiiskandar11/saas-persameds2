@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		
+        <report auto="False" id="rfq_form" 
+		        model="purchase.order" 
+		        name="report.rfq.persamed"
+		        file="dos_purchase_persamed/report/report_rfq.mako" 
+		        string="Request for Quotation Persameds" 
+         		webkit_header="persamed_header_footer_rfq"
+		        usage="default" 
+		       	report_type="webkit"/>
+
+		 <report auto="False" id="report_purchase_order" 
+		        model="purchase.order" 
+		        name="report.purchase.order"
+		        file="dos_purchase_persamed/report/report_purchase_order.mako" 
+		        string="Purchase Order Persameds" 
+         		webkit_header="po_header_footer"
+		        usage="default" 
+		       	report_type="webkit"/>	 	
+		       	        
+	</data>
+</openerp>

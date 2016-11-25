@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+		<!--  Account Journal -->
+
+		<!--
+        <record id="dos_sit" model="account.analytic.journal">
+            <field name="code">START</field>
+            <field name="name">Analytic General Operation</field>
+            <field name="type">situation</field>
+        </record>
+
+        <record id="dos_cash" model="account.analytic.journal">
+            <field name="code">CASH</field>
+            <field name="name">Analytic Journal Cash</field>
+            <field name="type">cash</field>
+        </record>
+        
+        <record id="account.sale" model="account.journal">
+            <field name="name">Sales Order Journal</field>
+            <field name="code">SOJ</field>
+            <field name="type">sale</field>
+            <field name="sequence_id" ref="account.sequence_sale_journal"/>
+            <field name="analytic_journal_id" ref="account.analytic_journal_sale"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+        <record id="account.sale_refund" model="account.journal">
+            <field name="name">Sales Refund Journal</field>
+            <field name="code">SRJ</field>
+            <field name="type">sale_refund</field>
+            <field name="sequence_id" ref="account.sequence_refund_sales_journal"/>
+            <field name="analytic_journal_id" ref="account.analytic_journal_sale"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+        <record id="account.expenses_journal" model="account.journal">
+            <field name="name">Purchase Journal</field>
+            <field name="code">POJ</field>
+            <field name="type">purchase</field>
+            <field name="sequence_id" ref="account.sequence_purchase_journal"/>
+            <field name="analytic_journal_id" ref="account.exp"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+        <record id="account.purchase_refund" model="account.journal">
+            <field name="name">Purchase Refund Journal</field>
+            <field name="code">PRJ</field>
+            <field name="type">purchase_refund</field>
+            <field name="sequence_id" ref="account.sequence_refund_purchase_journal"/>
+            <field name="analytic_journal_id" ref="account.exp"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <record id="account.bank_journal" model="account.journal">
+            <field name="name">Bank BCA Journal</field>
+            <field name="code">BNBCA</field>
+            <field name="type">bank</field>
+            <field name="sequence_id" ref="account.sequence_bank_journal"/>
+            <field name="default_debit_account_id" ref="chart_101-0121"/>
+            <field name="default_credit_account_id" ref="chart_101-0121"/>
+            <field name="analytic_journal_id" ref="dos_sit"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+        
+        <record id="dos_bank_mandiri_journal" model="account.journal">
+            <field name="name">Bank Mandiri Journal</field>
+            <field name="code">BNMAN</field>
+            <field name="type">bank</field>
+            <field name="sequence_id" ref="sequence_bank_man_journal"/>
+            <field name="default_debit_account_id" ref="chart_101-0122"/>
+            <field name="default_credit_account_id" ref="chart_101-0122"/>
+            <field name="analytic_journal_id" ref="dos_sit"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+        
+        <record id="dos_bank_bca_journal_usd" model="account.journal">
+            <field name="name">USD BCA Journal</field>
+            <field name="code">BCAUS</field>
+            <field name="type">bank</field>
+            <field name="sequence_id" ref="sequence_bank_bca_journal_usd"/>
+            <field name="default_debit_account_id" ref="chart_101-0123"/>
+            <field name="default_credit_account_id" ref="chart_101-0123"/>
+            <field name="currency" ref="base.USD"/>
+        </record>
+        
+        <record id="account.check_journal" model="account.journal">
+            <field name="name">Checks Journal</field>
+            <field name="code">CHKJ</field>
+            <field name="type">bank</field>
+            <field name="sequence_id" ref="account.sequence_check_journal"/>
+            <field name="analytic_journal_id" ref="dos_sit"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+        <record id="account.cash_journal" model="account.journal">
+            <field name="name">Kas Kecil Journal</field>
+            <field name="code">KKJ</field>
+            <field name="type">cash</field>
+            <field name="profit_account_id" ref="chart_305-0001" />
+            <field name="loss_account_id" ref="chart_305-0001" />
+            <field name="internal_account_id" ref="chart_305-0001" />
+            <field name="with_last_closing_balance" eval="True" />
+            <field name="cash_control" eval="False"/>
+            <field name="sequence_id" ref="account.sequence_cash_journal"/>
+            <field name="default_debit_account_id" ref="chart_101-0111"/>
+            <field name="default_credit_account_id" ref="chart_101-0111"/>
+            <field name="analytic_journal_id" ref="dos_cash"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+        <record id="dos_kas_besar_cash_journal" model="account.journal">
+            <field name="name">Kas Besar Journal</field>
+            <field name="code">KBJ</field>
+            <field name="type">cash</field>
+            <field name="profit_account_id" ref="chart_305-0001" />
+            <field name="loss_account_id" ref="chart_305-0001" />
+            <field name="internal_account_id" ref="chart_305-0001" />
+            <field name="with_last_closing_balance" eval="True" />
+            <field name="cash_control" eval="False"/>
+            <field name="sequence_id" ref="sequence_big_cash_journal"/>
+            <field name="default_debit_account_id" ref="chart_101-0112"/>
+            <field name="default_credit_account_id" ref="chart_101-0112"/>
+            <field name="analytic_journal_id" ref="dos_cash"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+        <record id="account.miscellaneous_journal" model="account.journal">
+            <field name="name">General Journal</field>
+            <field name="code">GNJ</field>
+            <field name="type">general</field>
+            <field name="sequence_id" ref="account.sequence_miscellaneous_journal"/>
+            <field name="analytic_journal_id" ref="dos_sit"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+        <record id="account.opening_journal" model="account.journal">
+            <field name="name">Opening Entries Journal</field>
+            <field name="code">OPEJ</field>
+            <field name="type">situation</field>
+            <field name="sequence_id" ref="account.sequence_opening_journal"/>
+            <field name="default_debit_account_id" ref="chart_903-0001"/>
+            <field name="default_credit_account_id" ref="chart_903-0002"/>
+            <field eval="True" name="centralisation"/>
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+        -->
+    </data>
+</openerp>
+        

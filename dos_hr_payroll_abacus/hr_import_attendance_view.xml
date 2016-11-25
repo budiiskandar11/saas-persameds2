@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	<record model="ir.ui.view" id="view_import_attendance_tree">
+			<field name="name">view_import_attendance_tree</field>
+			<field name="model">attendance.import</field>
+			<field name="arch" type="xml">
+				<tree string="Import Attendance" editable="bottom">
+					<field name="name"/>
+					<field name="tanggal"/>					
+					<field name="masuk"/>
+					<field name="keluar"/>					
+					<field name="reason"/>
+					<field name="date_sign_in"/>
+					<field name="date_sign_out"/>					
+					<field name="nama_peg"/>
+					<field name="state" readonly="1"/>					
+				</tree>
+			</field>
+		</record>
+    	
+    	<record model="ir.ui.view" id="view_import_attendance_form">
+			<field name="name">view_import_attendance_form</field>
+			<field name="model">attendance.import</field>
+			<field name="arch" type="xml">
+				<form string="Import Attendance Employee" version="7.0">
+					<header>
+<!--                     	<button name="" string="Plan" type="object" class="oe_highlight" -->
+<!--                             	states=""/> -->
+<!--                         <button name="" string="Done" type="object" class="oe_highlight" -->
+<!--                             	states=""/> -->
+                     	<field name="state" widget="statusbar" statusbar_visible="draft,confirm"/>
+                	</header>
+					<sheet>
+						<div class="oe_title">
+	                        <div class="oe_edit_only">
+	                            <label for="name"/>
+	                        </div>
+	                        <h1><field name="name" required="1"/></h1>
+                    	</div>
+						<group col="4" string="Data Import">
+							<group col="4">
+								<field name="no_peg"/>
+								<field name="no_akun"/>
+								<field name="nama_peg"/>
+								<field name="auto_assign"/>
+								<field name="tanggal"/>
+								<field name="jam_kerja"/>
+								<field name="awal_tugas"/>
+								<field name="akhir_tugas"/>
+								<field name="masuk"/>
+								<field name="keluar"/>
+								<field name="telat"/>
+								<field name="pulang_awal"/>
+								<field name="bolos"/>
+								<field name="waktu_lembur"/>
+								<field name="waktu_kerja"/>
+								<field name="status"/>
+								<field name="hrs_c_out"/>
+							</group>
+							<group col="2">
+								<field name="departement"/>
+								<field name="ndays"/>
+								<field name="akhir_pekan"/>
+								<field name="hari_libur"/>
+								<field name="lama_hadir"/>
+								<field name="ndays_out"/>
+								<field name="lembur_weekday"/>
+								<field name="libur_lembur"/>
+								<field name="reason"/>								
+							</group>
+						</group>
+						<group col="4" string="Data OpenERP">
+							<group col="2">
+								<field name="date_sign_in"/>
+								<field name="date_sign_out"/>
+							</group>
+							<group col="2">
+								<field name="date_attn"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="view_import_attendance_search">
+			<field name="name">view_import_attendance_search</field>
+			<field name="model">attendance.import</field>
+			<field name="arch" type="xml">
+				<search>
+					<field name="name"/>
+					<field name="no_peg"/>
+					<field name="no_akun"/>
+					<field name="nama_peg"/>
+				</search>
+			</field>
+		</record>
+		
+		<record id="view_attendance_filter" model="ir.ui.view">
+            <field name="name">Employees</field>
+            <field name="model">hr.employee</field>
+            <field name="arch" type="xml">
+                <search string="Attendance">
+                    <group expand="0" string="Group By">
+                    	<filter string="State" context="{'group_by':'state'}"/>
+                        <filter string="Month" context="{'group_by':'tanggal:month'}"/>                        
+                    </group>
+                </search>
+             </field>
+         </record>
+		
+		<record id="action_import_attendance" model="ir.actions.act_window">
+			<field name="name">Import Attendance</field>
+			<field name="res_model">attendance.import</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="search_view_id" ref="view_attendance_filter"/>
+		</record>
+		<menuitem id="menu_aimport_attendance" action="action_import_attendance" 
+				parent="hr_attendance.menu_hr_attendance" name="Import Attendance"/>
+		
+		<!--###Attendance Reason###-->
+		<record model="ir.ui.view" id="view_absence_reason">
+			<field name="name">Attendance Reason Tree</field>
+			<field name="model">absence.reason</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="allowance"/>
+					<field name="asdefault"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_attendance_reason" model="ir.actions.act_window">
+			<field name="name">Attendance Reason</field>
+			<field name="res_model">absence.reason</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<!--<field name="search_view_id" ref="view_attendance_filter"/>-->
+		</record>
+		<menuitem id="menu_attendance_reason" name="Attendance Reason" parent="hr.menu_hr_configuration" />
+		<menuitem id="submenu_attendance_reason" name="Attendance Reason" action="action_attendance_reason" parent="menu_attendance_reason" sequence="15"/>
+										
+	</data>
+</openerp>

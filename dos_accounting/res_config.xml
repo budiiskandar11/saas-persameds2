@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        
+        <record id="view_sale_account_add_disc_configuration" model="ir.ui.view">
+			<field name="name">dos.config.settings</field>
+			<field name="model">dos.config.settings</field>
+			<field name="inherit_id" ref="dos_config.view_dos_config_settings"/>
+			<field name="arch" type="xml">
+				<xpath expr="//div[@name='dos_sale']" position="inside">
+                    <div name="dos_sale_add_discount">
+						<div>
+							<label for="sale_account_additional_discount_id" string="Account Additional Discount"/>
+							<field name="sale_account_additional_discount_id" domain="[('type','!=','view')]" class="oe_inline"/>
+							<label string="*for Customer"/>
+						</div>
+					</div>
+				</xpath>
+				<xpath expr="//div[@name='dos_purchase']" position="inside">
+                    <div name="dos_purchase_add_discount">
+						<div>
+							<label for="purchase_account_additional_discount_id" string="Account Additional Discount"/>
+							<field name="purchase_account_additional_discount_id" domain="[('type','!=','view')]" class="oe_inline"/>
+							<label string="*for Supplier"/>
+						</div>
+					</div>
+				</xpath>
+			</field>
+		</record>
+
+    </data>
+</openerp>

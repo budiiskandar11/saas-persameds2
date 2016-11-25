@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <!-- Sequences for duty.trip --> 
+        <record id="seq_type_duty_trip" model="ir.sequence.type">
+            <field name="name">Duty Trip Order</field>
+            <field name="code">duty.trip.order</field>
+        </record>
+        <record id="seq_duty_trip" model="ir.sequence">
+            <field name="name">Duty Trip Order</field>
+            <field name="code">duty.trip.order</field>
+            <field name="prefix">ADSI/BMS/SPPD/</field>
+            <field name="suffix">/%(month)s/%(year)s</field>
+            <field name="padding">5</field>
+        </record>
+    </data>
+</openerp>

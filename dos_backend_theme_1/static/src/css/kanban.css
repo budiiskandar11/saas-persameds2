@@ -1,0 +1,81 @@
+.openerp .oe_kanban_view {
+  background: #8F8F8F;
+  height: auto;
+}
+
+.openerp .oe_kanban_view .oe_kanban_details {
+  display: inline-block;
+  vertical-align: top;
+  width: 260px;
+  height: 80px;
+  font-size: 11px;
+  margin: 5px;
+  padding: 5px;
+  color: #4c4c4c;
+}
+
+.openerp .oe_kanban_view .oe_kanban_vignette {
+  padding: 8px;
+  min-height: 100px;
+      background-color: #fff;
+    box-shadow: 0 0 1px 1px #6f6f6f;
+    padding: 8px 8px;
+}
+
+.openerp .oe_kanban_buttons button.oe_highlight {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    background-color: #337ab7;
+    border: 0px;
+    white-space: nowrap;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.42857143;
+    border-radius: 0px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.openerp .oe_kanban_buttons button.oe_highlight:hover {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    background-color: #2d6da3;
+    border: 0px;
+    white-space: nowrap;
+    padding: 5px 10px;
+    font-size: 12px;
+    line-height: 1.42857143;
+    border-radius: 0px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/*kanban module install*/
+.openerp .oe_kanban_view .oe_kanban_record {
+  position: relative;
+  display: block;
+  min-height: 20px;
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #1D559D;
+  background: #FFFFFF;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0) inset;
+}

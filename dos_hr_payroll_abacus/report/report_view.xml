@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<openerp>
+	<data>
+		<report 
+		 id="report_payslip" 
+		 string="Abacus Payslip" 
+		 model="hr.payslip" 
+		 report_type="qweb-pdf" 
+		 file="dos_hr_payroll_abacus.payslip_template_document" 
+		 name="dos_hr_payroll_abacus.payslip_template_document"/>
+	</data>
+</openerp>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name='balancesheetWidget'>         
+        <div class="modal-body1 greyback" id="divtitlebs">
+        <table>
+          <tr>
+          <td style="width:10%">
+          </td>
+            <td class="nowrap hidediv" style="width:8%">
+              <p>Chart of Account&#160;&#160; </p>
+            </td>
+            <td class="hidediv">
+              <p> : </p>
+            </td>
+            <td class="hidediv">
+	      <select id="chart_account_id" class="form-control wrapper-dropdown">
+		    <option class="js_loc_option" value="-1"><i>Select ...</i></option>
+		</select>
+            </td>
+            <td class="nowrap hidediv" style="width:4%">
+              <p>Filter by &#160;</p>
+            </td>
+            <td class="hidediv">
+              <p> : </p>
+            </td>
+            <td style="width:10%" class="hidediv">              
+	      <select id="filter_select" class="form-control wrapper-dropdown">
+		    <option class="js_loc_option" value="-1"><i>Select Filter ...</i></option>
+		    <option class="js_loc_option" value="filter_date">Date</option>
+		    <option class="js_loc_option" value="filter_period">Periods</option>
+		</select>
+            </td>             
+            <td class="nowrap" style="width:6%" id="daterangetd1">
+              <p>&#160;&#160;As of Date </p>
+            </td>
+            <td id="daterangetd2">
+              <p> : </p>
+            </td>
+            <td id="daterangetd3" style="width:10%">
+              <input id="daterange" name="daterange"/>
+              <input type="text" id="datepicker_from" class="datepicker hidediv" size="10" style="border:0.5px solid skyblue;border-radius: 4px;height:35px"/>
+            </td> 
+            <td class="nowrap hidediv" style="width:4%" id="periodfromtd1">
+              <p>&#160;&#160;Period From </p>
+            </td>
+            <td class="hidediv" id="periodfromtd2">
+              <p> : </p>
+            </td>
+            <td class="hidediv" id="periodfromtd3" style="width:14%">
+              <select id="periodfrom" class="form-control wrapper-dropdown">
+		    <option class="js_loc_option" value="-1"><i>Select ...</i></option>
+		</select>
+            </td> 
+            <td class="nowrap hidediv" style="width:4%">
+              <p>Date To </p>
+            </td>
+            <td class="nowrap hidediv" style="width:4%" id="periodtotd1">
+              <p>&#160;&#160;Period To </p>
+            </td>
+            <td class="hidediv" id="periodtotd2">
+              <p> : </p>
+            </td>
+            <td class="hidediv" id="periodtotd3" style="width:14%">
+              <select id="periodto" class="form-control wrapper-dropdown">
+		    <option class="js_loc_option" value="-1"><i>Select ...</i></option>
+		</select>
+            </td> 
+            <td class="nowrap hidediv" style="width:4%">
+              <p>Date To </p>
+            </td>
+            <td class="hidediv">
+              <p> : </p>
+            </td>
+            <td>
+              <input type="text" id="datepicker_to" class="datepicker hidediv" size="10" style="border:0.5px solid skyblue;border-radius: 4px;height:35px"/>              
+            </td>
+            <td class="nowrap" style="width:4%">
+              <p>Target Moves &#160;</p>
+            </td>
+            <td>
+              <p> : </p>
+            </td>
+            <td style="width:15%">              
+	      <select id="targetmove_select" class="form-control wrapper-dropdown">
+		    <option class="js_loc_option" value="-1"><i>Select ...</i></option>
+		    <option class="js_loc_option" value="posted">All Posted Entries</option>
+		    <option class="js_loc_option" value="all">All Entries</option>
+		</select>
+            </td>
+            <td class="nowrap" style="width:2%">
+              <p> &#160;Type &#160;</p>
+            </td>
+            <td>
+              <p> : </p>
+            </td>
+            <td style="width:15%">              
+	      <select id="type_select" class="form-control wrapper-dropdown">
+		    <option class="js_loc_option" value="standard">Standard</option>
+		    <option class="js_loc_option" value="compare">Prev Year Comparison</option>		    
+		    <option class="js_loc_option" value="level3">Level 1</option>
+		    <option class="js_loc_option" value="level4">Level 2</option>
+		    <option class="js_loc_option" value="level5">Level 3</option>
+		    <option class="js_loc_option" value="level6">Level 4</option>
+		    <option class="js_loc_option" value="level7">Level 5</option>
+		</select>
+            </td>    
+            <td>
+              <p>&#160;</p>
+            </td>                     
+            <td style="width:10%">
+            <button id="btnsubmit" name="btnsubmit" class="button_highlight">Apply</button>
+            </td> 
+            <td style="width:20%">
+            <button id="btnprint" name="btnprint" class="button_highlight hidediv">Print</button> 
+            <button id="btnexport" name="btnexport" class="button_highlight hidediv">Export</button> 
+          </td>              
+          </tr>          
+        </table>
+        </div>        
+        <div id="maindiv" name="maindiv" width="100%">
+                    <h4><b><p id="companyid" width="100%" class="hidediv" style="text-align:center"></p></b></h4>
+                    <h4><b><p id="titleid" width="100%" class="hidediv" style="text-align:center"><t t-esc="widget.get_title()"/></p></b></h4>
+                    <h4><b><p id="filterid" width="100%" class="hidediv" style="text-align:center"></p></b></h4>
+       <table id="maintbl" class="hidediv">
+        <tr>
+        <td style="width:15%;">             
+        </td>
+        <td style="width:70%;">             
+        </td>   
+        <td style="width:15%;">
+        </td> 
+       </tr>
+        <tr>
+        <td style="width:15%;">             
+        </td>
+        <td id="maintd" class="tree">        
+        </td>
+        <td style="width:15%;">
+        </td>
+        </tr>
+        </table>
+        <table id="maintbl_prevyear" class="hidediv">
+            <tr>
+            <td style="width:5%;">             
+            </td>
+            <td style="width:90%;"> 
+            <h4><b><table id="tblTitles"><tr><td style="text-align:left;border-bottom: 1px solid black;">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Account</td><td style="text-align:right;border-bottom: 1px solid black;width:150px;" id="balidtd">Year &#160;&#160;</td><td style="text-align:right;border-bottom: 1px solid black;width:150px;" id="balcmpidtd">Year &#160;&#160;</td><td style="text-align:right;border-bottom: 1px solid black;width:150px;">$ Change </td><td style="text-align:right;border-bottom: 1px solid black;width:150px;">% Change </td></tr></table></b></h4> 
+            </td>   
+           <td style="width:5%;">
+           </td> 
+            </tr>
+        <tr>
+        <td style="width:5%;">             
+        </td>
+        <td id="maintd_prevyear" class="tree">        
+        </td>
+        <td style="width:5%;">
+        </td>
+        </tr>
+        </table>
+        </div>
+        <div id="editor"></div>
+    </t>  
+    
+</templates>
+  

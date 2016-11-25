@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		
+        <report auto="False" id="report_do_form" 
+		        model="stock.picking" 
+		        name="report.do.form"
+		        file="dos_warehouse_report/report/wr_form.mako" 
+		        string="Delivery Order" 
+         		webkit_header="warehouse_header_footer"
+		        usage="default" 
+		       	report_type="webkit"/>	
+	</data>
+</openerp>

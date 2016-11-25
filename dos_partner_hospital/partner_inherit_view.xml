@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+    	<record id="view_partner_tree_hospital" model="ir.ui.view">
+            <field name="name">res.partner.tree.hospital</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <tree string="Contacts">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="class"/>
+                    <field name="owner"/>
+                    <field name="email"/>
+                     <field name="website"/>
+                    <field name="phone"/>
+                    <field name="city"/>
+                    <field name="is_company" invisible="1"/>
+                    <field name="country_id" invisible="1"/>
+                    <field name="parent_id" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+ 
+    	<record id="view_hospital_form_inherit" model="ir.ui.view">
+            <field name="name">view.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//form/sheet/group/group/field[@name='website']" position="after">
+            		<field name="class" attrs="{'invisible': [('hospital','!=', True)]}"/>
+            		<field name="owner" attrs="{'invisible': [('hospital','!=', True)]}"/>
+            	</xpath>
+            	<xpath expr="//form/sheet/notebook/page[@name='sales_purchases']/group/group[2]/field[@name='supplier']" position="after">
+            		<field name="hospital"/>
+            		
+            	</xpath>
+            </field>
+        </record>
+       		
+        <record model='ir.actions.act_window' id='res_partner_hospital_view'>
+            <field name="name">Hospital List</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref="view_partner_tree_hospital"/>
+            <field name="domain">[('hospital','=',True)]</field>
+            <field name="context">{'search_default_supplier': 0,'default_customer': 0,'default_supplier': 0,'default_hospital': 1,'default_is_company':1,}</field>
+           
+           
+        </record>
+        
+        <menuitem action="res_partner_hospital_view" id="menu_action_hospital" 
+        			parent="base.menu_sales" sequence="3"/>
+        
+    </data>
+</openerp>

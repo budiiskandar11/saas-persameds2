@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        
+    	<!-- cash Advance Type -->
+    	
+		<record model="ir.ui.view" id="cash_advance_type_form">
+			<field name="name">cash.advance.type.form</field>
+            <field name="model">cash.advance.type</field>
+            <field name="arch" type="xml">
+            	<form string="Advance Type">
+            		<header>
+            		</header>
+            		<sheet string="Advance Type">
+            			<group>
+            				<group>
+            					<field name="code"/>
+            					<field name="name"/>
+            				</group>
+            				<group>
+            					<field name="account_advance_id"/>
+            				</group>
+            			</group>
+            		</sheet>
+            	</form>
+            </field>
+		</record>
+		
+		<record model="ir.ui.view" id="cash_advance_type_tree">
+			<field name="name">cash.advance.type.tree</field>
+            <field name="model">cash.advance.type</field>
+            <field name="arch" type="xml">
+            	<tree string="Advance Type">
+            		<field name="code"/>
+           			<field name="name"/> 				
+            		<field name="account_advance_id"/>
+            				
+            	</tree>
+            </field>
+		</record>
+		
+		<record id="action_cash_advance_type" model="ir.actions.act_window">
+            <field name="name">Cash Advance Configuration</field>
+            <field name="res_model">cash.advance.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a new model.
+              </p>
+            </field>
+            
+        </record>
+		
+        
+		<menuitem name="Advance Settlement Config"
+		parent="account.menu_finance_configuration" 
+		id="menu_advance_settlement_config" 
+		sequence="100"	/> 
+			
+		<menuitem action="action_cash_advance_type" 
+		parent="menu_advance_settlement_config" 
+		id="cash_advance_config" 
+		sequence="101"	/>  	
+    	
+    	<!--ini form aselinya -->
+    	
+    	<record model="ir.ui.view" id="cash_view_vendor_payment_form">
+            <field name="name">cash.view.vendor.payment.form</field>
+            <field name="model">cash.advance</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Bill Payment">
+                    <group>
+                        <field name="partner_id" domain="[('supplier','=',True)]" required="1" on_change="onchange_partner_id(partner_id, journal_id, amount, currency_id, type, date, context)" context="{'invoice_currency':currency_id}" string="Supplier"/>
+                        <field name="amount" on_change="onchange_partner_id(partner_id, journal_id, amount, currency_id, type, date, context)"/>
+                        <field name="journal_id"
+                            domain="[('type','in',['bank', 'cash'])]" 
+                            widget="selection" select="1"
+                            on_change="onchange_partner_id(partner_id, journal_id, amount, currency_id, type, date, context)"
+                            string="Payment Method"/>
+                        <field name="date" select="1" on_change="onchange_date(partner_id, journal_id, amount, currency_id, type, date, context)"/>
+                        <field name="reference" select="1" string="Payment Ref"/>
+                        <field name="name" colspan="2"/>
+                        <field name="company_id" select="1" widget="selection" groups="base.group_multi_company"/>
+                        
+                        <field name="account_id"
+                            widget="selection"
+                            invisible="True"/>
+                        <field name="pre_line" invisible="1"/>
+                        <field name="type" invisible="True"/>
+                        <field name="payment_adm"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Payment Information2">
+                            <field name="line_dr_ids" default_get="{'journal_id':journal_id, 'type':type, 'partner_id':partner_id}" colspan="4" nolabel="1" height="140">
+                                <tree string="Supplier Invoices and Outstanding transactions" editable="bottom">
+                                    <field name="move_line_id" context="{'journal_id':parent.journal_id, 'partner_id':parent.partner_id}"
+                                        on_change="onchange_move_line_id(move_line_id)"
+                                        domain="[('account_id.type','=','payable'), ('reconcile_id','=', False), ('partner_id','=',parent.partner_id)]"
+                                        />
+                                    <field name="account_id" groups="base.group_extended" domain="[('type','=','payable')]"/>
+                                    <field name="date_original" readonly="1"/>
+                                    <field name="date_due" readonly="1"/>
+                                    <field name="amount_original" readonly="1"/>
+                                    <field name="amount_unreconciled" sum="Open Balance" readonly="1"/>
+                                    <field name="amount" sum="Payment"/>
+                                </tree>
+                            </field>
+                            <field name="line_cr_ids" colspan="4" nolabel="1" attrs="{'invisible': [('pre_line','=',False)]}" default_get="{'journal_id':journal_id, 'partner_id':partner_id}">
+                                <tree string="Credits" editable="bottom">
+                                    <field name="move_line_id"/>
+                                    <field name="account_id" groups="base.group_extended" domain="[('type','=','receivable')]"/>
+                                    <field name="date_original"/>
+                                    <field name="amount_original"/>
+                                    <field name="amount" sum="Payment"/>
+                                </tree>
+                            </field>
+                            <group col="2" colspan="3">
+                                <separator string="Internal Notes" colspan="2"/>
+                                <field name="narration" colspan="2" nolabel="1"/>
+                            </group>
+                            <group col="2" colspan="1">
+                                <group col="2" colspan="1">
+                                    <separator string="Payment Options" colspan="2"/>
+                                    <field name="payment_option" required="1"/>
+                                    <field name="writeoff_amount"
+                                           attrs="{'invisible':[('payment_option','!=','with_writeoff')]}"/>
+                                    <field name="writeoff_acc_id"
+                                           attrs="{'invisible':[('payment_option','!=','with_writeoff')], 'required':[('payment_option','=','with_writeoff')]}"
+                                           domain="[('type','=','other')]"/>
+                                    <field name="comment"
+                                           attrs="{'invisible':[('payment_option','!=','with_writeoff')]}"/>
+                                    <field name="analytic_id"
+                                           attrs="{'invisible':[('payment_option','!=','with_writeoff')]}"
+                                           groups="analytic.group_analytic_accounting"/>
+                                </group>
+                                <separator string="Other Information" colspan="2"/>
+                                <group col="4" colspan="1">
+                                  <field name="currency_id" invisible="True"/>
+                                  <field name="number"/>
+                                </group>
+                            </group>
+		                    <group col="10" colspan="4">
+		                        <field name="state"/>
+		                        <button name="cancel_voucher" string="Cancel" states="draft,proforma"  icon="gtk-cancel"/>
+		                        <button name="confirm" string="Propose" states="draft" class="oe_highlight" />
+		                        <button name="cancel_voucher" string="Unreconcile" type="object" states="posted" icon="terp-stock_effects-object-colorize" confirm="Are you sure to unreconcile this record ?"/>
+		                        <button name="action_cancel_draft" type="object" states="cancel" string="Set to Draft" icon="terp-stock_effects-object-colorize"/>
+		                        <button name="proforma_voucher" string="Validate" states="draft" icon="gtk-go-forward"/>
+		                    </group>
+                        </page>
+                        
+                        <page string="Journal Items" groups="base.group_extended" attrs="{'invisible': [('state','!=','posted')]}">
+                            <group col="6" colspan="4">
+                                <field name="period_id"/>
+                                <field name="audit"/>
+                            </group>
+                            <field name="move_ids" colspan="4" nolabel="1" readonly="1">
+                               <tree string="Journal Items">
+                                   <field name="move_id"/>
+                                   <field name="ref"/>
+                                   <field name="date"/>
+                                   <field name="statement_id"/>
+                                   <field name="partner_id"/>
+                                   <field name="account_id"/>
+                                   <field name="name"/>
+                                   <field name="debit"/>
+                                   <field name="credit"/>
+                                   <field name="state"/>
+                                   <field name="reconcile_id"/>
+                                   <field name="amount_currency"/>
+                                   <field name="currency_id"/>
+                               </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+    
+        <record id="view_cash_advance_filter_vendor" model="ir.ui.view">
+            <field name="name">view.cash.advance.filter.vendor</field>
+            <field name="model">cash.advance</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Search Vouchers">
+                    <group col='8' colspan='4'>
+                        <filter icon="terp-document-new" string="Draft" domain="[('state','=','draft')]" help="Draft Vouchers"/>
+                        <filter icon="terp-camera_test" string="Waiting Payment" domain="[('state','=','approve')]" help="Posted Vouchers"/>
+                        <filter icon="terp-camera_test" string="Posted" domain="[('state','=','posted')]" help="Posted Vouchers"/>
+                        <separator orientation="vertical"/>
+                        <filter icon="terp-gtk-jump-to-ltr" string="To Review" domain="[('state','=','posted')]" help="To Review"/>
+                        <separator orientation="vertical"/>
+                        <field name="date"/>
+                        <field name="number"/>
+                        <field name="partner_id" string="Employee"/>
+                    </group>
+                    <newline/>
+                    <group col='8' colspan='4'>
+                        <field name="journal_id" widget="selection" context="{'journal_id': self, 'set_visible':False}" domain="[('type','in',('purchase','purchase_refund'))]"/>
+                        <field name="period_id" groups="base.group_extended"/>
+                    </group>
+                    <newline/>
+                    <group expand="0" string="Extended Filters..." col='8' colspan='4'>
+                        <field name="reference"/>
+                        <field name="name"/>
+                        <field name="narration"/>
+                        <field name="amount"/>
+                   </group>
+                   <newline/>
+                    <group expand="0" string="Group By..." colspan="4" col="10">
+                        <filter string="Employee" icon="terp-personal" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter string="Department" icon="terp-personal" domain="[]" context="{'group_by':'department_id'}"/>
+                        <filter string="Tipe" icon="terp-personal" domain="[]" context="{'group_by':'advance_type_id'}"/>
+                        <filter string="Journal" icon="terp-folder-orange" domain="[]" context="{'group_by':'journal_id'}"/>
+                        <filter string="Period" icon="terp-go-month" domain="[]" context="{'group_by':'period_id','visible':True}"/>
+                        <filter string="State" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_cash_advance_filter_sale" model="ir.ui.view">
+            <field name="name">view.cash.advance.filter.sale</field>
+            <field name="model">cash.advance</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Search Vouchers">
+                    <group col='8' colspan='4'>
+                        <filter icon="terp-document-new" string="Draft" domain="[('state','=','draft')]" help="Draft Vouchers"/>
+                        <filter icon="terp-camera_test" string="Posted" domain="[('state','=','posted')]" help="Posted Vouchers"/>
+                        <filter icon="terp-camera_test" string="Waiting Payment" domain="[('state','=','approve')]" help="Waiting Payment Vouchers"/>
+                        <separator orientation="vertical"/>
+                        <filter icon="terp-gtk-jump-to-ltr" string="To Review" domain="[('state','=','posted')]" groups="base.group_extended" help="To Review"/>
+                        <separator orientation="vertical"/>
+                        <field name="date"/>
+                        <field name="number"/>
+                        <field name="partner_id" string="Employee"/>
+                    </group>
+                    <newline/>
+                    <group col='8' colspan='4'>
+                        <field name="journal_id" widget="selection" context="{'journal_id': self, 'set_visible':False}" domain="[('type','in',('sale','sale_refund'))]"/>
+                        <field name="period_id" groups="base.group_extended"/>
+                    </group>
+                    <newline/>
+                    <group expand="0" string="Extended Filters..." col='8' colspan='4'>
+                        <field name="reference"/>
+                        <field name="name"/>
+                        <field name="narration"/>
+                        <field name="amount"/>
+                   </group>
+                   <newline/>
+                    <group expand="0" string="Group By..." colspan="4" col="10">
+                        <filter string="Customer" icon="terp-personal" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter string="Journal" icon="terp-folder-orange" domain="[]" context="{'group_by':'journal_id'}"/>
+                        <filter string="Period" icon="terp-go-month" domain="[]" context="{'group_by':'period_id','visible':True}"/>
+                        <filter string="State" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!--  Purchase Vouchers -->
+        
+        <record id="act_pay_bills_cash_advance" model="ir.actions.act_window">
+            <field name="name">Bill Payment3333</field>
+            <field name="res_model">cash.advance</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('journal_id.type', 'in', ['bank', 'cash']), ('type','=','payment'), ('partner_id','=',partner_id)]</field>
+            <field name="context">{'type':'payment', 'partner_id': partner_id, 'default_reference':reference}</field>
+            <field name="view_id" ref="cash_view_vendor_payment_form"/>
+            <field name="target">current</field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_purchase_receipt_tree">
+            <field name="name">view.purchase.receipt.tree</field>
+            <field name="model">cash.advance</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree colors="blue:state in ('draft'); grey:state in ('posted'); purple:state in ('approve')" string="Cash Advance List">
+           			<field name="employee_id"/>
+           			<field name="name" />
+           			<field name="date" />
+           			<field name="number"/>
+           			<field name="amount"/>
+                    <field name="state"/>
+           		</tree>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_purchase_receipt_form">
+            <field name="name">view.purchase.receipt.form</field>
+            <field name="model">cash.advance</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Cash Advance">
+                    <header>
+                		<button name="cancel_voucher" string="Cancel" states="draft,confirm,proforma,approve" confirm="Are you sure to confirm this record ?"/>
+                    	<button name="action_cancel_draft" type="object" states="cancel" string="Set to Draft" />
+                    	<button name="confirm" string="Propose" states="draft" class="oe_highlight"/>
+                    	<button name="proforma_approve" string="Approve" states="confirm" class="oe_highlight"/>
+                    	<button name="proforma_voucher2" string="Paid" states="approve" class="oe_highlight"/>
+                    	<field name="state" widget="statusbar" statusbar_visible="draft,confirm,approve,posted,canceled"/>
+                    </header>
+					<sheet>
+                    <h1>
+                        <label string="Advance Form No"/>
+                        <field name="number" class="oe_inline" readonly="True"/>
+                    </h1>
+                    <group>
+                    	<group>
+                    		<field name="date_create" readonly="1"/>
+                    	</group>
+                    	<group>
+                    		<field name="create_uid" readonly="1"/>
+                    	</group>
+                        <group string="Request">
+	                        <field name="date" string="Request Date" select="1" required="1"/>
+	                        <field name="employee_id" /><!--on_change="onchange_employee(employee_id)" required="1"/>-->
+	                        <field name="department_id"/>
+	                        <field name="company_id" select="1" widget="selection" groups="base.group_multi_company"/>
+	                        <field name="partner_id" required="0" on_change="onchange_partner_id(partner_id, journal_id, amount, currency_id, type, date)" invisible="1"/>
+	                        <field name="currency_id" string="Advance Currency" widget="selection" required="0"/>
+                        	<field name="type" invisible="True"/>
+                        </group>
+                        <group string="Payments">
+                        	<field name="payment_adm" required="0" attrs="{'readonly': [('state','!=',('approve'))]}"/>
+                            <field name="account_id" domain="[('type','=','other')]"  invisible="True" />
+                            <field name="journal_id" domain="[('type','in',['bank','cash'])]" widget="selection" select="1" attrs="{'readonly': [('state','!=',('approve'))]}"/>
+                            <field name="advance_type" on_change="onchange_type_id(advance_type)" required="0" attrs="{'readonly': [('state','!=',('approve'))], 'required':[('state','=','approve')]}"/>
+                            <field name="account_advance_id" domain="[('type','!=','view'),('type','=','other'),('user_type','!=','cash'),('user_type','!=','bank')]" 
+                            attrs="{'readonly': [('state','!=',('approve'))], 'required':[('state','=','approve')]}"/>
+                            <field name="move_id" readonly="1" attrs="{'invisible': [('state','!=',('posted'))]}"/>
+                        </group>
+                        <group colspan="2">
+                        <field name="name" />
+                        </group>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Cash Advance">
+                            <field name="line_dr_ids" default_get="{'journal_id':journal_id,'partner_id':partner_id}" colspan="4" nolabel="1" height="180">
+                                <tree string="Expense Lines" editable="bottom">
+                                    
+                                	<!--<field name="account_id" widget="selection" domain="[('user_type.report_type','=','asset'), ('type','!=','view')]"/>-->
+                                    <field name="name" required="1"/>
+                                    <field name="amount" sum="Amount Total"/>
+                                    <!--<field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>-->
+                                </tree>
+                                <form string="Expense Lines">
+                                                                
+                                    <!--<field name="account_id" domain="[('user_type.report_type','=','expense'), ('type','!=','view')]"/>-->
+                                    
+                                    <field name="name" required="1"/>
+                                    <field name="amount"/>
+                                    <!--<field name="account_analytic_id" groups="analytic.group_analytic_accounting"/>-->
+                                </form>
+                            </field>
+                            <group col="2" colspan="3">
+                                <separator string="Internal Notes" colspan="2"/>
+                                <field name="narration" colspan="2" nolabel="1"/>
+                            </group>
+                            <group col="2" colspan="1" invisible="1">
+                                <group col="4" colspan="1">
+                                    <separator string="Total" colspan="4"/>
+                                    <field name="amount" string="Total"/>
+                                </group>
+                            </group>
+                        </page>
+                        
+                        <page string="Payment Administration" attrs="{'invisible': [('payment_adm','=','cash')]}">
+		                    <field name="adm_amount" colspan="4"  
+		                           attrs="{'invisible':[('payment_adm','not in',('transfer','cheque'))]}"/>
+		                    <field name="adm_acc_id" colspan="4"
+		                           attrs="{'invisible':[('payment_adm','not in',('transfer','cheque'))], 'readonly':[('adm_amount','&lt;=',0)], 'required':[('payment_adm','in',('transfer','cheque')),('adm_amount','!=',0)]}" domain="[('type','=','other')]"/>
+		                    <field name="adm_comment" colspan="4"
+		                           attrs="{'invisible':['|',('payment_adm','=','cheque'),('payment_adm','=','cash')], 'required':['|',('payment_adm','=','transfer'),('payment_adm','=','free_transfer')]}"/> 
+		                    <!--<field name="adm_comment" colspan="4"
+		                           attrs="{'invisible':[('payment_adm','!=','transfer')], 'required':[('payment_adm','=','transfer')]}"/> -->
+		                    <field name="cheque_number" colspan="4"
+		                           attrs="{'invisible':[('payment_adm','!=','cheque')]}"/>
+		                    <field name="cheque_start_date" colspan="2"
+		                           attrs="{'invisible':[('payment_adm','!=','cheque')]}" domain="[('type','=','other')]"/> 
+		                    <field name="cheque_end_date" colspan="2"
+		                           attrs="{'invisible':[('payment_adm','!=','cheque')], 'required':[('payment_adm','=','cheque')]}"/>
+		                    <field name="bank_id" colspan="4"
+		                           attrs="{'invisible':[('payment_adm','!=','cheque')]}"/>                     
+                        </page>
+                        
+                        <page string="Journal Items" attrs="{'invisible': [('state','!=','posted')]}">
+                            <group col="6" colspan="4">
+                                <field name="period_id"/>
+                                <field name="audit"/>
+                            </group>
+                            <field name="move_ids" colspan="4" nolabel="1" readonly="1">
+                               <tree string="Journal Items">
+                                   <field name="move_id"/>
+                                   <field name="ref"/>
+                                   <field name="date"/>
+                                   <field name="statement_id"/>
+                                   <field name="partner_id"/>
+                                   <field name="account_id"/>
+                                   <field name="name"/>
+                                   <field name="debit"/>
+                                   <field name="credit"/>
+                                   <field name="state"/>
+                                   <field name="reconcile_id"/>
+                               </tree>
+                            </field>
+                        </page>
+                    </notebook>                    
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <record id="action_cash_advance_receipt" model="ir.actions.act_window">
+            <field name="name">Cash Advance</field>
+            <field name="res_model">cash.advance</field>
+            <field name="view_type">form</field>
+            <field name="domain"></field>
+            <field name="context">{'type':'purchase'}</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" eval="view_cash_advance_filter_vendor"/>
+            <field name="target">current</field>
+        </record>
+        <record id="action_cash_advance_receipt_tree" model="ir.actions.act_window.view">
+            <field eval="1" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="act_window_id" ref="action_cash_advance_receipt"/>
+        </record>
+        <record id="action_cash_advance_receipt_form" model="ir.actions.act_window.view">
+            <field eval="2" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_purchase_receipt_form"/>
+            <field name="act_window_id" ref="action_cash_advance_receipt"/>
+        </record>
+		
+        <menuitem id="menu_view_cash_advance" name="Cash Advance" parent="account.menu_finance" groups="group_cash_advance" sequence="4"/>
+        
+        <menuitem id="menu_action_cash_advance_receipt" icon="STOCK_JUSTIFY_FILL"
+            action="action_cash_advance_receipt" parent="menu_view_cash_advance" groups="group_cash_advance" sequence="1" /> 
+    </data>
+</openerp>

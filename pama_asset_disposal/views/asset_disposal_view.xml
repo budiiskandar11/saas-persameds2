@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		
+		<!-- Asset Disposal Search View -->
+		<record id="view_account_asset_disposal_filter" model="ir.ui.view">
+			<field name="name">account.asset.disposal.select</field>
+			<field name="model">account.asset.disposal</field>
+			<field name="arch" type="xml">
+				<search string="Search Asset Disposal">
+					<filter icon="terp-dolar_ok!" string="Draft"
+						domain="[('state', '=', 'draft')]"/>
+					<separator/>
+					<filter string="Propose"
+						domain="[('state', '=', 'propose')]"
+						name="propose"/>
+					<separator/>
+					<filter string="Approved" icon="terp-personnal"
+						domain="[('state', '=', 'approved')]"/>
+					<separator/>
+					<filter string="To Sale" icon="terp-personnal"
+						domain="[('type', '=', 'to_sale')]"/>
+					<separator/>
+					<filter string="To Destroy" icon="terp-personnal"
+						domain="[('type', '=', 'to_destroy')]"/>
+					<separator/>
+					<filter string="CSR Activity" icon="terp-personnal"
+						domain="[('type', '=', 'csr_activity')]"/>
+					<separator/>
+					<field name="name"/>
+					<field name="date"/>
+					<field name="responsible_id"/>
+					<field name="asset_id"/>
+				</search>
+			</field>
+		</record>
+		
+		<!-- Asset Disposal Tree View -->
+		<record id="view_account_asset_disposal_tree" model="ir.ui.view">
+			<field name="name">account.asset.disposal.tree</field>
+			<field name="model">account.asset.disposal</field>
+			<field name="priority">2</field>
+			<field name="arch" type="xml">
+				<tree string="Asset Disposal">
+					<field name="name"/>
+					<field name="date"/>
+					<field name="asset_id"/>
+					<field name="responsible_id"/>
+					<field name="asset_responsible_id"/>
+					<field name="type"/>
+					<field name="state"/>
+				</tree>
+			</field>
+		</record>
+		
+		<!-- Asset Disposal Form View -->
+		<record id="view_account_asset_disposal_form" model="ir.ui.view">
+			<field name="name">account.asset.disposal.form</field>
+			<field name="model">account.asset.disposal</field>
+			<field name="arch" type="xml">
+				<form string="Sales Order">
+					<header>
+						<button name="button_propose" states="draft" type="object" string="Propose" class="oe_highlight"/>
+						<button name="button_approve" states="propose" type="object" string="Approve" class="oe_highlight"/>
+						
+						<button name="button_validate" states="approved" type="object" string="Validate" class="oe_highlight"/>
+						<button name="button_dispose" states="validate" type="object" string="Dispose" class="oe_highlight"/>
+						<button name="button_done" states="dispose" type="object" string="Done" class="oe_highlight"/>				
+						<field name="state" widget="statusbar"
+						statusbar_visible="draft,propose,approved,done"/>
+					</header>
+					<sheet>
+						<h1>
+							<label string="Disposal Number"/>
+							<field name="name" class="oe_inline"/>
+						</h1>
+						<group>
+							<group string="General Info">
+								<field name="date"/>
+								<field name="responsible_id"/>
+							</group>
+							<group string="Asset Info">
+									<field name="asset_id"
+										on_change="asset_id_change(asset_id)"/>
+									
+									<field name="asset_responsible_id"/>
+									<field name="purchase_value"/>
+									<field name="book_value"/>
+									<field name="depreciation_value"/>
+									
+									<!-- <field name="purchase_value_usd"/>
+									<field name="book_value_usd"/>
+									<field name="depreciation_value_usd"/> -->
+										
+									<!-- <field name="masterlist"/>
+									<field name="leasing"/> -->
+							</group>
+							<group>
+									<field name="type" string="Disposible Type" attrs="{'required': [('state','=','validate')]}"/>
+							</group>
+
+
+						</group>
+						<notebook>
+							<page string="Disposible Info" >
+							<group colspan="4" col="4">
+								<field name="partner_id" 
+									attrs="{'invisible': [('type', 'in', ['to_destroy'])], 'required': [('type','=','to_sale')]}"/>
+								<field name="invoice_date"
+									attrs="{'invisible': [('type', 'in', ['to_destroy'])], 'required': [('type','=','to_sale')]}"/>								
+								<field name="currency_id"
+									attrs="{'invisible': [('type', 'in', ['to_destroy'])], 'required': [('type','=','to_sale')]}"/>								
+								<field name="price" options="{'currency_field': 'currency_id'}"
+									attrs="{'invisible': [('type', 'in', ['to_destroy', 'csr_activity'])]}"/>
+								<field name="tax_ids" domain="[('parent_id','=',False),('type_tax_use','&lt;&gt;','purchase')]" widget="many2many_tags"
+									attrs="{'invisible': [('type', 'in', ['to_destroy', 'csr_activity'])]}"/>
+								<field name="reasons"
+									attrs="{'invisible': [('type', 'in', ['to_sale', 'csr_activity'])], 'required': [('type','=','to_destroy')]}"/>
+								<field name="note" colspan="4"/>
+							</group>
+							</page>	
+							<page string="Other Info">
+								<group>
+									<field name="move_id"/>
+									<field name="invoice_id"/>
+								</group>
+							</page>
+							</notebook>
+						 
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<!-- Asset Disposal Action -->
+		<record id="action_account_asset_disposal" model="ir.actions.act_window">
+			<field name="name">Asset Disposal</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">account.asset.disposal</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="filter" eval="True"/>
+			<field name="search_view_id" ref="view_account_asset_disposal_filter"/>
+		</record>
+		
+		<!-- Asset Disposal Menu -->
+		<menuitem action="action_account_asset_disposal"
+			id="menu_account_asset_disposal"
+			parent="account_asset.menu_finance_assets" sequence="101"/>
+		
+	</data>
+</openerp>

@@ -1,0 +1,399 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* ad_hr_training
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.0.3\n"
+"Report-Msgid-Bugs-To: support@openerp.com\n"
+"POT-Creation-Date: 2012-07-12 15:02+0000\n"
+"PO-Revision-Date: 2012-07-12 22:06+0700\n"
+"Last-Translator: Togar Hutabarat <to.garnet@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: ad_hr_training
+#: field:hr.training.lines,type:0
+msgid "Type"
+msgstr "Jenis"
+
+#. module: ad_hr_training
+#: constraint:hr.employee:0
+msgid "ktp number is invalid. The format should be like this: 01.855.081.4-005.000"
+msgstr "Nomor KTP tidak valid. Format nomor KTP seharusnya seperti berikut: 01.855.081.4-005.000"
+
+#. module: ad_hr_training
+#: field:hr.training,date_end:0
+#: field:hr.training.lines,date_end:0
+msgid "End"
+msgstr "Sampai"
+
+#. module: ad_hr_training
+#: view:hr.employee:0
+#: field:hr.training.lines,certificate:0
+msgid "Certificate"
+msgstr "Sertifikat"
+
+#. module: ad_hr_training
+#: field:hr.training.lines,name:0
+msgid "Title"
+msgstr "Gelar"
+
+#. module: ad_hr_training
+#: field:hr.training,provider:0
+#: field:hr.training.lines,provider:0
+msgid "Training Provider"
+msgstr "Penyedia Training"
+
+#. module: ad_hr_training
+#: field:hr.training,location:0
+msgid "Training Location"
+msgstr "Lokasi Pelatihan"
+
+#. module: ad_hr_training
+#: view:hr.employee:0
+#: view:hr.training:0
+#: model:ir.actions.act_window,name:ad_hr_training.act_menu_dummy1
+#: model:ir.ui.menu,name:ad_hr_training.menu_dummy1
+#: model:ir.ui.menu,name:ad_hr_training.menu_training
+msgid "Training"
+msgstr "Pelatihan"
+
+#. module: ad_hr_training
+#: view:hr.training:0
+#: model:ir.actions.act_window,name:ad_hr_training.act_menu_training_submission_form
+#: model:ir.ui.menu,name:ad_hr_training.menu_training_submission_form
+msgid "Training Submission"
+msgstr "Pengajuan Pelatihan"
+
+#. module: ad_hr_training
+#: field:hr.training.lines,employee:0
+#: model:ir.model,name:ad_hr_training.model_hr_employee
+msgid "Employee"
+msgstr "Karyawan"
+
+#. module: ad_hr_training
+#: field:hr.training,state:0
+msgid "State"
+msgstr "Status"
+
+#. module: ad_hr_training
+#: field:hr.training,type:0
+#: model:ir.actions.act_window,name:ad_hr_training.act_menu_training_predicate_tree
+#: model:ir.actions.act_window,name:ad_hr_training.act_menu_training_type_tree
+#: model:ir.ui.menu,name:ad_hr_training.menu_training_type_tree
+#: view:training.type:0
+msgid "Training Type"
+msgstr "Jenis Pelatihan"
+
+#. module: ad_hr_training
+#: view:hr.training:0
+#: selection:hr.training,state:0
+msgid "Draft"
+msgstr "Draft"
+
+#. module: ad_hr_training
+#: field:hr.training.lines,location:0
+msgid "Location"
+msgstr "Lokasi"
+
+#. module: ad_hr_training
+#: field:hr.training,department:0
+msgid "Department"
+msgstr "Departemen"
+
+#. module: ad_hr_training
+#: model:ir.model,name:ad_hr_training.model_hr_training
+msgid "Training History of Employee"
+msgstr "Catatan Pelatihan Karyawan"
+
+#. module: ad_hr_training
+#: selection:hr.training.lines,category:0
+msgid "Before recruited"
+msgstr "Sebelum direkrut"
+
+#. module: ad_hr_training
+#: field:hr.training.lines,predicate:0
+#: model:ir.ui.menu,name:ad_hr_training.menu_training_predicate_tree
+#: view:training.predicate:0
+msgid "Training Predicate"
+msgstr "Predikat Pelatihan"
+
+#. module: ad_hr_training
+#: selection:hr.training.lines,category:0
+msgid "After recruited"
+msgstr "Setelah direkrut"
+
+#. module: ad_hr_training
+#: field:hr.training.lines,location_type:0
+msgid "Location type"
+msgstr "Jenis Lokasi"
+
+#. module: ad_hr_training
+#: field:training.predicate,desc:0
+#: field:training.type,desc:0
+msgid "Description"
+msgstr "Deskripsi"
+
+#. module: ad_hr_training
+#: model:ir.model,name:ad_hr_training.model_hr_training_lines
+msgid "hr.training.lines"
+msgstr "hr.training.lines"
+
+#. module: ad_hr_training
+#: field:hr.training,date_start:0
+#: field:hr.training.lines,date_start:0
+msgid "Start"
+msgstr "Mulai"
+
+#. module: ad_hr_training
+#: view:hr.training:0
+msgid "Propose"
+msgstr "Penawaran"
+
+#. module: ad_hr_training
+#: field:hr.training,journal_id:0
+msgid "Journal"
+msgstr "Jurnal"
+
+#. module: ad_hr_training
+#: view:hr.employee:0
+#: view:hr.training:0
+msgid "Training Info"
+msgstr "Info Pelatihan"
+
+#. module: ad_hr_training
+#: view:hr.employee:0
+msgid "Training History"
+msgstr "Histori Pelatihan"
+
+#. module: ad_hr_training
+#: code:addons/ad_hr_training/hr_training.py:39
+#: code:addons/ad_hr_training/hr_training.py:217
+#: code:addons/ad_hr_training/hr_training.py:237
+#, python-format
+msgid "Bad date"
+msgstr "Bad date"
+
+#. module: ad_hr_training
+#: field:hr.employee,training_line:0
+msgid "Training Lines"
+msgstr "Training Lines"
+
+#. module: ad_hr_training
+#: view:hr.training:0
+msgid "Purpose"
+msgstr "Tujuan"
+
+#. module: ad_hr_training
+#: selection:hr.training,location_type:0
+#: selection:hr.training.lines,location_type:0
+msgid "Luar Negeri"
+msgstr "Luar Negeri"
+
+#. module: ad_hr_training
+#: view:hr.training:0
+msgid "Training Supplier"
+msgstr "Penyedia Training"
+
+#. module: ad_hr_training
+#: model:ir.actions.report.xml,name:ad_hr_training.print_training_proposal
+msgid "Training Proposal"
+msgstr "Proposal Pelatihan"
+
+#. module: ad_hr_training
+#: view:hr.training:0
+#: selection:hr.training,state:0
+msgid "Approved"
+msgstr "Disetujui"
+
+#. module: ad_hr_training
+#: selection:hr.training.lines,certification:0
+msgid "Certified"
+msgstr "Disertifikasi"
+
+#. module: ad_hr_training
+#: selection:hr.training.lines,certification:0
+msgid "Non Certified"
+msgstr "Tidak Disertifikasi"
+
+#. module: ad_hr_training
+#: field:hr.training,job_id:0
+msgid "Function"
+msgstr "Fungsi"
+
+#. module: ad_hr_training
+#: field:hr.training,account_id:0
+msgid "Account"
+msgstr "Akun"
+
+#. module: ad_hr_training
+#: field:hr.training,pengusul:0
+#: field:training.predicate,name:0
+#: field:training.type,name:0
+msgid "Name"
+msgstr "Nama"
+
+#. module: ad_hr_training
+#: field:hr.training.lines,submission:0
+msgid "Submission"
+msgstr "Pengajuan"
+
+#. module: ad_hr_training
+#: constraint:hr.employee:0
+msgid ""
+"Bad NPWP format ! \n"
+"The NPWP format should be like this '01.855.081.4-005.000' or '018550814005000'"
+msgstr ""
+"Format NPWP salah ! \n"
+"Format NPWP seharusnya diketik seperti berikut '01.855.081.4-005.000' atau '018550814005000'"
+
+#. module: ad_hr_training
+#: field:hr.training,lines:0
+msgid "Lines"
+msgstr "Baris"
+
+#. module: ad_hr_training
+#: field:hr.training,product_id:0
+msgid "Product"
+msgstr "Produk"
+
+#. module: ad_hr_training
+#: view:training.predicate:0
+#: view:training.type:0
+msgid "Description.."
+msgstr "Deskripsi.."
+
+#. module: ad_hr_training
+#: view:hr.training:0
+msgid "Reviews"
+msgstr "Tinjauan"
+
+#. module: ad_hr_training
+#: field:hr.training,duration:0
+#: help:hr.training,duration:0
+#: field:hr.training.lines,duration:0
+msgid "Duration (days)"
+msgstr "Durasi (hari)"
+
+#. module: ad_hr_training
+#: model:ir.model,name:ad_hr_training.model_training_predicate
+msgid "training.predicate"
+msgstr "training.predicate"
+
+#. module: ad_hr_training
+#: field:hr.training,name:0
+msgid "Training Title"
+msgstr "Nama Pelatihan"
+
+#. module: ad_hr_training
+#: selection:hr.training,location_type:0
+#: selection:hr.training.lines,location_type:0
+msgid "Dalam Negeri"
+msgstr "Dalam Negeri"
+
+#. module: ad_hr_training
+#: view:hr.training:0
+msgid "Approve"
+msgstr "Setuju"
+
+#. module: ad_hr_training
+#: view:hr.training:0
+msgid "Proposed Employee"
+msgstr "Karyawan yang diajukan"
+
+#. module: ad_hr_training
+#: code:addons/ad_hr_training/hr_training.py:39
+#: code:addons/ad_hr_training/hr_training.py:217
+#: code:addons/ad_hr_training/hr_training.py:237
+#, python-format
+msgid "End date could not be earlier than start date"
+msgstr "Tanggal berakhir tidak dapat lebih cepat dari tanggal mulai"
+
+#. module: ad_hr_training
+#: model:ir.model,name:ad_hr_training.model_training_type
+msgid "training.type"
+msgstr "training.type"
+
+#. module: ad_hr_training
+#: view:hr.training:0
+#: selection:hr.training,state:0
+msgid "Proposed"
+msgstr "Diajukan"
+
+#. module: ad_hr_training
+#: field:hr.training.lines,certification:0
+msgid "Certification"
+msgstr "Sertifikasi"
+
+#. module: ad_hr_training
+#: field:hr.training,location_type:0
+msgid "Location Category"
+msgstr "Kategori Lokasi"
+
+#. module: ad_hr_training
+#: sql_constraint:hr.employee:0
+msgid "NIK must be unique per employee !"
+msgstr "NIK harus unik untuk setiap karyawan !"
+
+#. module: ad_hr_training
+#: constraint:hr.employee:0
+msgid "Error ! You cannot create recursive Hierarchy of Employees."
+msgstr "Error! Anda tidak dapat  membuat  Hirarki Karyawan secara rekursif  ."
+
+#. module: ad_hr_training
+#: view:hr.training:0
+msgid "Proposer"
+msgstr "Yang Mengajukan"
+
+#. module: ad_hr_training
+#: field:hr.training,currency:0
+#: field:hr.training.lines,currency:0
+msgid "Currency"
+msgstr "Mata Uang"
+
+#. module: ad_hr_training
+#: field:hr.training,cost:0
+#: field:hr.training.lines,cost:0
+msgid "Cost"
+msgstr "Biaya"
+
+#. module: ad_hr_training
+#: view:hr.training:0
+#: selection:hr.training,state:0
+msgid "Done"
+msgstr "Selesai"
+
+#. module: ad_hr_training
+#: field:hr.training.lines,category:0
+msgid "Before/After"
+msgstr "Sebelum/Setelah"
+
+#. module: ad_hr_training
+#: field:hr.training,purpose:0
+msgid "Training Purpose"
+msgstr "Tujuan Pelatihan"
+
+#. module: ad_hr_training
+#: view:hr.training:0
+msgid "Accounting"
+msgstr "Akuntansi"
+
+#. module: ad_hr_training
+#: help:hr.training.lines,submission:0
+msgid "If you find this field empty, the training submission maybe has been deleted, or this record is created manually."
+msgstr "Jika kolom ini kosong, pengajuan training mungkin telah dihapus atau baris ini dibuat secara manual."
+
+#. module: ad_hr_training
+#: view:hr.employee:0
+msgid "Education"
+msgstr "Pendidikan"
+
+#. module: ad_hr_training
+#: field:hr.training,employee:0
+msgid "Employee List"
+msgstr "Daftar Karyawan"
+

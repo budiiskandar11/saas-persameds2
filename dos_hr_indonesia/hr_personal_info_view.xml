@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	
+    	<!-- Religion -->
+
+		<record model="ir.ui.view" id="religion_form_view">
+			<field name="name">Religion</field>
+			<field name="model">res.religion</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Religion">
+					<field name="name" />
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="religion_tree_view">
+			<field name="name">Religion</field>
+			<field name="model">res.religion</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Religion">
+					<field name="name" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_view_religion_form" model="ir.actions.act_window">
+			<field name="name">Religion</field>
+			<field name="res_model">res.religion</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="view_id" ref="religion_tree_view" />
+		</record>
+
+		<menuitem id="menu_religion_configure" action="action_view_religion_form"
+			parent="hr.menu_hr_configuration" />
+
+    		 
+		<!-- employee data ktp -->
+		 
+		 <record id="view_nik_form" model="ir.ui.view">
+            <field name="name">hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page[2]/group/group[1]" position="replace">
+					<group string="Citizenship">					
+				   		<field name="no_ktp" placeholder="e.g. Nomor Induk Kependudukan" groups="base.group_hr_user"/>						
+				    	<field name="date_valid" />
+				    	<label for="street" string="Address"/>
+				    	<div>
+				    	<field name="ktp_street" placeholder="Street..." />
+                        <field name="ktp_street2"/>
+						 <div class="address_format">
+						 	  <label for="ktp_rt" string="RT"/>
+                             <field name="ktp_rt" placeholder="RT" style="width: 30%%" />
+                             <label for="ktp_rt" string="RW"/>
+                             <field name="ktp_rw" placeholder="RW" style="width: 30%%" options='{"no_open": True}' />
+                        </div>
+                         <div class="address_format">
+                             <label for="ktp_kel" string="Kel/Desa"/>
+                             <field name="ktp_kel" placeholder="Kel/Desa" style="width: 70%%" />
+                        </div>                        
+                        <div class="address_format">
+                             <field name="ktp_city" placeholder="City" style="width: 39%%" />
+                             <field name="ktp_state_id" class="oe_no_button" placeholder="State" style="width: 37%%" />
+                             <field name="ktp_zip" placeholder="ZIP" style="width: 20%%" />
+                             </div>
+                        <field name="ktp_country_id" placeholder="Country" class="oe_no_button" options='{"no_open": True}' />
+                        </div>
+                        <field name="country_id" placeholder="Nationality"/>
+				    </group>
+                	
+				</xpath>
+				<xpath expr="/form/sheet/notebook/page[2]/group/group[3]/field[@name='marital']" position="after">
+										
+				    <field name="marriage_date" />
+				  
+				</xpath>
+				<xpath expr="/form/sheet/notebook/page[2]/group/group[@string='Birth']/field[@name='birthday']" position="replace">
+										
+				  	<field name="birthday" required="1" />
+				    <field name="age"/>
+				</xpath>
+				<xpath expr="/form/sheet/notebook/page[2]/group/group[4]" position="after">
+					<group string="Religion">					
+				    <field name="religion_id" />
+				    </group>
+				    <group string="Blood Type">					
+				    <field name="blood_type" />
+				    </group>
+			     	<group string="Other Ids">					
+				    <field name="npwp" />
+				    <field name="passport_id" />
+				    <field name="bank_account_id" />
+				    <field name="otherid" />
+				    </group>
+				    <group string="Driver's License">					
+				    <field name="sim" />
+				    <field name="sim_type" />
+				    <field name="sim_expire" />
+				    </group>
+				    
+				</xpath>
+				<xpath expr="/form/sheet/notebook/page[@string='Personal Information']" position="after">
+					<page string="Family Member">
+						<group string="Emergency Contact">					
+				    <field name="emergency_contact" />
+				    <field name="emergency_relation" />
+				    <field name="emergency_phone" />
+				    </group>
+				    <group string="Family Member">
+						<field name="family_ids" nolabel="1">
+							<tree string="Family">
+								<field name="name"/>
+								<field name="birthday"/>
+								<field name="status"/>
+								<field name="notes"/>
+							</tree>
+							<form string="Family">
+								<group>
+									<group col="2">
+										<field name="name"/>
+										<field name="birthday"/>
+										<field name="status"/>
+										<field name="notes"/>
+									</group>
+								</group>
+							</form>
+						</field>
+					</group>
+					</page>
+					<page string="Job Experience">
+						<field name="job_exp_ids">
+							<tree string="Job">
+								<field name="company_name"/>
+								<field name="title"/>
+								<field name="location"/>
+								<field name="date_from"/>
+								<field name="date_to"/>
+								<field name="current_work"/>
+							</tree>
+							<form string="Job">
+								<group>
+									<group col="2">
+										<field name="company_name"/>
+										<field name="title"/>
+										<field name="location"/>
+									</group>
+									<group col="4">
+										<label string="Time Period" for="date_from"/>
+										<field name="date_from" nolabel="1"/>
+										<label string="-"/>
+										<field name="date_to" nolabel="1" attrs="{'invisible':[('current_work','=',True)]}"/>
+										<field name="current_work"/>
+									</group>
+								</group>
+							</form>
+						</field>
+					</page>
+				</xpath>
+				<field name="address_home_id" position="after">
+					<field name="email"/>
+				</field>
+    		</field>
+    	</record>
+    	
+    </data>
+</openerp>	

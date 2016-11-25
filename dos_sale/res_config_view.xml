@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    	
+	    <record id="view_double_sale_validation_configuration" model="ir.ui.view">
+            <field name="name">Sales Application</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="sale.view_sales_config"/>
+            <field name="arch" type="xml">
+                <div name="Sale Features" position="inside">
+	            	<div name="module_dos_sale">
+	                    <label for="sale_discount_limit"/>
+                        <field name="sale_discount_limit" class="oe_inline"/>%%
+	                </div>
+                </div>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

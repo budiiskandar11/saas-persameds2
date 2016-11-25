@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    
+     <record id="view_account_asset_asset_form_inherit_disaposal" model="ir.ui.view">
+            <field name="name">account.asset.asset.form.inherit</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_asset_form"/>
+            <field name="arch" type="xml">
+    		<xpath expr="//field[@name='company_id']" position="after">
+                    <field name="asset_disposal" readonly="1"/>
+                    
+                </xpath> 
+            
+        </field>
+    </record>    
+    <record id="view_account_asset_category_form_inherit" model="ir.ui.view">
+            <field name="name">account.asset.category.form.inherit</field>
+            <field name="model">account.asset.category</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_category_form"/>
+            <field name="arch" type="xml">
+    		<xpath expr="//field[@name='account_expense_depreciation_id']" position="after">
+                    
+                    <field name="account_disposal_id" domain="[('type','!=','view')]"/>
+					<field name="account_gainloss_disposal_id" domain="[('type','!=','view')]"/>
+					<field name="account_transit_id" domain="[('type','!=','view')]"/>					
+                </xpath> 
+            </field>
+        </record>               
+          
+    </data>
+ </openerp>

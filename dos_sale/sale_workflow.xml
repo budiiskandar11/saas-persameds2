@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Activity -->
+        
+        <record id="act_quot_approval" model="workflow.activity">
+            <field name="wkf_id" ref="sale.wkf_sale"/>
+            <field name="name">quot_approval</field>
+            <field name="kind">function</field>
+            <field name="action">write({'state':'quot_approval'})</field>
+            <field name="group_id" ref="base.group_sale_manager"/>
+        </record>   
+        
+        <record id="act_quot" model="workflow.activity">
+            <field name="wkf_id" ref="sale.wkf_sale"/>
+            <field name="name">quot</field>
+            <field name="kind">function</field>
+            <field name="action">write({'state':'quot'})</field>
+        </record>   
+
+        <!-- Transistion -->
+
+        <record id="trans_draft_quot_approval" model="workflow.transition">
+            <field name="act_from" ref="sale.act_draft"/>
+            <field name="act_to" ref="act_quot_approval"/>
+            <field name="signal">quot_approval</field>
+        </record>
+        
+        <record id="trans_quot_approval_cancel" model="workflow.transition">
+            <field name="act_from" ref="act_quot_approval"/>
+            <field name="act_to" ref="sale.act_cancel"/>
+            <field name="signal">cancel</field>
+        </record>        
+        
+        <record id="trans_draft_quot_approval_bypass" model="workflow.transition">
+            <field name="act_from" ref="sale.act_draft"/>
+            <field name="act_to" ref="act_quot"/>
+            <field name="signal">quot_approval_bypass</field>
+        </record>
+        
+        <record id="trans_draft_quot" model="workflow.transition">
+            <field name="act_from" ref="act_quot_approval"/>
+            <field name="act_to" ref="act_quot"/>
+            <field name="signal">quot_confirm</field>
+        </record>
+        
+        <record id="trans_quot_cancel" model="workflow.transition">
+            <field name="act_from" ref="act_quot"/>
+            <field name="act_to" ref="sale.act_cancel"/>
+            <field name="signal">cancel</field>
+        </record>     
+        
+        
+        <record id="sale.trans_draft_sent" model="workflow.transition">
+            <field name="act_from" ref="act_quot"/>
+            <field name="act_to" ref="sale.act_sent"/>
+            <field name="signal">quotation_sent</field>
+        </record>
+        
+        <record id="trans_quot_router" model="workflow.transition">
+            <field name="act_from" ref="act_quot"/>
+            <field name="act_to" ref="sale.act_router"/>
+            <field name="signal">order_confirm</field>
+        </record>
+        
+
+    </data>
+</openerp>

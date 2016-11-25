@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+
+<!-- Qweb templates for Backend -->
+
+<!-- About modal -->
+<t t-extend="UserMenu.about">
+    <t t-jquery=".user-info-block" t-operation="replace">
+        <div class="user-info-block">
+            <h3>Databit Theme <t t-esc="version_info.server_version"/></h3>
+            <h4>Copyright © 2015 Databit Solusi Indonesia.</h4>
+            <h4>PT. Databit Solusi Indonesia</h4>
+            <p>
+                Calle Pocito de San Roque, 30<br/>
+                28230 Las Rozas (Madrid) <br/>
+                España <br/> <br/>
+                <a href="mail:info@databit.co.id">info@databit.co.id</a> <br/>
+                phone: +62 
+            </p>
+            <h4>Copyright © 2004-TODAY OpenERP SA. All Rights Reserved.</h4>
+            <p>Odoo is a trademark of the <a target="_blank" href="https://www.odoo.com" style="text-decoration: underline;">OpenERP SA Company</a>.</p>
+            <p>Licenced under the terms of <a target="_blank" href="http://www.gnu.org/licenses/agpl.html" style="text-decoration: underline;">GNU Affero General Public License</a></p>
+            <p>For more information visit <a target="_blank" href="https://www.odoo.com" style="text-decoration: underline;">Odoo.com</a></p>
+        </div>
+    </t>
+</t>
+
+<tr t-extend="ListView.row" t-att-data-id="record.get('id')" t-att-style="view.style_for(record)">
+	<th t-jquery=".oe_list_record_selector" t-operation="replace">
+        <th t-if="options.selectable" class="oe_list_record_selector" width="1">
+	        <t t-set="checked" t-value="options.select_view_id == record.get('id') ? 'checked' : null"/>
+	        <input t-if="options.radio" type="radio" name="radiogroup" t-att-checked="checked"/>
+	        <input t-if="!options.radio" type="checkbox" name="radiogroup" t-att-checked="checked"/>
+	    </th>
+    </th>
+</tr>
+
+<t t-extend="ViewManager">  
+	<div t-query="div.oe_view_manager_wrapper" t-operation="replace">
+		<!-- 
+	    <div class="oe_view_manager_wrapper">
+	        <div>
+	            <div class="oe_view_manager_body">
+	            	<div class="oe_searchview_drawer_container"/>
+	                <t t-foreach="widget.views_src" t-as="view">
+	                    <div t-attf-class="oe_view_manager_view_#{view.view_type}"/>
+	                </t>
+	            </div>
+	        </div>
+	    </div>
+		-->		
+	</div>
+</t>
+<!--
+<t t-name="Menu.needaction_counter">
+    <div id="menu_counter" class="badge pull-right">
+        <t t-if="widget.needaction_counter &gt; 99"> 99+ </t>
+        <t t-if="widget.needaction_counter &lt;= 99"> <t t-esc="widget.needaction_counter"/> </t>
+    </div>
+</t>
+-->
+</templates>

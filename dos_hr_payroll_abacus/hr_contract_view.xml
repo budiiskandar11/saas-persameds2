@@ -1,0 +1,36 @@
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="malinda_view_hr_contract_form_view">
+			<field name="name">malinda.view.hr.contract.form.view</field>
+			<field name="model">hr.contract</field>
+			<field name="type">form</field>
+			<field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+			<field name="arch" type="xml">
+				<field name="working_hours" position="before">
+					<field name="extraday_working_hours"/>	
+				</field>
+				<field name='struct_id' position="after">
+					<field name='fasilitas_jabatan'/>
+					<field name='tunjangan_khusus'/>
+					<field name='tunjangan_Perumahan'/>
+					<field name='tunjangan_telephone'/>
+					<field name='tunjangan_self_manage'/>          		
+            	</field>
+				
+				<!--<page string="Work Permit" position="after">
+					<page string="Configuration" >
+						<group>
+							<field name="overtime_allocation_amount"/>
+							<field name="latetime_deduction_amount"/>
+							<field name="meal_allowance_amount"/>
+							<field name="allowance_amount"/>
+							<field name="extra_day_amount"/>
+							<field name="absent_amount"/>
+							<field name="normal_days"/>
+						</group>
+					</page>
+				</page>-->
+			</field>
+		</record>
+	</data>
+</openerp>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="exit_document">
+    <t t-call="report.html_container">
+        <t t-call="report.internal_layout">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <h3><center>EXIT INTERVIEW FORM</center></h3>
+                    <br/>
+                    
+                    <table class="table-condensed" style="margin:0px auto; width:80%;">
+                        <tr>
+                            <td style="width:12%;">
+                                Nama <br/>
+                                <i>Name</i>
+                            </td>
+                            <td style="width:2%; text-align:left;">:</td>
+                            <td style="width:30%;">:</td>
+                        </tr>
+                        <tr>
+                            <td style="width:12%;">
+                                NIP <br/>
+                                <i>Employee ID</i>
+                            </td>
+                            <td style="width:2%; text-align:left;">:</td>
+                            <td style="width:30%;">:</td>
+                        </tr>
+                        <tr>
+                            <td style="width:12%;">
+                                Jabatan <br/>
+                                <i>Corporate Position</i>
+                            </td>
+                            <td style="width:2%; text-align:left;">:</td>
+                            <td style="width:30%;">:</td>
+                        </tr>
+                        <tr>
+                            <td style="width:12%;">
+                                unit Kerja/ Dept <br/>
+                                <i>Departement</i>
+                            </td>
+                            <td style="width:2%; text-align:left;">:</td>
+                            <td style="width:30%;">:</td>
+                        </tr>
+                        <tr>
+                            <td style="width:12%;">
+                                Tanggal Masuk <br/>
+                                <i>Joining Date</i>
+                            </td>
+                            <td style="width:2%; text-align:left;">:</td>
+                            <td style="width:30%;">:</td>
+                        </tr>
+                        <tr>
+                            <td style="width:12%;">
+                                Tanggal Keluar <br/>
+                                <i>Resignation Date</i>
+                            </td>
+                            <td style="width:2%; text-align:left;">:</td>
+                            <td style="width:30%;">:</td>
+                        </tr>
+                     </table>                  
+                    <img src='/dos_hr_contract/static/src/img/Exit Interview-1.png' style="margin:0px auto; width:80%;page-break-before: always;"/>
+                	<img src='/dos_hr_contract/static/src/img/Exit Interview-2.png' style="margin:0px auto; width:80%;page-break-before: always;"/>
+            	</div>
+            </t>
+        </t>
+    </t>
+</template>
+<template id="report_exit_doc">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'dos_hr_contract.exit_document')"/>
+        </t>
+    </t>
+</template>
+
+
+</data>
+</openerp>

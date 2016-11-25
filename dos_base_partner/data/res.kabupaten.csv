@@ -1,0 +1,498 @@
+id,name,state_id
+kabupaten_id_1,Kab Aceh Besar,Nangroe Aceh Darussalam
+kabupaten_id_2,Kab Pidie,Nangroe Aceh Darussalam
+kabupaten_id_3,Kab Aceh Utara,Nangroe Aceh Darussalam
+kabupaten_id_4,Kab Aceh Timur,Nangroe Aceh Darussalam
+kabupaten_id_5,Kab Aceh Tengah,Nangroe Aceh Darussalam
+kabupaten_id_6,Kab Aceh Barat,Nangroe Aceh Darussalam
+kabupaten_id_7,Kab Aceh Selatan,Nangroe Aceh Darussalam
+kabupaten_id_8,Kab Aceh Tenggara,Nangroe Aceh Darussalam
+kabupaten_id_9,Kab Simeulue,Nangroe Aceh Darussalam
+kabupaten_id_10,Kab Bireuen,Nangroe Aceh Darussalam
+kabupaten_id_11,Kab Aceh Singkil,Nangroe Aceh Darussalam
+kabupaten_id_12,Kab Aceh Tamiang,Nangroe Aceh Darussalam
+kabupaten_id_13,Kab Nagan Raya,Nangroe Aceh Darussalam
+kabupaten_id_14,Kab Aceh Jaya,Nangroe Aceh Darussalam
+kabupaten_id_15,Kab Aceh Barat Daya,Nangroe Aceh Darussalam
+kabupaten_id_16,Kab Gayo Lues,Nangroe Aceh Darussalam
+kabupaten_id_17,Kab Bener Meriah,Nangroe Aceh Darussalam
+kabupaten_id_18,Kab Pidie Jaya,Nangroe Aceh Darussalam
+kabupaten_id_19,Kota Sabang,Nangroe Aceh Darussalam
+kabupaten_id_20,Kota Banda Aceh,Nangroe Aceh Darussalam
+kabupaten_id_21,Kota Lhokseumawe,Nangroe Aceh Darussalam
+kabupaten_id_22,Kota Langsa,Nangroe Aceh Darussalam
+kabupaten_id_23,Kota Subulussalam,Nangroe Aceh Darussalam
+kabupaten_id_24,Kab Deli Serdang,Sumatera Utara
+kabupaten_id_25,Kab Langkat,Sumatera Utara
+kabupaten_id_26,Kab Karo,Sumatera Utara
+kabupaten_id_27,Kab Simalungun,Sumatera Utara
+kabupaten_id_28,Kab Dairi,Sumatera Utara
+kabupaten_id_29,Kab Asahan,Sumatera Utara
+kabupaten_id_30,Kab Labuhan Batu,Sumatera Utara
+kabupaten_id_31,Kab Tapanuli Utara,Sumatera Utara
+kabupaten_id_32,Kab Tapanuli Tengah,Sumatera Utara
+kabupaten_id_33,Kab Tapanuli Selatan,Sumatera Utara
+kabupaten_id_34,Kab Nias,Sumatera Utara
+kabupaten_id_35,Kab Mandailing Natal,Sumatera Utara
+kabupaten_id_36,Kab Toba Samosir,Sumatera Utara
+kabupaten_id_37,Kab Nias Selatan,Sumatera Utara
+kabupaten_id_38,Kab Pakpak Bharat,Sumatera Utara
+kabupaten_id_39,Kab Humbang Hasundutan,Sumatera Utara
+kabupaten_id_40,Kab Samosir,Sumatera Utara
+kabupaten_id_41,Kab Serdang Bedagai,Sumatera Utara
+kabupaten_id_42,Kab Batu Bara,Sumatera Utara
+kabupaten_id_43,Kab Padang Lawas Utara,Sumatera Utara
+kabupaten_id_44,Kab Padang Lawas,Sumatera Utara
+kabupaten_id_45,Kab Labuhanbatu Utara,Sumatera Utara
+kabupaten_id_46,Kab Labuhanbatu Selatan,Sumatera Utara
+kabupaten_id_47,Kab Nias Barat,Sumatera Utara
+kabupaten_id_48,Kab Nias Utara,Sumatera Utara
+kabupaten_id_49,Kota Medan,Sumatera Utara
+kabupaten_id_50,Kota Binjai,Sumatera Utara
+kabupaten_id_51,Kota Tebing Tinggi,Sumatera Utara
+kabupaten_id_52,Kota Pematang Siantar,Sumatera Utara
+kabupaten_id_53,Kota Tanjung Balai,Sumatera Utara
+kabupaten_id_54,Kota Sibolga,Sumatera Utara
+kabupaten_id_55,Kota Padang Sidempuan,Sumatera Utara
+kabupaten_id_56,Kota Gunung Sitoli,Sumatera Utara
+kabupaten_id_57,Kab Agam,Sumatera Barat
+kabupaten_id_58,Kab Pasaman,Sumatera Barat
+kabupaten_id_59,Kab Lima Puluh Koto,Sumatera Barat
+kabupaten_id_60,Kab Solok,Sumatera Barat
+kabupaten_id_61,Kab Padang Pariaman,Sumatera Barat
+kabupaten_id_62,Kab Pesisir Selatan,Sumatera Barat
+kabupaten_id_63,Kab Tanah Datar,Sumatera Barat
+kabupaten_id_64,Kab Sawahlunto Sijunjung,Sumatera Barat
+kabupaten_id_65,Kab Kepulauan Mentawai,Sumatera Barat
+kabupaten_id_66,Kab Solok Selatan,Sumatera Barat
+kabupaten_id_67,Kab Dharmas Raya,Sumatera Barat
+kabupaten_id_68,Kab Pasaman Barat,Sumatera Barat
+kabupaten_id_69,Kota Bukittinggi,Sumatera Barat
+kabupaten_id_70,Kota Padang,Sumatera Barat
+kabupaten_id_71,Kota Padang Panjang,Sumatera Barat
+kabupaten_id_72,Kota Sawah Lunto,Sumatera Barat
+kabupaten_id_73,Kota Solok,Sumatera Barat
+kabupaten_id_74,Kota Payakumbuh,Sumatera Barat
+kabupaten_id_75,Kota Pariaman,Sumatera Barat
+kabupaten_id_76,Kab Kampar,Riau
+kabupaten_id_77,Kab Bengkalis,Riau
+kabupaten_id_78,Kab Indragiri Hulu,Riau
+kabupaten_id_79,Kab Indragiri Hilir,Riau
+kabupaten_id_80,Kab Pelalawan,Riau
+kabupaten_id_81,Kab Siak,Riau
+kabupaten_id_82,Kab Kuantan Singingi,Riau
+kabupaten_id_83,Kab Rokan Hulu,Riau
+kabupaten_id_84,Kab Rokan Hilir,Riau
+kabupaten_id_85,Kab Kep Meranti,Riau
+kabupaten_id_86,Kota Pekanbaru,Riau
+kabupaten_id_87,Kota Dumai,Riau
+kabupaten_id_88,Kab Bintan,Kepulauan Riau
+kabupaten_id_89,Kab Karimun,Kepulauan Riau
+kabupaten_id_90,Kab Natuna,Kepulauan Riau
+kabupaten_id_91,Kab Lingga,Kepulauan Riau
+kabupaten_id_92,Kab Kep Anambas,Kepulauan Riau
+kabupaten_id_93,Kota Batam,Kepulauan Riau
+kabupaten_id_94,Kota Tanjungpinang,Kepulauan Riau
+kabupaten_id_95,Kab Batang Hari,Jambi
+kabupaten_id_96,Kab Bungo,Jambi
+kabupaten_id_97,Kab Sarolangun,Jambi
+kabupaten_id_98,Kab Tanjung Jabung Barat,Jambi
+kabupaten_id_99,Kab Kerinci,Jambi
+kabupaten_id_100,Kab Tebo,Jambi
+kabupaten_id_101,Kab Muaro Jambi,Jambi
+kabupaten_id_102,Kab Tanjung Jabung Timur,Jambi
+kabupaten_id_103,Kab Merangin,Jambi
+kabupaten_id_104,Kota Jambi,Jambi
+kabupaten_id_105,Kota Sungai Penuh,Jambi
+kabupaten_id_106,Kab Musi Banyu Asin,Sumatera Selatan
+kabupaten_id_107,Kab Ogan Komering Ilir,Sumatera Selatan
+kabupaten_id_108,Kab Ogan Komering Ulu,Sumatera Selatan
+kabupaten_id_109,Kab Muara Enim,Sumatera Selatan
+kabupaten_id_110,Kab Lahat,Sumatera Selatan
+kabupaten_id_111,Kab Musi Rawas,Sumatera Selatan
+kabupaten_id_112,Kab Banyuasin,Sumatera Selatan
+kabupaten_id_113,Kab Ogan Komering Ulu Timur,Sumatera Selatan
+kabupaten_id_114,Kab Ogan Komering Ulu Sel,Sumatera Selatan
+kabupaten_id_115,Kab Ogan Ilir,Sumatera Selatan
+kabupaten_id_116,Kab Empat Lawang,Sumatera Selatan
+kabupaten_id_117,Kota Palembang,Sumatera Selatan
+kabupaten_id_118,Kota Prabumulih,Sumatera Selatan
+kabupaten_id_119,Kota Lubuk Linggau,Sumatera Selatan
+kabupaten_id_120,Kota Pagar Alam,Sumatera Selatan
+kabupaten_id_121,Kab Bengkulu Utara,Bengkulu
+kabupaten_id_122,Kab Rejang Lebong,Bengkulu
+kabupaten_id_123,Kab Bengkulu Selatan,Bengkulu
+kabupaten_id_124,Kab Muko-muko,Bengkulu
+kabupaten_id_125,Kab Kepahiang,Bengkulu
+kabupaten_id_126,Kab Lebong,Bengkulu
+kabupaten_id_127,Kab Kaur,Bengkulu
+kabupaten_id_128,Kab Seluma,Bengkulu
+kabupaten_id_129,Kab Bengkulu Tengah,Bengkulu
+kabupaten_id_130,Kota Bengkulu,Bengkulu
+kabupaten_id_131,Kab Lampung Selatan,Lampung
+kabupaten_id_132,Kab Lampung Tengah,Lampung
+kabupaten_id_133,Kab Lampung Utara,Lampung
+kabupaten_id_134,Kab Lampung Barat,Lampung
+kabupaten_id_135,Kab Tulang Bawang,Lampung
+kabupaten_id_136,Kab Tanggamus,Lampung
+kabupaten_id_137,Kab Lampung Timur,Lampung
+kabupaten_id_138,Kab Way Kanan,Lampung
+kabupaten_id_139,Kab Pesawaran,Lampung
+kabupaten_id_140,Kab Pringsewu,Lampung
+kabupaten_id_141,Kab Mesuji,Lampung
+kabupaten_id_142,Kab Tulang Bawang Barat,Lampung
+kabupaten_id_143,Kota Bandar Lampung,Lampung
+kabupaten_id_144,Kota Metro,Lampung
+kabupaten_id_145,Kab Bangka,Kepulauan Bangka Belitung
+kabupaten_id_146,Kab Belitung,Kepulauan Bangka Belitung
+kabupaten_id_147,Kab Bangka Tengah,Kepulauan Bangka Belitung
+kabupaten_id_148,Kab Bangka Barat,Kepulauan Bangka Belitung
+kabupaten_id_149,Kab Bangka Selatan,Kepulauan Bangka Belitung
+kabupaten_id_150,Kab Belitung Timur,Kepulauan Bangka Belitung
+kabupaten_id_151,Kota Pangkalpinang,Kepulauan Bangka Belitung
+kabupaten_id_152,Kab Kepulauan Seribu,DKI Jakarta
+kabupaten_id_153,Kota Jakarta Pusat,DKI Jakarta
+kabupaten_id_154,Kota Jakarta Utara,DKI Jakarta
+kabupaten_id_155,Kota Jakarta Barat,DKI Jakarta
+kabupaten_id_156,Kota Jakarta Selatan,DKI Jakarta
+kabupaten_id_157,Kota Jakarta Timur,DKI Jakarta
+kabupaten_id_158,Kab Bogor,Jawa Barat
+kabupaten_id_159,Kab Sukabumi,Jawa Barat
+kabupaten_id_160,Kab Cianjur,Jawa Barat
+kabupaten_id_161,Kab Bandung,Jawa Barat
+kabupaten_id_162,Kab Sumedang,Jawa Barat
+kabupaten_id_163,Kab Garut,Jawa Barat
+kabupaten_id_164,Kab Tasikmalaya,Jawa Barat
+kabupaten_id_165,Kab Ciamis,Jawa Barat
+kabupaten_id_166,Kab Kuningan,Jawa Barat
+kabupaten_id_167,Kab Majalengka,Jawa Barat
+kabupaten_id_168,Kab Cirebon,Jawa Barat
+kabupaten_id_169,Kab Indramayu,Jawa Barat
+kabupaten_id_170,Kab Subang,Jawa Barat
+kabupaten_id_171,Kab Purwakarta,Jawa Barat
+kabupaten_id_172,Kab Karawang,Jawa Barat
+kabupaten_id_173,Kab Bekasi,Jawa Barat
+kabupaten_id_174,Kab Bandung Barat,Jawa Barat
+kabupaten_id_175,Kota Bandung,Jawa Barat
+kabupaten_id_176,Kota Bogor,Jawa Barat
+kabupaten_id_177,Kota Sukabumi,Jawa Barat
+kabupaten_id_178,Kota Cirebon,Jawa Barat
+kabupaten_id_179,Kota Bekasi,Jawa Barat
+kabupaten_id_180,Kota Depok,Jawa Barat
+kabupaten_id_181,Kota Cimahi,Jawa Barat
+kabupaten_id_182,Kota Tasikmalaya,Jawa Barat
+kabupaten_id_183,Kota Banjar,Jawa Barat
+kabupaten_id_184,Kab Cilacap,Jawa Tengah
+kabupaten_id_185,Kab Banyumas,Jawa Tengah
+kabupaten_id_186,Kab Purbalingga,Jawa Tengah
+kabupaten_id_187,Kab Banjarnegara,Jawa Tengah
+kabupaten_id_188,Kab Kebumen,Jawa Tengah
+kabupaten_id_189,Kab Purworejo,Jawa Tengah
+kabupaten_id_190,Kab Wonosobo,Jawa Tengah
+kabupaten_id_191,Kab Magelang,Jawa Tengah
+kabupaten_id_192,Kab Boyolali,Jawa Tengah
+kabupaten_id_193,Kab Klaten,Jawa Tengah
+kabupaten_id_194,Kab Sukoharjo,Jawa Tengah
+kabupaten_id_195,Kab Wonogiri,Jawa Tengah
+kabupaten_id_196,Kab Karanganyar,Jawa Tengah
+kabupaten_id_197,Kab Sragen,Jawa Tengah
+kabupaten_id_198,Kab Grobogan,Jawa Tengah
+kabupaten_id_199,Kab Blora,Jawa Tengah
+kabupaten_id_200,Kab Rembang,Jawa Tengah
+kabupaten_id_201,Kab Pati,Jawa Tengah
+kabupaten_id_202,Kab Kudus,Jawa Tengah
+kabupaten_id_203,Kab Jepara,Jawa Tengah
+kabupaten_id_204,Kab Demak,Jawa Tengah
+kabupaten_id_205,Kab Semarang,Jawa Tengah
+kabupaten_id_206,Kab Temanggung,Jawa Tengah
+kabupaten_id_207,Kab Kendal,Jawa Tengah
+kabupaten_id_208,Kab Batang,Jawa Tengah
+kabupaten_id_209,Kab Pekalongan,Jawa Tengah
+kabupaten_id_210,Kab Pemalang,Jawa Tengah
+kabupaten_id_211,Kab Tegal,Jawa Tengah
+kabupaten_id_212,Kab Brebes,Jawa Tengah
+kabupaten_id_213,Kota Magelang,Jawa Tengah
+kabupaten_id_214,Kota Surakarta,Jawa Tengah
+kabupaten_id_215,Kota Salatiga,Jawa Tengah
+kabupaten_id_216,Kota Semarang,Jawa Tengah
+kabupaten_id_217,Kota Pekalongan,Jawa Tengah
+kabupaten_id_218,Kota Tegal,Jawa Tengah
+kabupaten_id_219,Kab Bantul,DI Yogyakarta
+kabupaten_id_220,Kab Sleman,DI Yogyakarta
+kabupaten_id_221,Kab Gunung Kidul,DI Yogyakarta
+kabupaten_id_222,Kab Kulon Progo,DI Yogyakarta
+kabupaten_id_223,Kota Yogyakarta,DI Yogyakarta
+kabupaten_id_224,Kab Gresik,Jawa Timur
+kabupaten_id_225,Kab Sidoarjo,Jawa Timur
+kabupaten_id_226,Kab Mojokerto,Jawa Timur
+kabupaten_id_227,Kab Jombang,Jawa Timur
+kabupaten_id_228,Kab Bojonegoro,Jawa Timur
+kabupaten_id_229,Kab Tuban,Jawa Timur
+kabupaten_id_230,Kab Lamongan,Jawa Timur
+kabupaten_id_231,Kab Madiun,Jawa Timur
+kabupaten_id_232,Kab Ngawi,Jawa Timur
+kabupaten_id_233,Kab Magetan,Jawa Timur
+kabupaten_id_234,Kab Ponorogo,Jawa Timur
+kabupaten_id_235,Kab Pacitan,Jawa Timur
+kabupaten_id_236,Kab Kediri,Jawa Timur
+kabupaten_id_237,Kab Nganjuk,Jawa Timur
+kabupaten_id_238,Kab Blitar,Jawa Timur
+kabupaten_id_239,Kab Tulungagung,Jawa Timur
+kabupaten_id_240,Kab Trenggalek,Jawa Timur
+kabupaten_id_241,Kab Malang,Jawa Timur
+kabupaten_id_242,Kab Pasuruan,Jawa Timur
+kabupaten_id_243,Kab Probolinggo,Jawa Timur
+kabupaten_id_244,Kab Lumajang,Jawa Timur
+kabupaten_id_245,Kab Bondowoso,Jawa Timur
+kabupaten_id_246,Kab Situbondo,Jawa Timur
+kabupaten_id_247,Kab Jember,Jawa Timur
+kabupaten_id_248,Kab Banyuwangi,Jawa Timur
+kabupaten_id_249,Kab Pamekasan,Jawa Timur
+kabupaten_id_250,Kab Sampang,Jawa Timur
+kabupaten_id_251,Kab Sumenep,Jawa Timur
+kabupaten_id_252,Kab Bangkalan,Jawa Timur
+kabupaten_id_253,Kota Surabaya,Jawa Timur
+kabupaten_id_254,Kota Malang,Jawa Timur
+kabupaten_id_255,Kota Madiun,Jawa Timur
+kabupaten_id_256,Kota Kediri,Jawa Timur
+kabupaten_id_257,Kota Mojokerto,Jawa Timur
+kabupaten_id_258,Kota Blitar,Jawa Timur
+kabupaten_id_259,Kota Pasuruan,Jawa Timur
+kabupaten_id_260,Kota Probolinggo,Jawa Timur
+kabupaten_id_261,Kota Batu,Jawa Timur
+kabupaten_id_262,Kab Pandeglang,Banten
+kabupaten_id_263,Kab Lebak,Banten
+kabupaten_id_264,Kab Tangerang,Banten
+kabupaten_id_265,Kab Serang,Banten
+kabupaten_id_266,Kota Cilegon,Banten
+kabupaten_id_267,Kota Tangerang,Banten
+kabupaten_id_268,Kota Serang,Banten
+kabupaten_id_269,Kota Tangerang Selatan,Banten
+kabupaten_id_270,Kab Buleleng,Bali
+kabupaten_id_271,Kab Jembrana,Bali
+kabupaten_id_272,Kab Tabanan,Bali
+kabupaten_id_273,Kab Badung,Bali
+kabupaten_id_274,Kab Gianyar,Bali
+kabupaten_id_275,Kab Klungkung,Bali
+kabupaten_id_276,Kab Bangli,Bali
+kabupaten_id_277,Kab Karang Asem,Bali
+kabupaten_id_278,Kota Denpasar,Bali
+kabupaten_id_279,Kab Lombok Barat,Nusa Tenggara Barat
+kabupaten_id_280,Kab Lombok Tengah,Nusa Tenggara Barat
+kabupaten_id_281,Kab Lombok Timur,Nusa Tenggara Barat
+kabupaten_id_282,Kab Sumbawa,Nusa Tenggara Barat
+kabupaten_id_283,Kab Dompu,Nusa Tenggara Barat
+kabupaten_id_284,Kab Bima,Nusa Tenggara Barat
+kabupaten_id_285,Kab Sumbawa Barat,Nusa Tenggara Barat
+kabupaten_id_286,Kab Lombok Utara,Nusa Tenggara Barat
+kabupaten_id_287,Kota Mataram,Nusa Tenggara Barat
+kabupaten_id_288,Kota Bima,Nusa Tenggara Barat
+kabupaten_id_289,Kab Kupang,Nusa Tenggara Timur
+kabupaten_id_290,Kab Timor Tengah Selatan,Nusa Tenggara Timur
+kabupaten_id_291,Kab Timor Tengah Utara,Nusa Tenggara Timur
+kabupaten_id_292,Kab Belu,Nusa Tenggara Timur
+kabupaten_id_293,Kab Alor,Nusa Tenggara Timur
+kabupaten_id_294,Kab Flores Timur,Nusa Tenggara Timur
+kabupaten_id_295,Kab Sikka,Nusa Tenggara Timur
+kabupaten_id_296,Kab Ende,Nusa Tenggara Timur
+kabupaten_id_297,Kab Ngada,Nusa Tenggara Timur
+kabupaten_id_298,Kab Manggarai,Nusa Tenggara Timur
+kabupaten_id_299,Kab Sumba Timur,Nusa Tenggara Timur
+kabupaten_id_300,Kab Sumba Barat,Nusa Tenggara Timur
+kabupaten_id_301,Kab Lembata,Nusa Tenggara Timur
+kabupaten_id_302,Kab Rote-Ndao,Nusa Tenggara Timur
+kabupaten_id_303,Kab Manggarai Barat,Nusa Tenggara Timur
+kabupaten_id_304,Kab Nagekeo,Nusa Tenggara Timur
+kabupaten_id_305,Kab Sumba Tengah,Nusa Tenggara Timur
+kabupaten_id_306,Kab Sumba Barat Daya,Nusa Tenggara Timur
+kabupaten_id_307,Kab Manggarai Timur,Nusa Tenggara Timur
+kabupaten_id_308,Kab Sabu Raijua,Nusa Tenggara Timur
+kabupaten_id_309,Kota Kupang,Nusa Tenggara Timur
+kabupaten_id_310,Kab Sambas,Kalimantan Barat
+kabupaten_id_311,Kab Pontianak,Kalimantan Barat
+kabupaten_id_312,Kab Sanggau,Kalimantan Barat
+kabupaten_id_313,Kab Sintang,Kalimantan Barat
+kabupaten_id_314,Kab Kapuas Hulu,Kalimantan Barat
+kabupaten_id_315,Kab Ketapang,Kalimantan Barat
+kabupaten_id_316,Kab Bengkayang,Kalimantan Barat
+kabupaten_id_317,Kab Landak,Kalimantan Barat
+kabupaten_id_318,Kab Sekadau,Kalimantan Barat
+kabupaten_id_319,Kab Melawi,Kalimantan Barat
+kabupaten_id_320,Kab Kayong Utara,Kalimantan Barat
+kabupaten_id_321,Kab Kubu Raya,Kalimantan Barat
+kabupaten_id_322,Kota Pontianak,Kalimantan Barat
+kabupaten_id_323,Kota Singkawang,Kalimantan Barat
+kabupaten_id_324,Kab Kapuas,Kalimantan Tengah
+kabupaten_id_325,Kab Barito Selatan,Kalimantan Tengah
+kabupaten_id_326,Kab Barito Utara,Kalimantan Tengah
+kabupaten_id_327,Kab Kotawaringin Timur,Kalimantan Tengah
+kabupaten_id_328,Kab Kotawaringin Barat,Kalimantan Tengah
+kabupaten_id_329,Kab Katingan,Kalimantan Tengah
+kabupaten_id_330,Kab Seruyan,Kalimantan Tengah
+kabupaten_id_331,Kab Sukamara,Kalimantan Tengah
+kabupaten_id_332,Kab Lamandau,Kalimantan Tengah
+kabupaten_id_333,Kab Gunung Mas,Kalimantan Tengah
+kabupaten_id_334,Kab Pulang Pisau,Kalimantan Tengah
+kabupaten_id_335,Kab Murung Raya,Kalimantan Tengah
+kabupaten_id_336,Kab Barito Timur,Kalimantan Tengah
+kabupaten_id_337,Kota Palangka Raya,Kalimantan Tengah
+kabupaten_id_338,Kab Banjar,Kalimantan Selatan
+kabupaten_id_339,Kab Tanah Laut,Kalimantan Selatan
+kabupaten_id_340,Kab Barito Kuala,Kalimantan Selatan
+kabupaten_id_341,Kab Tapin,Kalimantan Selatan
+kabupaten_id_342,Kab Hulu Sungai Selatan,Kalimantan Selatan
+kabupaten_id_343,Kab Hulu Sungai Tengah,Kalimantan Selatan
+kabupaten_id_344,Kab Hulu Sungai Utara,Kalimantan Selatan
+kabupaten_id_345,Kab Tabalong,Kalimantan Selatan
+kabupaten_id_346,Kab Kota Baru,Kalimantan Selatan
+kabupaten_id_347,Kab Balangan,Kalimantan Selatan
+kabupaten_id_348,Kab Tanah Bumbu,Kalimantan Selatan
+kabupaten_id_349,Kota Banjarmasin,Kalimantan Selatan
+kabupaten_id_350,Kota Banjarbaru,Kalimantan Selatan
+kabupaten_id_351,Kab Pasir,Kalimantan Timur
+kabupaten_id_352,Kab Kutai Kartanegara,Kalimantan Timur
+kabupaten_id_353,Kab Berau,Kalimantan Timur
+kabupaten_id_354,Kab Bulungan,Kalimantan Timur
+kabupaten_id_355,Kab Malinau,Kalimantan Timur
+kabupaten_id_356,Kab Nunukan,Kalimantan Timur
+kabupaten_id_357,Kab Kutai Barat,Kalimantan Timur
+kabupaten_id_358,Kab Kutai Timur,Kalimantan Timur
+kabupaten_id_359,Kab Penajam Paser Utara,Kalimantan Timur
+kabupaten_id_360,Kab Tana Tidung,Kalimantan Timur
+kabupaten_id_361,Kota Samarinda,Kalimantan Timur
+kabupaten_id_362,Kota Balikpapan,Kalimantan Timur
+kabupaten_id_363,Kota Tarakan,Kalimantan Timur
+kabupaten_id_364,Kota Bontang,Kalimantan Timur
+kabupaten_id_365,Kab Bolaang Mengondow,Sulawesi Utara
+kabupaten_id_366,Kab Minahasa,Sulawesi Utara
+kabupaten_id_367,Kab Kepulauan Sangihe,Sulawesi Utara
+kabupaten_id_368,Kab Kepulauan Talaud,Sulawesi Utara
+kabupaten_id_369,Kab Minahasa Selatan,Sulawesi Utara
+kabupaten_id_370,Kab Minahasa Utara,Sulawesi Utara
+kabupaten_id_371,Kab Bolaang Mongondow Utara,Sulawesi Utara
+kabupaten_id_372,Kab Siau Tagulandang Biaro,Sulawesi Utara
+kabupaten_id_373,Kab Minahasa Tenggara,Sulawesi Utara
+kabupaten_id_374,Kab Bolaang Mongondow Timur,Sulawesi Utara
+kabupaten_id_375,Kab Bolaang Mongondow Selatan,Sulawesi Utara
+kabupaten_id_376,Kota Manado,Sulawesi Utara
+kabupaten_id_377,Kota Bitung,Sulawesi Utara
+kabupaten_id_378,Kota Tomohon,Sulawesi Utara
+kabupaten_id_379,Kota Kotamobagu,Sulawesi Utara
+kabupaten_id_380,Kab Banggai Kepulauan,Sulawesi Tengah
+kabupaten_id_381,Kab Donggala,Sulawesi Tengah
+kabupaten_id_382,Kab Poso,Sulawesi Tengah
+kabupaten_id_383,Kab Banggai,Sulawesi Tengah
+kabupaten_id_384,Kab Buol,Sulawesi Tengah
+kabupaten_id_385,Kab Toli-Toli,Sulawesi Tengah
+kabupaten_id_386,Kab Morowali,Sulawesi Tengah
+kabupaten_id_387,Kab Parigi Moutong,Sulawesi Tengah
+kabupaten_id_388,Kab Tojo Una-Una,Sulawesi Tengah
+kabupaten_id_389,Kab Sigi,Sulawesi Tengah
+kabupaten_id_390,Kota Palu,Sulawesi Tengah
+kabupaten_id_391,Kab Maros,Sulawesi Selatan
+kabupaten_id_392,Kab Pangkajene Kepulauan,Sulawesi Selatan
+kabupaten_id_393,Kab Gowa,Sulawesi Selatan
+kabupaten_id_394,Kab Takalar,Sulawesi Selatan
+kabupaten_id_395,Kab Jeneponto,Sulawesi Selatan
+kabupaten_id_396,Kab Barru,Sulawesi Selatan
+kabupaten_id_397,Kab Bone,Sulawesi Selatan
+kabupaten_id_398,Kab Wajo,Sulawesi Selatan
+kabupaten_id_399,Kab Soppeng,Sulawesi Selatan
+kabupaten_id_400,Kab Bantaeng,Sulawesi Selatan
+kabupaten_id_401,Kab Bulukumba,Sulawesi Selatan
+kabupaten_id_402,Kab Sinjai,Sulawesi Selatan
+kabupaten_id_403,Kab Selayar,Sulawesi Selatan
+kabupaten_id_404,Kab Pinrang,Sulawesi Selatan
+kabupaten_id_405,Kab Sidenreng Rappang,Sulawesi Selatan
+kabupaten_id_406,Kab Enrekang,Sulawesi Selatan
+kabupaten_id_407,Kab Luwu,Sulawesi Selatan
+kabupaten_id_408,Kab Tana Toraja,Sulawesi Selatan
+kabupaten_id_409,Kab Tana Toraja Utara,Sulawesi Selatan
+kabupaten_id_410,Kab Luwu Utara,Sulawesi Selatan
+kabupaten_id_411,Kab Luwu Timur,Sulawesi Selatan
+kabupaten_id_412,Kota Makassar,Sulawesi Selatan
+kabupaten_id_413,Kota Pare-Pare,Sulawesi Selatan
+kabupaten_id_414,Kota Palopo,Sulawesi Selatan
+kabupaten_id_415,Kab Konawe,Sulawesi Tenggara
+kabupaten_id_416,Kab Muna,Sulawesi Tenggara
+kabupaten_id_417,Kab Buton,Sulawesi Tenggara
+kabupaten_id_418,Kab Kolaka,Sulawesi Tenggara
+kabupaten_id_419,Kab Konawe Selatan,Sulawesi Tenggara
+kabupaten_id_420,Kab Wakatobi,Sulawesi Tenggara
+kabupaten_id_421,Kab Bombana,Sulawesi Tenggara
+kabupaten_id_422,Kab Kolaka Utara,Sulawesi Tenggara
+kabupaten_id_423,Kab Konawe Utara,Sulawesi Tenggara
+kabupaten_id_424,Kab Buton Utara,Sulawesi Tenggara
+kabupaten_id_425,Kota Kendari,Sulawesi Tenggara
+kabupaten_id_426,Kota Baubau,Sulawesi Tenggara
+kabupaten_id_427,Kab Boalemo,Gorontalo
+kabupaten_id_428,Kab Gorontalo,Gorontalo
+kabupaten_id_429,Kab Pohuwato,Gorontalo
+kabupaten_id_430,Kab Bone Bolango,Gorontalo
+kabupaten_id_431,Kab Gorontalo Utara,Gorontalo
+kabupaten_id_432,Kota Gorontalo,Gorontalo
+kabupaten_id_433,Kab Mamuju,Sulawesi Barat
+kabupaten_id_434,Kab Mamuju Utara,Sulawesi Barat
+kabupaten_id_435,Kab Polewali Mandar,Sulawesi Barat
+kabupaten_id_436,Kab Mamasa,Sulawesi Barat
+kabupaten_id_437,Kab Majene,Sulawesi Barat
+kabupaten_id_438,Kab Maluku Tengah,Maluku
+kabupaten_id_439,Kab Maluku Tenggara,Maluku
+kabupaten_id_440,Kab Buru,Maluku
+kabupaten_id_441,Kab Maluku Tenggara Barat,Maluku
+kabupaten_id_442,Kab Seram Bagian Barat,Maluku
+kabupaten_id_443,Kab Seram Bagian Timur,Maluku
+kabupaten_id_444,Kab Kepulauan Aru,Maluku
+kabupaten_id_445,Kab Maluku Barat Daya,Maluku
+kabupaten_id_446,Kab Buru Selatan,Maluku
+kabupaten_id_447,Kota Ambon,Maluku
+kabupaten_id_448,Kota Tual,Maluku
+kabupaten_id_449,Kab Halmahera Tengah,Maluku Utara
+kabupaten_id_450,Kab Halmahera Barat,Maluku Utara
+kabupaten_id_451,Kab Halmahera Utara,Maluku Utara
+kabupaten_id_452,Kab Halmahera Selatan,Maluku Utara
+kabupaten_id_453,Kab Halmahera Timur,Maluku Utara
+kabupaten_id_454,Kab Kepulauan Sula,Maluku Utara
+kabupaten_id_455,Kab Kepulauan Morotai,Maluku Utara
+kabupaten_id_456,Kota Ternate,Maluku Utara
+kabupaten_id_457,Kota Tidore Kepulauan,Maluku Utara
+kabupaten_id_458,Kab Jayapura,Papua
+kabupaten_id_459,Kab Biak Numfor,Papua
+kabupaten_id_460,Kab Yapen Waropen,Papua
+kabupaten_id_461,Kab Merauke,Papua
+kabupaten_id_462,Kab Jayawijaya,Papua
+kabupaten_id_463,Kab Nabire,Papua
+kabupaten_id_464,Kab Paniai,Papua
+kabupaten_id_465,Kab Puncak Jaya,Papua
+kabupaten_id_466,Kab Mimika,Papua
+kabupaten_id_467,Kab Boven Digoel,Papua
+kabupaten_id_468,Kab Mappi,Papua
+kabupaten_id_469,Kab Asmat,Papua
+kabupaten_id_470,Kab Yahukimo,Papua
+kabupaten_id_471,Kab Pegunungan Bintang,Papua
+kabupaten_id_472,Kab Tolikara,Papua
+kabupaten_id_473,Kab Sarmi,Papua
+kabupaten_id_474,Kab Keerom,Papua
+kabupaten_id_475,Kab Waropen,Papua
+kabupaten_id_476,Kab Supiori,Papua
+kabupaten_id_477,Kab Memberamo Raya,Papua
+kabupaten_id_478,Kab Nduga Tengah,Papua
+kabupaten_id_479,Kab Lanny Jaya,Papua
+kabupaten_id_480,Kab Mamberamo Tengah,Papua
+kabupaten_id_481,Kab Yalimo,Papua
+kabupaten_id_482,Kab Puncak,Papua
+kabupaten_id_483,Kab Dogiyai,Papua
+kabupaten_id_484,Kab Deiyai,Papua
+kabupaten_id_485,Kab Intan Jaya,Papua
+kabupaten_id_486,Kota Jayapura,Papua
+kabupaten_id_487,Kab Fak-Fak,Papua Barat
+kabupaten_id_488,Kab Kaimana,Papua Barat
+kabupaten_id_489,Kab Teluk Wondama,Papua Barat
+kabupaten_id_490,Kab Teluk Bintuni,Papua Barat
+kabupaten_id_491,Kab Manokwari,Papua Barat
+kabupaten_id_492,Kab Sorong Selatan,Papua Barat
+kabupaten_id_493,Kab Sorong,Papua Barat
+kabupaten_id_494,Kab Raja Ampat,Papua Barat
+kabupaten_id_495,Kab Tambrauw,Papua Barat
+kabupaten_id_496,Kab Maybrat,Papua Barat
+kabupaten_id_497,Kota Sorong,Papua Barat

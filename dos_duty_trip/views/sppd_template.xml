@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="sppd_template_document">
+    <t t-call="report.external_layout">
+        <t t-foreach="docs" t-as="o">
+            <div class="page">
+               <h4><center><strong><i>SURAT PERINTAH PERJALANAN DINAS</i></strong></center></h4>
+                <h6><center><strong>NOMOR : <span t-field="o.name"/></strong></center></h6>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <h6><center><strong><i>Diberikan Kepada :</i></strong></center></h6>
+                <br/>
+                <table class="table-condensed" style="font-size:11px;">
+                    <tr>
+                        <td style="width:100px;" class="a">Nama</td>
+                        <td style="width:20px;">:</td>
+                        <td style="width:300px;"><span t-field="o.employee_id.name"/></td>
+                        <td style="width:140px;" class="a">No.Pegawai</td>
+                        <td style="width:20px;">:</td>
+                        <td style="width:300px;"><span t-field="o.employee_id.nik"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width:140px;" class="a">Jabatan</td>
+                        <td style="width:20px;">:</td>
+                        <td colspan="4"><span t-field="o.job_id.name"/></td>
+                    </tr>
+                    <tr>
+                        <td style="width:140px;" class="a">Departemen</td>
+                        <td style="width:20px;">:</td>
+                        <td colspan="4"><span t-field="o.depart_id.name"/></td>
+                    </tr>
+                </table>
+                
+               
+                <h6><left>Untuk Mengadakan Perjalanan Dinas Guna :</left></h6>
+                <h6><left><td><span t-field="o.description"/></td></left></h6>
+                <br/>
+                <br/>
+                <h6><left>Menurut Skema di Bawah Ini</left></h6>
+                <table class="table-condensed" style="font-size:11px;">
+                    <tr>
+                        <td style="width:100px;" class="a">Berangkat</td>
+                        <td style="width:20px;">:</td>
+                        <td><p><span t-field="o.date_start" t-field-options='{"format": "d MMMM y"}'/></p></td>
+                        <td style="width:50px;" class="a">GA</td>
+                        <td style="width:20px;">:</td>
+                        <td></td>
+                        <td style="width:50px;" class="a">ETD</td>
+                        <td style="width:20px;">:</td>
+                        <td></td>
+                        <td style="width:50px;" class="a">ETA</td>
+                        <td style="width:20px;">:</td>
+                        <td></td>
+                    </tr>
+                   <tr>
+                        <td style="width:50px;" class="a">Kembali</td>
+                        <td style="width:20px;">:</td>
+                        <td><p><span t-field="o.date_end" t-field-options='{"format": "d MMMM y"}'/></p></td>
+                        <td style="width:50px;" class="a">GA</td>
+                        <td style="width:20px;">:</td>
+                        <td></td>
+                        <td style="width:50px;" class="a">ETD</td>
+                        <td style="width:20px;">:</td>
+                        <td></td>
+                        <td style="width:50px;" class="a">ETA</td>
+                        <td style="width:20px;">:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td style="width:140px;" class="a">Route</td>
+                        <td style="width:20px;">:</td>
+                        <td><span t-field="o.route"/></td>
+                    </tr>
+                </table>
+             <!--    <table class="table table-bordered" style="font-size:11px;background-color:rgb(204,204,204);border:medium">
+                    <tr>
+                        <td style="width:140px;" class="a">PS</td>
+                        <td style="width:20px;">TIBA</td>
+                        <td>NOMOR PENERBANGAN</td>
+                        <td style="width:140px;" class="a">BERANGKAT</td>
+                        <td style="width:20px;">NOMOR PENERBANGAN</td>
+                        <td>lAY OVER</td>
+                        <td>KETERANGAN</td>
+                    </tr>
+                   
+                </table> -->
+                <table class="table table-bordered" style="font-size:11px;">
+                  <tr>
+                    <td rowspan="2"><center>PS</center></td>
+                    <td colspan="3"><center>Tiba</center></td>
+                    <td rowspan="2"><center>Nomor Penerbangan</center></td>
+                    <td colspan="3"><center>Berangkat</center></td>
+                    <td colspan="2"><center>Lay Over</center></td>
+                    <td rowspan="2"><center>Keterangan</center></td>
+                  </tr>
+                  <tr>
+                    <td align="center">Kota</td>
+                    <td align="center">Tanggal</td>
+                    <td align="center">Waktu</td>
+                    <td align="center">Kota</td>
+                    <td align="center">Tanggal</td>
+                    <td align="center">Waktu</td>
+                    <td align="center">Tanggal</td>
+                    <td align="center">Waktu</td>
+                  </tr>
+                  <tr t-foreach="o.flight_ids" t-as="line">
+                    <td/>
+                    <td align="center"><span t-field="line.flight_arr"/></td>
+                    <td align="center"><span t-field="line.arrival_date" t-field-options='{"format": "d-MMM-y"}'/></td>
+                    <td align="center"><span t-field="line.arrival_time" t-field-options='{"widget": "time"}'/></td>
+                    <td align="center"><span t-field="line.flight_num"/></td>
+                    <td align="center"><span t-field="line.flight_dep"/></td>
+                    <td align="center"><span t-field="line.flight_date" t-field-options='{"format": "d-MMM-y"}'/></td>
+                    <td align="center"><span t-field="line.flight_time" t-field-options='{"widget": "time"}'/></td>
+                    <td align="center"/>
+                    <td align="center"/>
+                    <td align="center"/>
+                  </tr>
+                </table>
+                <h6><left><strong>Akomodasi</strong></left></h6>
+                <table class="table table-bordered" style="font-size:11px;">
+                  <tr>
+                    <th><center>Hotel</center></th>
+                    <th><center>Keterangan</center></th>
+                    <th><center>Check-in</center></th>
+                    <th><center>Check-out</center></th>
+                    <th><center>Price</center></th>
+                    <th><center>Total</center></th>
+                    
+                  </tr>
+                  <tr>
+                    <td><center><span t-field="o.hotel_ids.hotel_name"/></center></td>
+                    <td></td>
+                    <td><center><span t-field="o.hotel_ids.check_in_date"/></center></td>
+                    <td><center><span t-field="o.hotel_ids.check_out_date"/></center></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </table>
+              
+                <table class="table table-condensed">
+                    <tr>
+                        <td>
+                            <br/>
+                            <br/>
+                            <br/>
+                        </td>
+                        <td class ="text-right">
+                            <p align="right">Jakarta, <span t-field="o.date_create" t-field-options='{"format": "d MMMM y"}'/></p>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <p align="right"><strong><u>Denny Fajar</u></strong></p>
+                            <p align="right">SM.Finance &amp; Adm</p>
+                        </td>
+                    </tr>
+                </table>
+                <p align="left">Catatan  :   Pembebasan Biaya Fiscal : sudah/ belum  diperoleh</p>
+            </div>
+        </t>
+    </t>
+</template>
+<template id="report_sppd_doc">
+    <t t-call="report.html_container">
+        <t t-foreach="doc_ids" t-as="doc_id">
+            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'dos_duty_trip.sppd_template_document')"/>
+        </t>
+    </t>
+</template>
+
+
+</data>
+</openerp>

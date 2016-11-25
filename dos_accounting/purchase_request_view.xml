@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+
+		<record model="ir.ui.view" id="purchase_request_form">
+			<field name="name">purchase.request.form</field>
+			<field name="model">purchase.request</field>
+			<field name="arch" type="xml">
+				<form string="Supplier Prepayment">
+				<header>
+					<button name="action_to_draft" states="cancel" string="Set to Draft" type="object"/>
+	                <button name="action_cancel" states="draft,confirmed,approved,done" string="Cancel" type="object"/>
+					<button name="action_confirmed" states="draft" type="object" string="Confirm" class="oe_highlight"/>
+					<button name="action_validate" states="confirmed" type="object" string="Validate" class="oe_highlight"/>
+	                <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,approved,done"/>
+	            </header>
+				<sheet string="Supplier Prepayment">
+					<h1>
+                        <label string="Number "/>
+                        <field name="name" class="oe_inline" readonly="1"/>
+                        <div class="oe_right oe_button_box" name="buttons">
+                        	<button name="view_invoice" states="done" groups="account.group_account_user" type="object" string="View Invoice" class="oe_inline oe_stat_button" icon="fa-arrow-up"/>     
+                        </div>
+                    </h1>
+                    <group>
+                        <group string="Supplier Info">
+                        	<field name="partner_id" on_change="onchange_partner_id(partner_id)"
+                              context="{'default_customer': 0, 'search_default_supplier': 1, 'default_supplier': 1, 'show_address': 1}" domain="[('supplier', '=', True)]" 
+                        	  attrs="{'readonly':[('state','!=','draft')]}" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                        	<field name="npwp"/>
+                        	<field name="fiscal_position" string="Supplier Tax Rules" invisible="1"/>
+                        	<field name="bank_id" domain="[('partner_id','=',partner_id)]" attrs="{'readonly':[('state','!=','draft')]}" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                        	<field name="payment_term_id" attrs="{'readonly':[('state','!=','draft')]}" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}" invisible="1"/>                -->
+                        </group>
+                        <group string="Request Info">
+                            <field name="date_order"/>
+                            <field name="user_id" required="1" readonly="1"/>
+<!--                            <field name="employee_id" on_change="onchange_employee_id(employee_id)" required="1" attrs="{'readonly':[('state','!=','draft')]}" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/-->
+<!--                            <field name="department_id" required="1" attrs="{'readonly':[('state','!=','draft')]}" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/-->
+                        	<field name="currency_id" required="1" domain="[('visible','=',True)]" attrs="{'readonly':[('state','!=','draft')]}" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>        
+							<field name="company_id" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>                            
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Products">
+                            <field name="order_line">
+                                <tree string="Invoice Lines" editable="bottom">
+                                    <field name="product_id" on_change="onchange_product_id(product_id,0,False,parent.partner_id, parent.date_order,date_planned,False,False,parent.state,context)"
+                                    		options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                                    <field name="name"/>
+									<field name="date_planned" invisible="1"/>                                    
+                                    <field name="product_qty" on_change="onchange_product_id(product_id,product_qty,product_uom,parent.partner_id,parent.date_order,date_planned,name,False,parent.state,context)"
+                                    		options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/> 
+                                    <field name="product_uom" on_change="onchange_product_uom(product_id,product_qty,product_uom,parent.partner_id, parent.date_order,date_planned,name,False,parent.state,context)"
+                                    		options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                                    <field name="account_id" required="1" domain="[('type','!=','view')]"
+                                    		options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                                    <field name="price_unit"/>
+                                    <field name="taxes_id" widget="many2many_tags" domain="[('parent_id','=',False),('type_tax_use','!=','sale')]"
+                                    		options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+                                    <field name="price_subtotal"/>
+                                    <field name="state" invisible="1"/>
+                                </tree>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <field name="amount_tax" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <div class="oe_subtotal_footer_separator oe_inline">
+                                    <label for="amount_total"/>
+                                    <button name="button_dummy"
+                                        states="draft" string="(update)" type="object" class="oe_edit_only oe_link"/>
+                                </div>
+                                <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                            <div class="oe_clear"/>
+                            <field name="propose" class="oe_inline" placeholder="Notes..."/>
+                        </page>
+                        <page string="General Info">
+                        	<group>
+                                <group>
+									<field name="create_date"/>
+									<field name="date_due"/>                            
+		                            <field name="type"/>         
+									<field name="prepayment_status" attrs="{'invisible': [('type','!=','prepayment')]}"/> 
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+				</sheet>
+				 <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.ui.view" id="purchase_request_tree_view">
+            <field name="name">purchase_request.tree</field>
+            <field name="model">purchase.request</field>
+            <field name="arch" type="xml">
+                <tree string="Supplier Prepayment">
+                	<field name="name" string="Order Number"/>
+                    <field name="date_order"/>
+                    <field name="partner_id"/>
+                    <field name="amount_untaxed" sum="Total DPP"/>
+                    <field name="amount_tax" sum="Total Pajak"/>
+                    <field name="amount_total" sum="Total"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>        
+		
+		<record model="ir.ui.view" id="purchase_request_search_view">
+            <field name="name">purchase_request.search</field>
+            <field name="model">purchase.request</field>
+            <field name="arch" type="xml">
+                <search>
+					<field name="name"/>
+					<field name="partner_id"/>
+					<field name="date_order"/>
+                </search>
+            </field>
+        </record>
+		
+        <record model="ir.actions.act_window" id="purchase_request_action">
+            <field name="name">Supplier Prepayment</field>
+            <field name="res_model">purchase.request</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,search</field>
+            <field name="domain">[('type','=','prepayment')]</field>
+            <field name="context">{'type': 'prepayment'}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to create a Supplier Prepayment that can be converted into a Supplier Invoice.
+                </p><p>
+                    Databit will help you efficiently handle the complete Supplier Prepayment,
+                    Supplier Invoice and Payment.
+                </p>
+            </field>
+        </record>
+        
+		<menuitem id="purchase_request_menu" name="Supplier Prepayment" parent="account.menu_finance_payables" action="purchase_request_action"/>
+		
+    </data>
+</openerp>

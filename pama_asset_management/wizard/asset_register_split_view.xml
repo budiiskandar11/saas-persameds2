@@ -1,0 +1,37 @@
+<openerp>
+	<data>
+		<record id="view_asset_split" model="ir.ui.view">
+            <field name="name">Asset Split</field>
+            <field name="model">asset.register.split.wiz</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Asset Split">
+                	<group>
+                		<field name="asset_register_id"/>
+                		<field name="original_value"/>
+                		<field name="asset_split_line" colspan="4" nolabel="1">
+                			<tree editable="bottom">
+                				<field name="name"/>
+								<field name="asset_class_id"/>
+	                			<field name="amount_value"/>
+                			</tree>    			
+                		</field>
+                	</group>
+                    <separator string="" colspan="4"/>
+                    <button special="cancel" string="Cancel" icon="gtk-cancel"/>
+                    <button name="split_asset_register" string="Confirm" type="object" icon="gtk-go-forward"/>
+                </form>
+            </field>
+        </record>
+		
+		
+		<record id="action_view_asset_split" model="ir.actions.act_window">
+            <field name="name">Asset Split</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">asset.register.split.wiz</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+	</data>
+</openerp>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_cashflow_statement" groups="base.group_user">
+                <div class="page">                    
+	            <b><h4 t-esc="res_company.name" style="text-align:center"/></b>
+                    <b><h4 t-esc="get_title()" style="text-align:center"/></b>
+                     <b><h4 t-esc="get_filter_str()" style="text-align:center"/></b>
+		<table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;Account</th>
+                            <th class="text-right" style="width:93px">Balance&#160;&#160;</th>
+                        </tr>
+                    </thead>
+                 </table>   
+                    <table class="table table-condensed">
+                        <tbody>
+                            <tr t-foreach="get_lines_report_cashflow_statement(data)" t-as="childrenaccount">
+                            <t t-if="childrenaccount['name'] != 'Cash Flow'">
+                            <t t-if="childrenaccount['has_childs'] == True or childrenaccount.has_key('bold') == True" >
+                                <t t-set="style" t-value="'font-weight:bold;color:RoyalBlue;'"/>
+                            </t>
+                            <t t-if="childrenaccount['has_childs'] != True and childrenaccount.has_key('bold') != True">
+                                <t t-set="style" t-value="'font-weight:normal;'"/>
+                            </t>
+                            <t t-if="childrenaccount.has_key('bold') == True">
+                                <t t-set="style" t-value="'font-weight: bold;color:RoyalBlue;line-height:50px;vertical-align: baseline;'"/>
+                            </t>
+                            <td>                               
+                                <span style="color: white;" t-esc="'&#160;&#160;' * (childrenaccount['level'])"/>
+                                <span t-att-style="style" t-esc="childrenaccount['name']"/>                               
+                            </td>
+                            <td class="text-right">
+                                <t t-if="childrenaccount['has_childs'] != True and childrenaccount.has_key('hide_bal') != True">
+                                    <span t-att-style="style" t-esc="formatLang(childrenaccount['balance'])"/>
+                                </t>
+                            </td>
+                            </t>  
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+</template>
+</data>
+</openerp>

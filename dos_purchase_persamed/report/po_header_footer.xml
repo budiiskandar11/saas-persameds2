@@ -1,0 +1,473 @@
+<openerp>
+    <data>
+    	
+        <record id="po_header_footer" model="ir.header_webkit">
+            <field name="footer_html"><![CDATA[
+            	<html>
+     <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <script>
+            function subst() {
+            var vars={};
+            var x=document.location.search.substring(1).split('&');
+            for(var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
+            var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
+            for(var i in x) {
+            var y = document.getElementsByClassName(x[i]);
+            for(var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
+                }
+            }
+        </script>
+        <style>
+          .perjanjian
+			{
+				font-size:11px;
+				text-align: justify;
+    			text-justify: inter-word;
+				line-height:12px;
+				page-break-inside:avoid; page-break-after:auto;
+			}
+        	.font12px
+			{
+				font-size: 12px;
+        	}
+        	table.one 
+         	{border-collapse:collapse;}
+        </style>
+    	</head>
+    	<body style="border:0; margin: 0;" onload="subst()">
+    	%for o in objects :	
+        <table class="one font11px perjanjian ">
+        		<tr>
+        			<td style="border-top:1px solid black; width:50%">Supplier Confirmation :
+        			</td>
+        			<td style="border-top:1px solid black; width:50%" ></td>
+        		</tr>
+        		<tr>
+        			<td>We acknowledge receipt of this Purchase Order
+        				and confirm our complience with the details and
+        				Other Terms and Condition behind this page
+        			</td>
+        			<td></td>
+        		</tr>
+        		<tr>
+        			<td>
+        			</td>
+        			<td>Authorize Person :</td>
+        		</tr>
+        		<tr>
+        			<td>
+        			</td>
+        			<td>SURONO</td>
+        		</tr>
+        		<tr>
+        			<td>
+        			</td>
+        			<td><br>
+        					</br>
+        					<br>
+        					</br>
+        			</td>
+        		</tr>
+        		<tr>
+        			<td></td>
+        			<td>PURCHASER : ${o.validator.name}
+        			</td>
+        			
+        		</tr>
+        		<tr>
+        			<td>
+        			</td>
+        			<td>ELECTRONICALLY APPROVED</td>
+        		</tr>
+        	
+        	</table> 
+        	<table class="one perjanjian" width="100%" >  
+				<tr> 
+					<td class="border_bottom" width="100%"> 
+	  					<br/>
+					</td>
+				</tr>
+				<tr>
+					<td class="font12px" ><b>${o.company_id.name or ''}</b>
+					</td>
+	            <tr>
+					<td >${o.company_id.street or ''} ${o.company_id.street2 or ''}  ${o.company_id.city or ''}
+										 ${o.company_id.state or ''}  ${o.company_id.country or ''}  ${o.company_id.zip or ''}
+					</td>  
+	            </tr>
+	            <tr>
+					<td  >Phone/Fax : ${o.company_id.phone or ''} / ${o.company_id.Fax or ''}
+					</td>
+				</tr>
+				<tr>
+					<td>Email : ${o.company_id.email or ''} 
+					</td>
+				</tr>
+				<tr>
+					<td  >Web  : ${o.company_id.website or ''} 
+					</td>
+				</tr>
+			</table>
+        %endfor
+    </body>
+</html>]]>
+</field>
+            <field eval="&quot;&quot;&quot;Portrait&quot;&quot;&quot;" name="orientation"/>
+            <field eval="&quot;&quot;&quot;A4&quot;&quot;&quot;" name="format"/>
+            <field name="html"><![CDATA[<html>
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <script>
+            function subst() {
+            var vars={};
+            var x=document.location.search.substring(1).split('&');
+            for(var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
+            var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
+            for(var i in x) {
+            var y = document.getElementsByClassName(x[i]);
+            for(var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
+                }
+            }
+        </script>
+            <style>
+			.vtop
+			{
+				vertical-align: top;
+			}
+
+			.vbottom
+			{
+				vertical-align: bottom;
+			}
+		
+			.hright
+			{
+				text-align: right;
+				padding-right: 3px;
+			}
+			.hleft
+			{
+				text-align: left;
+			}
+			.hmid
+			{
+				text-align: center;
+			}
+			.content
+			{
+				font-size: 12px;
+			}
+			.border_grey
+			{
+				border: 1px solid lightGrey;
+			}
+			.border_black
+			{
+				border: 1px solid black;
+			}
+			.space
+			{
+				min-height: 25px;
+			}
+			.note
+			{
+				width: 500px;
+				padding: 5px;
+				float:right;
+				min-width: 100px;
+				border:1px solid black;
+			}
+			.padding
+			{
+				padding: 5px;
+			}
+			.paddingtop
+			{
+				padding-top: 10px;
+			}
+			.paddingright
+			{
+				padding-right: 10px;
+			}
+			.perjanjian
+			{
+				font-size:10px;
+				text-align: justify;
+    			text-justify: inter-word;
+				line-height:12px;
+				page-break-inside:avoid; page-break-after:auto;
+			}
+			th
+			{
+				font-size: 12px;
+				border-bottom: 1px solid black;
+			}
+			.border_bottom_grey
+			{
+				border-bottom: 1px solid lightGrey;
+			}
+			.background_color
+			{
+				background-color: lightGrey
+			}
+			.border_top
+			{
+				border-top: 1px solid black;
+			}
+			.border_bottom
+			{
+				border-bottom: 1px solid black;
+			}
+			.border_right
+			{
+				border-right: 1px solid black;
+			}
+			.border_left
+			{
+				border-left: 1px solid black;
+			}            
+			.border_top_bottom
+			{
+				border-top: 1px solid black;
+				border-bottom: 1px solid black;
+			}
+			.border_left_right
+			{
+				border-right: 1px solid black;
+				border-left: 1px solid black;
+			}
+			.fright
+			{
+				float: right; 
+			}
+			.fleft
+			{
+				float: left; 
+			}
+			.font12px
+			{
+				font-size: 12px;
+			}
+			.font10px
+			{
+				font-size: 10px;
+			}
+            .font11px
+			{
+				font-size: 11px;
+			}
+			.font14px
+			{
+				font-size: 14px;
+			}
+			.font22px
+			{
+				font-size: 22px;
+			}
+			.font30px
+			{
+				font-size: 30px;
+			}
+			.title 
+			{
+				font-size: 22px;
+				text-align: center;
+				padding: 5px;
+			}
+			.title-table 
+			{
+				font-size: 12px;
+				text-align:center;
+				padding-top:20px;
+			}
+			.title-form 
+			{
+				font-size: 22px;
+				text-align:center;
+				padding-top:20px;
+				padding-bottom:10px;
+			}
+			
+         	table.one 
+         	{border-collapse:collapse;}
+			
+		</style>
+        </style>
+    </head>
+    <body style="border:0; margin: 0;" onload="subst()">
+        %for o in objects  :    
+           <table class="header" padding="3px" style="border-bottom: 0px solid black; width: 100%; ">
+            <tr>
+                <td style="width: 20%">${helper.embed_company_logo(height="70px",width="auto")|safe}</td>
+            </tr>
+           </table> ${_debug or ''|safe} 
+           <table cellpadding="3" class="header one" style="width:100%">
+			 <tr>
+             	<td colspan="2" class="font22px hmid border_top border_left_right">PURCHASE ORDER</td>
+            </tr>
+            <tr> 
+             	<td class="font12px hleft border_left"><b>P.O NUMBER :</b> ${o.name or '/'}</td>
+             	<td class="font12px hright border_right"><b>DATE : </b>${time.strftime('%d %b %Y', time.strptime(o.date_order,'%Y-%m-%d %H:%M:%S'))}</td>
+            </tr>  
+            <tr>
+            	<td width="50%" class="font12px hleft border_top border_left_right"><b>SHIP TO :</b></td>
+            	<td width="50%" class="font12px hleft border_top border_left_right"><b>BILL TO :</b></td>
+            </tr>
+             <tr>
+        		%if o.inco == True :
+		            <td width="50%" class="hleft font11px border_bottom border_left_right">EX WORKS - ${o.partner_id.name}
+	             </td>
+	             %else : 
+	            <td width="50%" class="hleft font11px border_bottom border_left_right"><b>${o.picking_type_id.warehouse_id.partner_id.name|upper or ''} </b></br>
+	                						   ${o.picking_type_id.warehouse_id.partner_id.street or ''}, ${o.picking_type_id.warehouse_id.partner_id.street2 or ''} </br>
+	                						   ${o.picking_type_id.warehouse_id.partner_id.city or ''} ${o.picking_type_id.warehouse_id.partner_id.state_id.name or ''}</br>
+	                						   ${o.picking_type_id.warehouse_id.partner_id.country_id.name or ''} ${o.picking_type_id.warehouse_id.partner_id.zip or ''}	
+	            </td>
+	             %endif
+            	 <td width="50%" class="hleft font11px border_bottom border_left_right"><b>${o.company_id.partner_id.name|upper or ''} </b></br>
+	                						   ${o.company_id.partner_id.street or ''}, ${o.company_id.partner_id.street2 or ''} </br>
+	                						   ${o.company_id.partner_id.city or ''} ${o.company_id.partner_id.state_id.name or ''}</br>
+	                						   ${o.company_id.partner_id.country_id.name or ''} ${o.company_id.partner_id.zip or ''}	
+	            </td>
+	         </tr>
+	         <tr>
+				<td class="font12px hleft border_top border_left_right"><b>SUPPLIER :</b></td>
+				<td class="font12px hleft border_top_bottom border_left_right"><b>PAYMENT TERMS : </b>${o.payment_term_id.name or ''}</td>	         
+	         </tr>
+	         <tr> 
+	         	<td rowspan="4" class="hleft vtop font11px border_bottom border_left_right"><b>${o.partner_id.name}</b> </br> 
+	                											${o.partner_id.street or ''} ${o.partner_id.street2 or ''} 
+	                											${o.partner_id.city or ''} ${o.partner_id.state_id.name or ''} 
+	                											${o.partner_id.country_id.name or ''} ${o.partner_id.zip or ''} 
+	              
+	             </td>
+	         
+	         </tr>
+	         <tr> 
+	         	<td class="font12px hleft border_top_bottom border_left_right"><b>CURRENCY : </b>${o.currency_id.name or ''}</td>
+	         </tr>
+	          <tr> 
+	         	<td class="font12px vtop hleft border_top border_left_right"><b>SHIPPING INSTRUCTION :</b>
+	         		
+	         		</td>
+	         </tr>
+	         <tr> 
+	         	<td height="20px" class="font12px vtop hleft border_bottom border_left_right">${o.shipping_int}
+	         		
+	         		</td>
+	         </tr>
+	         
+	    
+          </table>
+          <br/>
+           	<table  class="font11px one" style=" width: 100%; padding:30px 5px 5px 5px;">
+            	<tr>
+            		<td colspan="7" class="font14px"><b>Purchase Details</b></td>
+            	</tr>
+				<tr class="border_bottom title-table">
+					<th class="hmid" style="width: 2%; padding:5px;">No</th>
+					<th class="hmid" style="width: 35%">Item Name/Description</th>
+					<th class="hmid" style="width: 12%;">Qty</th>
+					<th class="hmid" style="width: 3%"></th>
+					<th class="hmid" style="width: 10%">Unit Price</th>
+                    <th class="hmid" style="width: 10%">Disc</th>
+					<th class="hmid" style="width: 3%"></th>
+					<th class="hmid" style="width: 15%">Total Price</th>
+					
+				</tr>
+			</table>
+		%endfor		
+</html>]]>
+</field>
+            <field eval="105.0" name="margin_top"/>
+            <field eval="70.0" name="margin_bottom"/>
+            <field name="css" ><![CDATA[
+body {
+font-family:helvetica;
+font-size:12;
+}
+
+
+.dest_address {
+margin-left:60%;
+font-size:12;
+}
+.header {
+margin-left:0;
+text-align:left;
+width:300px;
+font-size:12;
+}
+
+.title {
+font-size:16;
+font-weight: bold;
+
+}
+
+
+.basic_table{
+text-align:center;
+border:1px solid lightGrey;
+border-collapse: collapse;
+}
+.basic_table td {
+border:1px solid lightGrey;
+font-size:12;
+
+
+}
+
+.list_table {
+border-color:black;
+text-align:center;
+border-collapse: collapse;
+
+}
+.list_table td {
+border-color:gray;
+border-top:1px solid gray;
+text-align:left;
+font-size:12;
+padding-right:3px
+padding-left:3px
+padding-top:3px
+padding-bottom:3px
+}
+
+.list_table th {
+border-bottom:2px solid black;
+text-align:left;
+font-size:12;
+font-weight:bold;
+padding-right:3px
+padding-left:3px
+}
+
+.list_tabe thead {
+    display:table-header-group;
+}
+
+
+.total {
+width:100%;
+}
+.lib {
+width:10.3%;
+}
+.tot {
+text-align:right;
+width:15%;
+}
+.lefttot {
+width:74%;
+}
+.tax {
+width:50%;
+}]]> </field>
+            <field eval="&quot;&quot;&quot;Purchase Persameds&quot;&quot;&quot;" name="name"/>
+        </record>
+       
+    </data>
+</openerp>

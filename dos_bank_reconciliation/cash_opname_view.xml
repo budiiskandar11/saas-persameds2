@@ -1,0 +1,50 @@
+<openerp>
+	<data>
+		
+		<record id="view_cash_opname" model="ir.ui.view">
+			<field name="name">cash.reconciliation.form</field>
+			<field name="model">bank.reconciliation</field>
+			<field name="inherit_id" ref="view_bank_reconciliation_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//form/sheet/notebook/page[2]" position="after">
+            		<page string="BAPUK">
+            			<group>
+            				<!--<button name='refresh_record2' string='Reload' type='object'/>-->
+            				<field name="cash_ids" nolabel="1" >
+            					<tree string="Bapuk" editable="bottom">
+            					<field name="type"/>
+            					<field name="name"/>
+            					<field name="qty_bagus" />
+            					<field name="sub_total_bagus" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+            					<field name="qty_rusak" attrs="{'readonly':[('type','in','logam')]}"/>
+            					<field name="sub_total_rusak" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+            					</tree>
+            				</field>
+            			</group>
+            				<group>
+	            			<group string="Totals">
+	            				<field name="total_uang_kertas"/>
+	            				<field name="total_kertas_rusak"/>
+	            				<field name="total_logam"/>
+	            				<newline/>
+	            				<field name="eviden"/>
+	            				<field name="bulat"/>
+	            				<field name="bon_sementara"/>
+	            			</group>
+	            			<group string="Summary">
+	            				<field name="total_cash"/>
+	            				<field name="total_non_cash"/>
+	            				<field name="grand_total"/>
+	            				<field name="selisih" string="Selisih dengan System"/>
+	            			<newline string="Other Info"/>
+	            				<field name="date_opname"/>
+	            				<field name="check_by"/>
+	            			</group>
+	            			</group>
+            		</page>
+            	</xpath>
+            </field>	
+		</record>
+		
+	</data>
+</openerp>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data noupdate="0">
+	    <record id="partner_sale_personal_rule" model="ir.rule">
+	        <field name="name">Own Customer</field>
+	        <field ref="model_res_partner" name="model_id"/>
+	        <field name="domain_force">['|','|','|',('user_id','=',user.id),('user_id_2','=',user.id),('user_id_3','=',user.id),('user_id','=',False)]</field>
+	        <field name="groups" eval="[(4, ref('base.group_sale_salesman'))]"/>
+    	</record>
+
+    	<record id="partner_sale_own_team_rule" model="ir.rule">
+	        <field name="name">Own Team</field>
+	        <field ref="model_res_partner" name="model_id"/>
+	        <field name="domain_force">['|','|','|',('section_id','=',user.default_section_id.id),('section_id_2','=',user.default_section_id.id),('section_id_3','=',user.default_section_id.id),('section_id','=',False)]</field>
+	        <field name="groups" eval="[(4, ref('base.group_sale_salesman'))]"/>
+    	</record>
+
+	    <record id="partner_sale_personal_all_rule" model="ir.rule">
+	        <field name="name">All Customer</field>
+	        <field ref="model_res_partner" name="model_id"/>
+	        <field name="domain_force">[(1,'=',1)]</field>
+	        <field name="groups" eval="[(4, ref('base.group_sale_salesman_all_leads'))]"/>
+	    </record>
+
+
+    	 <record id="sale_team_own_team_rule" model="ir.rule">
+	        <field name="name">Own Team</field>
+	        <field ref="model_crm_case_section" name="model_id"/>
+	        <field name="domain_force">[('member_ids','=',user.id)]</field>
+	        <field name="groups" eval="[(4, ref('dos_base_kasana.group_own_team'))]"/>
+    	</record>
+
+    	<record id="partner_own_team_rule" model="ir.rule">
+            <field name="name">Own Team: Partner</field>
+            <field ref="model_res_partner" name="model_id"/>
+            <field name="domain_force">['|','|','|',('section_id','in',user.team_ids.ids),('section_id_2','in',user.team_ids.ids),('section_id_3','in',user.team_ids.ids),('section_id','=',False)]</field>
+            <field name="groups" eval="[(4, ref('dos_base_kasana.group_own_team'))]"/>
+        </record>
+
+	</data>    
+</openerp>

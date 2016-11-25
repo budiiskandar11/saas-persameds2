@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+			
+<!--	================================== work flow =================================-->
+		<record id="loan_management" model="workflow">
+			<field name="name">loan.management</field>
+			<field name="osv">loan.management</field>
+			<field name="on_create">True</field>	
+		</record>
+		
+		<record id="actwf_Loan_Draft" model="workflow.activity">
+			<field name="wkf_id" ref="loan_management"/>
+			<field name="flow_start">True</field>
+			<field name="name">draft</field>
+		</record>
+
+		<record id="actwf_Loan_Verify" model="workflow.activity">
+			<field name="wkf_id" ref="loan_management"/>
+			<field name="name">verify</field>
+			<field name="kind">function</field>
+			<field name="action">write({'state':'verify'})</field>	
+		</record>
+		
+		<record id="actwf_Loan_Agree" model="workflow.activity">
+			<field name="wkf_id" ref="loan_management"/>
+			<field name="name">agree</field>
+			<field name="kind">function</field>
+			<field name="action">write({'state':'agree'})</field>	
+		</record>
+		
+
+		<record id="actwf_Loan_Execute" model="workflow.activity">
+			<field name="wkf_id" ref="loan_management"/>
+			<field name="name">open</field>
+			<field name="kind">function</field>
+			<field name="action">workflow_action_Cairkan()</field>	
+		</record>
+		
+		<!--
+		<record id="actwf_Loan_Execute" model="workflow.activity">
+			<field name="wkf_id" ref="loan_management"/>
+			<field name="name">open</field>
+			<field name="kind">function</field>
+			<field name="action">write({'state':'open'})</field>	
+		</record>
+		
+		-->
+		<record id="actwf_Loan_Cancel" model="workflow.activity">
+			<field name="wkf_id" ref="loan_management"/>
+			<field name="name">cancel</field>
+			<field name="kind">function</field>
+			<field name="flow_stop">True</field>
+			<field name="action">write({'state':'draft'})</field>	
+		</record>
+		
+<!--            ============transision=-->
+		
+		<record id="transition_Loan_Draf_Verify" model="workflow.transition">
+			<field name="act_from" ref="actwf_Loan_Draft"/>
+			<field name="act_to" ref="actwf_Loan_Verify"/>
+			<field name="signal">button_verifikasi</field>
+		</record>
+
+		<record id="transition_Loan_Verify_Agreement" model="workflow.transition">
+			<field name="act_from" ref="actwf_Loan_Verify"/>
+			<field name="act_to" ref="actwf_Loan_Agree"/>
+			<field name="signal">button_setuju</field>
+		</record>
+		
+		<record id="transition_Loan_Agreement_Execute" model="workflow.transition">
+			<field name="act_from" ref="actwf_Loan_Agree"/>
+			<field name="act_to" ref="actwf_Loan_Execute"/>
+			<field name="signal">button_cairkan</field>
+		</record>
+		
+		<record id="transition_Loan_Verify_Cancel" model="workflow.transition">
+			<field name="act_from" ref="actwf_Loan_Verify"/>
+			<field name="act_to" ref="actwf_Loan_Cancel"/>
+			<field name="signal">button_batalkan</field>
+		</record>
+
+
+
+	 <!--
+		  <record id="actwf_Loan_Verify" model="workflow.activity">
+			<field name="wkf_id" ref="loan_management"/>
+			<field name="name">verify</field>
+			<field name="kind">function</field>
+			<field name="action">workflow_action_Verifikasi()</field>	
+		</record>
+		
+		<record id="actwf_Loan_Agree" model="workflow.activity">
+			<field name="wkf_id" ref="loan_management"/>
+			<field name="name">agree</field>
+			<field name="kind">function</field>
+			<field name="action">workflow_action_Setuju()</field>	
+		</record>
+		
+		<record id="actwf_Loan_Execute" model="workflow.activity">
+			<field name="wkf_id" ref="loan_management"/>
+			<field name="name">open</field>
+			<field name="kind">function</field>
+			<field name="action">workflow_action_Cairkan()</field>	
+		</record>
+		
+		<record id="actwf_Loan_Cancel" model="workflow.activity">
+			<field name="wkf_id" ref="loan_management"/>
+			<field name="name">cancel</field>
+			<field name="kind">function</field>
+			<field name="flow_stop">True</field>
+			<field name="action">workflow_action_Batalkan()</field>	
+		</record>
+		-->
+		
+
+
+
+
+
+
+
+
+	</data>
+</openerp>

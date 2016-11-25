@@ -1,0 +1,34 @@
+id,name,code,country_id:id
+state_id_11,Nangroe Aceh Darussalam,IAC ,base.id
+state_id_12,Sumatera Utara,ISU ,base.id
+state_id_13,Sumatera Barat,ISB ,base.id
+state_id_14,Riau,IRI ,base.id
+state_id_15,Jambi,IJA ,base.id
+state_id_16,Sumatera Selatan,ISS ,base.id
+state_id_17,Bengkulu,IBE ,base.id
+state_id_18,Lampung,ILA ,base.id
+state_id_19,Kepulauan Bangka Belitung,IBB ,base.id
+state_id_21,Kepulauan Riau,IKR ,base.id
+state_id_31,DKI Jakarta,IJK ,base.id
+state_id_32,Jawa Barat,IJB ,base.id
+state_id_33,Jawa Tengah,IJT ,base.id
+state_id_34,DI Yogyakarta,IYO ,base.id
+state_id_35,Jawa Timur,IJI ,base.id
+state_id_36,Banten,IBT ,base.id
+state_id_51,Bali,IBA ,base.id
+state_id_52,Nusa Tenggara Barat,INB ,base.id
+state_id_53,Nusa Tenggara Timur,INT ,base.id
+state_id_61,Kalimantan Barat,IKB ,base.id
+state_id_62,Kalimantan Tengah,IKT ,base.id
+state_id_63,Kalimantan Selatan,IKS ,base.id
+state_id_64,Kalimantan Timur,IKI ,base.id
+state_id_71,Sulawesi Utara,ISA ,base.id
+state_id_72,Sulawesi Tengah,IST ,base.id
+state_id_73,Sulawesi Selatan,ISN ,base.id
+state_id_74,Sulawesi Tenggara,ISG ,base.id
+state_id_75,Gorontalo,IGO ,base.id
+state_id_76,Sulawesi Barat,ISR ,base.id
+state_id_81,Maluku,IMA ,base.id
+state_id_82,Maluku Utara,IMU ,base.id
+state_id_94,Papua,IPA ,base.id
+state_id_95,Papua Barat,PPB,base.id

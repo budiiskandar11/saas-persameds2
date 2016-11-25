@@ -1,0 +1,19 @@
+<openerp>
+	<data>
+		<record id="view_sale_company_inherit" model="ir.ui.view">
+            <field name="name">company.sale.inherit.view</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="/form/sheet/notebook/page[2]/group/group" position="after">
+            		<group string="Sales Config">
+            			<field name="sale_discount_limit"/>
+            			<field colspan="2" name="ketentuan"  nolabel="1" widget="html"/>
+            		</group>
+            	</xpath>
+            	
+            	</field>
+          </record>
+          
+       </data>
+</openerp>       

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		
+		<record model="ir.ui.view" id="view_dplk_tree">
+            <field name="name">view.dplk.tree</field>            
+            <field name="model">hr.dplk</field>            
+            <field name="type">tree</field>							
+            <field name="arch" type="xml">
+            	<tree string="DPLK">
+            		<field name="date_to" />
+            		<field name="jnumber" />
+            		<field name="employee_number"/>
+            		<field name="name" />
+            		<field name="contract_id" string="SK No"/>
+            		<field name="dplk_by_employee" />
+					<field name="dplk_by_company" />            		
+            		<field name="state" />
+            	</tree>
+            </field>
+		</record>
+		<record model="ir.ui.view" id="view_dplk_form">
+            <field name="name">view.dplk.form</field>            
+            <field name="model">hr.dplk</field>            
+            <field name="type">form</field>							
+            <field name="arch" type="xml">
+				<form string="DPLK">
+					<header>	
+						<button name="cancel" type="object" string="Cancel" class="oe_highlight" states="registered"/>
+						<button name="register" type="object" string="Register" class="oe_highlight" states="draft"/>
+						<field name="state" widget="statusbar"/>						
+					</header>
+					<sheet>
+						<group>
+							<group>
+								<field name="name" on_change="onchange_employee_id(name)"/>
+								<field name="jnumber"/>
+								<field name="period_id" on_change="onchange_period(name, period_id)"/>
+								<field name="contract_id"/>
+							</group>
+							<group>								
+								<field name="department_id"/>
+								<!--<field name="section_id"/>-->
+								<field name="job_id"/>
+								<field name="current_job_level_id"/>
+								<label for="date_from" string="Period"/>
+		                        <div>
+		                            <field name="date_from" class="oe_inline"/> - <field name="date_to" class="oe_inline"/>
+		                        </div>								
+							</group>								
+						</group>							
+						<notebook colspan="4">
+							<page string="DPLk">
+								<group>
+									<field name="emp_status" invisible="1"/>
+									<field name="reg_date" required="1"/>
+									<field name="branch_office"/>
+									<group>
+										<field name="dplk"/>
+									</group>
+									<newline />
+									<separator string="Notes" colspan="4" />
+									<newline />
+									<field name="note" colspan="4" nolabel="1" />
+								</group>									
+							</page>
+							<page string="Premi Calculation">
+								<group >
+									<field name="contract_wage" />
+									<newline/>
+									<group col="2" colspan="2">
+										<separator string="DPLK" colspan="2" />
+										<newline/>
+										<field name="dplk_by_employee" />
+										<field name="dplk_by_company" />								
+									</group>
+									
+									<newline/>
+									<group col="4" colspan="4">
+										<separator string="Total" colspan="4" />
+										<newline/>
+										<field name="total" />
+									</group>
+								</group>
+							</page>
+							
+						</notebook>
+						<newline/>
+					</sheet>
+				</form>
+            </field>
+		</record>
+		<act_window id='act_menu_dplk_form' 
+				    res_model='hr.dplk' 
+					name='DPLK' 
+					domain="[]" 
+					view_type='form' 
+					view_mode='tree,form'/>
+		<menuitem 	name='DPLK'
+					id='menu_dplk_form' 
+				  	parent='menu_bpjs'
+				  	action='act_menu_dplk_form'
+				  	sequence='5'/>
+				  	
+		
+	</data>
+</openerp>

@@ -1,0 +1,22 @@
+<openerp>
+	<data>
+        <record id="training_proposed" model="mail.message.subtype">
+            <field name="name">Proposed</field>
+            <field name="res_model">hr.training</field>
+            <field name="default" eval="False"/>
+            <field name="description">Training Proposed</field>
+        </record>
+        <record id="training_approved" model="mail.message.subtype">
+            <field name="name">Approved</field>
+            <field name="res_model">hr.training</field>
+            <field name="default" eval="False"/>
+            <field name="description">Training Approved</field>
+        </record>
+        <record id="training_done" model="mail.message.subtype">
+            <field name="name">Done</field>
+            <field name="res_model">hr.training</field>
+            <field name="default" eval="False"/>
+            <field name="description">Training Done</field>
+        </record>
+	</data>
+</openerp>

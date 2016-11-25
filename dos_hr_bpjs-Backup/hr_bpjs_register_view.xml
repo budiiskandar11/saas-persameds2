@@ -1,0 +1,62 @@
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="view_bpjs_register_tree">
+            <field name="name">view.bpjs.register.tree</field>            
+            <field name="model">hr.bpjs.register</field>            
+            <field name="type">tree</field>							
+            <field name="arch" type="xml">
+            	<tree string="BPJS Register">
+            		<field name="name" />
+            		<field name="bpjs_tk_number"/>
+            		<field name="bpjs_kes_number"/>
+					<field name="state"/>            		
+            	</tree>
+            </field>
+		</record>
+		
+		<record model="ir.ui.view" id="view_bpjs_register_form">
+            <field name="name">view.bpjs.register.form</field>            
+            <field name="model">hr.bpjs.register</field>            
+            <field name="type">form</field>							
+            <field name="arch" type="xml">
+            	<form string="BPJS Register">
+            		<header>		
+            			<button name="cancel" type="object" string="Cancel" class="oe_highlight" states="draft"/>
+						<button name="register" type="object" string="Activate" class="oe_highlight" states="draft"/>
+						<button name="non_active" type="object" string="Inactivate" class="oe_highlight" states="registered"/>
+						<button name="modify" type="object" string="Modified" class="oe_highlight" states="registered"/>
+						<field name="state" widget="statusbar"/>						
+					</header>
+					<sheet>
+						<group>
+		            		<field name="name" required="1"/>
+							<field name="reg_date" required="1"/>		            		
+							<field name="contract_id" domain="[('employee_id','=',name)]" required="1"/>
+							<field name="bpjs_tk_member"/>
+							<field name="bpjs_tk_number"/>
+		            		<field name="jht"/>
+							<field name="jkk"/>
+							<field name="jk"/>           
+							<field name="bpjs_kes_member"/>		
+							<field name="bpjs_kes_number"/>
+							<field name="jpk"/>
+							<field name="dplk_member"/>							
+							<field name="dplk_number"/>
+							<field name="dplk"/>
+						</group>							
+					</sheet>			
+            	</form>
+            </field>
+		</record>
+		
+		<record id="action_hr_register" model="ir.actions.act_window">
+            <field name="name">BPJS Register</field>
+            <field name="res_model">hr.bpjs.register</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_bpjs_register_tree"/>
+            <!--<field name="search_view_id" ref="hr_bpjstk_run_filter"/>-->
+        </record>
+        <menuitem action="action_hr_register" id="menu_hr_bpjs_register" parent="menu_bpjs" sequence="1"/>
+		
+	</data>
+</openerp>

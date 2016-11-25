@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- modify supplier invoice view 
+        <record id="inherit_res_currency_form_view" model="ir.ui.view">
+            <field name="name">inherited.res.currency.form.view</field>
+            <field name="model">res.currency</field>
+            <field name="inherit_id" ref="base.view_currency_form"/>
+            <field name="arch" type="xml">
+            	<field name="rate_silent" position="after">
+            		<field name="tax_rate_silent"/>
+            		<field name="visible"/>
+            	</field>            	
+                <xpath expr="/form/field[@name='rate_ids']" position="after">
+                    <separator string="Rate Tax" colspan="4"/>
+                    <field mode="tree" name="rate_tax_ids" attrs="{'readonly':[('base','=',True)]}">
+                        <tree string="Rates" editable="bottom">
+                            <field name="name"/>
+							<field name="kp_men"/>                            
+                            <field name="rate"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record> -->
+    </data>
+</openerp>

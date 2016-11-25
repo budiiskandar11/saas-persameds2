@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+    <record id="action_bank_reconciliation_list_xls" model="ir.actions.report.xml">
+      <field name="name">Mutation Print</field>
+      <field name="model">bank.reconciliation</field>
+      <field name="type">ir.actions.report.xml</field>
+      <field name="report_name">bank.reconciliation.list.xls</field>
+      <field name="report_type">xls</field>
+      <field name="auto" eval="False"/>
+    </record>
+
+    <record model="ir.values" id="action_bank_reconciliation_list_xls_values">
+      <field name="name">Mutation Print</field>
+      <field name="key2">client_print_multi</field>
+      <field name="value" eval="'ir.actions.report.xml,' +str(ref('action_bank_reconciliation_list_xls'))" />
+      <field name="model">bank.reconciliation</field>
+    </record>
+  </data>
+</openerp>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+
+        <record id="seq_type_advance" model="ir.sequence.type">
+            <field name="name">Cash Advance</field>
+            <field name="code">cash.advance</field>
+        </record>
+
+        <record id="seq_advance" model="ir.sequence">
+            <field name="name">Cash Advance</field>
+            <field name="code">cash.advance</field>
+            <field name="prefix"></field>
+            <field name="suffix">/CA/%(month)s/%(y)s</field>
+            <field name="padding">3</field>
+        </record>
+    	
+    	
+    	<record id="seq_type_reimburs" model="ir.sequence.type">
+            <field name="name">Reimbursment</field>
+            <field name="code">reimburstment</field>
+        </record>
+
+        <record id="seq_reimburstment" model="ir.sequence">
+            <field name="name">Reimbursment No</field>
+            <field name="code">reimburstment</field>
+            <field name="prefix"></field>
+            <field name="suffix">/EXP/%(month)s/%(y)s</field>
+            <field name="padding">3</field>
+        </record>
+        
+       
+
+    </data>
+</openerp>

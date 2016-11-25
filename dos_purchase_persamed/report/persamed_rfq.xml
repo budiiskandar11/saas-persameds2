@@ -1,0 +1,486 @@
+<openerp>
+    <data>
+    	
+        <record id="persamed_header_footer_rfq" model="ir.header_webkit">
+            <field name="footer_html"><![CDATA[
+            	<html>
+     <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <script>
+            function subst() {
+            var vars={};
+            var x=document.location.search.substring(1).split('&');
+            for(var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
+            var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
+            for(var i in x) {
+            var y = document.getElementsByClassName(x[i]);
+            for(var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
+                }
+            }
+        </script>
+         <style>
+			.vtop
+			{
+				vertical-align: top;
+			}
+
+			.vbottom
+			{
+				vertical-align: bottom;
+			}
+		
+			.hright
+			{
+				text-align: right;
+				padding-right: 3px;
+			}
+			.hleft
+			{
+				text-align: left;
+			}
+			.hmid
+			{
+				text-align: center;
+			}
+			.content
+			{
+				font-size: 12px;
+			}
+			.border_grey
+			{
+				border: 1px solid lightGrey;
+			}
+			.border_black
+			{
+				border: 1px solid black;
+			}
+			.space
+			{
+				min-height: 25px;
+			}
+			.note
+			{
+				width: 500px;
+				padding: 5px;
+				float:right;
+				min-width: 100px;
+				border:1px solid black;
+			}
+			.padding
+			{
+				padding: 5px;
+			}
+			.paddingtop
+			{
+				padding-top: 10px;
+			}
+			.paddingright
+			{
+				padding-right: 10px;
+			}
+			th
+			{
+				font-size: 12px;
+				border-bottom: 1px solid black;
+			}
+			#border_bottom_grey
+			{
+				border-bottom: 1px solid lightGrey;
+			}
+			.background_color
+			{
+				background-color: lightGrey
+			}
+			.border_top
+			{
+				border-top: 1px solid black;
+			}
+			.border_bottom
+			{
+				border-bottom: 1px solid black;
+			}
+			.border_right
+			{
+				border-right: 1px solid black;
+			}
+			.border_top_bottom
+			{
+				border-top: 1px solid black;
+				border-bottom: 1px solid black;
+			}
+			.border_left_right
+			{
+				border-right: 1px solid black;
+				border-left: 1px solid black;
+			}
+			.fright
+			{
+				float: right; 
+			}
+			.fleft
+			{
+				float: left; 
+			}
+			.font12px
+			{
+				font-size: 12px;
+			}
+			.font10px
+			{
+				font-size: 10px;
+			}
+			.font14px
+			{
+				font-size: 14px;
+			}
+			.font22px
+			{
+				font-size: 22px;
+			}
+			.font30px
+			{
+				font-size: 30px;
+			}
+			.title 
+			{
+				font-size: 22px;
+				text-align: center;
+				padding: 5px;
+			}
+			.title-table 
+			{
+				font-size: 12px;
+				text-align:center;
+				padding-top:20px;
+			}
+			
+         	table.one 
+         	{border-collapse:collapse;}
+			
+			#watermark {
+			  color: #d0d0d0;
+			  font-size: 150pt;
+			  -webkit-transform: rotate(-45deg);
+			  position: fixed;
+			  width: 500px;
+			  height: 500px;
+			  margin: 0;
+			  z-index: -1;
+			  left:150px;
+			  top:350px;
+				}
+		</style> 
+    	</head>
+       %for o in objects :
+    	<body style="border:0; margin: 0;" onload="subst()">
+    	
+		<table class="one" width="100%" >
+			<tr> 
+				<td class="border_bottom" width="100%"> 
+  					<br/>
+					
+				</td>
+			</tr>
+			<tr>
+				<td class="font12px" ><b>${o.company_id.name or ''}</b>
+				</td>
+            <tr>
+				<td class="font10px" >${o.company_id.street or ''} ${o.company_id.street2 or ''}  ${o.company_id.city or ''}
+									 ${o.company_id.state or ''}  ${o.company_id.country or ''}  ${o.company_id.zip or ''}
+				</td>  
+            </tr>
+            <tr>
+				<td class="font10px" >Phone/Fax : ${o.company_id.phone or ''} / ${o.company_id.Fax or ''}
+				</td>
+			</tr>
+			<tr>
+				<td class="font10px" >Email : ${o.company_id.email or ''} 
+				</td>
+			</tr>
+			<tr>
+				<td class="font10px" >Web  : ${o.company_id.website or ''} 
+				</td>
+			</tr>
+		</table>             
+    </body>   
+  %endfor
+</html>]]>
+</field>
+            <field eval="&quot;&quot;&quot;Portrait&quot;&quot;&quot;" name="orientation"/>
+            <field eval="&quot;&quot;&quot;A4&quot;&quot;&quot;" name="format"/>
+            <field name="html"><![CDATA[<html>
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
+        <script>
+            function subst() {
+            var vars={};
+            var x=document.location.search.substring(1).split('&');
+            for(var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
+            var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
+            for(var i in x) {
+            var y = document.getElementsByClassName(x[i]);
+            for(var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
+                }
+            }
+        </script>
+            <style>
+			.vtop
+			{
+				vertical-align: top;
+			}
+
+			.vbottom
+			{
+				vertical-align: bottom;
+			}
+		
+			.hright
+			{
+				text-align: right;
+				padding-right: 3px;
+			}
+			.hleft
+			{
+				text-align: left;
+			}
+			.hmid
+			{
+				text-align: center;
+			}
+			.content
+			{
+				font-size: 12px;
+			}
+			.border_grey
+			{
+				border: 1px solid lightGrey;
+			}
+			.border_black
+			{
+				border: 1px solid black;
+			}
+			.space
+			{
+				min-height: 25px;
+			}
+			.note
+			{
+				width: 500px;
+				padding: 5px;
+				float:right;
+				min-width: 100px;
+				border:1px solid black;
+			}
+			.padding
+			{
+				padding: 5px;
+			}
+			.paddingtop
+			{
+				padding-top: 10px;
+			}
+			.paddingright
+			{
+				padding-right: 10px;
+			}
+			th
+			{
+				font-size: 12px;
+				border-bottom: 1px solid black;
+			}
+			#border_bottom_grey
+			{
+				border-bottom: 1px solid lightGrey;
+			}
+			.background_color
+			{
+				background-color: lightGrey
+			}
+			.border_top
+			{
+				border-top: 1px solid black;
+			}
+			.border_bottom
+			{
+				border-bottom: 1px solid black;
+			}
+			.border_right
+			{
+				border-right: 1px solid black;
+			}
+			.border_top_bottom
+			{
+				border-top: 1px solid black;
+				border-bottom: 1px solid black;
+			}
+			.border_left_right
+			{
+				border-right: 1px solid black;
+				border-left: 1px solid black;
+			}
+			.fright
+			{
+				float: right; 
+			}
+			.fleft
+			{
+				float: left; 
+			}
+			.font12px
+			{
+				font-size: 12px;
+			}
+			.font10px
+			{
+				font-size: 10px;
+			}
+			.font14px
+			{
+				font-size: 14px;
+			}
+			.font22px
+			{
+				font-size: 22px;
+			}
+			.font30px
+			{
+				font-size: 30px;
+			}
+			.title 
+			{
+				font-size: 22px;
+				text-align: center;
+				padding: 5px;
+			}
+			.title-table 
+			{
+				font-size: 12px;
+				text-align:center;
+				padding-top:20px;
+			}
+			
+         	table.one 
+         	{border-collapse:collapse;}
+			
+			#watermark {
+			  color: #d0d0d0;
+			  font-size: 150pt;
+			  -webkit-transform: rotate(-45deg);
+			  position: fixed;
+			  width: 500px;
+			  height: 500px;
+			  margin: 0;
+			  z-index: -1;
+			  left:150px;
+			  top:350px;
+				}
+		</style>
+	</head>
+	%for o in objects:
+	 <body style="border:0; margin: 0;" onload="subst()">
+        <table class="header" style="border-bottom: 0px solid black; width: 100%; ">
+            <tr>
+                <td style="width: 20%">${helper.embed_company_logo(height="70px",width="auto")|safe}</td>
+               
+            	</tr>
+            	<tr>
+            	
+            	</tr>
+        	</table> ${_debug or ''|safe}
+        	
+            </body> 
+		%endfor		
+</html>]]>
+</field>
+            <field eval="30.0" name="margin_top"/>
+            <field eval="40.0" name="margin_bottom"/>
+            <field name="css" ><![CDATA[
+body {
+font-family:helvetica;
+font-size:12;
+}
+
+
+.dest_address {
+margin-left:60%;
+font-size:12;
+}
+.header {
+margin-left:0;
+text-align:left;
+width:300px;
+font-size:12;
+}
+
+.title {
+font-size:16;
+font-weight: bold;
+
+}
+
+
+.basic_table{
+text-align:center;
+border:1px solid lightGrey;
+border-collapse: collapse;
+}
+.basic_table td {
+border:1px solid lightGrey;
+font-size:12;
+
+
+}
+
+.list_table {
+border-color:black;
+text-align:center;
+border-collapse: collapse;
+
+}
+.list_table td {
+border-color:gray;
+border-top:1px solid gray;
+text-align:left;
+font-size:12;
+padding-right:3px
+padding-left:3px
+padding-top:3px
+padding-bottom:3px
+}
+
+.list_table th {
+border-bottom:2px solid black;
+text-align:left;
+font-size:12;
+font-weight:bold;
+padding-right:3px
+padding-left:3px
+}
+
+.list_tabe thead {
+    display:table-header-group;
+}
+
+
+.total {
+width:100%;
+}
+.lib {
+width:10.3%;
+}
+.tot {
+text-align:right;
+width:15%;
+}
+.lefttot {
+width:74%;
+}
+.tax {
+width:50%;
+            
+}]]> </field>
+            <field eval="&quot;&quot;&quot;Persamed SO&quot;&quot;&quot;" name="name"/>
+        </record>
+       
+    </data>
+</openerp>

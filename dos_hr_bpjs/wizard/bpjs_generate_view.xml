@@ -1,0 +1,42 @@
+<openerp>
+	<data>
+		<record id="bpjs_generate_view" model="ir.ui.view">
+            <field name="name">bpjs.generate.view</field>
+            <field name="model">bpjs.generate</field>
+            <field name="arch" type="xml">
+                <form string="BPJS Generate">
+                    <p class="oe_grey">
+                        You need Generate BPJS.
+                    </p>
+                    <group>
+                    	<field name="name"/>
+						<label for="date_from" string="Period"/>
+                        <div>
+                            <field name="date_from" class="oe_inline"/> - <field name="date_to" class="oe_inline"/>
+                        </div>                	
+                    </group>
+                    <footer>
+                        <button string="Generate BPJS" name="bpjs_generate" type="object" default_focus="1" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+		
+        <record id="action_bpjs_generate_wizard" model="ir.actions.act_window">
+            <field name="name">Generate BPJS</field>
+            <field name="res_model">bpjs.generate</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="bpjs_generate_view"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem action="action_bpjs_generate_wizard"
+            id="menu_bpjs_generate_wizard" 
+            parent="menu_bpjs" sequence="2" />
+        
+                    	
+	</data>
+</openerp>

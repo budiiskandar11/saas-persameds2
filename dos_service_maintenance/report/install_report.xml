@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		
+        <report auto="False" id="report_installation" 
+		        model="installation" 
+		        name="report_installation"
+		        file="dos_service_maintenance/report/installation.mako" 
+		        string="Berita Acara Installasi" 
+         		webkit_header="persamed_header_footer2"
+		        usage="default" 
+		       	report_type="webkit"/>	
+		       	
+	   <report auto="False" id="report_warranty_card" 
+		        model="installation" 
+		        name="report_warranty"
+		        file="dos_service_maintenance/report/warranty_card.mako" 
+		        string="Warranty Card" 
+         		webkit_header=""
+		        usage="default" 
+		       	report_type="webkit"/>	
+	</data>
+</openerp>

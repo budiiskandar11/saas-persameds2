@@ -1,0 +1,73 @@
+<openerp>
+	<data>
+		<record id="view_working_substitution_form" model="ir.ui.view">
+            <field name="name">work.schedule.substitution.form</field>
+            <field name="model">hr.substitute.working.schedule</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Working Time Substitution">
+                    <group colspan="4" col="4" attrs="{'readonly': [('state','!=','draft')]}">
+	                    <field name="name" on_change="onchange_name(name)"/>
+	                    <field name="contract_id"/>
+	                    <field name="substitution_date"/>
+	                    <field name="substitution" on_change="onchange_substitution(substitution,substituen_id,substituen_contract_id,hour_from,hour_to)"/>
+	                    <field name="substituen_id" attrs="{'invisible': [('substitution','=',False)],'required': [('substitution','=',True)]}" on_change="onchange_substituen(substituen_id)"/>
+	                    <field name="substituen_contract_id" attrs="{'invisible': [('substitution','=',False)],'required': [('substitution','=',True)]}"/>
+	                    <field name="hour_from" widget="float_time" attrs="{'invisible': [('substitution','=',True)],'required': [('substitution','=',False)]}"/>
+	                    <field name="hour_to" widget="float_time" attrs="{'invisible': [('substitution','=',True)],'required': [('substitution','=',False)]}"/>
+	                    <field name="propose_id"/>
+                    </group>
+                    <group colspan="4" col="4">
+	                    <field name="state"/>
+                    	<group colspan="2">
+                    		<button name="button_cancel" states="draft,approved" string="Cancel" type="object" icon="gtk-cancel"/>
+		                    <button name="button_draft" states="cancel,proposed,approved" string="Set to Draft" type="object" icon="gtk-convert"/>
+		            		<button name="button_proposed" states="draft" string="Propose" type="object" icon="gtk-apply"/>
+		            		<button name="button_approved" states="proposed" string="Approve" type="object" icon="gtk-apply"/>
+						</group>                   
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record id="view_working_substitution_tree" model="ir.ui.view">
+            <field name="name">work.schedule.substitution.tree</field>
+            <field name="model">hr.substitute.working.schedule</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Working Time Substitution">
+	                <field name="name"/>
+	                <field name="substitution_date"/>
+	                <field name="substituen_id"/>
+	                <field name="substitution"/>
+	                <field name="hour_from" widget="float_time"/>
+	                <field name="hour_to" widget="float_time"/>
+	                <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        
+		<record id="view_working_substitution_search" model="ir.ui.view">
+            <field name="name">work.schedule.substitution.search</field>
+            <field name="model">hr.substitute.working.schedule</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Working Time Substitution">
+	                <field name="name"/>
+	                <field name="substitution_date"/>
+	                <field name="substituen_id"/>
+	                <field name="substitution"/>
+	                <field name="state"/>
+                </search>
+            </field>
+        </record>
+        
+		<record id="action_substitute_workschedule" model="ir.actions.act_window">
+			<field name="name">Working Time Substitution</field>
+			<field name="res_model">hr.substitute.working.schedule</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+		
+		<menuitem id="menu_action_substitute_workschedule" action="action_substitute_workschedule" parent="hr_attendance.menu_hr_attendance"/>
+	</data>
+</openerp>

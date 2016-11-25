@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="action_profitloss_menu" model="ir.actions.client">
+            <field name="name">Profit and Loss</field>
+            <field name="tag">profitloss</field>
+            <field name="target">self</field>
+        </record>
+        
+        <record id="action_profitloss_rpt" model="ir.actions.act_url">
+            <field name="name">Profit and Loss</field>
+            <field name="url">/profitloss/web/</field>
+            <field name="target">self</field>
+        </record>
+
+        <report 
+            id="action_report_profitloss_print"
+            model="website_account.profitloss.report"
+            string="Profit Loss report"
+            report_type="qweb-pdf"
+            name="website_account.report_profitloss_print"
+            file="website_account.report_profitloss_print"
+            menu="False"
+        />
+        <menuitem icon="STOCK_PRINT" name="Profit And Loss" action="action_profitloss_rpt" id="account.menu_account_report_pl" parent="account.final_accounting_reports"/>
+    </data>
+</openerp>

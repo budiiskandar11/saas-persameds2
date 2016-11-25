@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <!--#####################Activity###################-->
+        <record id="wkf_advance" model="workflow">
+            <field name="name">cash.advance</field>
+            <field name="osv">cash.advance</field>
+            <field name="on_create">True</field>
+        </record>
+        
+        
+         <record id="act_proforma_advance" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_advance"/>
+            <field name="flow_start">True</field>
+            <field name="name">proforma</field>
+            <field name="action">write({'state':'draft'})</field>
+            <field name="kind">function</field>
+        </record>
+        <record id="act_propose_advance" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_advance"/>
+            <field name="name">propose</field>
+            <field name="action">propose()</field>
+            <field name="kind">function</field>
+        </record>
+        
+       
+        <record id="act_approve" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_advance"/>
+            <field name="name">approve</field>
+            <field name="action">check_amount()
+            write({'state':'approve'})</field>
+            <field name="kind">function</field>
+        </record>
+        
+        <record id="act_done_advance" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_advance"/>
+            <field name="name">done</field>
+            <field name="action">proforma_voucher2()</field>
+            <field name="kind">function</field>
+        </record>
+
+        
+        <record id="act_cancel_adv" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_advance"/>
+            <field name="name">cancel_adv</field>
+            <field name="action">cancel_voucher()</field>
+            <field name="kind">function</field>
+            <field name="flow_stop">True</field>
+        </record>
+        
+        <!--#####################Transition###################-->
+           
+        <record id="t2" model="workflow.transition">
+            <field name="act_from" ref="act_proforma_advance"/>
+            <field name="act_to" ref="act_propose_advance"/>
+            <field name="signal">confirm</field>
+            <field name="condition">True</field>
+            <field name="group_id" ref=""/>
+        </record>
+        
+        <record id="t4" model="workflow.transition">
+            <field name="act_from" ref="act_propose_advance"/>
+            <field name="act_to" ref="act_approve"/>
+            <field name="signal">proforma_approve</field>
+            <field name="condition">True</field>
+            <field name="group_id" ref=""/>
+        </record>
+        
+        <record id="t3" model="workflow.transition">
+            <field name="act_from" ref="act_approve"/>
+            <field name="act_to" ref="act_done_advance"/>
+            <field name="signal">proforma_voucher2</field>
+            <field name="condition">True</field>
+            <field name="group_id" ref=""/>
+        </record>
+        
+        <record id="tcancel6" model="workflow.transition">
+            <field name="act_from" ref="act_propose_advance"/>
+            <field name="act_to" ref="act_cancel_adv"/>
+            <field name="signal">cancel_voucher</field>
+            <field name="condition">True</field>
+            <field name="group_id" ref=""/>
+        </record>
+        <record id="tcancel" model="workflow.transition">
+            <field name="act_from" ref="act_proforma_advance"/>
+            <field name="act_to" ref="act_cancel_adv"/>
+            <field name="signal">cancel_voucher</field>
+            <field name="condition">True</field>
+            <field name="group_id" ref=""/>
+        </record>
+        
+        <record id="tcancel2" model="workflow.transition">
+            <field name="act_from" ref="act_done_advance"/>
+            <field name="act_to" ref="act_cancel_adv"/>
+            <field name="signal">cancel_voucher</field>
+            <field name="condition">True</field>
+            <field name="group_id" ref=""/>
+        </record>
+        
+        <record id="tcancel3" model="workflow.transition">
+            <field name="act_from" ref="act_approve"/>
+            <field name="act_to" ref="act_cancel_adv"/>
+            <field name="signal">cancel_voucher</field>
+            <field name="condition">True</field>
+            <field name="group_id" ref=""/>
+        </record>
+        
+	</data>
+</openerp>

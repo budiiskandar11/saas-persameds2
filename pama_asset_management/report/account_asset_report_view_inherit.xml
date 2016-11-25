@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="action_account_asset_report_graph_inherit">
+        <field name="name">asset.asset.report.graph</field>
+        <field name="model">asset.asset.report</field>
+       <field name="inherit_id" ref="account_asset.action_account_asset_report_graph"/>
+        <field name="arch" type="xml">
+           
+                <field name="depreciation_value" position="after">
+    				<field name="book_value" type="measure"/>
+    			</field>           
+	            
+        </field>
+    </record>
+
+   
+</data>
+</openerp>

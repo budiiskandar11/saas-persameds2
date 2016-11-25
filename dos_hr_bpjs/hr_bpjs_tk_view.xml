@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<menuitem 	name='BPJS'
+					id='menu_bpjs' 
+				  	parent='hr.menu_hr_root'
+				  	sequence='15'/>
+		
+		<record model="ir.ui.view" id="view_bpjs_tk_tree">
+            <field name="name">view.bpjs.tk.tree</field>            
+            <field name="model">hr.bpjs.tk</field>            
+            <field name="type">tree</field>							
+            <field name="arch" type="xml">
+            	<tree string="BPJS">
+            		<field name="date_to" />
+            		<field name="jnumber" />
+            		<field name="employee_number"/>
+            		<field name="name" />
+            		<field name="contract_id" string="SK No"/>
+            		<field name="total_by_employee" />
+					<field name="total_by_company" />            		
+            		<field name="state" />
+            	</tree>
+            </field>
+		</record>
+		<record model="ir.ui.view" id="view_bpjs_tk_form">
+            <field name="name">view.bpjs.tk.form</field>            
+            <field name="model">hr.bpjs.tk</field>            
+            <field name="type">form</field>							
+            <field name="arch" type="xml">
+				<form string="BPJS">
+					<header>	
+						<button name="compute" type="object" string="Compute" class="oe_highlight" states="draft"/>
+						<button name="cancel" type="object" string="Cancel" class="oe_highlight" states="draft"/>
+						<button name="register" type="object" string="Activate" class="oe_highlight" states="draft"/>
+						<button name="non_active" type="object" string="Inactivate" class="oe_highlight" states="registered"/>
+						<button name="modify" type="object" string="Modified" class="oe_highlight" states="registered"/>		
+						<field name="state" widget="statusbar"/>						
+					</header>
+					<sheet>
+						<h2>
+                        <label string="BPJS TK No"/>
+                        <field name="jnumber" class="oe_inline"/>
+                   	 </h2>
+						<group>
+							<group >
+								<field name="name" on_change="onchange_employee_id(name)"/>
+								<field name="employee_number"/>
+								<field name="contract_id" string="SK No"/>
+								<field name="emp_status"/>
+								<label for="date_from" string="Period"/>
+		                        <div>
+		                            <field name="date_from" class="oe_inline"/> - <field name="date_to" class="oe_inline"/>
+		                        </div>								
+								<field name="dob"/>
+							</group>
+							<group>								
+								<field name="department_id"/>
+								<field name="job_id"/>
+								<field name="current_job_level_id"/>
+							</group>								
+						</group>							
+						<notebook>
+						<page string="BPJS TK Info" >
+						
+							<group>
+								<group>
+									<group>
+									<field name="reg_date" required="1"/>
+									<field name="branch_office"/>
+									</group>
+									<group>
+										<field name="jht"/>
+										<field name="jpk" invisible="1"/>
+										<field name="jkk"/>
+										<field name="jk"/>
+										<field name="jk_pensiun"/>										
+										<field name="tk_lhk" invisible="1"/>
+									</group>
+									<newline />
+									<separator string="Notes" colspan="4" />
+									<newline />
+									<field name="note" colspan="4" nolabel="1" />
+								</group>									
+							</group>
+							</page>
+							<page string="Premi Calculation">
+								<group >
+									<group col="2" colspan="2">
+										<field name="allowance_daily_amount"/>
+										<field name="contract_wage" />
+										<newline/>
+										<separator string="Jaminan Hari Tua" colspan="2"/>
+										<newline/>
+										<field name="jht_amount" />
+										<field name="jht_by_employee"/>
+										<field name="jht_by_company"/>
+										
+										<field name="jk_pensiun_employee"/>
+										<field name="jk_pensiun_company"/>									
+										<newline/>
+									</group>
+											
+									<!--<group col="2" colspan="2">
+										<separator string="Jaminan Pemeliharaan Kesehatan" colspan="2" />
+										<newline/>
+										<field name="jpk_amount" />
+									</group>-->
+									<group col="2" colspan="2">
+										<separator string="Jaminan Kecelakaan Kerja" colspan="2" />
+										<newline/>
+										<field name="jkk_amount" />
+									</group>
+									<group col="2" colspan="2">
+										<separator string="Jaminan Kematian" colspan="2" />
+										<newline/>
+										<field name="jk_amount" />
+									</group>
+									<!--<group col="2" colspan="2">
+										<separator string="Luar Hubungan Kerja" colspan="2" />
+										<newline/>
+										<field name="tk_lhk_amount" />
+									</group>-->
+									<newline/>
+									<group col="4" colspan="4">
+										<group>
+											<separator string="Total by Employee"/>
+											<newline/>
+											<field name="total_by_employee"/>	
+										</group>										
+										<group>
+											<separator string="Total by Company"/>
+											<newline/>
+											<field name="total_by_company"/>
+										</group>									
+									</group>
+								</group>
+							</page>
+						</notebook>
+						<newline/>
+					</sheet>
+				</form>
+            </field>
+		</record>
+		<act_window id='act_menu_bpjs_tk_form' 
+				    res_model='hr.bpjs.tk' 
+					name='BPJS' 
+					domain="[]" 
+					view_type='form' 
+					view_mode='tree,form'/>
+		<menuitem 	name='BPJS Ketenagakerjaan '
+					id='menu_bpjs_tk_form' 
+				  	parent='menu_bpjs'
+				  	action='act_menu_bpjs_tk_form'
+				  	sequence='5'/>
+		
+
+				  		<!-- BPJS Tenaga Kerja Batch -->
+
+        <record id="hr_bpjstk_run_filter" model="ir.ui.view">
+            <field name="name">hr.bpjstk.run.search</field>
+            <field name="model">hr.bpjstk.run</field>
+            <field name="arch" type="xml">
+                <search string="Search BPJS TK Batches">
+                    <field name="name" string="Monthly BPJSTK Batches"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <filter icon="terp-document-new" string="Draft" domain="[('state','=','draft')]" help="Draft Payslip Batches"/>
+                    <filter name="done_filter" icon="terp-camera_test" string="Done" domain="[('state','=','close')]" help="Done Payslip Batches"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="hr_bpjstk_run_tree" model="ir.ui.view">
+            <field name="name">hr.bpjstk.run.tree</field>
+            <field name="model">hr.bpjstk.run</field>
+            <field name="arch" type="xml">
+                <tree string="BPJS TK Batches">
+                    <field name="name"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="credit_note"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_bpjstk_run_form" model="ir.ui.view">
+            <field name="name">hr.bpjstk.run.form</field>
+            <field name="model">hr.bpjstk.run</field>
+            <field name="arch" type="xml">
+                <form string="BPJS TK Batches">
+                <header>
+                    <button name="close_bpjstk_run" type="object" string="Close" states="draft" class="oe_highlight"/>
+                   
+                    <button string="Set to Draft" name="draft_bpjstk_run" type="object" states="close" />
+                    
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                	
+                    <label for ="name" class="oe_edit_only"/>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+                    
+                    <group cols="4">
+                        <field name="user_id" readonly="1"/>
+                    	  <field name="date_create" readonl="1"/>
+                    	  
+                    </group>
+                   
+                    <group>
+                    <group> 
+                    	<label for="date_start" string="Date"/>
+                         <div>
+                               <field name="date_start" class="oe_inline"/> - <field name="date_end" class="oe_inline"/>
+                         </div>
+                        <field name="period_id"/>
+                    </group>
+                    <group>
+                    	<field name="company_id"/>
+                    	<field name="npp"/>
+                    </group>	
+                    </group>
+                    <group string="Summary">
+	                    <group >
+	                    	<field name="total_empl"/>
+	                    	<field name="total_wages"/>
+	                    	
+	                    </group>
+	                    <group>
+	                    	<field name="total_jkm"/>
+	                    	<field name="total_jkk"/>
+	                    </group>	
+	                    <group>
+	                    	<field name="total_jht_emp"/>
+	                    	<field name="total_jht_com"/>
+	                    </group>		
+                    </group>
+                    <separator string="Monthly BPJS TK Report"/>
+                    <button name="load_requirements" 
+                        class="oe_highlight"
+                        string="Import" 
+                        type="dummy"  groups="base.group_hr_manager">
+                </button>
+                    <field name="bpjstk_ids">
+                    	<tree string="BPJSTK">
+                    	    <field name="jnumber" />
+                    	    <field name="employee_number"/>
+		            		<field name="name" />
+		            		<field name="dob"/>
+		            		<field name="contract_wage"/>
+		            		<field name="jkk_amount" />
+	                    	<field name="jk_amount"/>
+	                    	<field name="jht_by_employee"/>
+	                    	<field name="jht_by_company"/>
+                    	</tree>
+                    	
+                    	
+                    	
+                    </field>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_hr_bpjs_run_tree" model="ir.actions.act_window">
+            <field name="name">BPJS TK Montly Batches</field>
+            <field name="res_model">hr.bpjstk.run</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="hr_bpjstk_run_tree"/>
+            <field name="search_view_id" ref="hr_bpjstk_run_filter"/>
+        </record>
+        <menuitem action="action_hr_bpjs_run_tree" id="menu_hr_bpjstk_run" parent="menu_bpjs"/>
+				  			
+				  							  						  	
+		
+	</data>
+</openerp>

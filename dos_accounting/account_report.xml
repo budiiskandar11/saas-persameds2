@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        
+        <!-- QWeb Reports -->
+       
+
+        <report 
+            id="account_invoices"
+            model="account.invoice"
+            string="Payment Request" 
+            report_type="qweb-pdf"
+            name="dos_accounting.report_pr_qweb"
+            file="dos_accounting.report_pr_qweb"
+           
+        />
+
+       
+    </data>
+</openerp>

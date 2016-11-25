@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		
+		<record id="stock_move_bin_inherit" model="ir.ui.view">
+            <field name="name">stock.move.form</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//group/group[1]/field[@name='name']" position="after">
+                    <field colspan="2" name="product_desc" string="Part Item" widget="html"/>
+                </xpath>
+            </field>
+        </record>
+        
+        
+		
+		 <record id="view_picking_form_dos_stock" model="ir.ui.view">
+            <field name="name">stock.picking.form.dos_stock</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//group/group[2]/field[@name='date_done']" position="after">
+            		<field name="date_transfered"/>
+            	</xpath>
+            </field>
+        </record>
+        
+        <record id="view_picking_form_dos_stock_2" model="ir.ui.view">
+            <field name="name">stock.picking.form.dos_stock</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+            	<xpath expr="/form/sheet/group/group[2]" position="after">
+            		<group string="Transport Mode">
+            			<field name="transport_mode"/>
+            			<field name="carrier_tracking_ref" attrs="{'invisible': [('transport_mode','=','internal')]}"/>
+            			<field name="vehicle_no" attrs="{'invisible': [('transport_mode','!=','internal')]}"/>
+            			<field name="driver_name" attrs="{'invisible': [('transport_mode','!=','internal')]}"/>
+            		</group>
+            		<group string="Item Transfer">
+            			<field name="pack_no"/>
+            			<field name="total_item"/>
+            			
+            		</group>
+            	</xpath>
+            </field>
+        </record>
+		
+		
+	</data>
+</openerp>

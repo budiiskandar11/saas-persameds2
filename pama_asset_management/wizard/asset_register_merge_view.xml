@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_asset_register_merge" model="ir.ui.view">
+            <field name="name">Merger Asset Register</field>
+            <field name="model">asset.register.merge</field>
+            <field name="arch" type="xml">
+               <form string="Merge orders">
+                    <group>
+                        <separator string="Are you sure you want to merge these Asset Register?"/>
+                        <label string="
+Please note that: &#10; &#10;
+Invoice will only be merged if: &#10;
+* Invoice are in draft &#10;
+* Invoice belong to the same partner &#10;
+" colspan="4"/>
+                    </group>
+                    
+                    <footer>
+                        <button name="merge_asset_register" string="Merge Asset" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Merge Asset Register"
+            context="{'search_default_draft': 1, 'search_default_approved': False}"
+            res_model="asset.register.merge"
+            src_model="asset.register"
+            view_mode="form"
+            target="new"
+            multi="True"
+            key2="client_action_multi"
+            id="action_view_asset_register_merge"/>
+
+    </data>
+</openerp>
+

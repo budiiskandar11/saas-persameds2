@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="view_print_overtime_wizard">
+			<field name="name">Overtime Recapitulation</field>
+			<field name="model">or.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Overtime Recapitulation">
+					<separator colspan="4" string="Overtime Recapitulation"/>
+					<group colspan="4">
+						<field name="name" />
+						<field name="type" attrs="{'invisible':[('name','!=','type')], 'required':[('name','=','type')]}" />
+						<field name="date" />
+					</group>
+					<separator colspan="4" string="Data" />
+					<field name="employee" height="200" width="600" colspan="4" nolabel="1" attrs="{'invisible':[('name','!=','employee')]}" />
+					<field name="permanent" height="200" width="600" colspan="4" nolabel="1" attrs="{'invisible':['|',('name','!=','type'),('type','!=','permanent')]}" />
+					<field name="outsource" height="200" width="600" colspan="4" nolabel="1" attrs="{'invisible':['|',('name','!=','type'),('type','!=','outsource')]}" />
+					<separator colspan="4" />
+					<group colspan="4">
+						<button icon="gtk-cancel" string="Cancel" special="cancel" />
+						<button icon="gtk-print" string="Print Report" name="report_overtime" type="object" />	
+					</group>
+				</form>
+			</field>
+		</record>
+		
+		<record id="action_print_overtime_wizard" model="ir.actions.act_window">
+            <field name="name">Overtime Recapitulation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">or.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="view_print_overtime_wizard"/>
+        </record>
+		
+        <menuitem id="menu_print_overtime_recapitulation" 
+        		  name="Print Overtime Recapitulation" 
+        		  action="action_print_overtime_wizard"
+        		  parent="hr_attendance.menu_hr_attendance"
+        		  icon='STOCK_PRINT'
+        		  sequence="25" />
+        
+		<report id="report_employee_overtime_recapitulation" 
+				name="employee.overtime.recapitulation"
+				string="Report Employee Overtime Recapitulation"
+				file="ad_hr_overtime/report/print_employee_overtime_recapitulation.mako"
+				report_type="webkit" 
+				model="hr.overtime"
+				auto="False" 
+				menu="False" />
+
+		<report id="report_permanent_overtime_recapitulation" 
+				name="employee.permanent.overtime.recapitulation"
+				string="Report Permanent Employee Overtime Recapitulation"
+				file="ad_hr_overtime/report/print_employee_permanent_overtime_recapitulation.mako"
+				report_type="webkit" 
+				model="hr.overtime" 
+				auto="False" 
+				menu="False" />
+
+		<report id="report_outsource_overtime_recapitulation" 
+				name="employee.outsource.overtime.recapitulation"
+				string="Report Outsource Employee Overtime Recapitulation"
+				file="ad_hr_overtime/report/print_employee_outsource_overtime_recapitulation.mako"
+				report_type="webkit" 
+				model="hr.overtime" 
+				auto="False" 
+				menu="False" />
+	</data>
+</openerp>

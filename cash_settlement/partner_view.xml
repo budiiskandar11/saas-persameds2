@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="account.view_partner_property_form" model="ir.ui.view">
+            <field name="name">res.partner.property.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="priority">2</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <page string="History" position="before">
+                <page string="Accounting">
+                    <group col="2" colspan="2">
+                        <separator string="Customer Accounting Properties" colspan="2"/>
+                        <field name="property_account_receivable" groups="base.group_extended"/>
+                        <field name="property_account_position" widget="selection"/>
+                        <field name="property_payment_term" widget="selection"/>
+                    </group>
+                    <group col="2" colspan="2">
+                        <separator string="Supplier Accounting Properties" colspan="2"/>
+                        <field name="property_account_payable" groups="base.group_extended"/>
+                    </group>
+                    
+                    <group col="2" colspan="2">
+                        <separator string="Customer Credit" colspan="2"/>
+                        <field name="credit"/>
+                        <field name="credit_limit" groups="base.group_extended"/>
+                    </group>
+                    <group col="2" colspan="2">
+                        <separator string="Supplier Debit" colspan="2"/>
+                        <field name="debit"/>
+                        <separator string="Advance Accounting Properties" colspan="2"/>
+                        <field name="account_balance_id" groups="base.group_extended"/>
+                    </group>
+                    <field colspan="4" context="{'address': address}" name="bank_ids" nolabel="1">
+                        <form string="Bank account">
+                            <field name="state"/>
+                            <newline/>
+                            <field name="acc_number" select="1"/>
+                            <newline/>
+                            <field name="bank"/>
+                            <newline/>
+                            <field name="sequence"/>
+                            <field colspan="4" name="name"/>
+                            <separator colspan="4" string="Bank account owner"/>
+                            <field colspan="4" name="owner_name"/>
+                            <field colspan="4" name="street"/>
+                            <newline/>
+                            <field name="zip"/>
+                            <field name="city"/>
+                            <newline/>
+                            <field completion="1" name="country_id"/>
+                            <field name="state_id"/>
+                        </form>
+                        <tree string="Bank Details">
+                            <field name="state"/>
+                            <field name="bank"/>
+                            <field name="owner_name"/>
+                            <field name="acc_number"/>
+                        </tree>
+                    </field>
+                </page>
+                </page>
+            </field>
+        </record>
+	</data>
+</openerp>
+<!-- vim: set fdm=marker : -->

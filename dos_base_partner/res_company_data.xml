@@ -1,0 +1,25 @@
+<openerp>
+	<data noupdate="1">
+		<record id="base.main_company" model="res.company">
+	    	<field name="signature">
+	    		<br/><hr/>
+	    		<p>
+	    		<img src="data:image/png;base64,${object.logo}" width="210px" height="70"/><br/>
+	    		<b><i>${object.name}</i></b><br/>
+	    		<b><i>${object.street}</i></b><br/>
+	    		<b><i>${object.city} ${object.state_id.name}</i></b><br/>
+	    		<b><i>${object.country_id.name}</i></b><br/>
+	    		<b><i>${object.zip}</i></b><br/>
+				Phone   : <i>${object.phone}</i><br/>
+				email   : <i>${object.email}</i><br/>
+				website : <i>${object.website}</i><br/>
+				<img src="data:image/png;base64,${object.image1}" width="50px" height="50px"/>
+				<img src="data:image/png;base64,${object.image2}" width="50px" height="50px"/>
+				<img src="data:image/png;base64,${object.image3}" width="50px" height="50px"/>
+				<img src="data:image/png;base64,${object.image4}" width="50px" height="50px"/>
+				<img src="data:image/png;base64,${object.image5}" width="50px" height="50px"/>
+				</p>
+	    	</field>
+		</record>
+	</data>
+</openerp>

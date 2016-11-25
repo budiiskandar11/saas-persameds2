@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- customer -->
+        <record model="ir.ui.view" id="receipt_customer_payment_adm_form">
+            <field name="name">customer.payment.adm.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_receipt_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/group/group[2]/field[@name='date']" position="after">
+                    <field name="rate"/>
+                </xpath>                
+                <xpath expr="/form/sheet/group/group[1]/field[@name='journal_id']" position="after">
+                    <field name="payment_adm"/>
+                </xpath>                
+                <xpath expr="/form/sheet/group" position="after">                    
+                    <group attrs="{'invisible':[('payment_adm','in',('cash'))]}">                        
+                        <group string="Payment Administration">
+                            <group>                          
+                                <field name="adm_amount" attrs="{'invisible':[('payment_adm','not in',('cc','transfer','check'))]}"/>
+                                <field name="adm_acc_id" attrs="{'invisible':[('payment_adm','not in',('transfer','check'))],
+                                    'readonly':[('adm_amount','&lt;=',0)], 'required':[('payment_adm','in',('transfer','check')),('adm_amount','!=',0)]}"
+                                    domain="[('type','=','other')]"/>
+                                <field name="adm_comment" attrs="{'invisible':['|',('payment_adm','=','check'),('payment_adm','=','cash')],
+                                    'required':['|',('payment_adm','=','transfer'),('payment_adm','=','free_transfer')]}"/>
+                                <field name="bank_id" colspan="2" attrs="{'invisible':[('payment_adm','!=','check')]}"/>
+                            </group>
+                            <group>
+                                <field name="card_type" attrs="{'invisible':[('payment_adm','!=','cc')]}"/>
+                                <field name="card_number" attrs="{'invisible':[('payment_adm','!=','cc')]}"/>
+                                <field name="check_registered" domain="[('state','=','hold'),('check_id.state','=','confirm'),('check_id.partner_id','=',partner_id)]]" 
+                                    attrs="{'invisible':[('payment_adm','!=','check')]}"/>    
+                                <field name="check_number" colspan="2" attrs="{'invisible':[('payment_adm','!=','check')]}"/>
+                                <field name="check_start_date" colspan="2" attrs="{'invisible':[('payment_adm','!=','check')]}"
+                                        domain="[('type','=','other')]"/> 
+                                <field name="check_end_date" colspan="2" attrs="{'invisible':[('payment_adm','!=','check')],
+                                        'required':[('payment_adm','=','check')]}"/> 
+                            </group>
+                        </group>
+                    </group>                 
+                </xpath>
+            </field>
+        </record>
+        
+		<!--      wizard supplier payment        -->
+		<record model="ir.ui.view" id="view_vendor_receipt_dialog_payment_adm_form">
+            <field name="name">account.voucher.receipt.dialog.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_receipt_dialog_form"/>
+            <field name="arch" type="xml">
+                <field name="journal_id" position="after">
+                    <field name="payment_adm"/>
+                </field>
+                <xpath expr="/form/group[2]/group" position="attributes">
+                    <attribute name="string">Payment Difference</attribute>
+                </xpath>
+                <xpath expr="/form/group[2]/group" position="before">
+                    <group string="Payment Administration">
+                        <field name="adm_amount" attrs="{'invisible':[('payment_adm','not in',('cc','transfer','check'))]}"/>
+                        <field name="adm_acc_id" attrs="{'invisible':[('payment_adm','not in',('transfer','check'))],
+                            'readonly':[('adm_amount','&lt;=',0)], 'required':[('payment_adm','in',('transfer','check')),('adm_amount','!=',0)]}"
+                            domain="[('type','=','other')]"/>
+                        <field name="adm_comment" attrs="{'invisible':[('payment_adm','=','check')],
+                            'required':['|',('payment_adm','=','transfer'),('payment_adm','=','free_transfer')]}"/>
+                        <field name="bank_id" colspan="2" attrs="{'invisible':[('payment_adm','!=','check')]}"/>  
+
+                        <field name="card_type" attrs="{'invisible':[('payment_adm','!=','cc')]}"/>
+                        <field name="card_number" attrs="{'invisible':[('payment_adm','!=','cc')]}"/>
+                        <field name="check_registered" domain="[('state','=','hold'),('check_id.state','=','confirm'),('check_id.partner_id','=',partner_id)]]" 
+                            attrs="{'invisible':[('payment_adm','!=','check')]}"/>    
+                        <field name="check_number" colspan="2" attrs="{'invisible':[('payment_adm','!=','check')]}"/>
+                        <field name="check_start_date" colspan="2" attrs="{'invisible':[('payment_adm','!=','check')]}"
+                                domain="[('type','=','other')]"/> 
+                        <field name="check_end_date" colspan="2" attrs="{'invisible':[('payment_adm','!=','check')],
+                                'required':[('payment_adm','=','check')]}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        <!-- form supplier payment -->
+        <record model="ir.ui.view" id="view_voucher_supplier_order_number_tree">
+            <field name="name">account.voucher.tree</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_tree"/>
+            <field name="arch" type="xml">
+            	<field name="date" position="before">
+            		<field name="payment_voucher_order_number"/>
+            	</field>
+            </field>
+        </record>
+
+        	        
+        <record model="ir.ui.view" id="supplier_payment_adm_form">
+            <field name="name">supplier.payment.adm.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_payment_form"/>
+            <field name="arch" type="xml">
+            	<field name="name" position="after">
+            		<field name="payment_voucher_order_number"/>
+            	</field>
+                <field name="journal_id" position="attributes">
+                    <attribute name="domain">[('type','in',['bank', 'cash', 'prepaid'])]</attribute>
+                </field>
+            	<field name="journal_id" position="after">
+                    <field name="payment_adm"/>
+                </field>
+                <xpath expr="/form/sheet/group" position="after">
+                    <group attrs="{'invisible':[('payment_adm','in',('cash'))]}">                        
+                        <group string="Payment Administration">
+                            <group>                          
+                                <field name="adm_amount" attrs="{'invisible':[('payment_adm','not in',('cc','transfer','check'))]}"/>
+                                <field name="adm_acc_id" attrs="{'invisible':[('payment_adm','not in',('transfer','check'))],
+                                    'readonly':[('adm_amount','&lt;=',0)], 'required':[('payment_adm','in',('transfer','check')),('adm_amount','!=',0)]}"
+                                    domain="[('type','=','other')]"/>
+                                <field name="adm_comment" attrs="{'invisible':['|',('payment_adm','=','check'),('payment_adm','=','cash')],
+                                    'required':['|',('payment_adm','=','transfer'),('payment_adm','=','free_transfer')]}"/>
+                                <field name="bank_id" colspan="2" attrs="{'invisible':[('payment_adm','!=','check')]}"/>
+                                <field name="letter_amount" attrs="{'invisible':[('payment_adm','!=','letter')]}"/>                         
+                            	<field name="letter_bank" attrs="{'invisible':[('payment_adm','!=','letter')]}"/> 
+                            </group>
+                            <group>
+                                <field name="card_type" attrs="{'invisible':[('payment_adm','!=','cc')]}"/>
+                                <field name="card_number" attrs="{'invisible':[('payment_adm','!=','cc')]}"/>
+                                <field name="check_registered" domain="[('state','=','hold'),('check_id.state','=','confirm'),('check_id.partner_id','=',partner_id)]]" 
+                                    attrs="{'invisible':[('payment_adm','!=','check')]}"/>    
+                                <field name="check_number" colspan="2" attrs="{'invisible':[('payment_adm','!=','check')]}"/>
+                                <field name="check_start_date" colspan="2" attrs="{'invisible':[('payment_adm','!=','check')]}"
+                                        domain="[('type','=','other')]"/> 
+                                <field name="check_end_date" colspan="2" attrs="{'invisible':[('payment_adm','!=','check')],
+                                        'required':[('payment_adm','=','check')]}"/>
+                                  <field name="letter_id" attrs="{'invisible':[('payment_adm','!=','letter')]}" domain="[('state', '=','proposed')]"/>     
+                            	<field name="letter_name" attrs="{'invisible':[('payment_adm','!=','letter')]}"/>
+                            </group>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        
+        
+    </data>
+</openerp>
+

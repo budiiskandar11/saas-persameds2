@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+  <template id="assets_backend_tb" inherit_id="website.assets_backend" name="Website Trail Balance Report">
+    <xpath expr="." position="inside">
+      <script type="text/javascript" src="/website_account/static/src/js/website_trailbalance.js"></script>
+      <script type="text/javascript" src="/website_account/static/lib/jSignature/jSignature.min.js"></script>
+      <script type="text/javascript" src="/website_account/static/src/js/date_format.js"></script>
+      <link rel='stylesheet' href='/website_account/static/src/css/website_profitloss.css'/>
+    </xpath>
+  </template>  
+
+  <template  id="so_trailbalance" name="Trail Balance">&lt;!DOCTYPE html&gt;
+      <html>
+      <head>      
+      <title>Trail Balance - Odoo</title>
+      <link rel="shortcut icon" href="/website_account/static/src/img/favicon.ico" type="image/x-icon"/>
+      <t t-call-assets="web.assets_common" t-css="false"/>
+        <t t-call-assets="web.assets_backend" t-css="false" />
+        <link rel="stylesheet" href="/web/static/lib/bootstrap/css/bootstrap.css" />
+         <link rel='stylesheet' href='/website_account/static/src/css/website_profitloss.css'/>
+         <link rel="stylesheet" href="/website_account/static/src/css/pickdate_jquery-ui.css"/>
+	<script src="/website_account/static/src/js/pickdate_jquery-ui.js"></script>
+	<link rel="stylesheet" href="/website_account/static/src/css/style.css"/>
+	
+	
+    <link href="/website_account/static/src/css/daterange/jquery.comiseo.daterangepicker.css" rel="stylesheet"/>
+    <script src="/website_account/static/src/js/daterange/moment.min.js"></script>
+    <script src="/website_account/static/src/js/daterange/jquery.comiseo.daterangepicker.js"></script>
+        
+        <script type="text/javascript" id="loading-script-bs" t-raw="init">
+            $(function() {
+                var s = new openerp.init();
+                var wc = new s.web.WebClient();
+
+                wc.show_application = function() {
+                    wc.action_manager.do_action("website_account.trailbalance", {});
+                };
+
+                wc.do_push_state = function(state){};
+                wc.setElement($(document.body));
+                wc.start();
+            });
+        </script>
+      </head>  
+<body>
+        <div class='openerp openerp_webclient_container'>
+            <table class='oe_webclient'>
+                <tr>
+                    <td class='oe_application' />
+                </tr>
+            </table>
+        </div>
+    </body>      
+        </html>
+  </template>
+  
+<template id="user_navbar_tb" inherit_id="website_account.so_trailbalance" groups="base.group_user">
+<xpath expr="//div['id=divtitle']" position="before">
+<div id="dvLoading" name="dvLoading"></div>
+<t t-if="website and menu_data">
+    <nav id="oe_main_menu_navbar" class="navbar1 navbar-inverse" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#oe_applications">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>    
+        </div>
+
+        <ul id="oe_applications" class="nav navbar-nav navbar-left navbar-collapse collapse">
+            <li class="dropdown active">
+                <a href="#" class="dropdown-toggle hidden-xs" data-toggle="dropdown"><i class="fa fa-th-large"></i> Website<b class="caret"/></a>
+                <ul class="dropdown-menu">
+                    <li t-foreach="menu_data['children']" t-as="menu">
+                        <t t-call="web.menu_link"/>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <ul id="oe_applications" class="nav navbar-nav navbar-left navbar-collapse collapse">
+            <li class="dropdown active">
+                <a href="#" class="dropdown-toggle hidden-xs" data-toggle="dropdown"><i class="fa fa-th-large"></i> Reports<b class="caret"/></a>
+                <ul class="dropdown-menu">
+                    <li>
+                       <a t-att-href="'/trailbalance/web/'" t-att-class="'oe_menu_toggler oe_menu_leaf'">
+        		<span class="oe_menu_text">
+            		  Trail Balance
+        		</span>
+    			</a>
+                    </li>
+                    <li>
+                       <a t-att-href="'/balancesheet/web/'" t-att-class="'oe_menu_toggler oe_menu_leaf'">
+        		<span class="oe_menu_text">
+            		  Balance Sheet
+        		</span>
+    			</a>
+                    </li>
+                    <li>
+                       <a t-att-href="'/profitloss/web/'" t-att-class="'oe_menu_toggler oe_menu_leaf'">
+        		<span class="oe_menu_text">
+            		  Profit and Loss
+        		</span>
+    			</a>
+                    </li>
+                    <li>
+                       <a t-att-href="'/cashflow_statement/web/'" t-att-class="'oe_menu_toggler oe_menu_leaf'">
+        		<span class="oe_menu_text">
+            		  Statement of Cash Flows
+        		</span>
+    			</a>
+                    </li>
+                    <li class="show_budget_actual">
+                       <a t-att-href="'/budget_actual/web/'" t-att-class="'oe_menu_toggler oe_menu_leaf'">
+        		<span class="oe_menu_text">
+            		  Budget vs Actual
+        		</span>
+    			</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+	<div class="navbar-header navbar-form navbar-right">
+            <button type="button" class="btn btn-danger js_pick_quit pull-right">Quit</button>
+        </div>
+        <div class="navbar-header navbar-form navbar-right">
+            
+        </div>
+    </nav>
+</t>
+
+</xpath>
+</template>
+
+<template id="account.report_trialbalance" groups="base.group_user">
+                <div class="page">                    
+	            <b><h4 t-esc="res_company.name" style="text-align:center"/></b>
+                    <b><h4 t-esc="get_title()" style="text-align:center"/></b>
+                     <b><h4 t-esc="get_filter_str()" style="text-align:center"/></b>
+		<table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Account</th>
+                            <th class="text-right" style="width:90px">Debit</th>
+                            <th class="text-right" style="width:90px">Credit</th>
+                            <th class="text-right" colspan="2" style="width:186px">Balance</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">&#160;</th>
+                            <th class="text-right" style="width:90px">&#160;</th>
+                            <th class="text-right" style="width:90px">&#160;</th>
+                            <th class="text-right" style="width:93px">Debit</th>
+                            <th class="text-right" style="width:93px">Credit</th>
+                        </tr>
+                    </thead>
+                 </table>   
+                    <table class="table table-condensed">
+                        <tbody>
+                            <tr t-foreach="get_lines_report_trail_balance(data)" t-as="childrenaccount">
+                            <t t-if="childrenaccount['type'] == 'view'">
+                                <t t-set="style" t-value="'font-weight:bold;color:RoyalBlue;'"/>
+                            </t>
+                            <t t-if="childrenaccount['type'] != 'view'">
+                                <t t-set="style" t-value="'font-weight:normal;'"/>
+                            </t>
+                            <t t-if="childrenaccount['name'][:5] == 'Total'">
+                                <t t-set="style" t-value="'font-weight: bold;color:RoyalBlue;line-height:50px;vertical-align: baseline;'"/>
+                            </t>
+                            <td>
+                                <span style="color: white;" t-esc="'&#160;&#160;' * (childrenaccount['level'])"/>
+                                <span t-att-style="style" t-esc="childrenaccount['name']"/>
+                            </td>
+                            <td class="text-right">
+                              <t t-if="childrenaccount['has_childs'] == False">
+                                <span t-att-style="style" t-esc="formatLang(childrenaccount['debit'])"/>
+                              </t>
+                            </td>
+                            <td class="text-right">
+                              <t t-if="childrenaccount['has_childs'] == False">
+                                <span t-att-style="style" t-esc="formatLang(childrenaccount['credit'])"/>
+                              </t>
+                            </td>
+                            <td class="text-right">
+                              <t t-if="childrenaccount['has_childs'] == False">
+                                <span t-att-style="style" t-esc="formatLang(childrenaccount['balance']>=0 and childrenaccount['balance'] or 0.00)"/>
+                              </t>
+                            </td>
+                            <td class="text-right">
+                              <t t-if="childrenaccount['has_childs'] == False">
+                                <span t-att-style="style" t-esc="formatLang(childrenaccount['balance']&lt;=0 and abs(childrenaccount['balance']) or 0.00)"/>
+                              </t>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+</template>
+
+<record id="account.action_report_trial_balance" model="ir.actions.report.xml">
+    <field name="paperformat_id" ref="website_account.paperformat_trailbalance"/>
+</record>
+
+</data>
+</openerp>

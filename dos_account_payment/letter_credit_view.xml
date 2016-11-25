@@ -1,0 +1,78 @@
+<openerp>
+	<data>
+		
+		<record model="ir.ui.view" id="view_lettercredit_tree">
+			<field name="name">Letter Credit</field>
+			<field name="model">letter.credit</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="Letter Credit Form" version="7.0">
+					<field name="name"/>
+					<field name="user_id"/>
+					<field name="create_date"/>
+					<field name="partner_id"/>
+					<field name="date_paid"/>
+					<field name="currency_id"/>
+					<field name="amount"/>
+					<field name="state"/>
+        		</tree>
+        	</field>
+        </record>
+
+		<record model="ir.ui.view" id="view_lettercredit_form">
+			<field name="name">Letter Credit</field>
+			<field name="model">letter.credit</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="Letter Credit Form" version="7.0">
+						<header>
+							<button string="Cancelled" name="button_cancel" type="object" icon="gtk-cancel" states="paid"/>
+							<button string="Set to Draft" name="button_draft" type="object" icon="gtk-cancel" states="proposed,cancelled"/>
+							<button string="Proposed" states="draft" type="object" icon="gtk-apply" name="button_proposed"/>
+							<field name="state" widget="statusbar" />
+						</header>
+						<sheet>
+							<h1>
+	                      	<label string="Letter Credit No"/>
+	                       	
+                        	<field name="name" class="oe_inline" required="1"/>
+                    		</h1>
+                    		<group>
+								<field name="create_date" readonly="1"/>
+	                			<field name="user_id" readonly="1"/>
+                    		</group>
+                    		<newline/>
+                    		<group>
+                    			<group string="General Information">
+									<field name="partner_id" attrs="{'readonly':[('state','=','paid')]}"/>
+									<field name="company_id" attrs="{'readonly':[('state','=','paid')]}"/>
+									<field name="purchase_id" attrs="{'readonly':[('state','=','paid')]}"/>
+                    			</group>
+                    			<group string="Value">
+                    				<field name="bank_name" attrs="{'readonly':[('state','=','paid')]}"/>
+									<field name="currency_id" attrs="{'readonly':[('state','=','paid')]}"/>
+									<field name="amount" attrs="{'readonly':[('state','=','paid')]}"/>                    				
+									<field name="date_paid" attrs="{'readonly':[('state','=','paid')]}"/>
+									<field name="voucher_id" attrs="{'readonly':[('state','=','paid')]}"/>
+                    			</group>
+                    			<field colspan="4" name="note" nolabel="1" placeholder="Notes"/>
+                    		</group>
+            			</sheet>
+            		</form>
+            	</field>
+            </record>
+
+            <record id="action_lettercredit_form" model="ir.actions.act_window">
+			<field name="name">Letter Credit</field>
+			<field name="res_model">letter.credit</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+			<!-- <field name="search_view_id" ref="view_contract_search"/> -->
+			<field name="view_id" ref="view_lettercredit_tree" />
+            <field name="help">Here you can add, modify, or remove Letter Credit.</field>
+		</record>
+			
+		<menuitem id="menu_view_lettercredit" parent="menu_check_giro" action="action_lettercredit_form"/>
+	</data>
+</openerp>

@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_asset_class,account.asset.class,model_account_asset_class,,1,1,1,1
+access_account_asset_group,account.asset.group,model_account_asset_group,,1,1,1,1
+access_account_asset_class_manager,account.asset.class,model_account_asset_class,,1,1,1,1
+access_account_asset_group_manager,account.asset.group,model_account_asset_group,,1,1,1,1
+access_account_asset_tax_depreciation_line,account.asset.tax.depreciation.line,model_account_asset_tax_depreciation_line,,1,1,1,1
+access_account_asset_depreciation_line_manager,account.asset.tax.depreciation.line,model_account_asset_tax_depreciation_line,,1,1,1,1
+access_asset_location,access_asset_location,model_asset_location,,1,1,1,1
+access_asset_area,access_asset_area,model_asset_area,,1,1,1,1
+access_asset_gedung,access_asset_gedung,model_asset_gedung,,1,1,1,1
+access_account_asset_tax_category,access_account_asset_tax_category,model_account_asset_tax_category,,1,1,1,1
+access_asset_extra,access_asset_extra,model_asset_extra,,1,1,1,1
+access_asset_extra_log,access_asset_extra_log,model_asset_extra_log,,1,1,1,1
+access_asset_extra_group,access_asset_extra_group,model_asset_extra_group,,1,1,1,1
+access_asset_register,access_asset_register,model_asset_register,,1,1,1,1

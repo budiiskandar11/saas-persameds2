@@ -1,0 +1,44 @@
+<openerp>
+	<data>
+		
+		<record model="ir.ui.view" id="view_cash_bank_wizard">
+			<field name="name">Cash Bank Summary</field>
+			<field name="model">wizz.cash.bank.summary</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form col="4" string="Cash Bank Summary">
+					<header>
+						<button name="create_cash_bank_report" string="Print" type="object" icon="gtk-print" class="oe_highlight"/>
+						or
+						<button special="cancel" string="_Cancel" icon="gtk-cancel"/>
+					</header>
+					<separator string="Budget Detail" colspan="4"/>
+					<group>
+						<group>
+							<field name="company_id" required="1" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+							<field name="district_id" required="1" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>
+							<!--<field name="journal_id" required="1" domain="[('type','in',['cash','bank']),('distrik_id','=',district_id)]" options="{'no_open': True,'no_create': 1, 'no_create_edit': 1}"/>-->	
+						</group>
+						<group>
+							<field name="fiscalyear_id" required="1"/>
+							<field name="start_date" required="1"/>				
+							<field name="end_date" required="1"/>
+						</group>
+					</group>					
+				</form>
+			</field>
+		</record>
+		
+		
+		<record model="ir.actions.act_window" id="action_cash_bank_summary">
+			<field name="name">Cash/Bank Summary</field>
+			<field name="res_model">wizz.cash.bank.summary</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+		
+		<menuitem action="action_cash_bank_summary" id="menu_cash_bank_summary" 
+			parent="account.menu_finance_bank_and_cash" sequence="10" />
+	</data>
+</openerp>

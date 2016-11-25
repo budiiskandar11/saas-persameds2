@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+		<report 
+		   id="dos_invoice_report" model="account.invoice" name="dos.invoice.form" 
+			file="dos_accounting/report/dos_print_invoice.mako" string="Invoice / Commercial Tax" 
+			webkit_header="invoice_header_footer"
+			report_type="webkit"/>
+		
+<!--		<report  id="report_faktur_pajak" model="account.invoice" name="faktur.pajak.form"
+            file="dos_accounting/report/faktur_pajak.mako" string="Faktur Pajak"
+           report_type="webkit" />
+		
+        <report auto="False" id="report_faktur_pajak_valas" model="account.invoice" name="faktur.pajak.valas.form"
+            file="dos_accounting/report/faktur_pajak_valas.mako" string="Faktur Pajak
+            USD" usage="default" report_type="webkit"/>
+       -->
+        <!-- <report auto="False" id="report_payment_request" model="account.invoice" name="report.payment.request"
+            file="dos_accounting/report/report_payment_request.mako" string="Payment Request(mako)"  usage="default" report_type="webkit"/>	 -->	
+		<report auto="False" id="report_kuitansi" model="account.invoice" name="report.kuitansi"
+            file="dos_accounting/report/kuitansi.mako" string="Print Kuitansi Sementara"  usage="default" report_type="webkit"/>		
+		
+	</data>
+</openerp>
